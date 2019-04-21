@@ -1,51 +1,129 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * 
- * Generated with the TypeScript template
- * https://github.com/emin93/react-native-template-typescript
- * 
- * @format
- */
+import 'reflect-metadata';
+import React from 'react';
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+  createAppContainer,
+} from 'react-navigation';
+import { HomeScreen } from './src/components/screens/HomeScreen';
+import { CreateCourseScreen } from './src/components/screens/CreateCourseScreen';
+import { StyleSheet } from 'react-native';
+import { COLORS } from './src/common/colors';
+import { IconWithBadge as TabBarIcon } from './src/components/ui/IconWithBadge';
+import { ERouteName } from './src/enums/ERouteName';
+import { CourseTypeModal } from './src/components/modals/CourseTypeModal';
+import { CourseDurationModal } from './src/components/modals/CourseDurationModal';
+import { CourseOftennessModal } from './src/components/modals/CourseOftennessModal';
+import { CourseTakeModal } from './src/components/modals/CourseTakeModal';
+import { CourseSummaryModal } from './src/components/modals/CourseSummaryModal';
+import { Notifications } from './src/components/common/Notifications';
+import { FONTS } from './src/common/fonts';
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: COLORS.WHITE.toString(),
+    borderTopWidth: 1,
+    borderTopColor: COLORS.GRAY_LIGHT.alpha(0.4).toString(),
+  },
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+  tabStyle: {},
+
+  labelStyle: {
+    padding: 0,
+    margin: 0,
+    fontFamily: FONTS.MEDIUM,
+  },
+
+  iconStyle: {
+    marginLeft: 0,
+    padding: 0,
+  },
 });
 
-interface Props {}
-export default class App extends Component<Props> {
+const TodayStack = createStackNavigator(
+  {
+    [ERouteName.Today]: {
+      screen: HomeScreen,
+    },
+    [ERouteName.TodayCreateCourseScreen]: {
+      screen: CreateCourseScreen,
+    },
+    [ERouteName.CourseTypeModal]: {
+      screen: CourseTypeModal,
+    },
+    [ERouteName.CourseTakeModal]: {
+      screen: CourseTakeModal,
+    },
+    [ERouteName.CourseDurationModal]: {
+      screen: CourseDurationModal,
+    },
+    [ERouteName.CourseOftennessModal]: {
+      screen: CourseOftennessModal,
+    },
+    [ERouteName.CourseSummaryModal]: {
+      screen: CourseSummaryModal,
+    },
+    [ERouteName.TodayEditCourseScreen]: {
+      screen: CourseSummaryModal,
+    },
+  },
+  {
+    initialRouteName: ERouteName.Today,
+    mode: 'card',
+    headerMode: 'none',
+  },
+);
+
+const TabNavigator = createBottomTabNavigator(
+  {
+    [ERouteName.Today]: {
+      screen: TodayStack,
+    },
+    [ERouteName.Summary]: {
+      screen: TodayStack,
+    },
+    [ERouteName.Log]: {
+      screen: TodayStack,
+    },
+    [ERouteName.Settings]: {
+      screen: TodayStack,
+    },
+  },
+  {
+    lazy: true,
+    initialRouteName: ERouteName.Today,
+    tabBarOptions: {
+      tabStyle: styles.tabStyle,
+      labelStyle: styles.labelStyle,
+      iconStyle: styles.iconStyle,
+      style: styles.tabBar,
+      activeTintColor: COLORS.RED.toString(),
+      inactiveTintColor: COLORS.GRAY_LIGHT.toString(),
+    },
+    animationEnabled: true,
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        return (
+          <TabBarIcon
+            focused={focused}
+            routeName={navigation.state.routeName as ERouteName}
+            color={tintColor}
+          />
+        );
+      },
+    }),
+  },
+);
+
+const AppContainer = createAppContainer(TabNavigator);
+
+export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.tsx</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <>
+        <AppContainer />
+        <Notifications />
+      </>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
