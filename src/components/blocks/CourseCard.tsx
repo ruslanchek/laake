@@ -22,6 +22,7 @@ import { withNavigation, NavigationInjectedProps } from 'react-navigation';
 import { ERouteName } from '../../enums/ERouteName';
 import { ECourseEditMode } from '../../stores/createCourseStore';
 import { Ionicons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { FONTS } from '../../common/fonts';
 
 interface IProps extends NavigationInjectedProps {
