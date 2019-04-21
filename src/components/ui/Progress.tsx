@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { VARIABLES } from '../../common/variables';
-import { Svg } from 'expo';
+import { Svg, Circle } from 'react-native-svg';
 import { COLORS } from '../../common/colors';
 import { FONTS } from '../../common/fonts';
 
@@ -25,7 +25,7 @@ export class Progress extends React.PureComponent<IProps> {
             <Text style={[styles.text]}>{percent}%</Text>
           </View>
           <Svg height={diameter} width={diameter}>
-            <Svg.Circle
+            <Circle
               cx={radius}
               cy={radius}
               r={radiusWithoutStroke}
@@ -36,7 +36,7 @@ export class Progress extends React.PureComponent<IProps> {
               fill='transparent'
               strokeLinecap='round'
             />
-            <Svg.Circle
+            <Circle
               cx={radius}
               cy={radius}
               r={radiusWithoutStroke}
@@ -77,6 +77,6 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: FONTS.BOLD,
     fontSize: VARIABLES.FONT_SIZE_REGULAR,
-    textAlign: 'center'
+    textAlign: 'center',
   },
 });

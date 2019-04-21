@@ -4,7 +4,7 @@ import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
 import { View, StyleSheet, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Constants } from 'expo';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export enum ENotificationType {
   Error = 'error',
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 
   defaultContainer: {
     marginHorizontal: VARIABLES.PADDING_BIG,
-    marginTop: Constants.statusBarHeight + 2,
+    marginTop: getStatusBarHeight() + 2,
     paddingTop: 4,
     paddingVertical: 4,
     paddingHorizontal: 10,

@@ -17,7 +17,7 @@ import { COLORS } from '../../common/colors';
 import { EHeaderTheme, Header } from '../common/Header';
 import { followStore } from 'react-stores';
 import { createCourseStore } from '../../stores/createCourseStore';
-import { Haptic, ImagePicker, Permissions } from 'expo';
+import { ImagePicker, Permissions } from 'expo';
 import { CommonService } from '../../services/CommonService';
 import { createCourseManager } from '../../managers/CreateCourseManager';
 import { GLOBAL_STYLES } from '../../common/styles';
