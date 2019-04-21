@@ -1,0 +1,136 @@
+{
+  "CREATE_COURSE": {
+    "LABEL_NAME": "Medication name",
+    "LABEL_DESCRIPTION": "Description",
+    "LABEL_DURATION": "Duration",
+    "LABEL_OFTENNESS": "Oftenness",
+    "LABEL_TAKES": "Takes",
+    "TITLE": "New course",
+    "DESCRIPTION": "State info about the new course"
+  },
+  "EDIT_COURSE": {
+    "TITLE": "Edit course",
+    "DESCRIPTION": "You can change any info of the course"
+  },
+  "COURSE_DURATION_MODAL": {
+    "HEADER": "Course duration",
+    "DESCRIPTION": "How long is the course"
+  },
+  "COURSE_OFTENNESS_MODAL": {
+    "HEADER": "Course oftenness",
+    "DESCRIPTION": "How often you have to take the medication during the course"
+  },
+  "COURSE_SUMMARY_MODAL": {
+    "HEADER": "Summary",
+    "DESCRIPTION": "Please check your preferences before creating the course"
+  },
+  "COURSE_TYPE_MODAL": {
+    "HEADER": "Medication type",
+    "SELECT_PICTURE": "Select picture",
+    "TAKE_PICTURE": "Take picture",
+    "DESCRIPTION": "Select or upload image for the course"
+  },
+  "ERRORS": {
+    "NAME_EMPTY": {
+      "TITLE": "Form error",
+      "MESSAGE": "Medication name cannot be empty"
+    },
+    "COURSE_ALREADY_EXISTS": {
+      "TITLE": "Form error",
+      "MESSAGE": "Course with that name already exists"
+    },
+    "UPLOAD_ERROR": {
+      "TITLE": "Image upload error",
+      "MESSAGE": "Could not upload image, please try again"
+    }
+  },
+  "PERIODS": {
+    "DAYS": "days",
+    "WEEKS": "weeks",
+    "MONTHS": "months"
+  },
+  "TIMES": {
+    "TIMES": "{{value}} time",
+    "TIMES_plural": "{{value}} times"
+  },
+  "TIMES_PER": {
+    "DAY": "per day",
+    "WEEK": "per week"
+  },
+  "PILL_NAMES": {
+    "VITAMIN": "Vitamin",
+    "COLOUR_PILL": "Colour pill",
+    "ELLIPSE_PILL": "Ellipse pill",
+    "ROUND_TABLET": "Round tablet",
+    "ROUNDED_TABLET": "Rounded tablet"
+  },
+  "PILL_TYPES": {
+    "COMMON": "Common",
+    "CAPSULE": "Capsule",
+    "PILL": "Pill",
+    "TABLET": "Tablet"
+  },
+  "DATE_DISTANCE": {
+    "TODAY": "Today",
+    "TOMORROW": "Tomorrow",
+    "YESTERDAY": "Yesterday",
+    "DAYS_POST": "After one day",
+    "DAYS_POST_plural": "After {{count}} days",
+    "DAYS_PAST": "One day ago",
+    "DAYS_PAST_plural": "{{count}} days ago"
+  },
+  "COMMON": {
+    "BACK_TO_TODAY": "Today",
+    "CONFIRM": "Confirm",
+    "CREATE": "Create",
+    "SAVE": "Save",
+    "BACK": "Back",
+    "EDIT": "Edit",
+    "OK": "OK",
+    "CANCEL": "Cancel",
+    "CREATE_COURSE": "Create course",
+    "SAVE_COURSE": "Save course",
+    "EDIT_COURSE": "Edit course",
+    "DELETE_COURSE": "Delete course",
+    "DELETE_CONFIRM": "Are ou sure you want to delete the course?",
+    "NO_COURSES": "You have no active courses on this day, go to create one"
+  },
+  "TAKE": {
+    "HEADER": "Take",
+    "DESCRIPTION": "Select take time and amount of the medication",
+    "LABEL": "Take list",
+    "TIME": "Time",
+    "AMOUNT": "Amount",
+    "PLACEHOLDER": "Select take",
+    "DOSAGE_UNITS": {
+      "PILLS": "pill",
+      "PILLS_plural": "pills",
+      "TABLETS": "tablet",
+      "TABLETS_plural": "tablets",
+      "MILLI_GRAMS": "mg",
+      "GRAMS": "g",
+      "MILLI_LITERS": "mL",
+      "OUNCES": "oz",
+      "PIECES": "piece",
+      "PIECES_plural": "pieces"
+    },
+    "TERM": {
+      "BEFORE_MEAL": "before meal",
+      "AFTER_MEAL": "after meal",
+      "AFTER_BED": "after bed",
+      "BEFORE_BED": "before bed"
+    },
+    "NUMBERS": {
+      "FIRST": "First take",
+      "SECOND": "Second take",
+      "THIRD": "Third take",
+      "FOURTH": "Fourth take",
+      "FIFTH": "Fifth take",
+      "SIXTH": "Sixth take",
+      "SEVENTH": "Seventh take",
+      "EIGHTH": "Eighth take",
+      "NINETH": "Nineth take",
+      "TENTH": "Tenth take"
+    }
+  }
+}

@@ -1,0 +1,128 @@
+import React from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Platform } from 'react-native';
+import { COLORS } from '../../common/colors';
+import { VARIABLES } from '../../common/variables';
+import { Ionicons } from '@expo/vector-icons';
+import { withNavigation, NavigationInjectedProps } from 'react-navigation';
+import { Haptic } from 'expo';
+import { FONTS } from '../../common/fonts';
+
+export enum EHeaderTheme {
+  Dark,
+  Light,
+}
+
+interface IProps extends NavigationInjectedProps {
+  title: string;
+  next: {
+    title: string;
+    action: () => void;
+  } | null;
+  theme: EHeaderTheme;
+  onBack?: () => void;
+}
+
+class HeaderClass extends React.PureComponent<IProps> {
+  render() {
+    const { title, next, theme } = this.props;
+
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.button} onPress={this.handleBack}>
+          <View style={styles.back}>
+            <Ionicons name='ios-arrow-back' size={32} color={ICON_THEME_COLORS[theme].toString()} />
+          </View>
+
+          <Text style={[styles.title, titleTheme[theme]]}>{title}</Text>
+        </TouchableOpacity>
+
+        {next && (
+          <TouchableOpacity onPress={this.handleNext}>
+            <Text style={[styles.next, nextTheme[theme]]}>{next.title}</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    );
+  }
+
+  handleBack = () => {
+    if (Platform.OS === 'ios') {
+      Haptic.selection();
+    }
+
+    if (this.props.onBack) {
+      this.props.onBack();
+    }
+
+    this.props.navigation.goBack();
+  };
+
+  handleNext = () => {
+    if (Platform.OS === 'ios') {
+      Haptic.selection();
+    }
+
+    if (this.props.next) {
+      this.props.next.action();
+    }
+  };
+}
+
+const ICON_THEME_COLORS = {
+  [EHeaderTheme.Dark]: COLORS.GRAY,
+  [EHeaderTheme.Light]: COLORS.WHITE,
+};
+
+export const Header = withNavigation(HeaderClass);
+
+const styles = StyleSheet.create({
+  next: {
+    fontSize: VARIABLES.FONT_SIZE_SMALL,
+    textTransform: 'uppercase',
+    fontFamily: FONTS.BOLD,
+  },
+
+  container: {
+    paddingHorizontal: VARIABLES.PADDING_BIG,
+    paddingVertical: VARIABLES.PADDING_MEDIUM,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  back: {
+    marginRight: 6,
+    top: 1,
+  },
+
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  title: {
+    fontSize: VARIABLES.FONT_SIZE_SMALL,
+    fontFamily: FONTS.BOLD,
+    textTransform: 'uppercase',
+  },
+});
+
+const titleTheme = StyleSheet.create({
+  [EHeaderTheme.Dark]: {
+    color: COLORS.GRAY.toString(),
+  },
+
+  [EHeaderTheme.Light]: {
+    color: COLORS.WHITE.toString(),
+  },
+});
+
+const nextTheme = StyleSheet.create({
+  [EHeaderTheme.Dark]: {
+    color: COLORS.RED.toString(),
+  },
+
+  [EHeaderTheme.Light]: {
+    color: COLORS.WHITE.toString(),
+  },
+});
