@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import React from 'react';
 import {
   createStackNavigator,
@@ -119,11 +118,7 @@ const AppContainer = createAppContainer(TabNavigator);
 
 export default class App extends React.Component {
   render() {
-    return (
-      <>
-        <AppContainer />
-        <Notifications />
-      </>
-    );
+    return <>{/* <AppContainer />
+        <Notifications /> */}</>;
   }
 }
