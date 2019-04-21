@@ -174,10 +174,7 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
   }
 
   handleSelect(pill: IPill) {
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
-
+    CommonService.haptic();
     createCourseManager.selectCurrentPill(pill);
     CommonService.goBackAfterSelect(this.props.navigation);
   }

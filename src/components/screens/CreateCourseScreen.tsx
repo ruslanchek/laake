@@ -26,10 +26,10 @@ import { FormTextInput } from '../ui/FormTextInput';
 import { FormEntitiesInput } from '../ui/FormEntitiesInput';
 import { timesPerNames } from '../../common/times';
 import { createCourseManager } from '../../managers/CreateCourseManager';
-import { Haptic } from 'expo';
 import { courseManager } from '../../managers/CourseManager';
 import { ICONS } from '../../common/icons';
 import { ModalHeader } from '../blocks/ModalHeader';
+import { CommonService } from '../../services/CommonService';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -78,10 +78,14 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
             scrollTop={scrollTop}
             icon={courseEditMode === ECourseEditMode.Create ? ICONS.CREATE : ICONS.EDIT}
             title={localeManager.t(
-              courseEditMode === ECourseEditMode.Create ? 'CREATE_COURSE.TITLE' : 'EDIT_COURSE.TITLE',
+              courseEditMode === ECourseEditMode.Create
+                ? 'CREATE_COURSE.TITLE'
+                : 'EDIT_COURSE.TITLE',
             )}
             description={localeManager.t(
-              courseEditMode === ECourseEditMode.Create ? 'CREATE_COURSE.DESCRIPTION' : 'EDIT_COURSE.DESCRIPTION',
+              courseEditMode === ECourseEditMode.Create
+                ? 'CREATE_COURSE.DESCRIPTION'
+                : 'EDIT_COURSE.DESCRIPTION',
             )}
           />
 
@@ -203,9 +207,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
       this.props.navigation.navigate(ERouteName.CourseTypeModal);
     }
 
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
   };
 
   handleEditDuration = () => {

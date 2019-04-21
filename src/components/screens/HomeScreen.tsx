@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavigationContainerProps, SafeAreaView } from 'react-navigation'
+import React from 'react';
+import { NavigationContainerProps, SafeAreaView } from 'react-navigation';
 import {
   ActivityIndicator,
   Animated,
@@ -11,26 +11,26 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native'
-import { ERouteName } from '../../enums/ERouteName'
-import { COLORS } from '../../common/colors'
-import { VARIABLES } from '../../common/variables'
-import { followStore } from 'react-stores'
-import { commonStore } from '../../stores/commonStore'
-import { Ionicons } from '@expo/vector-icons'
-import { Haptic } from 'expo'
-import { GLOBAL_STYLES } from '../../common/styles'
-import { CalendarHeader } from '../common/CalendarHeader'
-import { courseManager } from '../../managers/CourseManager'
-import { localeManager } from '../../managers/LocaleManager'
-import { courseStore, createTakeTimeIndex } from '../../stores/courseStore'
-import { CourseCard } from '../blocks/CourseCard'
-import { ITake, ITakeTime } from '../../common/take'
-import { ICourse } from '../../common/course'
-import { createCourseManager } from '../../managers/CreateCourseManager'
-import { isAfter, isBefore } from 'date-fns'
-import { FONTS } from '../../common/fonts'
-import { Appear, EAppearType } from '../common/Appear'
+} from 'react-native';
+import { ERouteName } from '../../enums/ERouteName';
+import { COLORS } from '../../common/colors';
+import { VARIABLES } from '../../common/variables';
+import { followStore } from 'react-stores';
+import { commonStore } from '../../stores/commonStore';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { GLOBAL_STYLES } from '../../common/styles';
+import { CalendarHeader } from '../common/CalendarHeader';
+import { courseManager } from '../../managers/CourseManager';
+import { localeManager } from '../../managers/LocaleManager';
+import { courseStore, createTakeTimeIndex } from '../../stores/courseStore';
+import { CourseCard } from '../blocks/CourseCard';
+import { ITake, ITakeTime } from '../../common/take';
+import { ICourse } from '../../common/course';
+import { createCourseManager } from '../../managers/CreateCourseManager';
+import { isAfter, isBefore } from 'date-fns';
+import { FONTS } from '../../common/fonts';
+import { Appear, EAppearType } from '../common/Appear';
+import { CommonService } from '../../services/CommonService';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -99,7 +99,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
                   {sections.length > 0 && (
                     <TouchableOpacity onPress={this.handleNewCourse}>
                       <View style={styles.add}>
-                        <Ionicons name='ios-add' size={64} color={COLORS.RED.toString()} />
+                        <Icon name='ios-arrow-back' size={64} color={COLORS.RED.toString()} />
                       </View>
                     </TouchableOpacity>
                   )}
@@ -138,7 +138,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
                   <Appear type={EAppearType.Fade} show={true} customStyles={styles.centered}>
                     <TouchableOpacity onPress={this.handleNewCourse}>
                       <View style={styles.add}>
-                        <Ionicons name='ios-add' size={64} color={COLORS.RED.toString()} />
+                        <Icon name='ios-add' size={64} color={COLORS.RED.toString()} />
                       </View>
                     </TouchableOpacity>
 
@@ -204,10 +204,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
 
   handleNewCourse = () => {
     createCourseManager.setDefaults();
-
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
 
     if (this.props.navigation) {
       this.props.navigation.navigate(ERouteName.TodayCreateCourseScreen);

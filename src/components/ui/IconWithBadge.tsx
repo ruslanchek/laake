@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { View, StyleSheet } from 'react-native';
 import { COLORS } from '../../common/colors';
 import { ERouteName } from '../../enums/ERouteName';
@@ -16,9 +16,9 @@ export class IconWithBadge extends React.PureComponent<IProps> {
 
     return (
       <View style={styles.container}>
-        <Ionicons
+        <Icon
           style={styles.icon}
-          name={this.iconName}
+          name='ios-arrow-forward'
           size={28}
           color={color || COLORS.RED.toString()}
         />

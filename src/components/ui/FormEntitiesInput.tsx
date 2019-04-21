@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableHighlight, Platform } from 'react-nati
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { GLOBAL_STYLES } from '../../common/styles';
-import { Ionicons } from '@expo/vector-icons';
-import { Haptic } from 'expo';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { CommonService } from '../../services/CommonService';
 
 interface IProps {
   placeholder: string;
@@ -74,7 +74,7 @@ export class FormEntitiesInput extends React.PureComponent<IProps> {
             )}
           </View>
 
-          <Ionicons
+          <Icon
             style={GLOBAL_STYLES.INPUT_ENTITIES_ARROW}
             name='ios-arrow-forward'
             size={24}
@@ -86,10 +86,6 @@ export class FormEntitiesInput extends React.PureComponent<IProps> {
   }
 
   handlePress = () => {
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
-
     if (this.props.onPress) {
       this.props.onPress();
     }

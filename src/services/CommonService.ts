@@ -1,7 +1,14 @@
 import { NavigationScreenProp } from 'react-navigation';
+import { Platform } from 'react-native';
 import { VARIABLES } from '../common/variables';
-import { IFormSelectItem } from '../components/ui/FormSelect'
-import { localeManager } from '../managers/LocaleManager'
+import { IFormSelectItem } from '../components/ui/FormSelect';
+import { localeManager } from '../managers/LocaleManager';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
+const HAPTIC_OPTIONS = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
 
 export class CommonService {
   static goBackAfterSelect(navigation: NavigationScreenProp<any, any> | undefined) {
@@ -36,14 +43,18 @@ export class CommonService {
     return result;
   }
 
-  static generateSelectItemsFromEnumMap<TEnum>(
-    map: Map<TEnum, string>,
-  ): IFormSelectItem<TEnum>[] {
+  static generateSelectItemsFromEnumMap<TEnum>(map: Map<TEnum, string>): IFormSelectItem<TEnum>[] {
     return Array.from(map.keys()).map(key => {
       return {
         value: key,
         title: localeManager.t(map.get(key) || ''),
       };
     });
+  }
+
+  static haptic() {
+    if (Platform.OS === 'ios') {
+      ReactNativeHapticFeedback.trigger('impactLight', HAPTIC_OPTIONS);
+    }
   }
 }

@@ -18,4 +18,6 @@ target 'laake' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'react-native-haptic-feedback', :path => '../node_modules/react-native-haptic-feedback'
+
 end

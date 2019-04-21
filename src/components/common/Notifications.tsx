@@ -3,7 +3,7 @@ import DropdownAlert from 'react-native-dropdownalert';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
 import { View, StyleSheet, Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Constants } from 'expo';
 
 export enum ENotificationType {
@@ -27,14 +27,14 @@ export class Notifications extends React.PureComponent {
         renderImage={() => {
           return (
             <View style={styles.iconView}>
-              <Ionicons name='ios-warning' size={32} color={COLORS.WHITE.toString()} />
+              <Icon name='ios-arrow-back' size={32} color={COLORS.WHITE.toString()} />
             </View>
           );
         }}
         defaultContainer={styles.defaultContainer}
         titleStyle={styles.titleStyle}
         messageStyle={styles.messageStyle}
-        ref={ref => (this.dropDown = ref)}
+        ref={(ref: DropdownAlert) => (this.dropDown = ref)}
       />
     );
   }

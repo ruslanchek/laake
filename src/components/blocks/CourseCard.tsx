@@ -17,13 +17,12 @@ import { createCourseManager } from '../../managers/CreateCourseManager';
 import { commonStore } from '../../stores/commonStore';
 import { courseManager } from '../../managers/CourseManager';
 import { ITake, ITakeTime } from '../../common/take';
-import { Haptic } from 'expo';
 import { withNavigation, NavigationInjectedProps } from 'react-navigation';
 import { ERouteName } from '../../enums/ERouteName';
 import { ECourseEditMode } from '../../stores/createCourseStore';
-import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { FONTS } from '../../common/fonts';
+import { CommonService } from '../../services/CommonService';
 
 interface IProps extends NavigationInjectedProps {
   take: ITake;
@@ -103,11 +102,11 @@ class CourseCardClass extends React.Component<IProps, IState> {
             ) : (
               <>
                 {takeTime && takeTime.isTaken ? (
-                  <Ionicons name='ios-checkmark' size={39.5} color={COLORS.GREEN.toString()} />
+                  <Icon name='ios-checkmark' size={39.5} color={COLORS.GREEN.toString()} />
                 ) : (
-                  <Ionicons
-                    name='ios-medical'
+                  <Icon
                     style={styles.addIcon}
+                    name='ios-medical'
                     size={22}
                     color={COLORS.RED.toString()}
                   />
@@ -121,9 +120,7 @@ class CourseCardClass extends React.Component<IProps, IState> {
   }
 
   handleEdit = () => {
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
 
     if (this.props.navigation) {
       createCourseManager.setEditingCourseData(this.props.course.id);
@@ -137,9 +134,7 @@ class CourseCardClass extends React.Component<IProps, IState> {
   handleCheck = () => {
     const { take, takeTime, course } = this.props;
 
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
 
     this.setState(
       {

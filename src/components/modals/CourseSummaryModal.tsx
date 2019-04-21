@@ -23,13 +23,13 @@ import { PILLS, PILLS_MAP } from '../../common/pills';
 import { periodTypeNames } from '../../common/periods';
 import { commonStore } from '../../stores/commonStore';
 import { timesPerNames } from '../../common/times';
-import { Haptic } from 'expo';
 import { ERouteName } from '../../enums/ERouteName';
 import { courseManager } from '../../managers/CourseManager';
 import { FONTS } from '../../common/fonts';
 import { BGS } from '../../common/bgs';
 import { Progress } from '../ui/Progress';
 import { Appear, EAppearType } from '../common/Appear';
+import { CommonService } from '../../services/CommonService';
 
 interface IState {
   loading: boolean;
@@ -197,9 +197,7 @@ export class CourseSummaryModal extends React.Component<
   }
 
   handleEdit = () => {
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
 
     if (this.props.navigation) {
       this.props.navigation.navigate(ERouteName.TodayCreateCourseScreen);
@@ -207,9 +205,7 @@ export class CourseSummaryModal extends React.Component<
   };
 
   handleDelete = () => {
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
 
     Alert.alert(
       localeManager.t('COMMON.DELETE_COURSE'),
@@ -235,9 +231,7 @@ export class CourseSummaryModal extends React.Component<
   };
 
   handleSave = async () => {
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
 
     this.setState({
       loading: true,

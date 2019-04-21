@@ -121,7 +121,6 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <Icon name='ios-airplane' size={30} color='#900' />
         {/* <AppContainer /><Icon name="rocket" size={30} color="#900" />
         <Notifications /> */}
       </>

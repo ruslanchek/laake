@@ -2,10 +2,10 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Platform } from 'react-native';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
-import { Ionicons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { withNavigation, NavigationInjectedProps } from 'react-navigation';
-import { Haptic } from 'expo';
 import { FONTS } from '../../common/fonts';
+import { CommonService } from '../../services/CommonService';
 
 export enum EHeaderTheme {
   Dark,
@@ -30,7 +30,7 @@ class HeaderClass extends React.PureComponent<IProps> {
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={this.handleBack}>
           <View style={styles.back}>
-            <Ionicons name='ios-arrow-back' size={32} color={ICON_THEME_COLORS[theme].toString()} />
+            <Icon name='ios-arrow-back' size={32} color={ICON_THEME_COLORS[theme].toString()} />
           </View>
 
           <Text style={[styles.title, titleTheme[theme]]}>{title}</Text>
@@ -46,9 +46,7 @@ class HeaderClass extends React.PureComponent<IProps> {
   }
 
   handleBack = () => {
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
 
     if (this.props.onBack) {
       this.props.onBack();
@@ -58,9 +56,7 @@ class HeaderClass extends React.PureComponent<IProps> {
   };
 
   handleNext = () => {
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
 
     if (this.props.next) {
       this.props.next.action();

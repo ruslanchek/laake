@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CalendarStrip from 'react-native-calendar-strip';
-import { Ionicons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { commonStore } from '../../stores/commonStore';
@@ -9,9 +9,9 @@ import { followStore } from 'react-stores';
 import { isToday } from 'date-fns';
 import { localeManager } from '../../managers/LocaleManager';
 import { courseManager } from '../../managers/CourseManager';
-import { Haptic } from 'expo';
 import { FONTS } from '../../common/fonts';
 import { Appear, EAppearType } from './Appear';
+import { CommonService } from '../../services/CommonService';
 
 interface IProps {
   scrollTop: Animated.Value;
@@ -74,9 +74,9 @@ export class CalendarHeader extends React.Component<IProps> {
           type={EAppearType.Spring}
         >
           <TouchableOpacity style={styles.todayButtonTouchable} onPress={this.handlePressToday}>
-            <Ionicons
-              name='ios-calendar'
+            <Icon
               style={styles.todayButtonIcon}
+              name='ios-calendar'
               size={16}
               color={COLORS.WHITE.toString()}
             />
@@ -136,12 +136,22 @@ export class CalendarHeader extends React.Component<IProps> {
             }}
             rightSelector={
               <View style={styles.arrowRight}>
-                <Ionicons name='ios-arrow-forward' size={32} color={COLORS.WHITE.toString()} />
+                <Icon
+                  style={styles.todayButtonIcon}
+                  name='ios-arrow-forward'
+                  size={32}
+                  color={COLORS.WHITE.toString()}
+                />
               </View>
             }
             leftSelector={
               <View style={styles.arrowLeft}>
-                <Ionicons name='ios-arrow-back' size={32} color={COLORS.WHITE.toString()} />
+                <Icon
+                  style={styles.todayButtonIcon}
+                  name='ios-arrow-back'
+                  size={32}
+                  color={COLORS.WHITE.toString()}
+                />
               </View>
             }
           />
@@ -185,23 +195,17 @@ export class CalendarHeader extends React.Component<IProps> {
   handlePressToday = () => {
     courseManager.setToday(new Date());
 
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
   };
 
   handleSelectDate = (date: Date) => {
     courseManager.setToday(new Date(date));
 
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
   };
 
   handleWeekChange = () => {
-    if (Platform.OS === 'ios') {
-      Haptic.selection();
-    }
+    CommonService.haptic();
   };
 }
 
