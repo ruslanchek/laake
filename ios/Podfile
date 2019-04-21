@@ -12,4 +12,7 @@ target 'laake' do
   pod 'Firebase/Storage', '~> 5.20.1'
   pod 'Firebase/Auth', '~> 5.20.1'
 
+  pod 'Fabric', '~> 1.7.13'
+  pod 'Crashlytics', '~> 3.10.7'
+
 end
