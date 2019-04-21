@@ -18,6 +18,9 @@ import React from 'react';
 // import { Notifications } from './src/components/common/Notifications';
 // import { FONTS } from './src/common/fonts';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Text, Image } from 'react-native';
+import { FONTS } from './src/common/fonts';
+import { ICONS } from './src/common/icons';
 
 // const styles = StyleSheet.create({
 //   tabBar: {
@@ -121,6 +124,17 @@ export default class App extends React.Component {
   render() {
     return (
       <>
+        <Icon style={{}} name='ios-calendar' size={50} color={'red'} />
+        <Text
+          style={{
+            fontFamily: FONTS.BOLD,
+          }}
+        >
+          sadasdasd
+        </Text>
+
+        <Image source={ICONS.CLOCKS} />
+
         {/* <AppContainer /><Icon name="rocket" size={30} color="#900" />
         <Notifications /> */}
       </>
