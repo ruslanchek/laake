@@ -68,7 +68,6 @@ export class CourseSummaryModal extends React.Component<
   render() {
     const { loading, deleteLoading } = this.state;
     const { currentLocale } = commonStore.state;
-    const { t } = localeManager;
     const course: ICourse = {
       id: '',
       title: createCourseStore.state.title,
@@ -82,11 +81,11 @@ export class CourseSummaryModal extends React.Component<
       endDate: 0,
     };
     const pill = PILLS_MAP.get(course.pillId) || PILLS[0];
-    const periodTitle = t(periodTypeNames.get(course.periodType) || '');
-    const timesTitle = `${t('TIMES.TIMES', {
+    const periodTitle = localeManager.t(periodTypeNames.get(course.periodType) || '');
+    const timesTitle = `${localeManager.t('TIMES.TIMES', {
       value: course.times.toLocaleString(currentLocale),
       count: course.times,
-    })} ${t(timesPerNames.get(course.timesPer) || '')}`;
+    })} ${localeManager.t(timesPerNames.get(course.timesPer) || '')}`;
 
     return (
       <View style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>

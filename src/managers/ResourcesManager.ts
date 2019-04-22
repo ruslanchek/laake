@@ -1,5 +1,4 @@
 import { Manager } from './Manager';
-import { Asset, Font } from 'expo';
 import { FONTS } from '../common/fonts';
 
 class ResourcesManager extends Manager {
@@ -26,18 +25,20 @@ class ResourcesManager extends Manager {
       require('../assets/bg/1.png'),
     ];
 
-    const cacheImages = images.map(image => {
-      return Asset.fromModule(image).downloadAsync();
-    });
+    // const cacheImages = images.map(image => {
+    //   return Asset.fromModule(image).downloadAsync();
+    // });
 
-    const cacheFonts = Font.loadAsync({
-      [FONTS.LIGHT]: require('../assets/fonts/Quicksand-Light.ttf'),
-      [FONTS.BOLD]: require('../assets/fonts/Quicksand-Bold.ttf'),
-      [FONTS.MEDIUM]: require('../assets/fonts/Quicksand-Medium.ttf'),
-      [FONTS.REGULAR]: require('../assets/fonts/Quicksand-Regular.ttf'),
-    });
+    // const cacheFonts = Font.loadAsync({
+    //   [FONTS.LIGHT]: require('../assets/fonts/Quicksand-Light.ttf'),
+    //   [FONTS.BOLD]: require('../assets/fonts/Quicksand-Bold.ttf'),
+    //   [FONTS.MEDIUM]: require('../assets/fonts/Quicksand-Medium.ttf'),
+    //   [FONTS.REGULAR]: require('../assets/fonts/Quicksand-Regular.ttf'),
+    // });
 
-    return Promise.all([cacheImages, cacheFonts]);
+    // return Promise.all([cacheImages, cacheFonts]);
+
+    return Promise.resolve();
   }
 }
 

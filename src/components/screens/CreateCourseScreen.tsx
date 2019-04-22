@@ -48,7 +48,6 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
     const { scrollTop } = this.state;
     const { period, periodType, times, timesPer, takes, courseEditMode } = createCourseStore.state;
     const { currentLocale } = commonStore.state;
-    const { t } = localeManager;
     const periodTypeName = periodTypeNames.get(periodType) || '';
 
     return (
@@ -94,7 +93,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
               <FormRow>
                 <FormCol width='100%'>
                   <FormTextInput
-                    label={t('CREATE_COURSE.LABEL_NAME')}
+                    label={localeManager.t('CREATE_COURSE.LABEL_NAME')}
                     value={createCourseStore.state.title}
                     onChange={title => {
                       createCourseStore.setState({
@@ -134,8 +133,8 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
                     borderRadiusBottom
                     useWrapper
                     onPress={this.handleEditDuration}
-                    items={`${period} ${t(periodTypeName)}`}
-                    label={t('CREATE_COURSE.LABEL_DURATION')}
+                    items={`${period} ${localeManager.t(periodTypeName)}`}
+                    label={localeManager.t('CREATE_COURSE.LABEL_DURATION')}
                     placeholder='Select duration'
                   />
                 </FormCol>
@@ -149,11 +148,11 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
                     borderRadiusTop={true}
                     borderRadiusBottom={true}
                     onPress={this.handleEditOftenness}
-                    items={`${t('TIMES.TIMES', {
+                    items={`${localeManager.t('TIMES.TIMES', {
                       value: times.toLocaleString(currentLocale),
                       count: times,
-                    })} ${t(timesPerNames.get(timesPer) || '')}`}
-                    label={t('CREATE_COURSE.LABEL_OFTENNESS')}
+                    })} ${localeManager.t(timesPerNames.get(timesPer) || '')}`}
+                    label={localeManager.t('CREATE_COURSE.LABEL_OFTENNESS')}
                     placeholder='Select duration'
                   />
                 </FormCol>
@@ -177,7 +176,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
                             onPress={this.handleEditTake.bind(this, i)}
                             items={createCourseManager.generateTakeStrings(take, currentLocale)}
                             label={localeManager.t(courseManager.getTakeNumber(take.index))}
-                            placeholder={t('TAKE.PLACEHOLDER')}
+                            placeholder={localeManager.t('TAKE.PLACEHOLDER')}
                           />
                         );
                       })}

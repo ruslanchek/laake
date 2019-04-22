@@ -18,7 +18,7 @@ export class IconWithBadge extends React.PureComponent<IProps> {
       <View style={styles.container}>
         <Icon
           style={styles.icon}
-          name='ios-arrow-forward'
+          name={this.iconName}
           size={28}
           color={color || COLORS.RED.toString()}
         />

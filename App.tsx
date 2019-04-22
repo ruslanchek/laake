@@ -17,8 +17,9 @@ import { CourseTakeModal } from './src/components/modals/CourseTakeModal';
 import { CourseSummaryModal } from './src/components/modals/CourseSummaryModal';
 import { Notifications } from './src/components/common/Notifications';
 import { FONTS } from './src/common/fonts';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { Text, Image } from 'react-native';
+import { managers } from './src/managers/managers';
+
+console.disableYellowBox = true;
 
 const styles = StyleSheet.create({
   tabBar: {
@@ -118,8 +119,28 @@ const TabNavigator = createBottomTabNavigator(
 
 const AppContainer = createAppContainer(TabNavigator);
 
-export default class App extends React.Component {
+interface IState {
+  appLoaded: boolean;
+}
+
+export default class App extends React.Component<{}, IState> {
+  state = {
+    appLoaded: false,
+  };
+
+  async componentDidMount() {
+    await managers.init();
+
+    this.setState({
+      appLoaded: true,
+    });
+  }
+
   render() {
+    if (!this.state.appLoaded) {
+      return null;
+    }
+
     return (
       <>
         <AppContainer />

@@ -17,7 +17,7 @@ class LocaleManager extends Manager {
       return this.translator(key, values);
     }
 
-    return 's';
+    return '1';
   }
 
   public reset(): void {}
@@ -35,10 +35,6 @@ class LocaleManager extends Manager {
         wait: true,
       },
     });
-
-    console.log(this.t);
-
-    return Promise.resolve();
   }
 }
 
