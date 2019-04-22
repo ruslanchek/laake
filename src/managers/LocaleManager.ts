@@ -17,7 +17,7 @@ class LocaleManager extends Manager {
       return this.translator(key, values);
     }
 
-    return '1';
+    return ' ';
   }
 
   public reset(): void {}

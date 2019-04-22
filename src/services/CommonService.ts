@@ -43,11 +43,20 @@ export class CommonService {
     return result;
   }
 
-  static generateSelectItemsFromEnumMap<TEnum>(map: Map<TEnum, string>): IFormSelectItem<TEnum>[] {
+  static generateSelectItemsFromEnumMap<TEnum>(
+    map: Map<TEnum, string>,
+    count?: number,
+  ): IFormSelectItem<TEnum>[] {
+    const values: any = {};
+
+    if (count || count === 0) {
+      values.count = count;
+    }
+
     return Array.from(map.keys()).map(key => {
       return {
         value: key,
-        title: localeManager.t(map.get(key) || ''),
+        title: localeManager.t(map.get(key) || '', values),
       };
     });
   }

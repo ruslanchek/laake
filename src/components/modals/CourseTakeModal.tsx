@@ -116,6 +116,7 @@ export class CourseTakeModal extends React.Component<
                     width='40%'
                     items={CommonService.generateSelectItemsFromEnumMap<ETakeDosageUnit>(
                       takeDosageUnitNames,
+                      dosage,
                     )}
                     value={dosageUnits}
                     onChange={this.handleChangeDosageUnits}

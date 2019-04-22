@@ -45,9 +45,12 @@
     }
   },
   "PERIODS": {
-    "DAYS": "days",
-    "WEEKS": "weeks",
-    "MONTHS": "months"
+    "DAYS": "day",
+    "DAYS_plural": "days",
+    "WEEKS": "week",
+    "WEEKS_plural": "weeks",
+    "MONTHS": "month",
+    "MONTHS_plural": "months"
   },
   "TIMES": {
     "TIMES": "{{value}} time",

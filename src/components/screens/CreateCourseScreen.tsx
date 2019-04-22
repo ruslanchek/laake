@@ -133,7 +133,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
                     borderRadiusBottom
                     useWrapper
                     onPress={this.handleEditDuration}
-                    items={`${period} ${localeManager.t(periodTypeName)}`}
+                    items={`${period} ${localeManager.t(periodTypeName, { count: period })}`}
                     label={localeManager.t('CREATE_COURSE.LABEL_DURATION')}
                     placeholder='Select duration'
                   />
@@ -151,7 +151,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
                     items={`${localeManager.t('TIMES.TIMES', {
                       value: times.toLocaleString(currentLocale),
                       count: times,
-                    })} ${localeManager.t(timesPerNames.get(timesPer) || '')}`}
+                    })} ${localeManager.t(timesPerNames.get(timesPer) || '', times)}`}
                     label={localeManager.t('CREATE_COURSE.LABEL_OFTENNESS')}
                     placeholder='Select duration'
                   />

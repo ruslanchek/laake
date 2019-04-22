@@ -99,7 +99,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
                   {sections.length > 0 && (
                     <TouchableOpacity onPress={this.handleNewCourse}>
                       <View style={styles.add}>
-                        <Icon name='ios-arrow-back' size={64} color={COLORS.RED.toString()} />
+                        <Icon name='ios-add' size={64} color={COLORS.RED.toString()} />
                       </View>
                     </TouchableOpacity>
                   )}

@@ -61,6 +61,7 @@ export class CourseDurationModal extends React.Component<NavigationContainerProp
                     width='50%'
                     items={CommonService.generateSelectItemsFromEnumMap<EPeriodType>(
                       periodTypeNames,
+                      period,
                     )}
                     value={periodType}
                     onChange={this.handleChangePeriodType}
