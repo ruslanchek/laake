@@ -10,12 +10,20 @@ const RESOURCES = {
 };
 
 class LocaleManager extends Manager {
-  public t!: i18n.TFunction;
+  public translator: i18n.TFunction | null = null;
+
+  public t(key: string, values?: any): string {
+    if (this.translator) {
+      return this.translator(key, values);
+    }
+
+    return 's';
+  }
 
   public reset(): void {}
 
   public async init(): Promise<any> {
-    this.t = await i18n.use(initReactI18next).init({
+    this.translator = await i18n.use(initReactI18next).init({
       resources: RESOURCES,
       lng: commonStore.state.currentLocale,
       fallbackLng: commonStore.state.currentLocale,
@@ -27,6 +35,8 @@ class LocaleManager extends Manager {
         wait: true,
       },
     });
+
+    console.log(this.t);
 
     return Promise.resolve();
   }

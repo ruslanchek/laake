@@ -1,6 +1,5 @@
 import { Manager } from './Manager';
 import firebase from 'react-native-firebase';
-import { ImageManipulator } from 'expo';
 import { CollectionReference } from 'react-native-firebase/firestore';
 
 const FIREBASE_CONFIG = {
@@ -55,47 +54,40 @@ class FirebaseManager extends Manager {
     return firebase.firestore().collection(ref);
   }
 
-  public async uploadFile(
-    filename: string,
-    file: string,
-  ): Promise<{ error: string | null; uri: string | null }> {
-    const result = await ImageManipulator.manipulateAsync(
-      file,
-      [
-        {
-          resize: {
-            width: 512,
-            height: 512,
-          },
-        },
-      ],
-      {
-        compress: 0.85,
-        format: 'jpeg',
-        base64: true,
-      },
-    );
-
-    if (result.base64) {
-      const storageRef = firebase.storage().ref();
-      const uploadTask = await storageRef.child(`${this.userRef}pills/${filename}`);
-
-      // .putString(`data:image/jpeg;base64,aaaa`, 'data_url', {
-      //   contentType: 'image/jpeg',
-      // });
-
-      // console.log(uploadTask);
-
-      return {
-        error: null,
-        uri: '',
-      };
-    } else {
-      return {
-        error: 'Convert error',
-        uri: null,
-      };
-    }
+  public async uploadFile(filename: string, file: string) {
+    // const result = await ImageManipulator.manipulateAsync(
+    //   file,
+    //   [
+    //     {
+    //       resize: {
+    //         width: 512,
+    //         height: 512,
+    //       },
+    //     },
+    //   ],
+    //   {
+    //     compress: 0.85,
+    //     format: 'jpeg',
+    //     base64: true,
+    //   },
+    // );
+    // if (result.base64) {
+    //   const storageRef = firebase.storage().ref();
+    //   const uploadTask = await storageRef.child(`${this.userRef}pills/${filename}`);
+    //   // .putString(`data:image/jpeg;base64,aaaa`, 'data_url', {
+    //   //   contentType: 'image/jpeg',
+    //   // });
+    //   // console.log(uploadTask);
+    //   return {
+    //     error: null,
+    //     uri: '',
+    //   };
+    // } else {
+    //   return {
+    //     error: 'Convert error',
+    //     uri: null,
+    //   };
+    // }
   }
 }
 

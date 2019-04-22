@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Animated,
-  StyleSheet,
-  TextInput,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { View, Animated, StyleSheet, TextInput, TouchableWithoutFeedback } from 'react-native';
 import { COLORS } from '../../common/colors';
 import { GLOBAL_STYLES } from '../../common/styles';
 import { VARIABLES } from '../../common/variables';

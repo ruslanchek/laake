@@ -3,7 +3,6 @@ import {
   Animated,
   Dimensions,
   Image,
-  Platform,
   StatusBar,
   StyleSheet,
   Text,
@@ -17,7 +16,7 @@ import { COLORS } from '../../common/colors';
 import { EHeaderTheme, Header } from '../common/Header';
 import { followStore } from 'react-stores';
 import { createCourseStore } from '../../stores/createCourseStore';
-import { ImagePicker, Permissions } from 'expo';
+import ImagePicker from 'react-native-image-picker';
 import { CommonService } from '../../services/CommonService';
 import { createCourseManager } from '../../managers/CreateCourseManager';
 import { GLOBAL_STYLES } from '../../common/styles';
@@ -125,38 +124,51 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
   }
 
   handleSelectPicture = async () => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-
-    if (status === 'granted') {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: 'Images',
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1,
-        exif: false,
-      });
-
-      if (!result.cancelled && result.uri) {
-        this.handleUpload(result.uri);
-      }
-    }
+    // const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    // if (status === 'granted') {
+    //   ImagePicker.showImagePicker(options, response => {
+    //     console.log('Response = ', response);
+    //     if (response.didCancel) {
+    //       console.log('User cancelled image picker');
+    //     } else if (response.error) {
+    //       console.log('ImagePicker Error: ', response.error);
+    //     } else if (response.customButton) {
+    //       console.log('User tapped custom button: ', response.customButton);
+    //     } else {
+    //       const source = { uri: response.uri };
+    //       // You can also display the image using data:
+    //       // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+    //       this.setState({
+    //         avatarSource: source,
+    //       });
+    //     }
+    //   });
+    //   const result = await ImagePicker.launchImageLibraryAsync({
+    //     mediaTypes: 'Images',
+    //     allowsEditing: true,
+    //     aspect: [1, 1],
+    //     quality: 1,
+    //     exif: false,
+    //   });
+    //   if (!result.cancelled && result.uri) {
+    //     this.handleUpload(result.uri);
+    //   }
+    // }
   };
 
   handleCapturePicture = async () => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-
-    if (status === 'granted') {
-      const result = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1,
-        exif: false,
-      });
-
-      if (!result.cancelled && result.uri) {
-        this.handleUpload(result.uri);
-      }
-    }
+    // const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    // if (status === 'granted') {
+    //   const result = await ImagePicker.launchCameraAsync({
+    //     allowsEditing: true,
+    //     aspect: [1, 1],
+    //     quality: 1,
+    //     exif: false,
+    //   });
+    //   if (!result.cancelled && result.uri) {
+    //     this.handleUpload(result.uri);
+    //   }
+    // }
   };
 
   async handleUpload(uri: string) {
