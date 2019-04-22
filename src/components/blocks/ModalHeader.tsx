@@ -35,7 +35,7 @@ export class ModalHeader extends React.PureComponent<IProps> {
                   outputRange: [0, 45],
                   extrapolate: 'clamp',
                 }),
-              }
+              },
             ],
           },
         ]}
@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
 
   header: {
     fontSize: VARIABLES.FONT_SIZE_GIANT,
-    fontWeight: '400',
     textAlign: 'center',
     marginBottom: 5,
     fontFamily: FONTS.BOLD,
