@@ -4,6 +4,7 @@ import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
 import { StyleSheet, Text } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { FONTS } from '../../common/fonts';
 
 export enum ENotificationType {
   Error = 'error',
@@ -28,8 +29,6 @@ export class Notifications extends React.PureComponent {
         imageSrc={undefined}
         sensitivity={100}
         renderTitle={(props, state: any) => {
-          console.log(props);
-
           switch (state.type) {
             case 'error': {
               return <Text style={[styles.titleStyle, styles.titleStyleError]}>{state.title}</Text>;
@@ -112,9 +111,10 @@ const styles = StyleSheet.create({
   },
 
   titleStyle: {
-    fontWeight: '600',
+    fontWeight: '800',
     fontSize: VARIABLES.FONT_SIZE_SMALL,
     marginBottom: 3,
+    fontFamily: FONTS.BOLD,
   },
 
   titleStyleError: {
@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
   messageStyle: {
     color: COLORS.WHITE.toString(),
     fontSize: VARIABLES.FONT_SIZE_SMALL,
+    fontFamily: FONTS.MEDIUM,
   },
 
   messageStyleError: {

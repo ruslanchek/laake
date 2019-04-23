@@ -179,8 +179,8 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
     } else {
       NotificationsHandler.alertWithType(
         ENotificationType.Error,
-        localeManager.t('ERRORS.UPLOAD_ERROR.TITLE'),
-        localeManager.t('ERRORS.UPLOAD_ERROR.MESSAGE'),
+        localeManager.t('NOTIFICATIONS.UPLOAD_ERROR.TITLE'),
+        localeManager.t('NOTIFICATIONS.UPLOAD_ERROR.MESSAGE'),
       );
     }
   }

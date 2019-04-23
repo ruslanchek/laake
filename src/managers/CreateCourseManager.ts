@@ -85,13 +85,13 @@ class CreateCourseManager extends Manager {
 
     if (!title) {
       return {
-        title: 'ERRORS.NAME_EMPTY.TITLE',
-        message: 'ERRORS.NAME_EMPTY.MESSAGE',
+        title: 'NOTIFICATIONS.NAME_EMPTY.TITLE',
+        message: 'NOTIFICATIONS.NAME_EMPTY.MESSAGE',
       };
     } else if (title && !this.checkCourseAvailability()) {
       return {
-        title: 'ERRORS.COURSE_ALREADY_EXISTS.TITLE',
-        message: 'ERRORS.COURSE_ALREADY_EXISTS.MESSAGE',
+        title: 'NOTIFICATIONS.COURSE_ALREADY_EXISTS.TITLE',
+        message: 'NOTIFICATIONS.COURSE_ALREADY_EXISTS.MESSAGE',
       };
     }
 

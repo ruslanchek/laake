@@ -30,7 +30,7 @@
     "TAKE_PICTURE": "Take picture",
     "DESCRIPTION": "Select or upload image for the course"
   },
-  "ERRORS": {
+  "NOTIFICATIONS": {
     "NAME_EMPTY": {
       "TITLE": "Form error",
       "MESSAGE": "Medication name cannot be empty"
@@ -42,6 +42,14 @@
     "UPLOAD_ERROR": {
       "TITLE": "Image upload error",
       "MESSAGE": "Could not upload image, please try again"
+    },
+    "COURSE_DELETED": {
+      "TITLE": "Course deleted",
+      "MESSAGE": "The course was deleted"
+    },
+    "NOTIFICATIONS_ENABLED": {
+      "TITLE": "Reminders",
+      "MESSAGE": "Remind notifications is enabled for the course"
     }
   },
   "PERIODS": {

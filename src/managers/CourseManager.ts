@@ -118,8 +118,8 @@ class CourseManager extends Manager {
 
         NotificationsHandler.alertWithType(
           ENotificationType.Info,
-          localeManager.t('XXX'),
-          localeManager.t('XXX'),
+          localeManager.t('NOTIFICATIONS.COURSE_DELETED.TITLE'),
+          localeManager.t('NOTIFICATIONS.COURSE_DELETED.MESSAGE'),
         );
       }
     }
@@ -220,8 +220,8 @@ class CourseManager extends Manager {
       if (isEnabled) {
         NotificationsHandler.alertWithType(
           ENotificationType.Info,
-          localeManager.t('XXX'),
-          localeManager.t('XXX'),
+          localeManager.t('NOTIFICATIONS.NOTIFICATIONS_ENABLED.TITLE'),
+          localeManager.t('NOTIFICATIONS.NOTIFICATIONS_ENABLED.MESSAGE'),
         );
       }
     } else {
