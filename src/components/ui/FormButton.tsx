@@ -29,7 +29,7 @@ export enum EFormButtonTheme {
 
 export class FormButton extends React.PureComponent<IProps> {
   render() {
-    const { children, onPress, isDisabled, isLoading, customStyles, isSmall } = this.props;
+    const { children, isDisabled, isLoading, customStyles, isSmall } = this.props;
 
     return (
       <TouchableHighlight
@@ -44,9 +44,7 @@ export class FormButton extends React.PureComponent<IProps> {
           },
           customStyles ? customStyles : null,
         ]}
-        onPress={() => {
-          onPress();
-        }}
+        onPress={this.handlePress}
       >
         <View style={styles.inner}>
           {isLoading ? (
@@ -106,6 +104,14 @@ export class FormButton extends React.PureComponent<IProps> {
       }
     }
   }
+
+  handlePress = () => {
+    const { onPress, isDisabled, isLoading } = this.props;
+
+    if (!isDisabled && !isLoading) {
+      onPress();
+    }
+  };
 }
 
 const styles = StyleSheet.create({

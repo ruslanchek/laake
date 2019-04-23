@@ -9,7 +9,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { NavigationContainerProps, NavigationEvents, SafeAreaView } from 'react-navigation';
+import { NavigationContainerProps, SafeAreaView } from 'react-navigation';
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { EHeaderTheme, Header } from '../common/Header';
@@ -30,10 +30,12 @@ import { BGS } from '../../common/bgs';
 import { Progress } from '../ui/Progress';
 import { Appear, EAppearType } from '../common/Appear';
 import { CommonService } from '../../services/CommonService';
+import { CheckButton } from '../ui/CheckButton';
 
 interface IState {
   loading: boolean;
   deleteLoading: boolean;
+  notificationsLoading: boolean;
 }
 
 @followStore(commonStore)
@@ -49,6 +51,7 @@ export class CourseSummaryModal extends React.Component<
   state: IState = {
     loading: false,
     deleteLoading: false,
+    notificationsLoading: false,
   };
 
   get courseEditMode(): ECourseEditMode {
@@ -66,7 +69,7 @@ export class CourseSummaryModal extends React.Component<
   }
 
   render() {
-    const { loading, deleteLoading } = this.state;
+    const { loading, deleteLoading, notificationsLoading } = this.state;
     const { currentLocale } = commonStore.state;
     const course: ICourse = {
       id: '',
@@ -79,6 +82,7 @@ export class CourseSummaryModal extends React.Component<
       takes: createCourseStore.state.takes,
       startDate: 0,
       endDate: 0,
+      notificationsEnabled: createCourseStore.state.notificationsEnabled,
     };
     const pill = PILLS_MAP.get(course.pillId) || PILLS[0];
     const periodTitle = localeManager.t(periodTypeNames.get(course.periodType) || '');
@@ -128,6 +132,13 @@ export class CourseSummaryModal extends React.Component<
                     </Appear>
                   </View>
                 </View>
+
+                <CheckButton
+                  text='Receive reminders'
+                  isChecked={course.notificationsEnabled}
+                  isLoading={notificationsLoading}
+                  onPress={this.handleNotifications}
+                />
               </View>
             </View>
           </ImageBackground>
@@ -217,11 +228,18 @@ export class CourseSummaryModal extends React.Component<
         {
           text: localeManager.t('COMMON.OK'),
           onPress: async () => {
-            await courseManager.deleteCourse(createCourseStore.state.currentCourseId);
+            this.setState(
+              {
+                deleteLoading: true,
+              },
+              async () => {
+                await courseManager.deleteCourse(createCourseStore.state.currentCourseId);
 
-            if (this.props.navigation) {
-              this.props.navigation.navigate(ERouteName.Today);
-            }
+                if (this.props.navigation) {
+                  this.props.navigation.navigate(ERouteName.Today);
+                }
+              },
+            );
           },
         },
       ],
@@ -229,22 +247,40 @@ export class CourseSummaryModal extends React.Component<
     );
   };
 
-  handleSave = async () => {
+  handleNotifications = () => {
+    this.setState(
+      {
+        notificationsLoading: true,
+      },
+      async () => {
+        await courseManager.updateNotificationsEnabled();
+
+        this.setState({
+          notificationsLoading: false,
+        });
+      },
+    );
+  };
+
+  handleSave = () => {
     CommonService.haptic();
 
-    this.setState({
-      loading: true,
-    });
+    this.setState(
+      {
+        loading: true,
+      },
+      async () => {
+        if (this.courseEditMode === ECourseEditMode.Create) {
+          await courseManager.createCourse();
+        } else {
+          await courseManager.updateCourse();
+        }
 
-    if (this.courseEditMode === ECourseEditMode.Create) {
-      await courseManager.createCourse();
-    } else {
-      await courseManager.updateCourse();
-    }
-
-    if (this.props.navigation) {
-      this.props.navigation.navigate(ERouteName.Today);
-    }
+        if (this.props.navigation) {
+          this.props.navigation.navigate(ERouteName.Today);
+        }
+      },
+    );
   };
 }
 

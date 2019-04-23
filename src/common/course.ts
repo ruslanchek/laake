@@ -1,6 +1,6 @@
 import { EPeriodType } from './periods';
 import { ETimesPer } from './times';
-import { ITake } from './take'
+import { ITake } from './take';
 
 export interface ICourse {
   id: string;
@@ -13,4 +13,5 @@ export interface ICourse {
   takes: ITake[];
   startDate: number;
   endDate: number;
+  notificationsEnabled: boolean;
 }

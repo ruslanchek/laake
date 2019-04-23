@@ -6,7 +6,6 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  Platform,
   ActivityIndicator,
 } from 'react-native';
 import { COLORS } from '../../common/colors';

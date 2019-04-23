@@ -86,6 +86,8 @@ export class FormEntitiesInput extends React.PureComponent<IProps> {
   }
 
   handlePress = () => {
+    CommonService.haptic();
+
     if (this.props.onPress) {
       this.props.onPress();
     }

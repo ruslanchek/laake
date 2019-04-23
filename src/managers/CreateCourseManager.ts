@@ -38,6 +38,7 @@ class CreateCourseManager extends Manager {
         times: course.times,
         timesPer: course.timesPer,
         takes: course.takes,
+        notificationsEnabled: course.notificationsEnabled,
       });
     }
   }

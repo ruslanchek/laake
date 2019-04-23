@@ -17,6 +17,7 @@ import {
 import { EPeriodType } from '../common/periods';
 import { commonStore } from '../stores/commonStore';
 import { ITake, ITakeTime } from '../common/take';
+import { createCourseManager } from './CreateCourseManager';
 
 class CourseManager extends Manager {
   public reset(): void {}
@@ -110,6 +111,8 @@ class CourseManager extends Manager {
           .getCollection([ECollectionName.Courses])
           .doc(course.id)
           .delete();
+
+        this.subscribeToCourses();
       }
     }
   }
@@ -191,6 +194,25 @@ class CourseManager extends Manager {
 
   public getDayIndex(time: Date): number {
     return differenceInDays(time, new Date(0));
+  }
+
+  public async updateNotificationsEnabled() {
+    const isEnabled = !createCourseStore.state.notificationsEnabled;
+
+    if (createCourseStore.state.currentCourseId) {
+      await firebaseManager
+        .getCollection([ECollectionName.Courses])
+        .doc(createCourseStore.state.currentCourseId)
+        .update({
+          notificationsEnabled: isEnabled,
+        });
+
+      createCourseManager.setEditingCourseData(createCourseStore.state.currentCourseId);
+    } else {
+      createCourseStore.setState({
+        notificationsEnabled: isEnabled,
+      });
+    }
   }
 
   public async updateTakeTime(course: ICourse, take: ITake, takeTime: ITakeTime) {

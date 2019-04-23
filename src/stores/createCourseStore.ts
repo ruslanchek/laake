@@ -21,6 +21,7 @@ interface CreateCourseStoreState {
   times: number;
   timesPer: ETimesPer;
   takes: ITake[];
+  notificationsEnabled: boolean;
 }
 
 const initialState: CreateCourseStoreState = {
@@ -34,6 +35,7 @@ const initialState: CreateCourseStoreState = {
   times: 1,
   timesPer: ETimesPer.Day,
   takes: [],
+  notificationsEnabled: false,
 };
 
 export const createCourseStore = new Store<CreateCourseStoreState>(initialState, {
