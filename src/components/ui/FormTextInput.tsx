@@ -44,37 +44,22 @@ export class FormTextInput extends React.Component<IProps, IState> {
         useNativeDriver: true,
       }),
       Animated.timing(this.state.animated, {
-        toValue: 2,
+        toValue: 1,
         duration: SHAKE_KEYFRAME_DURATION,
         useNativeDriver: true,
       }),
       Animated.timing(this.state.animated, {
-        toValue: -4,
-        duration: SHAKE_KEYFRAME_DURATION,
-        useNativeDriver: true,
-      }),
-      Animated.timing(this.state.animated, {
-        toValue: 4,
-        duration: SHAKE_KEYFRAME_DURATION,
-        useNativeDriver: true,
-      }),
-      Animated.timing(this.state.animated, {
-        toValue: -4,
-        duration: SHAKE_KEYFRAME_DURATION,
-        useNativeDriver: true,
-      }),
-      Animated.timing(this.state.animated, {
-        toValue: 4,
-        duration: SHAKE_KEYFRAME_DURATION,
-        useNativeDriver: true,
-      }),
-      Animated.timing(this.state.animated, {
-        toValue: -4,
+        toValue: -2,
         duration: SHAKE_KEYFRAME_DURATION,
         useNativeDriver: true,
       }),
       Animated.timing(this.state.animated, {
         toValue: 2,
+        duration: SHAKE_KEYFRAME_DURATION,
+        useNativeDriver: true,
+      }),
+      Animated.timing(this.state.animated, {
+        toValue: -1,
         duration: SHAKE_KEYFRAME_DURATION,
         useNativeDriver: true,
       }),
