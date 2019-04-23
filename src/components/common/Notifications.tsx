@@ -2,12 +2,12 @@ import React from 'react';
 import DropdownAlert from 'react-native-dropdownalert';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
-import { View, StyleSheet, Platform } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { StyleSheet, Text } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export enum ENotificationType {
   Error = 'error',
+  Info = 'info',
 }
 
 export class Notifications extends React.PureComponent {
@@ -20,20 +20,45 @@ export class Notifications extends React.PureComponent {
   render() {
     return (
       <DropdownAlert
+        useNativeDriver={true}
         updateStatusBar={false}
         errorColor={COLORS.RED.toString()}
-        errorImageSrc={undefined}
+        infoColor={COLORS.GRAY_ULTRA_LIGHT.toString()}
+        successColor={COLORS.GREEN.toString()}
+        imageSrc={undefined}
         sensitivity={100}
-        renderImage={() => {
-          return (
-            <View style={styles.iconView}>
-              <Icon name='ios-arrow-back' size={32} color={COLORS.WHITE.toString()} />
-            </View>
-          );
+        renderTitle={(props, state: any) => {
+          console.log(props);
+
+          switch (state.type) {
+            case 'error': {
+              return <Text style={[styles.titleStyle, styles.titleStyleError]}>{state.title}</Text>;
+            }
+
+            default: {
+              return <Text style={[styles.titleStyle, styles.titleStyleInfo]}>{state.title}</Text>;
+            }
+          }
+        }}
+        renderMessage={(props, state: any) => {
+          switch (state.type) {
+            case 'error': {
+              return (
+                <Text style={[styles.messageStyle, styles.messageStyleError]}>{state.message}</Text>
+              );
+            }
+
+            default: {
+              return (
+                <Text style={[styles.messageStyle, styles.messageStyleInfo]}>{state.message}</Text>
+              );
+            }
+          }
+        }}
+        renderImage={(props, state) => {
+          return null;
         }}
         defaultContainer={styles.defaultContainer}
-        titleStyle={styles.titleStyle}
-        messageStyle={styles.messageStyle}
         ref={(ref: DropdownAlert) => (this.dropDown = ref)}
       />
     );
@@ -65,13 +90,17 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
 
+  icon: {
+    top: 1,
+  },
+
   defaultContainer: {
     marginHorizontal: VARIABLES.PADDING_BIG,
     marginTop: getStatusBarHeight() + 2,
     paddingTop: 4,
     paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
+    paddingHorizontal: 6,
+    borderRadius: VARIABLES.BORDER_RADIUS_BIG,
     backgroundColor: COLORS.WHITE.toString(),
     shadowColor: COLORS.GRAY.toString(),
     shadowOffset: {
@@ -83,14 +112,29 @@ const styles = StyleSheet.create({
   },
 
   titleStyle: {
-    color: COLORS.WHITE.alpha(0.75).toString(),
     fontWeight: '600',
     fontSize: VARIABLES.FONT_SIZE_SMALL,
-    marginBottom: 2,
+    marginBottom: 3,
+  },
+
+  titleStyleError: {
+    color: COLORS.WHITE.toString(),
+  },
+
+  titleStyleInfo: {
+    color: COLORS.BLACK.toString(),
   },
 
   messageStyle: {
     color: COLORS.WHITE.toString(),
     fontSize: VARIABLES.FONT_SIZE_SMALL,
+  },
+
+  messageStyleError: {
+    color: COLORS.WHITE.toString(),
+  },
+
+  messageStyleInfo: {
+    color: COLORS.BLACK.toString(),
   },
 });

@@ -18,6 +18,8 @@ import { EPeriodType } from '../common/periods';
 import { commonStore } from '../stores/commonStore';
 import { ITake, ITakeTime } from '../common/take';
 import { createCourseManager } from './CreateCourseManager';
+import { NotificationsHandler, ENotificationType } from '../components/common/Notifications';
+import { localeManager } from './LocaleManager';
 
 class CourseManager extends Manager {
   public reset(): void {}
@@ -113,6 +115,12 @@ class CourseManager extends Manager {
           .delete();
 
         this.subscribeToCourses();
+
+        NotificationsHandler.alertWithType(
+          ENotificationType.Info,
+          localeManager.t('XXX'),
+          localeManager.t('XXX'),
+        );
       }
     }
   }
@@ -208,6 +216,14 @@ class CourseManager extends Manager {
         });
 
       createCourseManager.setEditingCourseData(createCourseStore.state.currentCourseId);
+
+      if (isEnabled) {
+        NotificationsHandler.alertWithType(
+          ENotificationType.Info,
+          localeManager.t('XXX'),
+          localeManager.t('XXX'),
+        );
+      }
     } else {
       createCourseStore.setState({
         notificationsEnabled: isEnabled,
