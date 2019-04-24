@@ -224,6 +224,9 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - RNFirebase (5.3.1):
+    - Firebase/Core
+    - React
   - RNGestureHandler (1.1.0):
     - React
   - RNSVG (9.4.0):
@@ -265,6 +268,7 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNFirebase (from `../node_modules/react-native-firebase/ios`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -312,6 +316,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-haptic-feedback"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  RNFirebase:
+    :path: "../node_modules/react-native-firebase/ios"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNSVG:
@@ -351,14 +357,15 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
-  React: 1d605e098d69bdf08960787f3446f0a9dc2e2ccf
-  react-native-haptic-feedback: f675486e3889e3229272158943c1e9e075247e5a
-  react-native-image-picker: f42de90075c5b1af53417af927631d909a1a746e
-  RNGestureHandler: afde2addc517e85cc97a25bfe119acbee779a7ce
-  RNSVG: 4834be1d644eb77f0e3f6de851881b83758a3124
-  RNVectorIcons: 8c52e1e8da1153613fdef44748e865c25556cb9c
-  yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
+  React: 90adac468c7b72bf1fa6c64bf230650f851a8388
+  react-native-haptic-feedback: 22c9dc85fd8059f83bf9edd9212ac4bd4ae6074d
+  react-native-image-picker: fd93361c666f397bdf72f9c6c23f13d2685b9173
+  RNFirebase: f20e5e4ceaa632aebb1a29a9a91022ae0469c633
+  RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
+  RNSVG: 9cb6e958c4b6a1f58185ac72a350b148947d6fed
+  RNVectorIcons: 6607bd3a30291d0edb56f9bbe7ae411ee2b928b0
+  yoga: 2e571f113e8cbeb0eb752aeebc86c1bfe7a8200c
 
-PODFILE CHECKSUM: d57f407d6d1259721d609d315e9baf1511dab111
+PODFILE CHECKSUM: b1e3f820f7bfd7f2960da7d6d6aabf5a09a0b968
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

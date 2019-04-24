@@ -41,6 +41,7 @@ target 'laake' do
   pod 'Firebase/Storage', '~> 5.20.1'
   pod 'Firebase/Auth', '~> 5.20.1'
   pod 'Firebase/Performance', '~> 5.20.1'
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
 
   pod 'Fabric', '~> 1.7.13'
   pod 'Crashlytics', '~> 3.10.7'
