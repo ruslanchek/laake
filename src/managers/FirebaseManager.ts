@@ -24,29 +24,19 @@ class FirebaseManager extends Manager {
 
   public async init(): Promise<any> {
     await this.initAuth();
-    await this.initMessaging();
   }
 
-  private async initMessaging() {
-    const enabled = await firebase.messaging().hasPermission();
+  public async initMessaging(): Promise<boolean> {
+    let enabled = await firebase.messaging().hasPermission();
 
     if (enabled) {
-      // user has
+      return true;
     } else {
       await firebase.messaging().requestPermission();
+      enabled = await firebase.messaging().hasPermission();
     }
-  }
 
-  private async initAuth() {
-    const data = await firebase.auth().signInAnonymously();
-
-    if (data && data.user && data.user.uid) {
-      this.uid = data.user.uid;
-    }
-  }
-
-  private get userRef(): string {
-    return `${USERS_REF}/${this.uid}/`;
+    return enabled;
   }
 
   public getCollection(connectionPath: ECollectionName[] | string[]): CollectionReference {
@@ -88,6 +78,18 @@ class FirebaseManager extends Manager {
     //     uri: null,
     //   };
     // }
+  }
+
+  private async initAuth() {
+    const data = await firebase.auth().signInAnonymously();
+
+    if (data && data.user && data.user.uid) {
+      this.uid = data.user.uid;
+    }
+  }
+
+  private get userRef(): string {
+    return `${USERS_REF}/${this.uid}/`;
   }
 }
 

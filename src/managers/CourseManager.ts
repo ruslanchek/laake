@@ -205,7 +205,12 @@ class CourseManager extends Manager {
   }
 
   public async updateNotificationsEnabled() {
-    const isEnabled = !createCourseStore.state.notificationsEnabled;
+    let isEnabled = !createCourseStore.state.notificationsEnabled;
+    const isMessagingAllowedByUser = await firebaseManager.initMessaging();
+
+    if (!isMessagingAllowedByUser) {
+      isEnabled = false;
+    }
 
     if (createCourseStore.state.currentCourseId) {
       await firebaseManager
