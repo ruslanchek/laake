@@ -85,6 +85,7 @@ class FirebaseManager extends Manager {
 
     if (data && data.user && data.user.uid) {
       this.uid = data.user.uid;
+      firebase.crashlytics().setUserIdentifier(this.uid);
     }
   }
 

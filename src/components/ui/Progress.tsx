@@ -19,7 +19,7 @@ export class Progress extends React.PureComponent<IProps> {
     const radius = diameter / 2;
     const radiusWithoutStroke = radius - strokeWidth / 2;
     const circleLength = 2 * Math.PI * radiusWithoutStroke;
-    const dashOffset = (circleLength + strokeWidth / 2) * (1 - percent / 100);
+    const dashOffset = circleLength * (1 - percent / 100);
 
     return (
       <View style={[styles.container, { width: diameter, height: diameter }]}>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
 
   text: {
     fontFamily: FONTS.BOLD,
-    fontSize: VARIABLES.FONT_SIZE_REGULAR,
+    fontSize: VARIABLES.FONT_SIZE_SMALL,
     textAlign: 'center',
   },
 });

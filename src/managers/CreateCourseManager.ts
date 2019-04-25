@@ -39,6 +39,10 @@ class CreateCourseManager extends Manager {
         timesPer: course.timesPer,
         takes: course.takes,
         notificationsEnabled: course.notificationsEnabled,
+        takenPercent: course.takenPercent,
+        timesTaken: course.timesTaken,
+        timesToTake: course.timesToTake,
+        timesTotal: course.timesTotal,
       });
     }
   }
@@ -47,13 +51,18 @@ class CreateCourseManager extends Manager {
     createCourseStore.setState({
       courseEditMode: ECourseEditMode.Create,
       currentCourseId: null,
-      title: '',
-      description: '',
       currentPill: PILLS[0],
-      period: 7,
+      title: '',
       periodType: EPeriodType.Days,
+      period: 7,
       times: 3,
       timesPer: ETimesPer.Day,
+      takes: [],
+      notificationsEnabled: false,
+      takenPercent: 0,
+      timesTaken: 0,
+      timesToTake: 0,
+      timesTotal: 0,
     });
 
     this.generateDefaultTakeEntities();

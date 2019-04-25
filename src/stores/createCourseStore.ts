@@ -22,6 +22,10 @@ interface CreateCourseStoreState {
   timesPer: ETimesPer;
   takes: ITake[];
   notificationsEnabled: boolean;
+  takenPercent: number;
+  timesToTake: number;
+  timesTaken: number;
+  timesTotal: number;
 }
 
 const initialState: CreateCourseStoreState = {
@@ -36,6 +40,10 @@ const initialState: CreateCourseStoreState = {
   timesPer: ETimesPer.Day,
   takes: [],
   notificationsEnabled: false,
+  takenPercent: 0,
+  timesToTake: 0,
+  timesTaken: 0,
+  timesTotal: 0,
 };
 
 export const createCourseStore = new Store<CreateCourseStoreState>(initialState, {

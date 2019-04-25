@@ -19,7 +19,7 @@ import { createCourseStore, ECourseEditMode } from '../../stores/createCourseSto
 import { GLOBAL_STYLES } from '../../common/styles';
 import { EFormButtonTheme, FormButton } from '../ui/FormButton';
 import { localeManager } from '../../managers/LocaleManager';
-import { ICourse, ICourseStatistics } from '../../common/course';
+import { ICourse } from '../../common/course';
 import { PILLS, PILLS_MAP } from '../../common/pills';
 import { periodTypeNames } from '../../common/periods';
 import { commonStore } from '../../stores/commonStore';
@@ -35,9 +35,7 @@ import { CheckButton } from '../ui/CheckButton';
 
 interface IState {
   loading: boolean;
-  courseStatistics: ICourseStatistics | null;
   deleteLoading: boolean;
-  courseStatisticsLoading: boolean;
   notificationsLoading: boolean;
 }
 
@@ -52,40 +50,10 @@ export class CourseSummaryModal extends React.Component<
   };
 
   state: IState = {
-    courseStatistics: null,
     loading: false,
-    courseStatisticsLoading: false,
     deleteLoading: false,
     notificationsLoading: false,
   };
-
-  componentDidMount() {
-    this.loadStatistics();
-  }
-
-  loadStatistics() {
-    this.setState(
-      {
-        courseStatisticsLoading: true,
-      },
-      async () => {
-        if (createCourseStore.state.currentCourseId) {
-          const courseStatistics = await courseManager.getCourseStatistics(
-            createCourseStore.state.currentCourseId,
-          );
-
-          this.setState({
-            courseStatistics,
-            courseStatisticsLoading: false,
-          });
-        } else {
-          this.setState({
-            courseStatisticsLoading: false,
-          });
-        }
-      },
-    );
-  }
 
   get courseEditMode(): ECourseEditMode {
     if (
@@ -102,13 +70,7 @@ export class CourseSummaryModal extends React.Component<
   }
 
   render() {
-    const {
-      loading,
-      deleteLoading,
-      notificationsLoading,
-      courseStatisticsLoading,
-      courseStatistics,
-    } = this.state;
+    const { loading, deleteLoading, notificationsLoading } = this.state;
     const { currentLocale } = commonStore.state;
     const course: ICourse = {
       id: '',
@@ -122,6 +84,10 @@ export class CourseSummaryModal extends React.Component<
       startDate: 0,
       endDate: 0,
       notificationsEnabled: createCourseStore.state.notificationsEnabled,
+      takenPercent: createCourseStore.state.takenPercent,
+      timesToTake: createCourseStore.state.timesToTake,
+      timesTaken: createCourseStore.state.timesTaken,
+      timesTotal: createCourseStore.state.timesTotal,
     };
     const pill = PILLS_MAP.get(course.pillId) || PILLS[0];
     const periodTitle = localeManager.t(periodTypeNames.get(course.periodType) || '');
@@ -185,25 +151,18 @@ export class CourseSummaryModal extends React.Component<
 
         <View style={styles.bottom}>
           <View style={styles.content}>
-            {courseStatisticsLoading && (
-              <View style={styles.loadingContainer}>
-                <ActivityIndicator color={COLORS.GRAY.toString()} size='large' />
+            <View>
+              <Text style={styles.headerText}>Summary</Text>
+              <Text style={GLOBAL_STYLES.INPUT_LABEL}>Information about the course</Text>
+              <View style={styles.takeListView}>
+                <Progress
+                  strokeWidth={4}
+                  size={58}
+                  color={COLORS.RED.toString()}
+                  percent={course.takenPercent}
+                />
               </View>
-            )}
-            {courseStatistics && (
-              <View>
-                <Text style={styles.headerText}>Summary</Text>
-                <Text style={GLOBAL_STYLES.INPUT_LABEL}>Information about the course</Text>
-                <View style={styles.takeListView}>
-                  <Progress
-                    strokeWidth={4}
-                    size={58}
-                    color={COLORS.RED.toString()}
-                    percent={courseStatistics.takenPercent}
-                  />
-                </View>
-              </View>
-            )}
+            </View>
           </View>
 
           <View style={GLOBAL_STYLES.MODAL_BUTTON_HOLDER}>
