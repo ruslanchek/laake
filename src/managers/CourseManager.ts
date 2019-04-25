@@ -104,7 +104,7 @@ class CourseManager extends Manager {
         const batch = firebase.firestore().batch();
         const docs = await firebaseManager
           .getCollection([ECollectionName.TakeTimes])
-          .where('courseId', '==', course.id)
+          .where('courseId', '==', courseId)
           .get();
 
         docs.forEach(doc => {
@@ -114,7 +114,7 @@ class CourseManager extends Manager {
         await batch.commit();
         await firebaseManager
           .getCollection([ECollectionName.Courses])
-          .doc(course.id)
+          .doc(courseId)
           .delete();
 
         this.subscribeToCourses();
@@ -138,7 +138,7 @@ class CourseManager extends Manager {
 
     if (courseDoc && course && course.startDate) {
       const courseStatistics = await this.getCourseStatistics(
-        course.id,
+        courseId,
         new Date(course.endDate),
         new Date(course.startDate),
         course.takes,
@@ -146,7 +146,7 @@ class CourseManager extends Manager {
 
       await firebaseManager
         .getCollection([ECollectionName.Courses])
-        .doc(course.id)
+        .doc(courseId)
         .update({
           takenPercent: courseStatistics.takenPercent,
           timesTaken: courseStatistics.timesTaken,
@@ -178,12 +178,6 @@ class CourseManager extends Manager {
 
       if (courseDoc && course && course.startDate) {
         const endDate = this.getCourseEndDate(new Date(course.startDate));
-        const courseStatistics = await this.getCourseStatistics(
-          null,
-          endDate,
-          new Date(course.startDate),
-          takes,
-        );
 
         await firebaseManager
           .getCollection([ECollectionName.Courses])
@@ -196,10 +190,6 @@ class CourseManager extends Manager {
             times,
             timesPer,
             endDate: endDate.getTime(),
-            takenPercent: courseStatistics.takenPercent,
-            timesTaken: courseStatistics.timesTaken,
-            timesToTake: courseStatistics.timesToTake,
-            timesTotal: courseStatistics.timesTotal,
             takes: takes.map(take => {
               return { ...take };
             }),
@@ -220,6 +210,7 @@ class CourseManager extends Manager {
         });
 
         await batch.commit();
+        await this.recalculateCourseStatistics(currentCourseId);
         await this.subscribeToTakeTimes();
       }
     }
@@ -357,10 +348,10 @@ class CourseManager extends Manager {
   }
 
   public async updateTakeTime(course: ICourse, take: ITake, takeTime: ITakeTime) {
-    const dayIndex = this.getDayIndex(commonStore.state.today);
-    const takeTimeId = createTakeTimeIndex(course.id, take.index, dayIndex);
-
     try {
+      const dayIndex = this.getDayIndex(commonStore.state.today);
+      const takeTimeId = createTakeTimeIndex(course.id, take.index, dayIndex);
+
       if (takeTime && takeTime.id) {
         await firebaseManager
           .getCollection([ECollectionName.TakeTimes])
@@ -389,7 +380,7 @@ class CourseManager extends Manager {
 
       await this.recalculateCourseStatistics(course.id);
     } catch (e) {
-      firebase.crashlytics().recordError(72938173981, e);
+      console.log(e);
     }
   }
 
