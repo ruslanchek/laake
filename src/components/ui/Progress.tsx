@@ -10,11 +10,12 @@ export interface IProps {
   size: number;
   strokeWidth: number;
   color: string;
+  showPercentage: boolean;
 }
 
 export class Progress extends React.PureComponent<IProps> {
   render() {
-    const { percent, size, color, strokeWidth } = this.props;
+    const { percent, size, color, strokeWidth, showPercentage } = this.props;
     const diameter = size;
     const radius = diameter / 2;
     const radiusWithoutStroke = radius - strokeWidth / 2;
@@ -24,9 +25,12 @@ export class Progress extends React.PureComponent<IProps> {
     return (
       <View style={[styles.container, { width: diameter, height: diameter }]}>
         <View style={styles.graphics}>
-          <View style={styles.textContainer}>
-            <Text style={[styles.text]}>{percent}%</Text>
-          </View>
+          {showPercentage && (
+            <View style={styles.textContainer}>
+              <Text style={[styles.text]}>{percent}%</Text>
+            </View>
+          )}
+
           <Svg height={diameter} width={diameter}>
             <Circle
               cx={radius}

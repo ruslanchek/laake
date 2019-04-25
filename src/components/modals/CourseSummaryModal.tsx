@@ -32,6 +32,7 @@ import { Progress } from '../ui/Progress';
 import { Appear, EAppearType } from '../common/Appear';
 import { CommonService } from '../../services/CommonService';
 import { CheckButton } from '../ui/CheckButton';
+import { StatisticsInfoBlock } from '../ui/StatisticsInfoBlock';
 
 interface IState {
   loading: boolean;
@@ -154,12 +155,33 @@ export class CourseSummaryModal extends React.Component<
             <View>
               <Text style={styles.headerText}>Summary</Text>
               <Text style={GLOBAL_STYLES.INPUT_LABEL}>Information about the course</Text>
-              <View style={styles.takeListView}>
-                <Progress
-                  strokeWidth={4}
-                  size={58}
-                  color={COLORS.RED.toString()}
-                  percent={course.takenPercent}
+              <View style={styles.infoBlock}>
+                <StatisticsInfoBlock
+                  icon={
+                    <Progress
+                      strokeWidth={4}
+                      size={30}
+                      color={COLORS.RED.toString()}
+                      percent={course.takenPercent}
+                      showPercentage={false}
+                    />
+                  }
+                  title='Completion'
+                  body={`${course.takenPercent}%`}
+                />
+
+                <StatisticsInfoBlock
+                  icon={
+                    <Progress
+                      strokeWidth={4}
+                      size={30}
+                      color={COLORS.RED.toString()}
+                      percent={course.takenPercent}
+                      showPercentage={false}
+                    />
+                  }
+                  title='Takes'
+                  body={`${course.timesTaken} / ${course.timesTotal}`}
                 />
               </View>
             </View>
@@ -342,7 +364,7 @@ const styles = StyleSheet.create({
     minHeight: VARIABLES.INPUT_HEIGHT,
   },
 
-  takeListView: {
+  infoBlock: {
     elevation: 1,
     backgroundColor: COLORS.WHITE.toString(),
     shadowColor: COLORS.GRAY_PALE_LIGHT.toString(),
@@ -355,23 +377,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
     padding: VARIABLES.PADDING_MEDIUM,
-  },
-
-  takeListItem: {
-    borderTopColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
-    borderTopWidth: 1,
-    justifyContent: 'center',
-    paddingHorizontal: VARIABLES.PADDING_MEDIUM,
-    height: VARIABLES.INPUT_HEIGHT,
-  },
-
-  takeListItemFirst: {
-    borderTopWidth: 0,
-  },
-
-  takeListItemString: {
-    marginRight: VARIABLES.PADDING_MEDIUM / 3,
-    flexShrink: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 
   labels: {
