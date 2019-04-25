@@ -5,18 +5,21 @@ import { Svg, Circle } from 'react-native-svg';
 import { COLORS } from '../../common/colors';
 import { FONTS } from '../../common/fonts';
 
-export interface IProps {}
+export interface IProps {
+  percent: number;
+  size: number;
+  strokeWidth: number;
+  color: string;
+}
 
 export class Progress extends React.PureComponent<IProps> {
   render() {
-    const percent = 25;
-    const size = 62;
-    const strokeWidth = 4;
+    const { percent, size, color, strokeWidth } = this.props;
     const diameter = size;
     const radius = diameter / 2;
     const radiusWithoutStroke = radius - strokeWidth / 2;
-    const circleLength = 2 * Math.PI * radius;
-    const dashOffset = circleLength * (1 - percent / 100);
+    const circleLength = 2 * Math.PI * radiusWithoutStroke;
+    const dashOffset = (circleLength + strokeWidth / 2) * (1 - percent / 100);
 
     return (
       <View style={[styles.container, { width: diameter, height: diameter }]}>
@@ -43,7 +46,7 @@ export class Progress extends React.PureComponent<IProps> {
               rotation={-90}
               origin={`${radius},${radius}`}
               strokeWidth={strokeWidth}
-              stroke={COLORS.RED.toString()}
+              stroke={color}
               fill='transparent'
               strokeLinecap='round'
               strokeDasharray={[circleLength]}

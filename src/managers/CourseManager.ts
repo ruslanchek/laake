@@ -2,7 +2,7 @@ import firebase from 'react-native-firebase';
 import { Manager } from './Manager';
 import { courseStore, createTakeTimeIndex } from '../stores/courseStore';
 import { createCourseStore } from '../stores/createCourseStore';
-import { ICourse } from '../common/course';
+import { ICourse, ICourseStatistics } from '../common/course';
 import { ECollectionName, firebaseManager } from './FirebaseManager';
 import {
   isToday,
@@ -10,9 +10,12 @@ import {
   differenceInCalendarDays,
   isYesterday,
   addDays,
-  startOfToday,
   differenceInDays,
   isSameDay,
+  isBefore,
+  isAfter,
+  startOfDay,
+  endOfDay,
 } from 'date-fns';
 import { EPeriodType } from '../common/periods';
 import { commonStore } from '../stores/commonStore';
@@ -138,20 +141,32 @@ class CourseManager extends Manager {
     } = createCourseStore.state;
 
     if (currentCourseId) {
-      await firebaseManager
+      const courseDoc = await firebaseManager
         .getCollection([ECollectionName.Courses])
         .doc(currentCourseId)
-        .update({
-          title,
-          pillId: currentPill.id,
-          periodType: periodType,
-          period,
-          times,
-          timesPer,
-          takes: takes.map(take => {
-            return { ...take };
-          }),
-        });
+        .get();
+
+      const course: ICourse = courseDoc.data() as ICourse;
+
+      if (courseDoc && course && course.startDate) {
+        const endDate = this.getCourseEndDate(new Date(course.startDate)).getTime();
+
+        await firebaseManager
+          .getCollection([ECollectionName.Courses])
+          .doc(currentCourseId)
+          .update({
+            title,
+            pillId: currentPill.id,
+            periodType: periodType,
+            period,
+            times,
+            timesPer,
+            endDate,
+            takes: takes.map(take => {
+              return { ...take };
+            }),
+          });
+      }
     }
   }
 
@@ -176,11 +191,11 @@ class CourseManager extends Manager {
       }
     }
 
-    return addDays(startDate, days);
+    return endOfDay(addDays(startDate, days - 1));
   }
 
   public async createCourse() {
-    const startDate = startOfToday();
+    const startDate = startOfDay(new Date());
     const endDate = this.getCourseEndDate(startDate);
 
     const course: Partial<ICourse> = {
@@ -223,16 +238,65 @@ class CourseManager extends Manager {
       createCourseManager.setEditingCourseData(createCourseStore.state.currentCourseId);
 
       if (isEnabled) {
-        NotificationsHandler.alertWithType(
-          ENotificationType.Info,
-          localeManager.t('NOTIFICATIONS.NOTIFICATIONS_ENABLED.TITLE'),
-          localeManager.t('NOTIFICATIONS.NOTIFICATIONS_ENABLED.MESSAGE'),
-        );
+        setTimeout(() => {
+          NotificationsHandler.alertWithType(
+            ENotificationType.Info,
+            localeManager.t('NOTIFICATIONS.NOTIFICATIONS_ENABLED.TITLE'),
+            localeManager.t('NOTIFICATIONS.NOTIFICATIONS_ENABLED.MESSAGE'),
+          );
+        }, 200);
       }
     } else {
       createCourseStore.setState({
         notificationsEnabled: isEnabled,
       });
+    }
+  }
+
+  public isCourseValidForDate(course: ICourse, date: Date): boolean {
+    const { startDate, endDate } = course;
+    const validStartDate = isSameDay(startDate, date) || isBefore(startDate, date);
+    const validEndDate = isAfter(endDate, date);
+
+    console.log('---');
+    console.log('validStartDate', validStartDate);
+    console.log('validEndDate', validEndDate);
+    console.log('startDate', new Date(startDate));
+    console.log('endDate', new Date(endDate));
+    console.log('date', date);
+    console.log('---');
+
+    return validStartDate && validEndDate;
+  }
+
+  public async getCourseStatistics(id: string): Promise<ICourseStatistics | null> {
+    const course = courseStore.state.courses.get(id);
+
+    if (course) {
+      const days = differenceInDays(course.endDate, course.startDate);
+      const timesTotal = days * course.takes.length;
+      const timesTakenDocs = await firebaseManager
+        .getCollection([ECollectionName.TakeTimes])
+        .where('courseId', '==', course.id)
+        .where('isTaken', '==', true)
+        .get();
+
+      const timesTaken = timesTakenDocs.docs.length;
+      const timesToTake = timesTotal - timesTaken;
+      let takenPercent = Math.round(timesTaken / (timesTotal / 100));
+
+      if (takenPercent > 100) {
+        takenPercent = 0;
+      }
+
+      return {
+        takenPercent,
+        timesTaken,
+        timesToTake,
+        timesTotal,
+      };
+    } else {
+      return null;
     }
   }
 

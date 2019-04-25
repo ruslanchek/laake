@@ -15,3 +15,10 @@ export interface ICourse {
   endDate: number;
   notificationsEnabled: boolean;
 }
+
+export interface ICourseStatistics {
+  takenPercent: number;
+  timesToTake: number;
+  timesTaken: number;
+  timesTotal: number;
+}

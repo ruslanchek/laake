@@ -27,7 +27,7 @@ import { CourseCard } from '../blocks/CourseCard';
 import { ITake, ITakeTime } from '../../common/take';
 import { ICourse } from '../../common/course';
 import { createCourseManager } from '../../managers/CreateCourseManager';
-import { isAfter, isBefore } from 'date-fns';
+import { isAfter, isBefore, isSameDay, isFuture } from 'date-fns';
 import { FONTS } from '../../common/fonts';
 import { Appear, EAppearType } from '../common/Appear';
 import { CommonService } from '../../services/CommonService';
@@ -159,38 +159,34 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
 
   getSections(): SectionListData<ISectionData>[] {
     const sections: SectionListData<ISectionData>[] = [];
+    const { today } = commonStore.state;
 
     courseStore.state.courses.forEach(course => {
-      if (
-        isBefore(new Date(course.endDate), commonStore.state.today) ||
-        isAfter(new Date(course.startDate), commonStore.state.today)
-      ) {
-        return;
-      }
-
-      course.takes.forEach(take => {
-        const section = sections.find(section => section.title === take.index);
-        const data: ISectionData = {
-          take,
-          takeTime: courseStore.state.takeTimes.get(
-            createTakeTimeIndex(
-              course.id,
-              take.index,
-              courseManager.getDayIndex(commonStore.state.today),
+      if (courseManager.isCourseValidForDate(course, today)) {
+        course.takes.forEach(take => {
+          const section = sections.find(section => section.title === take.index);
+          const data: ISectionData = {
+            take,
+            takeTime: courseStore.state.takeTimes.get(
+              createTakeTimeIndex(
+                course.id,
+                take.index,
+                courseManager.getDayIndex(commonStore.state.today),
+              ),
             ),
-          ),
-          course,
-        };
+            course,
+          };
 
-        if (section) {
-          section.data.push(data);
-        } else {
-          sections.push({
-            title: take.index,
-            data: [data],
-          });
-        }
-      });
+          if (section) {
+            section.data.push(data);
+          } else {
+            sections.push({
+              title: take.index,
+              data: [data],
+            });
+          }
+        });
+      }
     });
 
     sections.forEach(section => {

@@ -51,7 +51,7 @@ export class FormButton extends React.PureComponent<IProps> {
             <ActivityIndicator
               style={styles.loading}
               size='small'
-              color={COLORS.WHITE.toString()}
+              color={this.textColor.toString()}
             />
           ) : (
             <Text
@@ -78,7 +78,7 @@ export class FormButton extends React.PureComponent<IProps> {
       }
 
       case EFormButtonTheme.RedLight: {
-        return COLORS.RED.lighten(0.8);
+        return COLORS.GRAY_PALE_LIGHT;
       }
 
       case EFormButtonTheme.Gray:

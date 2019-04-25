@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import { NavigationContainerProps, SafeAreaView } from 'react-navigation';
 import { VARIABLES } from '../../common/variables';
@@ -18,7 +19,7 @@ import { createCourseStore, ECourseEditMode } from '../../stores/createCourseSto
 import { GLOBAL_STYLES } from '../../common/styles';
 import { EFormButtonTheme, FormButton } from '../ui/FormButton';
 import { localeManager } from '../../managers/LocaleManager';
-import { ICourse } from '../../common/course';
+import { ICourse, ICourseStatistics } from '../../common/course';
 import { PILLS, PILLS_MAP } from '../../common/pills';
 import { periodTypeNames } from '../../common/periods';
 import { commonStore } from '../../stores/commonStore';
@@ -34,7 +35,9 @@ import { CheckButton } from '../ui/CheckButton';
 
 interface IState {
   loading: boolean;
+  courseStatistics: ICourseStatistics | null;
   deleteLoading: boolean;
+  courseStatisticsLoading: boolean;
   notificationsLoading: boolean;
 }
 
@@ -49,10 +52,40 @@ export class CourseSummaryModal extends React.Component<
   };
 
   state: IState = {
+    courseStatistics: null,
     loading: false,
+    courseStatisticsLoading: false,
     deleteLoading: false,
     notificationsLoading: false,
   };
+
+  componentDidMount() {
+    this.loadStatistics();
+  }
+
+  loadStatistics() {
+    this.setState(
+      {
+        courseStatisticsLoading: true,
+      },
+      async () => {
+        if (createCourseStore.state.currentCourseId) {
+          const courseStatistics = await courseManager.getCourseStatistics(
+            createCourseStore.state.currentCourseId,
+          );
+
+          this.setState({
+            courseStatistics,
+            courseStatisticsLoading: false,
+          });
+        } else {
+          this.setState({
+            courseStatisticsLoading: false,
+          });
+        }
+      },
+    );
+  }
 
   get courseEditMode(): ECourseEditMode {
     if (
@@ -69,7 +102,13 @@ export class CourseSummaryModal extends React.Component<
   }
 
   render() {
-    const { loading, deleteLoading, notificationsLoading } = this.state;
+    const {
+      loading,
+      deleteLoading,
+      notificationsLoading,
+      courseStatisticsLoading,
+      courseStatistics,
+    } = this.state;
     const { currentLocale } = commonStore.state;
     const course: ICourse = {
       id: '',
@@ -146,11 +185,25 @@ export class CourseSummaryModal extends React.Component<
 
         <View style={styles.bottom}>
           <View style={styles.content}>
-            <Text style={styles.headerText}>Summary</Text>
-            <Text style={GLOBAL_STYLES.INPUT_LABEL}>Information about the course</Text>
-            <View style={styles.takeListView}>
-              <Progress />
-            </View>
+            {courseStatisticsLoading && (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator color={COLORS.GRAY.toString()} size='large' />
+              </View>
+            )}
+            {courseStatistics && (
+              <View>
+                <Text style={styles.headerText}>Summary</Text>
+                <Text style={GLOBAL_STYLES.INPUT_LABEL}>Information about the course</Text>
+                <View style={styles.takeListView}>
+                  <Progress
+                    strokeWidth={4}
+                    size={58}
+                    color={COLORS.RED.toString()}
+                    percent={courseStatistics.takenPercent}
+                  />
+                </View>
+              </View>
+            )}
           </View>
 
           <View style={GLOBAL_STYLES.MODAL_BUTTON_HOLDER}>
@@ -162,7 +215,7 @@ export class CourseSummaryModal extends React.Component<
                   isDisabled={false}
                   isLoading={deleteLoading}
                   isSmall
-                  theme={EFormButtonTheme.Red}
+                  theme={EFormButtonTheme.RedLight}
                 >
                   {localeManager.t('COMMON.DELETE_COURSE')}
                 </FormButton>
@@ -369,6 +422,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: VARIABLES.PADDING_BIG,
+  },
+
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   headerText: {
