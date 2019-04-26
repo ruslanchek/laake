@@ -46,7 +46,7 @@ export class CommonService {
   }
 
   static formatDosageTotal(number: number): string {
-    const numberParts: string[] = number.toString().split('.');
+    const numberParts: string[] = number >= 0 ? number.toString().split('.') : [''];
     const whole: number | null = numberParts[0] ? parseInt(numberParts[0]) : null;
     const part: number | null = numberParts[1] ? parseFloat(`0.${numberParts[1]}`) : null;
 

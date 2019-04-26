@@ -293,6 +293,10 @@ class CourseManager extends Manager {
     };
 
     await firebaseManager.getCollection([ECollectionName.Courses]).add(course);
+
+    commonStore.setState({
+      today: new Date(),
+    });
   }
 
   public getDayIndex(time: Date): number {
