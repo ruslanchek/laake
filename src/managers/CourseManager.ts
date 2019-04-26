@@ -286,10 +286,14 @@ class CourseManager extends Manager {
       startDate: startDate.getTime(),
       endDate: endDate.getTime(),
       takes,
+      notificationsEnabled: createCourseStore.state.notificationsEnabled,
       takenPercent: courseStatistics.takenPercent,
       timesTaken: courseStatistics.timesTaken,
       timesToTake: courseStatistics.timesToTake,
       timesTotal: courseStatistics.timesTotal,
+      unitsTaken: courseStatistics.unitsTaken,
+      unitsToTake: courseStatistics.unitsToTake,
+      unitsTotal: courseStatistics.unitsTotal,
     };
 
     await firebaseManager.getCollection([ECollectionName.Courses]).add(course);
