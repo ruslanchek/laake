@@ -196,7 +196,10 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
       createCourseManager.setDefaults();
     } else {
       if (createCourseStore.state.currentCourseId) {
-        createCourseManager.setEditingCourseData(createCourseStore.state.currentCourseId);
+        createCourseManager.setEditingCourseData(
+          createCourseStore.state.currentCourseId,
+          ECourseEditMode.View,
+        );
       }
     }
   };
@@ -229,14 +232,14 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
     }
   }
 
-  handleCreateCourse = () => {
+  handleCreateCourse = async () => {
     const error = createCourseManager.checkFormValidity();
+
+    await courseManager.recalculateCourseStatistics(null);
 
     if (!error) {
       if (this.props.navigation) {
-        this.props.navigation.navigate(ERouteName.CourseSummaryModal, {
-          courseEditMode: createCourseStore.state.courseEditMode,
-        });
+        this.props.navigation.navigate(ERouteName.CourseSummaryModal);
       }
     } else {
       NotificationsHandler.alertWithType(

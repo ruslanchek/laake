@@ -16,6 +16,9 @@ import { ICONS } from '../../common/icons';
 import { localeManager } from '../../managers/LocaleManager';
 import { CommonService } from '../../services/CommonService';
 import { commonStore } from '../../stores/commonStore';
+import { startOfDay, addDays } from 'date-fns';
+import { createCourseManager } from '../../managers/CreateCourseManager';
+import { courseManager } from '../../managers/CourseManager';
 
 interface IState {
   period: number;
@@ -114,6 +117,14 @@ export class CourseDurationModal extends React.Component<NavigationContainerProp
     createCourseStore.setState({
       period,
       periodType,
+    });
+
+    const startDate = startOfDay(new Date());
+    const endDate = courseManager.getCourseEndDate(startDate);
+
+    createCourseStore.setState({
+      startDate: startDate.getTime(),
+      endDate: endDate.getTime(),
     });
   }
 }

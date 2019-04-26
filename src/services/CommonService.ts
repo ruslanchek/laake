@@ -45,6 +45,22 @@ export class CommonService {
     }
   }
 
+  static formatDosageTotal(number: number): string {
+    const numberParts: string[] = number.toString().split('.');
+    const whole: number | null = numberParts[0] ? parseInt(numberParts[0]) : null;
+    const part: number | null = numberParts[1] ? parseFloat(`0.${numberParts[1]}`) : null;
+
+    if (whole && part) {
+      return `${whole} ${this.convertDosagePartToString(part)}`;
+    } else if (whole && !part) {
+      return `${whole}`;
+    } else if (part && !whole) {
+      return `${this.convertDosagePartToString(part)}`;
+    } else {
+      return '0';
+    }
+  }
+
   static formatDosageParts(dosage: number, dosagePart: number, locale: string): string {
     let result = '';
 

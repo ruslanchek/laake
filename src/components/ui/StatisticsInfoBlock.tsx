@@ -18,8 +18,12 @@ export class StatisticsInfoBlock extends React.PureComponent<IProps> {
       <View style={styles.container}>
         <View style={styles.icon}>{icon}</View>
         <View>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.body}>{body}</Text>
+          <Text numberOfLines={1} style={styles.title}>
+            {title}
+          </Text>
+          <Text numberOfLines={1} style={styles.body}>
+            {body}
+          </Text>
         </View>
       </View>
     );

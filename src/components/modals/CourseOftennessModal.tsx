@@ -17,6 +17,7 @@ import { localeManager } from '../../managers/LocaleManager';
 import { createCourseManager } from '../../managers/CreateCourseManager';
 import { CommonService } from '../../services/CommonService';
 import { commonStore } from '../../stores/commonStore';
+import { courseManager } from '../../managers/CourseManager';
 
 interface IState {
   times: number;

@@ -57,23 +57,10 @@ export class CourseSummaryModal extends React.Component<
     notificationsLoading: false,
   };
 
-  get courseEditMode(): ECourseEditMode {
-    if (
-      this.props.navigation &&
-      this.props.navigation.state &&
-      this.props.navigation.state.params &&
-      (this.props.navigation.state.params.courseEditMode === 0 ||
-        this.props.navigation.state.params.courseEditMode)
-    ) {
-      return this.props.navigation.state.params.courseEditMode;
-    } else {
-      return ECourseEditMode.Create;
-    }
-  }
-
   render() {
     const { loading, deleteLoading, notificationsLoading } = this.state;
     const { currentLocale } = commonStore.state;
+    const { courseEditMode } = createCourseStore.state;
     const course: ICourse = {
       id: '',
       title: createCourseStore.state.title,
@@ -90,6 +77,9 @@ export class CourseSummaryModal extends React.Component<
       timesToTake: createCourseStore.state.timesToTake,
       timesTaken: createCourseStore.state.timesTaken,
       timesTotal: createCourseStore.state.timesTotal,
+      unitsTaken: createCourseStore.state.unitsTaken,
+      unitsToTake: createCourseStore.state.unitsToTake,
+      unitsTotal: createCourseStore.state.unitsTotal,
     };
     const pill = PILLS_MAP.get(course.pillId) || PILLS[0];
     const periodTitle = localeManager.t(periodTypeNames.get(course.periodType) || '');
@@ -97,6 +87,8 @@ export class CourseSummaryModal extends React.Component<
       value: course.times.toLocaleString(currentLocale),
       count: course.times,
     })} ${localeManager.t(timesPerNames.get(course.timesPer) || '')}`;
+    const unitsTotal = CommonService.formatDosageTotal(course.unitsTotal);
+    const unitsTaken = CommonService.formatDosageTotal(course.unitsTaken);
 
     return (
       <View style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
@@ -110,7 +102,7 @@ export class CourseSummaryModal extends React.Component<
           <ImageBackground source={BGS.BLUE} style={{ width: '100%', height: '100%' }}>
             <Header
               title={localeManager.t(
-                this.courseEditMode === ECourseEditMode.Create ? 'COMMON.EDIT' : 'COMMON.BACK',
+                courseEditMode === ECourseEditMode.Create ? 'COMMON.EDIT' : 'COMMON.BACK',
               )}
               next={null}
               theme={EHeaderTheme.Light}
@@ -154,14 +146,16 @@ export class CourseSummaryModal extends React.Component<
         <View style={styles.bottom}>
           <View style={styles.content}>
             <View>
-              <Text style={styles.headerText}>Summary</Text>
+              <Text style={styles.headerText}>
+                Summary {createCourseStore.state.courseEditMode}
+              </Text>
               <Text style={GLOBAL_STYLES.INPUT_LABEL}>Information about the course</Text>
               <View style={styles.infoBlock}>
                 <View style={styles.infoBlockRow}>
                   <StatisticsInfoBlock
                     icon={
                       <Progress
-                        strokeWidth={3}
+                        strokeWidth={4}
                         size={30}
                         color={COLORS.RED.toString()}
                         percent={course.takenPercent}
@@ -179,7 +173,7 @@ export class CourseSummaryModal extends React.Component<
                       <Image
                         style={styles.infoIcon}
                         resizeMode='contain'
-                        source={ICONS.SMALL_TABLETS}
+                        source={ICONS.SMALL_LIST}
                       />
                     }
                     title='Takes'
@@ -195,11 +189,11 @@ export class CourseSummaryModal extends React.Component<
                       <Image
                         style={styles.infoIcon}
                         resizeMode='contain'
-                        source={ICONS.SMALL_LIST}
+                        source={ICONS.SMALL_TABLETS}
                       />
                     }
-                    title='Takes'
-                    body={`${course.timesTaken} / ${course.timesTotal}`}
+                    title='Units taken'
+                    body={`${unitsTaken} / ${unitsTotal}`}
                   />
 
                   <View style={styles.infoBlockSeparatorVertical} />
@@ -221,7 +215,7 @@ export class CourseSummaryModal extends React.Component<
           </View>
 
           <View style={GLOBAL_STYLES.MODAL_BUTTON_HOLDER}>
-            {this.courseEditMode === ECourseEditMode.View ? (
+            {courseEditMode === ECourseEditMode.View ? (
               <View style={styles.actions}>
                 <FormButton
                   customStyles={styles.actionsButton}
@@ -260,7 +254,7 @@ export class CourseSummaryModal extends React.Component<
                   onPress={this.handleSave}
                 >
                   {localeManager.t(
-                    this.courseEditMode === ECourseEditMode.Create
+                    courseEditMode === ECourseEditMode.Create
                       ? 'COMMON.CREATE_COURSE'
                       : 'COMMON.SAVE_COURSE',
                   )}
@@ -278,6 +272,9 @@ export class CourseSummaryModal extends React.Component<
 
     if (this.props.navigation) {
       this.props.navigation.navigate(ERouteName.TodayCreateCourseScreen);
+      createCourseStore.setState({
+        courseEditMode: ECourseEditMode.Edit,
+      });
     }
   };
 
@@ -337,7 +334,7 @@ export class CourseSummaryModal extends React.Component<
         loading: true,
       },
       async () => {
-        if (this.courseEditMode === ECourseEditMode.Create) {
+        if (createCourseStore.state.courseEditMode === ECourseEditMode.Create) {
           await courseManager.createCourse();
         } else {
           await courseManager.updateCourse();

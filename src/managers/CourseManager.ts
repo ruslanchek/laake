@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase';
 import { Manager } from './Manager';
 import { courseStore, createTakeTimeIndex } from '../stores/courseStore';
-import { createCourseStore } from '../stores/createCourseStore';
+import { createCourseStore, ECourseEditMode } from '../stores/createCourseStore';
 import { ICourse, ICourseStatistics } from '../common/course';
 import { ECollectionName, firebaseManager } from './FirebaseManager';
 import {
@@ -50,6 +50,13 @@ class CourseManager extends Manager {
             id: doc.id,
             ...(course as ICourse),
           });
+
+          if (
+            createCourseStore.state.currentCourseId === doc.id &&
+            createCourseStore.state.courseEditMode === ECourseEditMode.View
+          ) {
+            createCourseManager.setEditingCourseData(doc.id, ECourseEditMode.View);
+          }
         }
       });
 
@@ -128,34 +135,53 @@ class CourseManager extends Manager {
     }
   }
 
-  private async recalculateCourseStatistics(courseId: string) {
-    const courseDoc = await firebaseManager
-      .getCollection([ECollectionName.Courses])
-      .doc(courseId)
-      .get();
-
-    const course: ICourse = courseDoc.data() as ICourse;
-
-    if (courseDoc && course && course.startDate) {
-      const courseStatistics = await this.getCourseStatistics(
-        courseId,
-        new Date(course.endDate),
-        new Date(course.startDate),
-        course.takes,
-      );
-
-      await firebaseManager
+  public async recalculateCourseStatistics(courseId: string | null) {
+    if (courseId) {
+      const courseDoc = await firebaseManager
         .getCollection([ECollectionName.Courses])
         .doc(courseId)
-        .update({
-          takenPercent: courseStatistics.takenPercent,
-          timesTaken: courseStatistics.timesTaken,
-          timesToTake: courseStatistics.timesToTake,
-          timesTotal: courseStatistics.timesTotal,
-          unitsTotal: courseStatistics.unitsTotal,
-          unitsTaken: courseStatistics.unitsTaken,
-          unitsToTake: courseStatistics.unitsToTake,
-        });
+        .get();
+
+      const course: ICourse = courseDoc.data() as ICourse;
+
+      if (courseDoc && course && course.startDate) {
+        const courseStatistics = await this.getCourseStatistics(
+          courseId,
+          new Date(course.endDate),
+          new Date(course.startDate),
+          course.takes,
+        );
+
+        await firebaseManager
+          .getCollection([ECollectionName.Courses])
+          .doc(courseId)
+          .update({
+            takenPercent: courseStatistics.takenPercent,
+            timesTaken: courseStatistics.timesTaken,
+            timesToTake: courseStatistics.timesToTake,
+            timesTotal: courseStatistics.timesTotal,
+            unitsTotal: courseStatistics.unitsTotal,
+            unitsTaken: courseStatistics.unitsTaken,
+            unitsToTake: courseStatistics.unitsToTake,
+          });
+      }
+    } else {
+      const courseStatistics = await this.getCourseStatistics(
+        createCourseStore.state.currentCourseId,
+        new Date(createCourseStore.state.endDate),
+        new Date(createCourseStore.state.startDate),
+        createCourseStore.state.takes,
+      );
+
+      createCourseStore.setState({
+        takenPercent: courseStatistics.takenPercent,
+        timesTaken: courseStatistics.timesTaken,
+        timesToTake: courseStatistics.timesToTake,
+        timesTotal: courseStatistics.timesTotal,
+        unitsTotal: courseStatistics.unitsTotal,
+        unitsTaken: courseStatistics.unitsTaken,
+        unitsToTake: courseStatistics.unitsToTake,
+      });
     }
   }
 
@@ -219,7 +245,7 @@ class CourseManager extends Manager {
     }
   }
 
-  private getCourseEndDate(startDate: Date): Date {
+  public getCourseEndDate(startDate: Date): Date {
     let days = 0;
 
     switch (createCourseStore.state.periodType) {
@@ -289,7 +315,10 @@ class CourseManager extends Manager {
           notificationsEnabled: isEnabled,
         });
 
-      createCourseManager.setEditingCourseData(createCourseStore.state.currentCourseId);
+      createCourseManager.setEditingCourseData(
+        createCourseStore.state.currentCourseId,
+        createCourseStore.state.courseEditMode,
+      );
 
       if (isEnabled) {
         setTimeout(() => {
@@ -323,6 +352,7 @@ class CourseManager extends Manager {
   ): Promise<ICourseStatistics> {
     const days = differenceInDays(endDate, startDate) + 1;
     const timesTotal = days * takes.length;
+
     let timesTaken = 0;
     let unitsTotal = 0;
     let unitsTaken = 0;
@@ -331,7 +361,7 @@ class CourseManager extends Manager {
       unitsTotal += take.dosage + take.dosagePart;
     });
 
-    unitsTotal = unitsTotal * timesTotal;
+    unitsTotal = unitsTotal * days;
 
     if (courseId !== null) {
       const timesTakenDocs = await firebaseManager

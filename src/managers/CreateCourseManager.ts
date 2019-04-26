@@ -15,6 +15,8 @@ import { VARIABLES } from '../common/variables';
 import { localeManager } from './LocaleManager';
 import { courseStore } from '../stores/courseStore';
 import { IFormError } from '../common/form';
+import { courseManager } from './CourseManager';
+import { startOfDay } from 'date-fns';
 
 class CreateCourseManager extends Manager {
   public reset(): void {}
@@ -24,12 +26,12 @@ class CreateCourseManager extends Manager {
     return Promise.resolve();
   }
 
-  public setEditingCourseData(courseId: string) {
+  public setEditingCourseData(courseId: string, courseEditMode: ECourseEditMode) {
     const course = courseStore.state.courses.get(courseId);
 
     if (course) {
       createCourseStore.setState({
-        courseEditMode: ECourseEditMode.Edit,
+        courseEditMode,
         currentCourseId: course.id,
         currentPill: PILLS_MAP.get(course.pillId),
         title: course.title,
@@ -50,7 +52,10 @@ class CreateCourseManager extends Manager {
     }
   }
 
-  public setDefaults() {
+  public async setDefaults() {
+    const startDate = startOfDay(new Date());
+    const endDate = courseManager.getCourseEndDate(startDate);
+
     createCourseStore.setState({
       courseEditMode: ECourseEditMode.Create,
       currentCourseId: null,
@@ -61,7 +66,7 @@ class CreateCourseManager extends Manager {
       times: 3,
       timesPer: ETimesPer.Day,
       takes: [],
-      notificationsEnabled: false,
+      notificationsEnabled: true,
       takenPercent: 0,
       timesTaken: 0,
       timesToTake: 0,
@@ -69,9 +74,12 @@ class CreateCourseManager extends Manager {
       unitsTotal: 0,
       unitsTaken: 0,
       unitsToTake: 0,
+      startDate: startDate.getTime(),
+      endDate: endDate.getTime(),
     });
 
     this.generateDefaultTakeEntities();
+    await courseManager.recalculateCourseStatistics(null);
   }
 
   public selectCurrentPill(currentPill: IPill) {
