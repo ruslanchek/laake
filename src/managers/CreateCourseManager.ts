@@ -40,6 +40,8 @@ class CreateCourseManager extends Manager {
         times: course.times,
         timesPer: course.timesPer,
         takes: course.takes,
+        startDate: course.startDate,
+        endDate: course.endDate,
         notificationsEnabled: course.notificationsEnabled,
         takenPercent: course.takenPercent,
         timesTaken: course.timesTaken,
@@ -66,6 +68,8 @@ class CreateCourseManager extends Manager {
       times: 3,
       timesPer: ETimesPer.Day,
       takes: [],
+      startDate: startDate.getTime(),
+      endDate: endDate.getTime(),
       notificationsEnabled: true,
       takenPercent: 0,
       timesTaken: 0,
@@ -74,8 +78,6 @@ class CreateCourseManager extends Manager {
       unitsTotal: 0,
       unitsTaken: 0,
       unitsToTake: 0,
-      startDate: startDate.getTime(),
-      endDate: endDate.getTime(),
     });
 
     this.generateDefaultTakeEntities();

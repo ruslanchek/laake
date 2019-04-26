@@ -34,6 +34,7 @@ import { CommonService } from '../../services/CommonService';
 import { CheckButton } from '../ui/CheckButton';
 import { StatisticsInfoBlock } from '../ui/StatisticsInfoBlock';
 import { ICONS } from '../../common/icons';
+import { differenceInDays } from 'date-fns';
 
 interface IState {
   loading: boolean;
@@ -62,7 +63,7 @@ export class CourseSummaryModal extends React.Component<
     const { currentLocale } = commonStore.state;
     const { courseEditMode } = createCourseStore.state;
     const course: ICourse = {
-      id: '',
+      id: createCourseStore.state.currentCourseId || '',
       title: createCourseStore.state.title,
       pillId: createCourseStore.state.currentPill.id,
       periodType: createCourseStore.state.periodType,
@@ -70,8 +71,8 @@ export class CourseSummaryModal extends React.Component<
       times: createCourseStore.state.times,
       timesPer: createCourseStore.state.timesPer,
       takes: createCourseStore.state.takes,
-      startDate: 0,
-      endDate: 0,
+      startDate: createCourseStore.state.startDate,
+      endDate: createCourseStore.state.endDate,
       notificationsEnabled: createCourseStore.state.notificationsEnabled,
       takenPercent: createCourseStore.state.takenPercent,
       timesToTake: createCourseStore.state.timesToTake,
@@ -198,8 +199,9 @@ export class CourseSummaryModal extends React.Component<
                         source={ICONS.SMALL_DAYS}
                       />
                     }
-                    title='Days left'
-                    body={`${course.timesTaken} / ${course.timesTotal}`}
+                    title='Days past'
+                    body={`${differenceInDays(Date.now(), course.startDate) +
+                      1} / ${differenceInDays(course.endDate, course.startDate) + 1}`}
                   />
                 </View>
               </View>
