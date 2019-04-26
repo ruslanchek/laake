@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '50%',
-    padding: VARIABLES.PADDING_BIG,
+    paddingVertical: VARIABLES.PADDING_BIG * 1.5,
+    paddingHorizontal: VARIABLES.PADDING_BIG * 1.5,
   },
 
   icon: {
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: VARIABLES.FONT_SIZE_TINY,
+    fontSize: VARIABLES.FONT_SIZE_SMALL,
     color: COLORS.GRAY_LIGHT.toString(),
     fontFamily: FONTS.MEDIUM,
   },

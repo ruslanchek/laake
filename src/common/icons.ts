@@ -8,4 +8,5 @@ export const ICONS = {
   EDIT: require('../assets/icons/Edit.png'),
   SMALL_TABLETS: require('../assets/icons/SmallTablets.png'),
   SMALL_LIST: require('../assets/icons/SmallList.png'),
+  SMALL_DAYS: require('../assets/icons/SmallDays.png'),
 };

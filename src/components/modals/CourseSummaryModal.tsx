@@ -146,17 +146,15 @@ export class CourseSummaryModal extends React.Component<
         <View style={styles.bottom}>
           <View style={styles.content}>
             <View>
-              <Text style={styles.headerText}>
-                Summary {createCourseStore.state.courseEditMode}
-              </Text>
-              <Text style={GLOBAL_STYLES.INPUT_LABEL}>Information about the course</Text>
+              <Text style={styles.headerText}>Summary</Text>
+              <Text style={styles.subHeaderText}>Information about the course</Text>
               <View style={styles.infoBlock}>
                 <View style={styles.infoBlockRow}>
                   <StatisticsInfoBlock
                     icon={
                       <Progress
                         strokeWidth={4}
-                        size={30}
+                        size={35}
                         color={COLORS.RED.toString()}
                         percent={course.takenPercent}
                         showPercentage={false}
@@ -165,8 +163,6 @@ export class CourseSummaryModal extends React.Component<
                     title='Completion'
                     body={`${course.takenPercent}%`}
                   />
-
-                  <View style={styles.infoBlockSeparatorVertical} />
 
                   <StatisticsInfoBlock
                     icon={
@@ -181,8 +177,6 @@ export class CourseSummaryModal extends React.Component<
                   />
                 </View>
 
-                <View style={styles.infoBlockSeparatorHorizontal} />
-
                 <View style={styles.infoBlockRow}>
                   <StatisticsInfoBlock
                     icon={
@@ -196,17 +190,15 @@ export class CourseSummaryModal extends React.Component<
                     body={`${unitsTaken} / ${unitsTotal}`}
                   />
 
-                  <View style={styles.infoBlockSeparatorVertical} />
-
                   <StatisticsInfoBlock
                     icon={
                       <Image
                         style={styles.infoIcon}
                         resizeMode='contain'
-                        source={ICONS.SMALL_LIST}
+                        source={ICONS.SMALL_DAYS}
                       />
                     }
-                    title='Takes'
+                    title='Days left'
                     body={`${course.timesTaken} / ${course.timesTotal}`}
                   />
                 </View>
@@ -354,22 +346,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  infoBlockSeparatorVertical: {
-    width: 1,
-    height: 32,
-    backgroundColor: COLORS.GRAY_PALE_LIGHT.toString(),
-  },
-
-  infoBlockSeparatorHorizontal: {
-    flex: 1,
-    height: 1,
-    backgroundColor: COLORS.GRAY_PALE_LIGHT.toString(),
-    marginHorizontal: VARIABLES.PADDING_BIG,
-  },
-
   infoIcon: {
-    width: 30,
-    height: 30,
+    width: 35,
+    height: 35,
   },
 
   top: {
@@ -449,10 +428,17 @@ const styles = StyleSheet.create({
   },
 
   headerText: {
-    fontSize: VARIABLES.FONT_SIZE_SMALL,
+    fontSize: VARIABLES.FONT_SIZE_REGULAR,
     color: COLORS.GRAY.toString(),
     textTransform: 'uppercase',
     fontFamily: FONTS.BOLD,
+  },
+
+  subHeaderText: {
+    fontSize: VARIABLES.FONT_SIZE_SMALL,
+    color: COLORS.GRAY.toString(),
+    fontFamily: FONTS.MEDIUM,
+    marginBottom: VARIABLES.PADDING_SMALL,
   },
 
   contentTop: {
@@ -472,7 +458,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: VARIABLES.FONT_SIZE_REGULAR,
+    fontSize: VARIABLES.FONT_SIZE_BIG,
     fontWeight: '600',
     marginBottom: 3,
     textAlign: 'center',
