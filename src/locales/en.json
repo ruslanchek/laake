@@ -22,7 +22,13 @@
   },
   "COURSE_SUMMARY_MODAL": {
     "HEADER": "Summary",
-    "DESCRIPTION": "Please check your preferences before creating the course"
+    "DISCLAIMER": "Please check your preferences before creating the course",
+    "RECEIVE_REMINDERS": "Receive reminders",
+    "DESCRIPTION": "Information about the course",
+    "COMPLETION": "Completion",
+    "TAKES": "Takes",
+    "UNITS_TAKEN": "Units taken",
+    "DAYS_PAST": "Days past"
   },
   "COURSE_TYPE_MODAL": {
     "HEADER": "Medication type",

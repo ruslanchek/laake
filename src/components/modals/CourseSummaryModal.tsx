@@ -134,7 +134,7 @@ export class CourseSummaryModal extends React.Component<
                 </View>
 
                 <CheckButton
-                  text='Receive reminders'
+                  text={localeManager.t('COURSE_SUMMARY_MODAL.RECEIVE_REMINDERS')}
                   isChecked={course.notificationsEnabled}
                   isLoading={notificationsLoading}
                   onPress={this.handleNotifications}
@@ -147,8 +147,12 @@ export class CourseSummaryModal extends React.Component<
         <View style={styles.bottom}>
           <View style={styles.content}>
             <View>
-              <Text style={styles.headerText}>Summary</Text>
-              <Text style={styles.subHeaderText}>Information about the course</Text>
+              <Text style={styles.headerText}>
+                {localeManager.t('COURSE_SUMMARY_MODAL.HEADER')}
+              </Text>
+              <Text style={styles.subHeaderText}>
+                {localeManager.t('COURSE_SUMMARY_MODAL.DESCRIPTION')}
+              </Text>
               <View style={styles.infoBlock}>
                 <View style={styles.infoBlockRow}>
                   <StatisticsInfoBlock
@@ -161,7 +165,7 @@ export class CourseSummaryModal extends React.Component<
                         showPercentage={false}
                       />
                     }
-                    title='Completion'
+                    title={localeManager.t('COURSE_SUMMARY_MODAL.COMPLETION')}
                     body={`${course.takenPercent}%`}
                   />
 
@@ -173,7 +177,7 @@ export class CourseSummaryModal extends React.Component<
                         source={ICONS.SMALL_LIST}
                       />
                     }
-                    title='Takes'
+                    title={localeManager.t('COURSE_SUMMARY_MODAL.TAKES')}
                     body={`${course.timesTaken} / ${course.timesTotal}`}
                   />
                 </View>
@@ -187,7 +191,7 @@ export class CourseSummaryModal extends React.Component<
                         source={ICONS.SMALL_TABLETS}
                       />
                     }
-                    title='Units taken'
+                    title={localeManager.t('COURSE_SUMMARY_MODAL.UNITS_TAKEN')}
                     body={`${unitsTaken} / ${unitsTotal}`}
                   />
 
@@ -199,7 +203,7 @@ export class CourseSummaryModal extends React.Component<
                         source={ICONS.SMALL_DAYS}
                       />
                     }
-                    title='Days past'
+                    title={localeManager.t('COURSE_SUMMARY_MODAL.DAYS_PAST')}
                     body={`${differenceInDays(Date.now(), course.startDate) +
                       1} / ${differenceInDays(course.endDate, course.startDate) + 1}`}
                   />
@@ -237,7 +241,7 @@ export class CourseSummaryModal extends React.Component<
               <>
                 <View style={styles.notice}>
                   <Text style={styles.noticeText}>
-                    {localeManager.t('COURSE_SUMMARY_MODAL.DESCRIPTION')}
+                    {localeManager.t('COURSE_SUMMARY_MODAL.DISCLAIMER')}
                   </Text>
                 </View>
 
