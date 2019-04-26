@@ -29,15 +29,31 @@ export class CommonService {
     return result;
   }
 
-  static formatDosageParts(dosage: number, dosagePart: string, locale: string): string {
+  static convertDosagePartToString(dosagePart: number): string {
+    if (dosagePart >= 0 && dosagePart < 0.25) {
+      return VARIABLES.NULL_VALUE_SYMBOL;
+    } else if (dosagePart > 0 && dosagePart < 0.26) {
+      return '¼';
+    } else if (dosagePart > 0.26 && dosagePart < 0.333339) {
+      return '⅓';
+    } else if (dosagePart > 0.333339 && dosagePart < 0.51) {
+      return '½';
+    } else if (dosagePart > 0.51 && dosagePart < 0.666669) {
+      return '⅔';
+    } else {
+      return '¾';
+    }
+  }
+
+  static formatDosageParts(dosage: number, dosagePart: number, locale: string): string {
     let result = '';
 
     if (dosage > 0) {
       result += dosage.toLocaleString(locale);
     }
 
-    if (dosagePart !== VARIABLES.NULL_VALUE_SYMBOL) {
-      result += ` ${dosagePart}`;
+    if (dosagePart > 0) {
+      result += ` ${this.convertDosagePartToString(dosagePart)}`;
     }
 
     return result;

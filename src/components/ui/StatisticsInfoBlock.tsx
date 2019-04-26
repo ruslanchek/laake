@@ -17,7 +17,6 @@ export class StatisticsInfoBlock extends React.PureComponent<IProps> {
     return (
       <View style={styles.container}>
         <View style={styles.icon}>{icon}</View>
-
         <View>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.body}>{body}</Text>
@@ -31,7 +30,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    flex: 0.5,
+    width: '50%',
+    padding: VARIABLES.PADDING_BIG,
   },
 
   icon: {
@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
 
   body: {
     fontSize: VARIABLES.FONT_SIZE_SMALL,
-    fontFamily: FONTS.BOLD,
+    fontFamily: FONTS.MEDIUM,
   },
 });

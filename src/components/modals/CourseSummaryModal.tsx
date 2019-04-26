@@ -33,6 +33,7 @@ import { Appear, EAppearType } from '../common/Appear';
 import { CommonService } from '../../services/CommonService';
 import { CheckButton } from '../ui/CheckButton';
 import { StatisticsInfoBlock } from '../ui/StatisticsInfoBlock';
+import { ICONS } from '../../common/icons';
 
 interface IState {
   loading: boolean;
@@ -156,33 +157,65 @@ export class CourseSummaryModal extends React.Component<
               <Text style={styles.headerText}>Summary</Text>
               <Text style={GLOBAL_STYLES.INPUT_LABEL}>Information about the course</Text>
               <View style={styles.infoBlock}>
-                <StatisticsInfoBlock
-                  icon={
-                    <Progress
-                      strokeWidth={4}
-                      size={30}
-                      color={COLORS.RED.toString()}
-                      percent={course.takenPercent}
-                      showPercentage={false}
-                    />
-                  }
-                  title='Completion'
-                  body={`${course.takenPercent}%`}
-                />
+                <View style={styles.infoBlockRow}>
+                  <StatisticsInfoBlock
+                    icon={
+                      <Progress
+                        strokeWidth={3}
+                        size={30}
+                        color={COLORS.RED.toString()}
+                        percent={course.takenPercent}
+                        showPercentage={false}
+                      />
+                    }
+                    title='Completion'
+                    body={`${course.takenPercent}%`}
+                  />
 
-                <StatisticsInfoBlock
-                  icon={
-                    <Progress
-                      strokeWidth={4}
-                      size={30}
-                      color={COLORS.RED.toString()}
-                      percent={course.takenPercent}
-                      showPercentage={false}
-                    />
-                  }
-                  title='Takes'
-                  body={`${course.timesTaken} / ${course.timesTotal}`}
-                />
+                  <View style={styles.infoBlockSeparatorVertical} />
+
+                  <StatisticsInfoBlock
+                    icon={
+                      <Image
+                        style={styles.infoIcon}
+                        resizeMode='contain'
+                        source={ICONS.SMALL_TABLETS}
+                      />
+                    }
+                    title='Takes'
+                    body={`${course.timesTaken} / ${course.timesTotal}`}
+                  />
+                </View>
+
+                <View style={styles.infoBlockSeparatorHorizontal} />
+
+                <View style={styles.infoBlockRow}>
+                  <StatisticsInfoBlock
+                    icon={
+                      <Image
+                        style={styles.infoIcon}
+                        resizeMode='contain'
+                        source={ICONS.SMALL_LIST}
+                      />
+                    }
+                    title='Takes'
+                    body={`${course.timesTaken} / ${course.timesTotal}`}
+                  />
+
+                  <View style={styles.infoBlockSeparatorVertical} />
+
+                  <StatisticsInfoBlock
+                    icon={
+                      <Image
+                        style={styles.infoIcon}
+                        resizeMode='contain'
+                        source={ICONS.SMALL_LIST}
+                      />
+                    }
+                    title='Takes'
+                    body={`${course.timesTaken} / ${course.timesTotal}`}
+                  />
+                </View>
               </View>
             </View>
           </View>
@@ -319,6 +352,29 @@ export class CourseSummaryModal extends React.Component<
 }
 
 const styles = StyleSheet.create({
+  infoBlockRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  infoBlockSeparatorVertical: {
+    width: 1,
+    height: 32,
+    backgroundColor: COLORS.GRAY_PALE_LIGHT.toString(),
+  },
+
+  infoBlockSeparatorHorizontal: {
+    flex: 1,
+    height: 1,
+    backgroundColor: COLORS.GRAY_PALE_LIGHT.toString(),
+    marginHorizontal: VARIABLES.PADDING_BIG,
+  },
+
+  infoIcon: {
+    width: 30,
+    height: 30,
+  },
+
   top: {
     backgroundColor: COLORS.BLUE.toString(),
     justifyContent: 'center',
@@ -376,7 +432,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 3,
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
-    padding: VARIABLES.PADDING_MEDIUM,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },

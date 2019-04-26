@@ -152,6 +152,9 @@ class CourseManager extends Manager {
           timesTaken: courseStatistics.timesTaken,
           timesToTake: courseStatistics.timesToTake,
           timesTotal: courseStatistics.timesTotal,
+          unitsTotal: courseStatistics.unitsTotal,
+          unitsTaken: courseStatistics.unitsTaken,
+          unitsToTake: courseStatistics.unitsToTake,
         });
     }
   }
@@ -321,6 +324,14 @@ class CourseManager extends Manager {
     const days = differenceInDays(endDate, startDate) + 1;
     const timesTotal = days * takes.length;
     let timesTaken = 0;
+    let unitsTotal = 0;
+    let unitsTaken = 0;
+
+    takes.forEach(take => {
+      unitsTotal += take.dosage + take.dosagePart;
+    });
+
+    unitsTotal = unitsTotal * timesTotal;
 
     if (courseId !== null) {
       const timesTakenDocs = await firebaseManager
@@ -330,8 +341,17 @@ class CourseManager extends Manager {
         .get();
 
       timesTaken = timesTakenDocs.docs.length;
+
+      timesTakenDocs.docs.forEach(takeTimeDoc => {
+        const takeTime: ITakeTime = takeTimeDoc.data() as ITakeTime;
+
+        if (takeTime && takeTime.dosage) {
+          unitsTaken += takeTime.dosage;
+        }
+      });
     }
 
+    const unitsToTake = unitsTotal - unitsTaken;
     const timesToTake = timesTotal - timesTaken;
     let takenPercent = Math.round(timesTaken / (timesTotal / 100));
 
@@ -344,6 +364,9 @@ class CourseManager extends Manager {
       timesTaken,
       timesToTake,
       timesTotal,
+      unitsTotal,
+      unitsTaken,
+      unitsToTake,
     };
   }
 
@@ -358,6 +381,7 @@ class CourseManager extends Manager {
           .doc(takeTimeId)
           .update({
             isTaken: !takeTime.isTaken,
+            dosage: take.dosage + take.dosagePart,
           });
       } else {
         const doc = await firebaseManager
@@ -374,6 +398,7 @@ class CourseManager extends Manager {
               takeIndex: take.index,
               dayIndex,
               isTaken: true,
+              dosage: take.dosage + take.dosagePart,
             });
         }
       }

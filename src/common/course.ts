@@ -18,6 +18,9 @@ export interface ICourse {
   timesToTake: number;
   timesTaken: number;
   timesTotal: number;
+  unitsTotal: number;
+  unitsTaken: number;
+  unitsToTake: number;
 }
 
 export interface ICourseStatistics {
@@ -25,4 +28,7 @@ export interface ICourseStatistics {
   timesToTake: number;
   timesTaken: number;
   timesTotal: number;
+  unitsTotal: number;
+  unitsTaken: number;
+  unitsToTake: number;
 }

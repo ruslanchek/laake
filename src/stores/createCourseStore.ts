@@ -26,6 +26,9 @@ interface CreateCourseStoreState {
   timesToTake: number;
   timesTaken: number;
   timesTotal: number;
+  unitsTotal: number;
+  unitsTaken: number;
+  unitsToTake: number;
 }
 
 const initialState: CreateCourseStoreState = {
@@ -44,6 +47,9 @@ const initialState: CreateCourseStoreState = {
   timesToTake: 0,
   timesTaken: 0,
   timesTotal: 0,
+  unitsTotal: 0,
+  unitsTaken: 0,
+  unitsToTake: 0,
 };
 
 export const createCourseStore = new Store<CreateCourseStoreState>(initialState, {

@@ -7,7 +7,7 @@ export interface ITake {
   minutes: number;
   term: ETakeTerm;
   dosage: number;
-  dosagePart: string;
+  dosagePart: number;
   dosageUnits: ETakeDosageUnit;
 }
 
@@ -17,6 +17,7 @@ export interface ITakeTime {
   takeIndex: number;
   dayIndex: number;
   isTaken: boolean;
+  dosage: number;
 }
 
 export enum ETakeDosageUnit {
@@ -59,11 +60,4 @@ export const TAKE_DOSAGE_LIST: number[] = CommonService.times(1001, i => {
   return i;
 });
 
-export const TAKE_DOSAGE_PART_LIST: string[] = [
-  VARIABLES.NULL_VALUE_SYMBOL,
-  '¼',
-  '⅓',
-  '½',
-  '⅔',
-  '¾',
-];
+export const TAKE_DOSAGE_PART_LIST: number[] = [0, 0.25, 0.333333, 0.5, 0.666666, 0.75];

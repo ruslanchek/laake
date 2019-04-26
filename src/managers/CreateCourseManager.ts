@@ -43,6 +43,9 @@ class CreateCourseManager extends Manager {
         timesTaken: course.timesTaken,
         timesToTake: course.timesToTake,
         timesTotal: course.timesTotal,
+        unitsTotal: course.unitsTotal,
+        unitsTaken: course.unitsTaken,
+        unitsToTake: course.unitsToTake,
       });
     }
   }
@@ -63,6 +66,9 @@ class CreateCourseManager extends Manager {
       timesTaken: 0,
       timesToTake: 0,
       timesTotal: 0,
+      unitsTotal: 0,
+      unitsTaken: 0,
+      unitsToTake: 0,
     });
 
     this.generateDefaultTakeEntities();
@@ -119,7 +125,7 @@ class CreateCourseManager extends Manager {
         minutes: 0,
         term: ETakeTerm.BeforeMeal,
         dosage: 1,
-        dosagePart: VARIABLES.NULL_VALUE_SYMBOL,
+        dosagePart: 0,
         dosageUnits: ETakeDosageUnit.Pieces,
       };
     });

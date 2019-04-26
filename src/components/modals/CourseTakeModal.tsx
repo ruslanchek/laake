@@ -106,7 +106,7 @@ export class CourseTakeModal extends React.Component<
                     value={dosage}
                     onChange={this.handleChangeDosage}
                   />
-                  <FormSelect<string>
+                  <FormSelect<number>
                     width='30%'
                     items={this.dosageParts}
                     value={dosagePart}
@@ -176,11 +176,11 @@ export class CourseTakeModal extends React.Component<
     });
   }
 
-  get dosageParts(): IFormSelectItem<string>[] {
+  get dosageParts(): IFormSelectItem<number>[] {
     return TAKE_DOSAGE_PART_LIST.map(item => {
       return {
         value: item,
-        title: item,
+        title: CommonService.convertDosagePartToString(item),
       };
     });
   }
@@ -218,7 +218,7 @@ export class CourseTakeModal extends React.Component<
     const { take } = this.state;
 
     if (take) {
-      if (take.dosagePart === VARIABLES.NULL_VALUE_SYMBOL && dosage === 0) {
+      if (take.dosagePart === 0 && dosage === 0) {
         dosage = 1;
       }
 
@@ -232,13 +232,13 @@ export class CourseTakeModal extends React.Component<
     }
   };
 
-  handleChangeDosagePart = (dosagePart: string) => {
+  handleChangeDosagePart = (dosagePart: number) => {
     const { take } = this.state;
 
     if (take) {
       take.dosagePart = dosagePart;
 
-      if (dosagePart === VARIABLES.NULL_VALUE_SYMBOL && take.dosage === 0) {
+      if (dosagePart === 0 && take.dosage === 0) {
         take.dosage = 1;
       }
 

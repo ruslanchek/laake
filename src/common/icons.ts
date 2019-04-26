@@ -6,4 +6,6 @@ export const ICONS = {
   PILL: require('../assets/icons/Pill.png'),
   CREATE: require('../assets/icons/Create.png'),
   EDIT: require('../assets/icons/Edit.png'),
+  SMALL_TABLETS: require('../assets/icons/SmallTablets.png'),
+  SMALL_LIST: require('../assets/icons/SmallList.png'),
 };
