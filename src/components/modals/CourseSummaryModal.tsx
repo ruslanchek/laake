@@ -360,12 +360,12 @@ const styles = StyleSheet.create({
   top: {
     backgroundColor: COLORS.BLUE.toString(),
     justifyContent: 'center',
-    flex: 0.4,
+    flex: 0.45,
   },
 
   bottom: {
     justifyContent: 'center',
-    flex: 0.6,
+    flex: 0.55,
   },
 
   container: {
@@ -450,6 +450,7 @@ const styles = StyleSheet.create({
   contentTop: {
     paddingTop: 0,
     justifyContent: 'center',
+    paddingBottom: VARIABLES.PADDING_BIG,
   },
 
   heading: {
