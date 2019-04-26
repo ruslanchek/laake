@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -31,14 +31,14 @@
 		<key>NSExceptionDomains</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) users can select and upload their custom images to use as a medication course icon</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) users can select and upload their custom images to use as a medication course icon</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ionicons.ttf</string>
