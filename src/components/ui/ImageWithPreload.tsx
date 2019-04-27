@@ -46,7 +46,6 @@ export class ImageWithPreload extends React.PureComponent<IProps, IState> {
               width,
               height,
             }}
-            cache='only-if-cached'
             onLoadEnd={this.handleLoadEnd}
             source={source}
           />
