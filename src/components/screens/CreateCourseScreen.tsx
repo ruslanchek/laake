@@ -30,6 +30,7 @@ import { courseManager } from '../../managers/CourseManager';
 import { ICONS } from '../../common/icons';
 import { ModalHeader } from '../blocks/ModalHeader';
 import { CommonService } from '../../services/CommonService';
+import { ImageWithPreload } from '../ui/ImageWithPreload';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -114,9 +115,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
                     suffix={null}
                     prefix={
                       <TouchableOpacity style={styles.pill} onPress={this.handleEditType}>
-                        <Image
-                          resizeMode='contain'
-                          style={styles.pillImage}
+                        <ImageWithPreload
                           source={
                             createCourseStore.state.uploadedImage
                               ? {
@@ -124,6 +123,9 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
                                 }
                               : createCourseStore.state.currentPill.image
                           }
+                          style={styles.pillImage}
+                          width={VARIABLES.INPUT_HEIGHT}
+                          height={VARIABLES.INPUT_HEIGHT}
                         />
                       </TouchableOpacity>
                     }
@@ -289,8 +291,8 @@ const styles = StyleSheet.create({
     borderBottomStartRadius: VARIABLES.BORDER_RADIUS_SMALL,
     borderTopStartRadius: VARIABLES.BORDER_RADIUS_SMALL,
     overflow: 'hidden',
-    width: VARIABLES.INPUT_HEIGHT - 2,
-    height: VARIABLES.INPUT_HEIGHT - 2,
+    width: VARIABLES.INPUT_HEIGHT,
+    height: VARIABLES.INPUT_HEIGHT,
     justifyContent: 'center',
     alignItems: 'center',
     flexShrink: 0,

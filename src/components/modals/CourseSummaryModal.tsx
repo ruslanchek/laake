@@ -21,7 +21,7 @@ import { EFormButtonTheme, FormButton } from '../ui/FormButton';
 import { localeManager } from '../../managers/LocaleManager';
 import { ICourse } from '../../common/course';
 import { PILLS, PILLS_MAP } from '../../common/pills';
-import { periodTypeNames } from '../../common/periods';
+import { periodTypeNames, EPeriodType } from '../../common/periods';
 import { commonStore } from '../../stores/commonStore';
 import { timesPerNames } from '../../common/times';
 import { ERouteName } from '../../enums/ERouteName';
@@ -35,12 +35,15 @@ import { CheckButton } from '../ui/CheckButton';
 import { StatisticsInfoBlock } from '../ui/StatisticsInfoBlock';
 import { ICONS } from '../../common/icons';
 import { differenceInDays } from 'date-fns';
+import { ImageWithPreload } from '../ui/ImageWithPreload';
 
 interface IState {
   loading: boolean;
   deleteLoading: boolean;
   notificationsLoading: boolean;
 }
+
+const IMAGE_HEIGHT = 75;
 
 @followStore(commonStore)
 @followStore(createCourseStore)
@@ -118,9 +121,11 @@ export class CourseSummaryModal extends React.Component<
                   type={EAppearType.Spring}
                   customStyles={styles.pillContainer}
                 >
-                  <Image
-                    style={styles.pill}
+                  <ImageWithPreload
                     source={course.uploadedImage ? { uri: course.uploadedImage } : pill.image}
+                    style={styles.pill}
+                    width={IMAGE_HEIGHT}
+                    height={IMAGE_HEIGHT}
                   />
                 </Appear>
 
@@ -137,12 +142,14 @@ export class CourseSummaryModal extends React.Component<
                   </View>
                 </View>
 
-                <CheckButton
-                  text={localeManager.t('COURSE_SUMMARY_MODAL.RECEIVE_REMINDERS')}
-                  isChecked={course.notificationsEnabled}
-                  isLoading={notificationsLoading}
-                  onPress={this.handleNotifications}
-                />
+                <Appear show={true} delay={200} type={EAppearType.Drop}>
+                  <CheckButton
+                    text={localeManager.t('COURSE_SUMMARY_MODAL.RECEIVE_REMINDERS')}
+                    isChecked={course.notificationsEnabled}
+                    isLoading={notificationsLoading}
+                    onPress={this.handleNotifications}
+                  />
+                </Appear>
               </View>
             </View>
           </ImageBackground>
@@ -485,9 +492,10 @@ const styles = StyleSheet.create({
   },
 
   pill: {
-    width: 75,
-    height: 75,
+    width: IMAGE_HEIGHT,
+    height: IMAGE_HEIGHT,
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL * 1.65,
+    overflow: 'hidden',
   },
 
   pillContainer: {

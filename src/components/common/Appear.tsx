@@ -4,6 +4,7 @@ import { Animated, StyleSheet } from 'react-native';
 export enum EAppearType {
   Spring,
   Fade,
+  Drop,
 }
 
 interface IProps {
@@ -62,6 +63,7 @@ export class Appear extends React.Component<IProps, IState> {
       }
 
       case EAppearType.Spring:
+      case EAppearType.Drop:
       default: {
         Animated.spring(this.state.animated, {
           toValue: 1,
@@ -87,6 +89,7 @@ export class Appear extends React.Component<IProps, IState> {
       }
 
       case EAppearType.Spring:
+      case EAppearType.Drop:
       default: {
         Animated.spring(this.state.animated, {
           toValue: 0,
@@ -101,7 +104,7 @@ export class Appear extends React.Component<IProps, IState> {
 
   render() {
     const { animated } = this.state;
-    const { customStyles, children } = this.props;
+    const { customStyles, children, type } = this.props;
 
     return (
       <Animated.View
@@ -111,12 +114,19 @@ export class Appear extends React.Component<IProps, IState> {
           {
             opacity: animated,
             transform: [
-              {
-                scale: animated.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.8, 1],
-                }),
-              },
+              type === EAppearType.Drop
+                ? {
+                    translateY: animated.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [-10, 0],
+                    }),
+                  }
+                : {
+                    scale: animated.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0.8, 1],
+                    }),
+                  },
             ],
           },
         ]}

@@ -22,6 +22,7 @@ import { ECourseEditMode, createCourseStore } from '../../stores/createCourseSto
 import Icon from 'react-native-vector-icons/Ionicons';
 import { FONTS } from '../../common/fonts';
 import { CommonService } from '../../services/CommonService';
+import { ImageWithPreload } from '../ui/ImageWithPreload';
 
 interface IProps extends NavigationInjectedProps {
   take: ITake;
@@ -63,9 +64,11 @@ class CourseCardClass extends React.Component<IProps, IState> {
         ]}
       >
         <TouchableOpacity onPress={this.handleEdit} style={styles.pillContainer}>
-          <Image
-            style={styles.pill}
+          <ImageWithPreload
             source={course.uploadedImage ? { uri: course.uploadedImage } : pill.image}
+            style={styles.pill}
+            width={HEIGHT}
+            height={HEIGHT}
           />
         </TouchableOpacity>
 
@@ -258,6 +261,7 @@ const styles = StyleSheet.create({
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
     borderWidth: 2,
     borderColor: COLORS.GRAY_PALE_LIGHT.toString(),
+    overflow: 'hidden',
   },
 
   pillContainer: {
