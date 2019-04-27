@@ -18,7 +18,7 @@ import { courseManager } from '../../managers/CourseManager';
 import { ITake, ITakeTime } from '../../common/take';
 import { withNavigation, NavigationInjectedProps } from 'react-navigation';
 import { ERouteName } from '../../enums/ERouteName';
-import { ECourseEditMode } from '../../stores/createCourseStore';
+import { ECourseEditMode, createCourseStore } from '../../stores/createCourseStore';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { FONTS } from '../../common/fonts';
 import { CommonService } from '../../services/CommonService';
@@ -63,7 +63,10 @@ class CourseCardClass extends React.Component<IProps, IState> {
         ]}
       >
         <TouchableOpacity onPress={this.handleEdit} style={styles.pillContainer}>
-          <Image style={styles.pill} source={pill.image} />
+          <Image
+            style={styles.pill}
+            source={course.uploadedImage ? { uri: course.uploadedImage } : pill.image}
+          />
         </TouchableOpacity>
 
         <View style={styles.center}>

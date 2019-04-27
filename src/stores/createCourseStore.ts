@@ -11,6 +11,7 @@ export enum ECourseEditMode {
 }
 
 interface CreateCourseStoreState {
+  uploadedImage: string | null;
   courseEditMode: ECourseEditMode;
   currentCourseId: string | null;
   currentPill: IPill;
@@ -34,6 +35,7 @@ interface CreateCourseStoreState {
 }
 
 const initialState: CreateCourseStoreState = {
+  uploadedImage: null,
   courseEditMode: ECourseEditMode.Create,
   currentCourseId: null,
   currentPill: PILLS[0],

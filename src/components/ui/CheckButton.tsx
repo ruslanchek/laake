@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: COLORS.WHITE.alpha(0.1).toString(),
+    // borderWidth: 1,
+    // borderColor: COLORS.WHITE.alpha(0.1).toString(),
     overflow: 'hidden',
   },
 

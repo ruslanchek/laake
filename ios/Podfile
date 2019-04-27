@@ -6,31 +6,31 @@ target 'laake' do
   # use_frameworks!
 
   #------- React core libs
-  pod ‘DoubleConversion’, :podspec => ‘../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec’
-  pod ‘glog’, :podspec => ‘../node_modules/react-native/third-party-podspecs/glog.podspec’
-  pod ‘Folly’, :podspec => ‘../node_modules/react-native/third-party-podspecs/Folly.podspec’
-  pod ‘yoga’, :path => ‘../node_modules/react-native/ReactCommon/yoga’
-  pod ‘React’, :path => ‘../node_modules/react-native’, :subspecs => [
-  ‘Core’,
-  ‘CxxBridge’,
-  ‘jsinspector’,
-  ‘PrivateDatabase’,
-  ‘cxxreact’,
-  ‘ART’,
-  ‘fishhook’,
-  #        ‘RCTTest’,
-  ‘DevSupport’,
-  ‘RCTActionSheet’,
-  ‘RCTAnimation’,
-  ‘RCTGeolocation’,
-  ‘RCTImage’,
-  ‘RCTLinkingIOS’,
-  ‘RCTNetwork’,
-  ‘RCTSettings’,
-  ‘RCTText’,
-  ‘RCTVibration’,
-  ‘RCTWebSocket’,
-  ‘RCTPushNotification’
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+    'CxxBridge',
+    'jsinspector',
+    'PrivateDatabase',
+    'cxxreact',
+    'ART',
+    'fishhook',
+    #        'RCTTest',
+    'DevSupport',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTGeolocation',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket',
+    'RCTPushNotification'
   ]
   #-------
   
@@ -47,6 +47,8 @@ target 'laake' do
   pod 'Crashlytics', '~> 3.10.7'
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
 
   pod 'react-native-haptic-feedback', :path => '../node_modules/react-native-haptic-feedback'
 

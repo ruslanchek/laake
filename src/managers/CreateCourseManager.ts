@@ -31,6 +31,7 @@ class CreateCourseManager extends Manager {
 
     if (course) {
       createCourseStore.setState({
+        uploadedImage: course.uploadedImage,
         courseEditMode,
         currentCourseId: course.id,
         currentPill: PILLS_MAP.get(course.pillId),
@@ -59,6 +60,7 @@ class CreateCourseManager extends Manager {
     const endDate = courseManager.getCourseEndDate(startDate);
 
     createCourseStore.setState({
+      uploadedImage: null,
       courseEditMode: ECourseEditMode.Create,
       currentCourseId: null,
       currentPill: PILLS[0],
@@ -82,12 +84,6 @@ class CreateCourseManager extends Manager {
 
     this.generateDefaultTakeEntities();
     await courseManager.recalculateCourseStatistics(null);
-  }
-
-  public selectCurrentPill(currentPill: IPill) {
-    createCourseStore.setState({
-      currentPill,
-    });
   }
 
   public checkCourseAvailability(): boolean {

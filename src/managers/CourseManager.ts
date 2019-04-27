@@ -156,13 +156,7 @@ class CourseManager extends Manager {
           .getCollection([ECollectionName.Courses])
           .doc(courseId)
           .update({
-            takenPercent: courseStatistics.takenPercent,
-            timesTaken: courseStatistics.timesTaken,
-            timesToTake: courseStatistics.timesToTake,
-            timesTotal: courseStatistics.timesTotal,
-            unitsTotal: courseStatistics.unitsTotal,
-            unitsTaken: courseStatistics.unitsTaken,
-            unitsToTake: courseStatistics.unitsToTake,
+            ...courseStatistics,
           });
       }
     } else {
@@ -174,13 +168,7 @@ class CourseManager extends Manager {
       );
 
       createCourseStore.setState({
-        takenPercent: courseStatistics.takenPercent,
-        timesTaken: courseStatistics.timesTaken,
-        timesToTake: courseStatistics.timesToTake,
-        timesTotal: courseStatistics.timesTotal,
-        unitsTotal: courseStatistics.unitsTotal,
-        unitsTaken: courseStatistics.unitsTaken,
-        unitsToTake: courseStatistics.unitsToTake,
+        ...courseStatistics,
       });
     }
   }
@@ -195,6 +183,7 @@ class CourseManager extends Manager {
       times,
       timesPer,
       takes,
+      uploadedImage,
     } = createCourseStore.state;
 
     if (currentCourseId) {
@@ -212,6 +201,7 @@ class CourseManager extends Manager {
           .getCollection([ECollectionName.Courses])
           .doc(currentCourseId)
           .update({
+            uploadedImage,
             title,
             pillId: currentPill.id,
             periodType: periodType,
@@ -272,28 +262,24 @@ class CourseManager extends Manager {
   public async createCourse() {
     const startDate = startOfDay(new Date());
     const endDate = this.getCourseEndDate(startDate);
-    const takes = createCourseStore.state.takes.map(take => {
+    const { state } = createCourseStore;
+    const takes = state.takes.map(take => {
       return { ...take };
     });
     const courseStatistics = await this.getCourseStatistics(null, endDate, startDate, takes);
     const course: Partial<ICourse> = {
-      title: createCourseStore.state.title.trim(),
-      period: createCourseStore.state.period,
-      periodType: createCourseStore.state.periodType,
-      pillId: createCourseStore.state.currentPill.id,
-      times: createCourseStore.state.times,
-      timesPer: createCourseStore.state.timesPer,
+      uploadedImage: state.uploadedImage,
+      title: state.title.trim(),
+      period: state.period,
+      periodType: state.periodType,
+      pillId: state.currentPill.id,
+      times: state.times,
+      timesPer: state.timesPer,
       startDate: startDate.getTime(),
       endDate: endDate.getTime(),
       takes,
-      notificationsEnabled: createCourseStore.state.notificationsEnabled,
-      takenPercent: courseStatistics.takenPercent,
-      timesTaken: courseStatistics.timesTaken,
-      timesToTake: courseStatistics.timesToTake,
-      timesTotal: courseStatistics.timesTotal,
-      unitsTaken: courseStatistics.unitsTaken,
-      unitsToTake: courseStatistics.unitsToTake,
-      unitsTotal: courseStatistics.unitsTotal,
+      notificationsEnabled: state.notificationsEnabled,
+      ...courseStatistics,
     };
 
     await firebaseManager.getCollection([ECollectionName.Courses]).add(course);

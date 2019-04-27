@@ -34,7 +34,8 @@
     "HEADER": "Medication type",
     "SELECT_PICTURE": "Select picture",
     "TAKE_PICTURE": "Take picture",
-    "DESCRIPTION": "Select or upload image for the course"
+    "DESCRIPTION": "Select or upload image for the course",
+    "CUSTOM_IMAGE": "Custom"
   },
   "NOTIFICATIONS": {
     "NAME_EMPTY": {

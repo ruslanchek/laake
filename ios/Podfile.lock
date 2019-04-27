@@ -224,6 +224,8 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - ReactNativePermissions (1.1.1):
+    - React
   - RNFirebase (5.3.1):
     - Firebase/Core
     - React
@@ -268,6 +270,7 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - ReactNativePermissions (from `../node_modules/react-native-permissions`)
   - RNFirebase (from `../node_modules/react-native-firebase/ios`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -316,6 +319,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-haptic-feedback"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  ReactNativePermissions:
+    :path: "../node_modules/react-native-permissions"
   RNFirebase:
     :path: "../node_modules/react-native-firebase/ios"
   RNGestureHandler:
@@ -360,12 +365,13 @@ SPEC CHECKSUMS:
   React: 90adac468c7b72bf1fa6c64bf230650f851a8388
   react-native-haptic-feedback: 22c9dc85fd8059f83bf9edd9212ac4bd4ae6074d
   react-native-image-picker: fd93361c666f397bdf72f9c6c23f13d2685b9173
+  ReactNativePermissions: 2e324bb3baf12702e3ec27f76c8ae1158fa69fc6
   RNFirebase: f20e5e4ceaa632aebb1a29a9a91022ae0469c633
   RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
   RNSVG: 9cb6e958c4b6a1f58185ac72a350b148947d6fed
   RNVectorIcons: 6607bd3a30291d0edb56f9bbe7ae411ee2b928b0
   yoga: 2e571f113e8cbeb0eb752aeebc86c1bfe7a8200c
 
-PODFILE CHECKSUM: b1e3f820f7bfd7f2960da7d6d6aabf5a09a0b968
+PODFILE CHECKSUM: 14fdb3168ceb6230f958fbd7602549906f047335
 
 COCOAPODS: 1.6.1

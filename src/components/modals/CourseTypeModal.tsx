@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Animated,
-  Dimensions,
-  Image,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Animated, Dimensions, StatusBar, StyleSheet, View } from 'react-native';
 import { NavigationContainerProps, SafeAreaView, ScrollView } from 'react-navigation';
 import { IPill, PILLS } from '../../common/pills';
 import { VARIABLES } from '../../common/variables';
@@ -18,29 +9,31 @@ import { followStore } from 'react-stores';
 import { createCourseStore } from '../../stores/createCourseStore';
 import ImagePicker from 'react-native-image-picker';
 import { CommonService } from '../../services/CommonService';
-import { createCourseManager } from '../../managers/CreateCourseManager';
 import { GLOBAL_STYLES } from '../../common/styles';
 import { localeManager } from '../../managers/LocaleManager';
 import { firebaseManager } from '../../managers/FirebaseManager';
 import { ENotificationType, NotificationsHandler } from '../common/Notifications';
-import { FONTS } from '../../common/fonts';
 import { EFormButtonTheme, FormButton } from '../ui/FormButton';
 import { ICONS } from '../../common/icons';
 import { ModalHeader } from '../blocks/ModalHeader';
+import Permissions from 'react-native-permissions';
+import { PillBrick } from '../ui/PillBrick';
 
 interface IState {
   scrollTop: Animated.Value;
+  customImageSource: string | null;
 }
 
 @followStore(createCourseStore)
 export class CourseTypeModal extends React.Component<NavigationContainerProps, IState> {
   state: IState = {
     scrollTop: new Animated.Value(0),
+    customImageSource: createCourseStore.state.uploadedImage,
   };
 
   render() {
     const sizeThird = Dimensions.get('window').width / 3 - VARIABLES.PADDING_BIG * 1.33;
-    const { scrollTop } = this.state;
+    const { scrollTop, customImageSource } = this.state;
 
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
@@ -83,38 +76,29 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
             </FormButton>
           </View>
           <View style={styles.content}>
+            {customImageSource && (
+              <PillBrick
+                title={localeManager.t('COURSE_TYPE_MODAL.CUSTOM_IMAGE')}
+                selected={true}
+                size={sizeThird}
+                imageSource={{
+                  uri: customImageSource,
+                }}
+                handleSelect={this.handleSelectCustom.bind(this)}
+              />
+            )}
+
             {PILLS.map((pill, i) => {
               return (
-                <TouchableOpacity
-                  onPress={this.handleSelect.bind(this, pill)}
-                  key={i}
-                  style={{ width: sizeThird }}
-                >
-                  <View style={[styles.pillInner, { width: sizeThird, height: sizeThird }]}>
-                    {createCourseStore.state.currentPill.id === pill.id && (
-                      <View style={styles.selected} />
-                    )}
-
-                    <Image
-                      style={[styles.pillImage, { width: sizeThird, height: sizeThird }]}
-                      resizeMode='contain'
-                      source={pill.image}
-                    />
-
-                    <View style={styles.subTitle}>
-                      <Text
-                        style={[
-                          styles.subTitleText,
-                          createCourseStore.state.currentPill.id === pill.id
-                            ? styles.subTitleTextSelected
-                            : null,
-                        ]}
-                      >
-                        {localeManager.t(pill.title)}
-                      </Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
+                <PillBrick
+                  title={localeManager.t(pill.title)}
+                  selected={
+                    createCourseStore.state.currentPill.id === pill.id && !customImageSource
+                  }
+                  size={sizeThird}
+                  imageSource={pill.image}
+                  handleSelect={this.handleSelect.bind(this, pill)}
+                />
               );
             })}
           </View>
@@ -124,70 +108,96 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
   }
 
   handleSelectPicture = async () => {
-    // const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // if (status === 'granted') {
-    //   ImagePicker.showImagePicker(options, response => {
-    //     console.log('Response = ', response);
-    //     if (response.didCancel) {
-    //       console.log('User cancelled image picker');
-    //     } else if (response.error) {
-    //       console.log('ImagePicker Error: ', response.error);
-    //     } else if (response.customButton) {
-    //       console.log('User tapped custom button: ', response.customButton);
-    //     } else {
-    //       const source = { uri: response.uri };
-    //       // You can also display the image using data:
-    //       // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-    //       this.setState({
-    //         avatarSource: source,
-    //       });
-    //     }
-    //   });
-    //   const result = await ImagePicker.launchImageLibraryAsync({
-    //     mediaTypes: 'Images',
-    //     allowsEditing: true,
-    //     aspect: [1, 1],
-    //     quality: 1,
-    //     exif: false,
-    //   });
-    //   if (!result.cancelled && result.uri) {
-    //     this.handleUpload(result.uri);
-    //   }
-    // }
+    let status = await Permissions.check('photo');
+
+    if (status !== 'authorized') {
+      status = await Permissions.request('photo');
+    }
+
+    if (status === 'authorized') {
+      ImagePicker.launchImageLibrary(
+        {
+          cameraType: 'back',
+          mediaType: 'photo',
+          allowsEditing: true,
+        },
+        response => {
+          if (response.didCancel) {
+          } else if (response.error) {
+          } else {
+            const source = { uri: response.uri };
+
+            if (source.uri) {
+              this.handleUpload(source.uri);
+            }
+          }
+        },
+      );
+    }
   };
 
   handleCapturePicture = async () => {
-    // const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    // if (status === 'granted') {
-    //   const result = await ImagePicker.launchCameraAsync({
-    //     allowsEditing: true,
-    //     aspect: [1, 1],
-    //     quality: 1,
-    //     exif: false,
-    //   });
-    //   if (!result.cancelled && result.uri) {
-    //     this.handleUpload(result.uri);
-    //   }
-    // }
+    let status = await Permissions.check('camera');
+
+    if (status !== 'authorized') {
+      status = await Permissions.request('camera');
+    }
+
+    if (status === 'authorized') {
+      ImagePicker.launchCamera(
+        {
+          cameraType: 'back',
+          mediaType: 'photo',
+          allowsEditing: true,
+        },
+        response => {
+          if (response.didCancel) {
+          } else if (response.error) {
+          } else {
+            const source = { uri: response.uri };
+
+            if (source.uri) {
+              this.handleUpload(source.uri);
+            }
+          }
+        },
+      );
+    }
   };
 
   async handleUpload(uri: string) {
-    const uploadResult = await firebaseManager.uploadFile(Date.now().toString(), uri);
+    const filename: string = Date.now().toString();
+    const uploadResult = await firebaseManager.uploadFile(filename, uri);
 
-    if (!uploadResult.error) {
-      CommonService.goBackAfterSelect(this.props.navigation);
-    } else {
+    if (uploadResult.error || !uploadResult.uri) {
       NotificationsHandler.alertWithType(
         ENotificationType.Error,
         localeManager.t('NOTIFICATIONS.UPLOAD_ERROR.TITLE'),
         localeManager.t('NOTIFICATIONS.UPLOAD_ERROR.MESSAGE'),
       );
+    } else {
+      createCourseStore.setState({
+        uploadedImage: uploadResult.uri,
+      });
+
+      CommonService.goBackAfterSelect(this.props.navigation);
     }
   }
 
-  handleSelect(pill: IPill) {
+  handleSelect(currentPill: IPill) {
     CommonService.haptic();
-    createCourseManager.selectCurrentPill(pill);
+    createCourseStore.setState({
+      currentPill,
+      uploadedImage: null,
+    });
+    CommonService.goBackAfterSelect(this.props.navigation);
+  }
+
+  handleSelectCustom() {
+    CommonService.haptic();
+    createCourseStore.setState({
+      uploadedImage: this.state.customImageSource,
+    });
     CommonService.goBackAfterSelect(this.props.navigation);
   }
 }
@@ -218,24 +228,6 @@ const styles = StyleSheet.create({
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
   },
 
-  subTitle: {
-    paddingHorizontal: 5,
-    borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
-    backgroundColor: COLORS.WHITE.alpha(0.8).toString(),
-    position: 'absolute',
-    bottom: 5,
-  },
-
-  subTitleText: {
-    fontSize: VARIABLES.FONT_SIZE_TINY,
-    color: COLORS.GRAY.toString(),
-    fontFamily: FONTS.MEDIUM,
-  },
-
-  subTitleTextSelected: {
-    color: COLORS.GRAY.toString(),
-  },
-
   title: {
     color: COLORS.GRAY.toString(),
     fontSize: VARIABLES.FONT_SIZE_TINY,
@@ -257,37 +249,6 @@ const styles = StyleSheet.create({
     color: COLORS.BLACK.toString(),
   },
 
-  pillInner: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: VARIABLES.BORDER_RADIUS_BIG,
-    marginBottom: VARIABLES.PADDING_MEDIUM,
-    backgroundColor: COLORS.WHITE.toString(),
-    elevation: 1,
-    shadowColor: COLORS.GRAY_PALE_LIGHT.toString(),
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3,
-  },
-
-  checkMarkIcon: {
-    top: -2,
-    left: 0,
-  },
-
-  selected: {
-    borderWidth: 2,
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    zIndex: 2,
-    borderColor: COLORS.GRAY_LIGHT.toString(),
-    borderRadius: VARIABLES.BORDER_RADIUS_BIG,
-  },
-
   add: {
     width: 75,
     height: 75,
@@ -300,9 +261,5 @@ const styles = StyleSheet.create({
 
   addIcon: {
     top: 2,
-  },
-
-  pillImage: {
-    borderRadius: VARIABLES.BORDER_RADIUS_BIG,
   },
 });

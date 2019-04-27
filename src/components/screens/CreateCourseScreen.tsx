@@ -117,7 +117,13 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
                         <Image
                           resizeMode='contain'
                           style={styles.pillImage}
-                          source={createCourseStore.state.currentPill.image}
+                          source={
+                            createCourseStore.state.uploadedImage
+                              ? {
+                                  uri: createCourseStore.state.uploadedImage,
+                                }
+                              : createCourseStore.state.currentPill.image
+                          }
                         />
                       </TouchableOpacity>
                     }

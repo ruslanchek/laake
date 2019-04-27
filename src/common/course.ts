@@ -1,9 +1,11 @@
 import { EPeriodType } from './periods';
 import { ETimesPer } from './times';
 import { ITake } from './take';
+import { ImageURISource } from 'react-native';
 
 export interface ICourse {
   id: string;
+  uploadedImage: string | null;
   title: string;
   pillId: number;
   periodType: EPeriodType;

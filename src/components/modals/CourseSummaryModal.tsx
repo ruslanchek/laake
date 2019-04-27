@@ -63,6 +63,7 @@ export class CourseSummaryModal extends React.Component<
     const { currentLocale } = commonStore.state;
     const { courseEditMode } = createCourseStore.state;
     const course: ICourse = {
+      uploadedImage: createCourseStore.state.uploadedImage,
       id: createCourseStore.state.currentCourseId || '',
       title: createCourseStore.state.title,
       pillId: createCourseStore.state.currentPill.id,
@@ -117,7 +118,10 @@ export class CourseSummaryModal extends React.Component<
                   type={EAppearType.Spring}
                   customStyles={styles.pillContainer}
                 >
-                  <Image style={styles.pill} source={pill.image} />
+                  <Image
+                    style={styles.pill}
+                    source={course.uploadedImage ? { uri: course.uploadedImage } : pill.image}
+                  />
                 </Appear>
 
                 <View style={styles.titleContainer}>
