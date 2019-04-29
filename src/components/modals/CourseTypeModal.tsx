@@ -153,11 +153,11 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
         compressImageMaxWidth: 256,
         compressImageMaxHeight: 256,
         compressImageQuality: 0.9,
-        cropperToolbarTitle: 'IMAGE_CROPPING.SELECT_AREA',
-        loadingLabelText: 'IMAGE_CROPPING.PROCESSING',
+        cropperToolbarTitle: localeManager.t('IMAGE_CROPPING.SELECT_AREA'),
+        loadingLabelText: localeManager.t('IMAGE_CROPPING.PROCESSING'),
         forceJpg: true,
-        cropperChooseText: 'IMAGE_CROPPING.CHOOSE',
-        cropperCancelText: 'IMAGE_CROPPING.CANCEL',
+        cropperChooseText: localeManager.t('IMAGE_CROPPING.CHOOSE'),
+        cropperCancelText: localeManager.t('IMAGE_CROPPING.CANCEL'),
       })) as Image;
 
       if (response && response.path) {
