@@ -7,7 +7,6 @@ import { COLORS } from '../../common/colors';
 import { EHeaderTheme, Header } from '../common/Header';
 import { followStore } from 'react-stores';
 import { createCourseStore } from '../../stores/createCourseStore';
-import ImagePicker from 'react-native-image-picker';
 import { CommonService } from '../../services/CommonService';
 import { GLOBAL_STYLES } from '../../common/styles';
 import { localeManager } from '../../managers/LocaleManager';
@@ -18,6 +17,7 @@ import { ICONS } from '../../common/icons';
 import { ModalHeader } from '../blocks/ModalHeader';
 import Permissions from 'react-native-permissions';
 import { PillBrick } from '../ui/PillBrick';
+import ImagePicker, { Image } from 'react-native-image-crop-picker';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -91,6 +91,7 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
             {PILLS.map((pill, i) => {
               return (
                 <PillBrick
+                  key={i}
                   title={localeManager.t(pill.title)}
                   selected={
                     createCourseStore.state.currentPill.id === pill.id && !customImageSource
@@ -115,24 +116,24 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
     }
 
     if (status === 'authorized') {
-      ImagePicker.launchImageLibrary(
-        {
-          cameraType: 'back',
-          mediaType: 'photo',
-          allowsEditing: true,
-        },
-        response => {
-          if (response.didCancel) {
-          } else if (response.error) {
-          } else {
-            const source = { uri: response.uri };
+      const response: Image = (await ImagePicker.openPicker({
+        width: 256,
+        height: 256,
+        cropping: true,
+        avoidEmptySpaceAroundImage: true,
+        compressImageMaxWidth: 256,
+        compressImageMaxHeight: 256,
+        compressImageQuality: 0.9,
+        cropperToolbarTitle: localeManager.t('IMAGE_CROPPING.SELECT_AREA'),
+        loadingLabelText: localeManager.t('IMAGE_CROPPING.PROCESSING'),
+        forceJpg: true,
+        cropperChooseText: localeManager.t('IMAGE_CROPPING.CHOOSE'),
+        cropperCancelText: localeManager.t('IMAGE_CROPPING.CANCEL'),
+      })) as Image;
 
-            if (source.uri) {
-              this.handleUpload(source.uri);
-            }
-          }
-        },
-      );
+      if (response && response.path) {
+        this.handleUpload(response.path);
+      }
     }
   };
 
@@ -144,24 +145,24 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
     }
 
     if (status === 'authorized') {
-      ImagePicker.launchCamera(
-        {
-          cameraType: 'back',
-          mediaType: 'photo',
-          allowsEditing: true,
-        },
-        response => {
-          if (response.didCancel) {
-          } else if (response.error) {
-          } else {
-            const source = { uri: response.uri };
+      const response: Image = (await ImagePicker.openCamera({
+        width: 256,
+        height: 256,
+        cropping: true,
+        avoidEmptySpaceAroundImage: true,
+        compressImageMaxWidth: 256,
+        compressImageMaxHeight: 256,
+        compressImageQuality: 0.9,
+        cropperToolbarTitle: 'IMAGE_CROPPING.SELECT_AREA',
+        loadingLabelText: 'IMAGE_CROPPING.PROCESSING',
+        forceJpg: true,
+        cropperChooseText: 'IMAGE_CROPPING.CHOOSE',
+        cropperCancelText: 'IMAGE_CROPPING.CANCEL',
+      })) as Image;
 
-            if (source.uri) {
-              this.handleUpload(source.uri);
-            }
-          }
-        },
-      );
+      if (response && response.path) {
+        this.handleUpload(response.path);
+      }
     }
   };
 

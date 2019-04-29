@@ -40,8 +40,7 @@ export class ImageWithPreload extends React.PureComponent<IProps, IState> {
         )}
         <Animated.View style={[styles.image, { opacity: animated }]}>
           <Image
-            resizeMethod='scale'
-            resizeMode='center'
+            resizeMode='cover'
             style={{
               width,
               height,

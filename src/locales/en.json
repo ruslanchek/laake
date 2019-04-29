@@ -37,6 +37,12 @@
     "DESCRIPTION": "Select or upload image for the course",
     "CUSTOM_IMAGE": "Custom"
   },
+  "IMAGE_CROPPING": {
+    "SELECT_AREA": "Adjust image area",
+    "PROCESSING": "Processing...",
+    "CHOOSE": "Choose",
+    "CANCEL": "Cancel"
+  },
   "NOTIFICATIONS": {
     "NAME_EMPTY": {
       "TITLE": "Form error",

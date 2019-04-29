@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Image, ImageURISource } from 
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { FONTS } from '../../common/fonts';
+import { ImageWithPreload } from './ImageWithPreload';
 
 interface IProps {
   title: string;
@@ -21,9 +22,10 @@ export class PillBrick extends React.PureComponent<IProps> {
         <View style={[styles.pillInner, { width: size, height: size }]}>
           {selected && <View style={styles.selected} />}
 
-          <Image
-            style={[styles.pillImage, { width: size, height: size }]}
-            resizeMode='contain'
+          <ImageWithPreload
+            style={styles.pillImage}
+            width={size}
+            height={size}
             source={imageSource}
           />
 
@@ -72,6 +74,7 @@ const styles = StyleSheet.create({
 
   pillImage: {
     borderRadius: VARIABLES.BORDER_RADIUS_BIG,
+    overflow: 'hidden',
   },
 
   subTitle: {

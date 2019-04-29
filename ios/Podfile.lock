@@ -160,6 +160,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.7.0)
+  - QBImagePickerController (3.4.0)
   - React (0.59.5):
     - React/Core (= 0.59.5)
   - react-native-haptic-feedback (1.7.1):
@@ -231,10 +232,15 @@ PODS:
     - React
   - RNGestureHandler (1.1.0):
     - React
+  - RNImageCropPicker (0.24.0):
+    - QBImagePickerController
+    - React/Core
+    - RSKImageCropper
   - RNSVG (9.4.0):
     - React
   - RNVectorIcons (6.4.2):
     - React
+  - RSKImageCropper (2.2.1)
   - yoga (0.59.5.React)
 
 DEPENDENCIES:
@@ -273,6 +279,7 @@ DEPENDENCIES:
   - ReactNativePermissions (from `../node_modules/react-native-permissions`)
   - RNFirebase (from `../node_modules/react-native-firebase/ios`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -305,6 +312,8 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - QBImagePickerController
+    - RSKImageCropper
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -325,6 +334,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-firebase/ios"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
@@ -362,16 +373,19 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 90adac468c7b72bf1fa6c64bf230650f851a8388
   react-native-haptic-feedback: 22c9dc85fd8059f83bf9edd9212ac4bd4ae6074d
   react-native-image-picker: fd93361c666f397bdf72f9c6c23f13d2685b9173
   ReactNativePermissions: 2e324bb3baf12702e3ec27f76c8ae1158fa69fc6
   RNFirebase: f20e5e4ceaa632aebb1a29a9a91022ae0469c633
   RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
+  RNImageCropPicker: 1f22116cbcee5c66f0dea776eb114269afd91b90
   RNSVG: 9cb6e958c4b6a1f58185ac72a350b148947d6fed
   RNVectorIcons: 6607bd3a30291d0edb56f9bbe7ae411ee2b928b0
+  RSKImageCropper: 98296ad26b41753f796b6898d015509598f13d97
   yoga: 2e571f113e8cbeb0eb752aeebc86c1bfe7a8200c
 
-PODFILE CHECKSUM: 14fdb3168ceb6230f958fbd7602549906f047335
+PODFILE CHECKSUM: 78b0ec791e0546267c4994dad9584b3b03e6cc98
 
 COCOAPODS: 1.6.1
