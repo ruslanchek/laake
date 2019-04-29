@@ -266,6 +266,17 @@ class CourseManager extends Manager {
     const takes = state.takes.map(take => {
       return { ...take };
     });
+
+    if (state.notificationsEnabled) {
+      const isMessagingAllowedByUser = await firebaseManager.initMessaging();
+
+      if (!isMessagingAllowedByUser) {
+        createCourseStore.setState({
+          notificationsEnabled: false,
+        });
+      }
+    }
+
     const courseStatistics = await this.getCourseStatistics(null, endDate, startDate, takes);
     const course: Partial<ICourse> = {
       uploadedImage: state.uploadedImage,
@@ -295,10 +306,13 @@ class CourseManager extends Manager {
 
   public async updateNotificationsEnabled() {
     let isEnabled = !createCourseStore.state.notificationsEnabled;
-    const isMessagingAllowedByUser = await firebaseManager.initMessaging();
 
-    if (!isMessagingAllowedByUser) {
-      isEnabled = false;
+    if (isEnabled) {
+      const isMessagingAllowedByUser = await firebaseManager.initMessaging();
+
+      if (!isMessagingAllowedByUser) {
+        isEnabled = false;
+      }
     }
 
     if (createCourseStore.state.currentCourseId) {

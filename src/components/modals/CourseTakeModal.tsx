@@ -101,19 +101,19 @@ export class CourseTakeModal extends React.Component<
               <FormCol width='100%'>
                 <View style={[GLOBAL_STYLES.INPUT_CONTAINER, GLOBAL_STYLES.SELECT_GROUP]}>
                   <FormSelect<number>
-                    width='30%'
+                    width='33.333333%'
                     items={this.dosages}
                     value={dosage}
                     onChange={this.handleChangeDosage}
                   />
                   <FormSelect<number>
-                    width='30%'
+                    width='33.333333%'
                     items={this.dosageParts}
                     value={dosagePart}
                     onChange={this.handleChangeDosagePart}
                   />
                   <FormSelect<ETakeDosageUnit>
-                    width='40%'
+                    width='33.333333%'
                     items={CommonService.generateSelectItemsFromEnumMap<ETakeDosageUnit>(
                       takeDosageUnitNames,
                       dosage,

@@ -2,14 +2,6 @@ import { Manager } from './Manager';
 import firebase from 'react-native-firebase';
 import { CollectionReference } from 'react-native-firebase/firestore';
 
-const FIREBASE_CONFIG = {
-  apiKey: 'AIzaSyAEmeWyzu_nxrVtLClP6LAfVF35H4vXbQk',
-  authDomain: 'laake-cab74.firebaseapp.com',
-  databaseURL: 'https://laake-cab74.firebaseio.com/',
-  storageBucket: 'laake-cab74.appspot.com',
-  projectId: 'laake-cab74',
-};
-
 const USERS_REF = 'users';
 
 export enum ECollectionName {
@@ -49,8 +41,6 @@ class FirebaseManager extends Manager {
     const uploadTask = await storageRef.child(`${this.userRef}pills/${filename}`).putFile(file, {
       contentType: 'image/jpeg',
     });
-
-    console.log(uploadTask);
 
     if (uploadTask.state === 'success') {
       return {

@@ -36,6 +36,7 @@ import { StatisticsInfoBlock } from '../ui/StatisticsInfoBlock';
 import { ICONS } from '../../common/icons';
 import { differenceInDays } from 'date-fns';
 import { ImageWithPreload } from '../ui/ImageWithPreload';
+import { firebaseManager } from '../../managers/FirebaseManager';
 
 interface IState {
   loading: boolean;
@@ -281,9 +282,12 @@ export class CourseSummaryModal extends React.Component<
 
     if (this.props.navigation) {
       this.props.navigation.navigate(ERouteName.TodayCreateCourseScreen);
-      createCourseStore.setState({
-        courseEditMode: ECourseEditMode.Edit,
-      });
+
+      setTimeout(() => {
+        createCourseStore.setState({
+          courseEditMode: ECourseEditMode.Edit,
+        });
+      }, 380);
     }
   };
 
