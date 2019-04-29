@@ -232,6 +232,8 @@ PODS:
     - React
   - RNGestureHandler (1.1.0):
     - React
+  - RNIap (2.4.11):
+    - React
   - RNImageCropPicker (0.24.0):
     - QBImagePickerController
     - React/Core
@@ -279,6 +281,7 @@ DEPENDENCIES:
   - ReactNativePermissions (from `../node_modules/react-native-permissions`)
   - RNFirebase (from `../node_modules/react-native-firebase/ios`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNIap (from `../node_modules/react-native-iap`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -334,6 +337,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-firebase/ios"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNIap:
+    :path: "../node_modules/react-native-iap"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
   RNSVG:
@@ -380,12 +385,13 @@ SPEC CHECKSUMS:
   ReactNativePermissions: 2e324bb3baf12702e3ec27f76c8ae1158fa69fc6
   RNFirebase: f20e5e4ceaa632aebb1a29a9a91022ae0469c633
   RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
+  RNIap: a60f6a825411782bf3f726ba91b09d9818561315
   RNImageCropPicker: 1f22116cbcee5c66f0dea776eb114269afd91b90
   RNSVG: 9cb6e958c4b6a1f58185ac72a350b148947d6fed
   RNVectorIcons: 6607bd3a30291d0edb56f9bbe7ae411ee2b928b0
   RSKImageCropper: 98296ad26b41753f796b6898d015509598f13d97
   yoga: 2e571f113e8cbeb0eb752aeebc86c1bfe7a8200c
 
-PODFILE CHECKSUM: 330efec31aa9607de3197ab1d0baa3384bb3557d
+PODFILE CHECKSUM: 750324ae968aec1c9ffc9802e569c6a1deb6dae4
 
 COCOAPODS: 1.6.1

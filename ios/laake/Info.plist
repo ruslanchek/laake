@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>8</string>
+	<string>9</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -32,7 +32,11 @@
 		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string></string>
+	<string>Some ad content may access Apple Music Usage</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Some ad content may access Bluetooth Peripheral</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Some ad content may access calendar</string>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) users can shot and upload their custom images to use as a medication course icon</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -41,8 +45,12 @@
 	<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Some ad content may access MotionUsage</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) users can select and upload their custom images to use as a medication course icon</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Some ad content may access Speech Recognition</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ionicons.ttf</string>

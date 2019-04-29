@@ -18,6 +18,7 @@ import { CourseSummaryModal } from './src/components/modals/CourseSummaryModal';
 import { Notifications } from './src/components/common/Notifications';
 import { FONTS } from './src/common/fonts';
 import { managers } from './src/managers/managers';
+import { PurchaseScreen } from './src/components/screens/PurchaseScreen';
 
 console.disableYellowBox = true;
 
@@ -88,7 +89,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: TodayStack,
     },
     [ERouteName.Settings]: {
-      screen: TodayStack,
+      screen: PurchaseScreen,
     },
   },
   {
