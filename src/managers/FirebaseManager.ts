@@ -7,6 +7,7 @@ const USERS_REF = 'users';
 export enum ECollectionName {
   Courses = 'courses',
   TakeTimes = 'takeTimes',
+  NotificationTokens = 'notificationTokens',
 }
 
 class FirebaseManager extends Manager {
@@ -55,11 +56,28 @@ class FirebaseManager extends Manager {
     }
   }
 
+  private async updateFCMToken() {
+    const hasPermission = await firebase.messaging().hasPermission();
+
+    if (hasPermission) {
+      const token = await firebase.messaging().getToken();
+
+      if (token) {
+        await this.getCollection([ECollectionName.NotificationTokens]).add({
+          token,
+          timezoneOffset: new Date().getTimezoneOffset(),
+          date: Date.now(),
+        });
+      }
+    }
+  }
+
   private async initAuth() {
     const data = await firebase.auth().signInAnonymously();
 
     if (data && data.user && data.user.uid) {
       this.uid = data.user.uid;
+      await this.updateFCMToken();
     }
   }
 
