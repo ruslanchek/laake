@@ -4,18 +4,12 @@ import { localeManager } from './LocaleManager';
 import { courseManager } from './CourseManager';
 import { createCourseManager } from './CreateCourseManager';
 import { resourcesManager } from './ResourcesManager';
-import { localNotificationManager } from './LocalNotificationManager';
 import { purchaseManager } from './PurchaseManager';
 
 export class Managers {
   private managersListTierOne: Manager[] = [firebaseManager, resourcesManager, localeManager];
 
-  private managersListTierTwo: Manager[] = [
-    courseManager,
-    createCourseManager,
-    localNotificationManager,
-    purchaseManager,
-  ];
+  private managersListTierTwo: Manager[] = [courseManager, createCourseManager, purchaseManager];
 
   public init = async () => {
     await this.initManagers();

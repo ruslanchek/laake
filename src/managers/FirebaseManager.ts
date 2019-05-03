@@ -1,6 +1,10 @@
 import { Manager } from './Manager';
 import firebase from 'react-native-firebase';
 import { CollectionReference } from 'react-native-firebase/firestore';
+import { ICourse } from '../common/course';
+import { courseManager } from './CourseManager';
+import { CommonService } from '../services/CommonService';
+import { string } from 'prop-types';
 
 const USERS_REF = 'users';
 
@@ -79,6 +83,53 @@ class FirebaseManager extends Manager {
 
   private get userRef(): string {
     return `${USERS_REF}/${this.uid}/`;
+  }
+
+  public createNotification(id: string, title: string, body: string, date: Date) {
+    const notification = new firebase.notifications.Notification()
+      .setNotificationId(id)
+      .setTitle(title)
+      .setBody(body)
+      .setData({
+        key1: 'value1222',
+        key2: 'value2',
+      });
+
+    firebase.notifications().scheduleNotification(notification, {
+      fireDate: date.getTime(),
+    });
+  }
+
+  public removeNotificationBy(id: string) {}
+
+  public createNotificationId(courseId: string, dayIndex: number, takeIndex: number): string {
+    return `${courseId}-${dayIndex}-${takeIndex}`;
+  }
+
+  public generateNotificationsForCourse(course: ICourse) {
+    const notifications = [];
+    const days =
+      courseManager.getCourseDaysLength(new Date(course.startDate), new Date(course.endDate)) + 1;
+
+    CommonService.times(days, dayIndex => {
+      course.takes.forEach(take => {
+        const notificationId = this.createNotificationId(course.id, dayIndex, take.index);
+        notifications.push(notificationId);
+      });
+    });
+  }
+
+  public cancelNotificationsForCourse(course: ICourse) {
+    const notificationIds: string[] = [];
+    const days =
+      courseManager.getCourseDaysLength(new Date(course.startDate), new Date(course.endDate)) + 1;
+
+    CommonService.times(days, dayIndex => {
+      course.takes.forEach(take => {
+        const notificationId = this.createNotificationId(course.id, dayIndex, take.index);
+        notificationIds.push(notificationId);
+      });
+    });
   }
 }
 

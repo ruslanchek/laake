@@ -55,7 +55,7 @@ fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHand
 }
 
 - (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
-  NSLog(@"FCM registration token: %@", fcmToken);
+//  NSLog(@"FCM registration token: %@", fcmToken);
   // Notify about received token.
   NSDictionary *dataDict = [NSDictionary dictionaryWithObject:fcmToken forKey:@"token"];
   [[NSNotificationCenter defaultCenter] postNotificationName:
