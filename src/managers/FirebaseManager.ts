@@ -4,9 +4,16 @@ import { CollectionReference } from 'react-native-firebase/firestore';
 import { ICourse } from '../common/course';
 import { courseManager } from './CourseManager';
 import { CommonService } from '../services/CommonService';
-import { string } from 'prop-types';
+import { addDays, differenceInDays } from 'date-fns';
 
 const USERS_REF = 'users';
+
+interface ILocalNotification {
+  id: string;
+  date: Date;
+  title: string;
+  message: string;
+}
 
 export enum ECollectionName {
   Courses = 'courses',
@@ -89,11 +96,7 @@ class FirebaseManager extends Manager {
     const notification = new firebase.notifications.Notification()
       .setNotificationId(id)
       .setTitle(title)
-      .setBody(body)
-      .setData({
-        key1: 'value1222',
-        key2: 'value2',
-      });
+      .setBody(body);
 
     firebase.notifications().scheduleNotification(notification, {
       fireDate: date.getTime(),
@@ -106,17 +109,32 @@ class FirebaseManager extends Manager {
     return `${courseId}-${dayIndex}-${takeIndex}`;
   }
 
-  public generateNotificationsForCourse(course: ICourse) {
-    const notifications = [];
+  public generateNotificationsForCourse(course: ICourse): ILocalNotification[] {
+    const notifications: ILocalNotification[] = [];
     const days =
       courseManager.getCourseDaysLength(new Date(course.startDate), new Date(course.endDate)) + 1;
+    const diffDaysFromStart = differenceInDays(new Date(), course.startDate);
 
     CommonService.times(days, dayIndex => {
-      course.takes.forEach(take => {
-        const notificationId = this.createNotificationId(course.id, dayIndex, take.index);
-        notifications.push(notificationId);
-      });
+      if (diffDaysFromStart >= dayIndex) {
+        course.takes.forEach(take => {
+          const id = this.createNotificationId(course.id, dayIndex, take.index);
+          const date = addDays(new Date(), dayIndex);
+
+          date.setHours(take.hours);
+          date.setMinutes(take.minutes);
+
+          notifications.push({
+            id,
+            date,
+            title: `Its take time`,
+            message: `Don't forget to have your ${course.title}`,
+          });
+        });
+      }
     });
+
+    return notifications;
   }
 
   public cancelNotificationsForCourse(course: ICourse) {

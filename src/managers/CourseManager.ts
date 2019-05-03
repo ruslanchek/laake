@@ -43,13 +43,17 @@ class CourseManager extends Manager {
 
     firebaseManager.getCollection([ECollectionName.Courses]).onSnapshot(snapshot => {
       snapshot.docs.forEach(doc => {
-        const course = doc.data() as ICourse;
+        const course: ICourse = {
+          id: doc.id,
+          ...doc.data(),
+        } as ICourse;
 
         if (doc.id) {
-          courseStore.state.courses.set(doc.id, {
-            id: doc.id,
-            ...(course as ICourse),
-          });
+          // const a = firebaseManager.generateNotificationsForCourse(course);
+
+          // a.forEach(n => firebaseManager.createNotification(n.id, n.title, n.message, n.date));
+
+          courseStore.state.courses.set(doc.id, course);
 
           if (
             createCourseStore.state.currentCourseId === doc.id &&
@@ -76,13 +80,13 @@ class CourseManager extends Manager {
       courseStore.state.takeTimes.clear();
 
       snapshot.docs.forEach(doc => {
-        const takeTime = doc.data() as ITakeTime;
+        const takeTime: ITakeTime = {
+          id: doc.id,
+          ...doc.data(),
+        } as ITakeTime;
 
         if (doc.id) {
-          courseStore.state.takeTimes.set(doc.id, {
-            id: doc.id,
-            ...(takeTime as ITakeTime),
-          });
+          courseStore.state.takeTimes.set(doc.id, takeTime);
         }
       });
 
