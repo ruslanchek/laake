@@ -57,18 +57,14 @@ class FirebaseManager extends Manager {
   }
 
   private async updateFCMToken() {
-    const hasPermission = await firebase.messaging().hasPermission();
+    const token = await firebase.messaging().getToken();
 
-    if (hasPermission) {
-      const token = await firebase.messaging().getToken();
-
-      if (token) {
-        await this.getCollection([ECollectionName.NotificationTokens]).add({
-          token,
-          timezoneOffset: new Date().getTimezoneOffset(),
-          date: Date.now(),
-        });
-      }
+    if (token) {
+      await this.getCollection([ECollectionName.NotificationTokens]).add({
+        token,
+        timezoneOffset: new Date().getTimezoneOffset(),
+        date: Date.now(),
+      });
     }
   }
 

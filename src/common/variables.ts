@@ -1,4 +1,4 @@
-import { Animated } from 'react-native'
+import { Animated } from 'react-native';
 
 export const VARIABLES = {
   FONT_SIZE_GIANT: 32,
@@ -29,4 +29,6 @@ export const VARIABLES = {
   BORDER_RADIUS_BIG: 12,
 
   ANIMATED_VALUE_ZERO: new Animated.Value(0),
+
+  MAX_TAKES_PER_DAY: 10,
 };

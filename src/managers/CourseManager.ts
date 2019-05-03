@@ -352,13 +352,17 @@ class CourseManager extends Manager {
     return validStartDate && validEndDate;
   }
 
+  public getCourseDaysLength(startDate: Date, endDate: Date): number {
+    return differenceInDays(endDate, startDate) + 1;
+  }
+
   public async getCourseStatistics(
     courseId: string | null,
     endDate: Date,
     startDate: Date,
     takes: ITake[],
   ): Promise<ICourseStatistics> {
-    const days = differenceInDays(endDate, startDate) + 1;
+    const days = this.getCourseDaysLength(startDate, endDate);
     const timesTotal = days * takes.length;
 
     let timesTaken = 0;

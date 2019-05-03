@@ -8,4 +8,4 @@ class PurchaseManager extends Manager {
   }
 }
 
-export const resourcesManager = new PurchaseManager();
+export const purchaseManager = new PurchaseManager();
