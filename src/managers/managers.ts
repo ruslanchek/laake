@@ -47,7 +47,7 @@ export class Managers {
 
       await Promise.all(promisesTierTwo);
     } catch (e) {
-      console.error(e);
+      firebaseManager.logError(238749, e);
     }
   }
 }

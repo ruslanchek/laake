@@ -35,9 +35,9 @@ export class ImageWithPreload extends React.PureComponent<IProps, IState> {
 
     return (
       <View style={[styles.container, style]}>
-        {loading && (
+        {/* {loading && (
           <ActivityIndicator style={styles.loading} color={COLORS.GRAY.toString()} size='small' />
-        )}
+        )} */}
         <Animated.View style={[styles.image, { opacity: animated }]}>
           <Image
             resizeMode='cover'
@@ -69,7 +69,7 @@ export class ImageWithPreload extends React.PureComponent<IProps, IState> {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.GRAY_PALE_LIGHT.toString(),
+    backgroundColor: COLORS.WHITE.toString(),
     justifyContent: 'center',
     alignItems: 'center',
   },

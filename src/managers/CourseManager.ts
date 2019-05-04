@@ -275,8 +275,9 @@ class CourseManager extends Manager {
       const isMessagingAllowedByUser = await firebaseManager.initMessaging();
 
       if (!isMessagingAllowedByUser) {
+        state.notificationsEnabled = false;
         createCourseStore.setState({
-          notificationsEnabled: false,
+          notificationsEnabled: state.notificationsEnabled,
         });
       }
     }
@@ -297,18 +298,17 @@ class CourseManager extends Manager {
       ...courseStatistics,
     };
 
-    const creatingResult = await firebaseManager
-      .getCollection([ECollectionName.Courses])
-      .add(course);
-
-    const createdCourseDocument = await creatingResult.get();
-
-    const createdCourse: ICourse = {
-      id: createdCourseDocument.id,
-      ...createdCourseDocument.data(),
-    } as ICourse;
-
     if (course.notificationsEnabled) {
+      const creatingResult = await firebaseManager
+        .getCollection([ECollectionName.Courses])
+        .add(course);
+
+      const createdCourseDocument = await creatingResult.get();
+      const createdCourse: ICourse = {
+        id: createdCourseDocument.id,
+        ...createdCourseDocument.data(),
+      } as ICourse;
+
       firebaseManager.createNotificationsForCourse(createdCourse);
     }
 
@@ -444,16 +444,23 @@ class CourseManager extends Manager {
     try {
       const dayIndex = this.getDayIndex(commonStore.state.today);
       const takeTimeId = createTakeTimeIndex(course.id, take.index, dayIndex);
+      let isTaken: boolean | null = null;
+
+      console.log(dayIndex);
 
       if (takeTime && takeTime.id) {
+        isTaken = !takeTime.isTaken;
+
         await firebaseManager
           .getCollection([ECollectionName.TakeTimes])
           .doc(takeTimeId)
           .update({
-            isTaken: !takeTime.isTaken,
+            isTaken,
             dosage: take.dosage + take.dosagePart,
           });
       } else {
+        isTaken = true;
+
         const doc = await firebaseManager
           .getCollection([ECollectionName.TakeTimes])
           .doc(takeTimeId)
@@ -467,15 +474,23 @@ class CourseManager extends Manager {
               courseId: course.id,
               takeIndex: take.index,
               dayIndex,
-              isTaken: true,
+              isTaken,
               dosage: take.dosage + take.dosagePart,
             });
         }
       }
 
+      if (course.notificationsEnabled && isTaken !== null) {
+        if (isTaken) {
+          firebaseManager.createNotificationByTake(course, take, dayIndex);
+        } else {
+          firebaseManager.cancelNotificationByTake(course.id, take.index, dayIndex);
+        }
+      }
+
       await this.recalculateCourseStatistics(course.id);
     } catch (e) {
-      console.log(e);
+      firebaseManager.logError(238047, e);
     }
   }
 

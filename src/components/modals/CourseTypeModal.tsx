@@ -44,7 +44,7 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
         />
         <Header title={localeManager.t('COMMON.BACK')} next={null} theme={EHeaderTheme.Dark} />
         <ScrollView
-          scrollEventThrottle={8}
+          scrollEventThrottle={1}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollTop } } }])}
         >
           <ModalHeader

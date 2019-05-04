@@ -5,6 +5,7 @@ import { ICourse } from '../common/course';
 import { courseManager } from './CourseManager';
 import { CommonService } from '../services/CommonService';
 import { addDays, differenceInDays } from 'date-fns';
+import { ITake } from '../common/take';
 
 const USERS_REF = 'users';
 
@@ -108,6 +109,42 @@ class FirebaseManager extends Manager {
     return `${courseId}-${dayIndex}-${takeIndex}`;
   }
 
+  public removeAllDeliveredNotifications() {
+    firebase.notifications().removeAllDeliveredNotifications();
+  }
+
+  private generateNotification(course: ICourse, take: ITake, dayIndex: number): ILocalNotification {
+    const id = this.createNotificationId(course.id, dayIndex, take.index);
+    const date = addDays(new Date(), dayIndex);
+
+    date.setHours(take.hours);
+    date.setMinutes(take.minutes);
+
+    return {
+      id,
+      date,
+      title: `It's take time`,
+      message: `Don't forget to have your ${course.title}`,
+    };
+  }
+
+  private generateNotificationsForCourse(course: ICourse): ILocalNotification[] {
+    const notifications: ILocalNotification[] = [];
+    const startDate = new Date(course.startDate);
+    const endDate = new Date(course.endDate);
+    const days = courseManager.getCourseDaysLength(startDate, endDate);
+    const startDayIndex = courseManager.getDayIndex(startDate);
+
+    CommonService.times(days, i => {
+      const dayIndex = startDayIndex + i;
+      course.takes.forEach(take => {
+        notifications.push(this.generateNotification(course, take, dayIndex));
+      });
+    });
+
+    return notifications;
+  }
+
   public createNotificationsForCourse(course: ICourse) {
     const notifications = this.generateNotificationsForCourse(course);
 
@@ -116,49 +153,38 @@ class FirebaseManager extends Manager {
     });
   }
 
-  public removeAllDeliveredNotifications() {
-    firebase.notifications().removeAllDeliveredNotifications();
-  }
-
-  private generateNotificationsForCourse(course: ICourse): ILocalNotification[] {
-    const notifications: ILocalNotification[] = [];
-    const days =
-      courseManager.getCourseDaysLength(new Date(course.startDate), new Date(course.endDate)) + 1;
-    const diffDaysFromStart = differenceInDays(new Date(), course.startDate);
-
-    CommonService.times(days, dayIndex => {
-      if (diffDaysFromStart >= dayIndex) {
-        course.takes.forEach(take => {
-          const id = this.createNotificationId(course.id, dayIndex, take.index);
-          const date = addDays(new Date(), dayIndex);
-
-          date.setHours(take.hours);
-          date.setMinutes(take.minutes);
-
-          notifications.push({
-            id,
-            date,
-            title: `Its take time`,
-            message: `Don't forget to have your ${course.title}`,
-          });
-        });
-      }
-    });
-
-    return notifications;
-  }
-
   public cancelNotificationsForCourse(course: ICourse) {
-    const days =
-      courseManager.getCourseDaysLength(new Date(course.startDate), new Date(course.endDate)) + 1;
+    const startDate = new Date(course.startDate);
+    const endDate = new Date(course.endDate);
+    const days = courseManager.getCourseDaysLength(startDate, endDate);
+    const startDayIndex = courseManager.getDayIndex(startDate);
 
-    CommonService.times(days, dayIndex => {
+    CommonService.times(days, i => {
+      const dayIndex = startDayIndex + i;
       course.takes.forEach(take => {
-        const notificationId = this.createNotificationId(course.id, dayIndex, take.index);
-
-        firebase.notifications().cancelNotification(notificationId);
+        this.cancelNotificationByTake(course.id, take.index, dayIndex);
       });
     });
+  }
+
+  public cancelNotificationByTake(courseId: string, takeIndex: number, dayIndex: number) {
+    firebase
+      .notifications()
+      .cancelNotification(this.createNotificationId(courseId, dayIndex, takeIndex));
+  }
+
+  public createNotificationByTake(course: ICourse, take: ITake, dayIndex: number) {
+    const notification = this.generateNotification(course, take, dayIndex);
+
+    console.log(dayIndex);
+
+    this.createNotification(notification);
+  }
+
+  public logError(code: number, error: any) {
+    console.error(code, error);
+
+    // firebase.crashlytics().recordError(code, JSON.stringify(error));
   }
 }
 

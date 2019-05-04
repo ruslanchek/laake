@@ -127,7 +127,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
             contentContainerStyle={styles.scrollViewContainer}
             style={styles.scrollView}
             onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollTop } } }])}
-            scrollEventThrottle={4}
+            scrollEventThrottle={1}
             ListEmptyComponent={
               <>
                 {loadingCourses || loadingTakeTimes ? (

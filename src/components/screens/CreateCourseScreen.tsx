@@ -70,7 +70,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
           theme={EHeaderTheme.Dark}
         />
         <ScrollView
-          scrollEventThrottle={8}
+          scrollEventThrottle={1}
           contentContainerStyle={styles.scrollView}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollTop } } }])}
         >
