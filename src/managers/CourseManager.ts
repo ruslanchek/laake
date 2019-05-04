@@ -49,10 +49,6 @@ class CourseManager extends Manager {
         } as ICourse;
 
         if (doc.id) {
-          // const a = firebaseManager.generateNotificationsForCourse(course);
-
-          // a.forEach(n => firebaseManager.createNotification(n.id, n.title, n.message, n.date));
-
           courseStore.state.courses.set(doc.id, course);
 
           if (
@@ -112,6 +108,8 @@ class CourseManager extends Manager {
       const course = courseStore.state.courses.get(courseId);
 
       if (course) {
+        firebaseManager.cancelNotificationsForCourse(course);
+
         const batch = firebase.firestore().batch();
         const docs = await firebaseManager
           .getCollection([ECollectionName.TakeTimes])
@@ -229,12 +227,14 @@ class CourseManager extends Manager {
 
         unnecessaryTakeTimesDocs.docs.forEach(doc => {
           batch.delete(doc.ref);
-          console.log(doc.data());
         });
 
         await batch.commit();
         await this.recalculateCourseStatistics(currentCourseId);
         await this.subscribeToTakeTimes();
+
+        firebaseManager.cancelNotificationsForCourse(course);
+        firebaseManager.createNotificationsForCourse(course);
       }
     }
   }
@@ -297,7 +297,20 @@ class CourseManager extends Manager {
       ...courseStatistics,
     };
 
-    await firebaseManager.getCollection([ECollectionName.Courses]).add(course);
+    const creatingResult = await firebaseManager
+      .getCollection([ECollectionName.Courses])
+      .add(course);
+
+    const createdCourseDocument = await creatingResult.get();
+
+    const createdCourse: ICourse = {
+      id: createdCourseDocument.id,
+      ...createdCourseDocument.data(),
+    } as ICourse;
+
+    if (course.notificationsEnabled) {
+      firebaseManager.createNotificationsForCourse(createdCourse);
+    }
 
     commonStore.setState({
       today: new Date(),
@@ -332,6 +345,8 @@ class CourseManager extends Manager {
         createCourseStore.state.courseEditMode,
       );
 
+      const course = courseStore.state.courses.get(createCourseStore.state.currentCourseId);
+
       if (isEnabled) {
         setTimeout(() => {
           NotificationsHandler.alertWithType(
@@ -339,7 +354,16 @@ class CourseManager extends Manager {
             localeManager.t('NOTIFICATIONS.NOTIFICATIONS_ENABLED.TITLE'),
             localeManager.t('NOTIFICATIONS.NOTIFICATIONS_ENABLED.MESSAGE'),
           );
+
+          if (course) {
+            firebaseManager.cancelNotificationsForCourse(course);
+            firebaseManager.createNotificationsForCourse(course);
+          }
         }, 200);
+      } else {
+        if (course) {
+          firebaseManager.cancelNotificationsForCourse(course);
+        }
       }
     } else {
       createCourseStore.setState({

@@ -28,6 +28,7 @@ class FirebaseManager extends Manager {
 
   public async init(): Promise<any> {
     await this.initAuth();
+    this.removeAllDeliveredNotifications();
   }
 
   public async initMessaging(): Promise<boolean> {
@@ -92,24 +93,34 @@ class FirebaseManager extends Manager {
     return `${USERS_REF}/${this.uid}/`;
   }
 
-  public createNotification(id: string, title: string, body: string, date: Date) {
+  public createNotification(inotification: ILocalNotification) {
     const notification = new firebase.notifications.Notification()
-      .setNotificationId(id)
-      .setTitle(title)
-      .setBody(body);
+      .setNotificationId(inotification.id)
+      .setTitle(inotification.title)
+      .setBody(inotification.message);
 
     firebase.notifications().scheduleNotification(notification, {
-      fireDate: date.getTime(),
+      fireDate: inotification.date.getTime(),
     });
   }
-
-  public removeNotificationBy(id: string) {}
 
   public createNotificationId(courseId: string, dayIndex: number, takeIndex: number): string {
     return `${courseId}-${dayIndex}-${takeIndex}`;
   }
 
-  public generateNotificationsForCourse(course: ICourse): ILocalNotification[] {
+  public createNotificationsForCourse(course: ICourse) {
+    const notifications = this.generateNotificationsForCourse(course);
+
+    notifications.forEach(notification => {
+      this.createNotification(notification);
+    });
+  }
+
+  public removeAllDeliveredNotifications() {
+    firebase.notifications().removeAllDeliveredNotifications();
+  }
+
+  private generateNotificationsForCourse(course: ICourse): ILocalNotification[] {
     const notifications: ILocalNotification[] = [];
     const days =
       courseManager.getCourseDaysLength(new Date(course.startDate), new Date(course.endDate)) + 1;
@@ -138,14 +149,14 @@ class FirebaseManager extends Manager {
   }
 
   public cancelNotificationsForCourse(course: ICourse) {
-    const notificationIds: string[] = [];
     const days =
       courseManager.getCourseDaysLength(new Date(course.startDate), new Date(course.endDate)) + 1;
 
     CommonService.times(days, dayIndex => {
       course.takes.forEach(take => {
         const notificationId = this.createNotificationId(course.id, dayIndex, take.index);
-        notificationIds.push(notificationId);
+
+        firebase.notifications().cancelNotification(notificationId);
       });
     });
   }
