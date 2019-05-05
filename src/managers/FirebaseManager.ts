@@ -29,7 +29,7 @@ class FirebaseManager extends Manager {
 
   public async init(): Promise<any> {
     await this.initAuth();
-    // this.removeAllDeliveredNotifications();
+    this.removeAllDeliveredNotifications();
   }
 
   public async initMessaging(): Promise<boolean> {
@@ -86,7 +86,7 @@ class FirebaseManager extends Manager {
 
     if (data && data.user && data.user.uid) {
       this.uid = data.user.uid;
-      await this.updateFCMToken();
+      this.updateFCMToken();
     }
   }
 
