@@ -133,7 +133,7 @@ class FirebaseManager extends Manager {
     const startDate = new Date(course.startDate);
     const endDate = new Date(course.endDate);
     const days = courseManager.getCourseDaysLength(startDate, endDate);
-    const startDayIndex = courseManager.getDayIndex(startDate);
+    const startDayIndex = courseManager.getDayIndex(startDate) + 1;
 
     CommonService.times(days, i => {
       const dayIndex = startDayIndex + i;
@@ -157,7 +157,7 @@ class FirebaseManager extends Manager {
     const startDate = new Date(course.startDate);
     const endDate = new Date(course.endDate);
     const days = courseManager.getCourseDaysLength(startDate, endDate);
-    const startDayIndex = courseManager.getDayIndex(startDate);
+    const startDayIndex = courseManager.getDayIndex(startDate) + 1;
 
     CommonService.times(days, i => {
       const dayIndex = startDayIndex + i;
