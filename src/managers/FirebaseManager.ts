@@ -29,7 +29,7 @@ class FirebaseManager extends Manager {
 
   public async init(): Promise<any> {
     await this.initAuth();
-    this.removeAllDeliveredNotifications();
+    // this.removeAllDeliveredNotifications();
   }
 
   public async initMessaging(): Promise<boolean> {
