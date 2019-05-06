@@ -30,6 +30,7 @@ class FirebaseManager extends Manager {
   public async init(): Promise<any> {
     await this.initAuth();
     this.removeAllDeliveredNotifications();
+    this.setBadgeNumber(0);
   }
 
   public async initMessaging(): Promise<boolean> {
@@ -43,6 +44,10 @@ class FirebaseManager extends Manager {
     }
 
     return enabled;
+  }
+
+  public setBadgeNumber(number: number) {
+    firebase.notifications().setBadge(number);
   }
 
   public getCollection(connectionPath: ECollectionName[] | string[]): CollectionReference {
