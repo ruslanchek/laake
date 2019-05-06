@@ -13,7 +13,7 @@ export enum EHeaderTheme {
 }
 
 interface IProps extends NavigationInjectedProps {
-  title: string;
+  title: string | null;
   next: {
     title: string;
     action: () => void;
@@ -28,13 +28,17 @@ class HeaderClass extends React.PureComponent<IProps> {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={this.handleBack}>
-          <View style={styles.back}>
-            <Icon name='ios-arrow-back' size={32} color={ICON_THEME_COLORS[theme].toString()} />
-          </View>
+        {title === null ? (
+          <View />
+        ) : (
+          <TouchableOpacity style={styles.button} onPress={this.handleBack}>
+            <View style={styles.back}>
+              <Icon name='ios-arrow-back' size={32} color={ICON_THEME_COLORS[theme].toString()} />
+            </View>
 
-          <Text style={[styles.title, titleTheme[theme]]}>{title}</Text>
-        </TouchableOpacity>
+            <Text style={[styles.title, titleTheme[theme]]}>{title}</Text>
+          </TouchableOpacity>
+        )}
 
         {next && (
           <TouchableOpacity onPress={this.handleNext}>
