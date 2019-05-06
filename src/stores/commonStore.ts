@@ -1,6 +1,7 @@
 import { Store } from 'react-stores';
 import { string } from 'prop-types';
 import { VARIABLES } from '../common/variables';
+import { startOfDay } from 'date-fns';
 
 export interface CommonStoreState {
   appReady: boolean;
@@ -10,7 +11,7 @@ export interface CommonStoreState {
 
 const initialState: CommonStoreState = {
   appReady: false,
-  today: new Date(),
+  today: startOfDay(new Date()),
   currentLocale: VARIABLES.DEFAULT_LOCALE,
 };
 

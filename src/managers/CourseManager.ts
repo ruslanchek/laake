@@ -96,7 +96,7 @@ class CourseManager extends Manager {
   public setToday(newDate: Date) {
     if (!isSameDay(newDate, commonStore.state.today)) {
       commonStore.setState({
-        today: newDate,
+        today: startOfDay(newDate),
       });
 
       this.subscribeToCourses();
@@ -312,9 +312,7 @@ class CourseManager extends Manager {
       firebaseManager.createNotificationsForCourse(createdCourse);
     }
 
-    commonStore.setState({
-      today: new Date(),
-    });
+    this.setToday(new Date());
   }
 
   public getDayIndex(time: Date): number {
@@ -445,8 +443,6 @@ class CourseManager extends Manager {
       const dayIndex = this.getDayIndex(commonStore.state.today);
       const takeTimeId = createTakeTimeIndex(course.id, take.index, dayIndex);
       let isTaken: boolean | null = null;
-
-      console.log(dayIndex);
 
       if (takeTime && takeTime.id) {
         isTaken = !takeTime.isTaken;

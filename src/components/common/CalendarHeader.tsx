@@ -6,7 +6,7 @@ import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { commonStore } from '../../stores/commonStore';
 import { followStore } from 'react-stores';
-import { isToday } from 'date-fns';
+import { isToday, isSameWeek, startOfWeek } from 'date-fns';
 import { localeManager } from '../../managers/LocaleManager';
 import { courseManager } from '../../managers/CourseManager';
 import { FONTS } from '../../common/fonts';
@@ -194,17 +194,25 @@ export class CalendarHeader extends React.Component<IProps> {
 
   handlePressToday = () => {
     courseManager.setToday(new Date());
-
     CommonService.haptic();
   };
 
   handleSelectDate = (date: Date) => {
     courseManager.setToday(new Date(date));
-
     CommonService.haptic();
   };
 
-  handleWeekChange = () => {
+  handleWeekChange = (e: any) => {
+    if (e && e._d) {
+      const weekStartDate = new Date(e._d);
+
+      if (isSameWeek(weekStartDate, new Date())) {
+        courseManager.setToday(new Date());
+      } else {
+        courseManager.setToday(weekStartDate);
+      }
+    }
+
     CommonService.haptic();
   };
 }

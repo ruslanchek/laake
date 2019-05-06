@@ -42,8 +42,6 @@ interface ISectionData {
   takeTime?: ITakeTime;
 }
 
-const COURSE_CARD_APPEAR_TIME: number = 140;
-
 @followStore(commonStore)
 @followStore(courseStore)
 export class HomeScreen extends React.Component<NavigationContainerProps, IState> {
