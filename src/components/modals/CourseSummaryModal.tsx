@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-  Alert,
-  Image,
-  ImageBackground,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-} from 'react-native';
+import { Alert, Image, ImageBackground, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainerProps, SafeAreaView } from 'react-navigation';
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
@@ -21,7 +11,7 @@ import { EFormButtonTheme, FormButton } from '../ui/FormButton';
 import { localeManager } from '../../managers/LocaleManager';
 import { ICourse } from '../../common/course';
 import { PILLS, PILLS_MAP } from '../../common/pills';
-import { periodTypeNames, EPeriodType } from '../../common/periods';
+import { periodTypeNames } from '../../common/periods';
 import { commonStore } from '../../stores/commonStore';
 import { timesPerNames } from '../../common/times';
 import { ERouteName } from '../../enums/ERouteName';
@@ -36,7 +26,6 @@ import { StatisticsInfoBlock } from '../ui/StatisticsInfoBlock';
 import { ICONS } from '../../common/icons';
 import { differenceInDays } from 'date-fns';
 import { ImageWithPreload } from '../ui/ImageWithPreload';
-import { firebaseManager } from '../../managers/FirebaseManager';
 
 interface IState {
   loading: boolean;

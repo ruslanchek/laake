@@ -22,7 +22,8 @@ class ResourcesManager extends Manager {
       require('../assets/pills/6.png'),
       require('../assets/pills/7.png'),
 
-      require('../assets/bg/1.png'),
+      require('../assets/bg/blue.png'),
+      require('../assets/bg/deep-purple.png'),
     ];
 
     // const cacheImages = images.map(image => {
