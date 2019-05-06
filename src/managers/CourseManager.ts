@@ -481,10 +481,12 @@ class CourseManager extends Manager {
       }
 
       if (course.notificationsEnabled && isTaken !== null) {
+        const notificationDayIndex = differenceInDays(commonStore.state.today, new Date());
+
         if (isTaken) {
-          firebaseManager.cancelNotificationByTake(course.id, take.index, dayIndex);
+          firebaseManager.cancelNotificationByTake(course.id, take.index, notificationDayIndex);
         } else {
-          firebaseManager.createNotificationByTake(course, take, dayIndex);
+          firebaseManager.createNotificationByTake(course, take, notificationDayIndex);
         }
       }
 
