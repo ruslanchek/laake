@@ -223,9 +223,8 @@ export class CourseSummaryModal extends React.Component<
                   isLoading={deleteLoading}
                   isSmall
                   theme={EFormButtonTheme.RedLight}
-                >
-                  {localeManager.t('COMMON.DELETE_COURSE')}
-                </FormButton>
+                  title={localeManager.t('COMMON.DELETE_COURSE')}
+                />
 
                 <FormButton
                   customStyles={styles.actionsButton}
@@ -234,9 +233,8 @@ export class CourseSummaryModal extends React.Component<
                   isLoading={false}
                   isSmall
                   theme={EFormButtonTheme.Gray}
-                >
-                  {localeManager.t('COMMON.EDIT_COURSE')}
-                </FormButton>
+                  title={localeManager.t('COMMON.EDIT_COURSE')}
+                />
               </View>
             ) : (
               <>
@@ -251,13 +249,12 @@ export class CourseSummaryModal extends React.Component<
                   theme={EFormButtonTheme.Red}
                   isDisabled={false}
                   onPress={this.handleSave}
-                >
-                  {localeManager.t(
+                  title={localeManager.t(
                     courseEditMode === ECourseEditMode.Create
                       ? 'COMMON.CREATE_COURSE'
                       : 'COMMON.SAVE_COURSE',
                   )}
-                </FormButton>
+                />
               </>
             )}
           </View>

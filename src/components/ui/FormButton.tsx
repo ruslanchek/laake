@@ -19,28 +19,31 @@ interface IProps {
   theme: EFormButtonTheme;
   isSmall?: boolean;
   customStyles?: ViewStyle;
+  title?: string;
 }
 
 export enum EFormButtonTheme {
   Red,
   Gray,
   RedLight,
+  Blue,
+  Purple,
 }
 
 export class FormButton extends React.PureComponent<IProps> {
   render() {
-    const { children, isDisabled, isLoading, customStyles, isSmall } = this.props;
+    const { children, isDisabled, isLoading, customStyles, isSmall, title } = this.props;
 
     return (
       <TouchableHighlight
         activeOpacity={1}
-        underlayColor={this.underlayColor.darken(0.1).toString()}
+        underlayColor={this.backgroundColor.darken(0.1).toString()}
         disabled={isDisabled}
         style={[
           styles.button,
           isDisabled ? styles.disabled : null,
           {
-            backgroundColor: this.underlayColor.toString(),
+            backgroundColor: this.backgroundColor.toString(),
           },
           customStyles ? customStyles : null,
         ]}
@@ -54,24 +57,30 @@ export class FormButton extends React.PureComponent<IProps> {
               color={this.textColor.toString()}
             />
           ) : (
-            <Text
-              style={[
-                styles.buttonText,
-                {
-                  color: this.textColor.toString(),
-                },
-                isSmall ? styles.isSmall : styles.isLarge,
-              ]}
-            >
-              {children}
-            </Text>
+            <>
+              {title ? (
+                <Text
+                  style={[
+                    styles.buttonText,
+                    {
+                      color: this.textColor.toString(),
+                    },
+                    isSmall ? styles.isSmall : styles.isLarge,
+                  ]}
+                >
+                  {title}
+                </Text>
+              ) : (
+                children
+              )}
+            </>
           )}
         </View>
       </TouchableHighlight>
     );
   }
 
-  get underlayColor(): Color {
+  get backgroundColor(): Color {
     switch (this.props.theme) {
       case EFormButtonTheme.Red: {
         return COLORS.RED;
@@ -79,6 +88,14 @@ export class FormButton extends React.PureComponent<IProps> {
 
       case EFormButtonTheme.RedLight: {
         return COLORS.GRAY_PALE_LIGHT;
+      }
+
+      case EFormButtonTheme.Blue: {
+        return COLORS.BLUE;
+      }
+
+      case EFormButtonTheme.Purple: {
+        return COLORS.PURPLE;
       }
 
       case EFormButtonTheme.Gray:
@@ -96,6 +113,14 @@ export class FormButton extends React.PureComponent<IProps> {
 
       case EFormButtonTheme.RedLight: {
         return COLORS.RED;
+      }
+
+      case EFormButtonTheme.Blue: {
+        return COLORS.WHITE;
+      }
+
+      case EFormButtonTheme.Purple: {
+        return COLORS.WHITE;
       }
 
       case EFormButtonTheme.Gray:
@@ -128,7 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: VARIABLES.BORDER_RADIUS_BIG,
-    paddingHorizontal: VARIABLES.PADDING_SMALL,
+    paddingHorizontal: VARIABLES.PADDING_BIG,
   },
 
   inner: {

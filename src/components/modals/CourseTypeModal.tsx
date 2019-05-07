@@ -61,9 +61,8 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
               isSmall
               onPress={this.handleSelectPicture}
               customStyles={{ flex: 0.48 }}
-            >
-              {localeManager.t('COURSE_TYPE_MODAL.SELECT_PICTURE')}
-            </FormButton>
+              title={localeManager.t('COURSE_TYPE_MODAL.SELECT_PICTURE')}
+            />
             <FormButton
               theme={EFormButtonTheme.Gray}
               isDisabled={false}
@@ -71,9 +70,8 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
               isSmall
               onPress={this.handleCapturePicture}
               customStyles={{ flex: 0.48 }}
-            >
-              {localeManager.t('COURSE_TYPE_MODAL.TAKE_PICTURE')}
-            </FormButton>
+              title={localeManager.t('COURSE_TYPE_MODAL.TAKE_PICTURE')}
+            />
           </View>
           <View style={styles.content}>
             {customImageSource && (

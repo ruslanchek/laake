@@ -185,7 +185,7 @@ class FirebaseManager extends Manager {
   }
 
   public logError(code: number, error: any) {
-    console.error(code, error);
+    console.log(code, error);
   }
 }
 
