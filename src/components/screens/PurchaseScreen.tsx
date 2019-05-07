@@ -216,17 +216,20 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
   }
 
   async handlePurchase(sku: ESKU) {
-    CommonService.haptic();
-
     if (!this.state.processingProduct) {
+      CommonService.haptic();
+
       this.setState({
         processingProduct: sku,
       });
 
       try {
         const result = await RNIap.buySubscription(sku);
+
+        Alert.alert(JSON.stringify(result));
       } catch (e) {
         firebaseManager.logError(421335, e);
+        Alert.alert(e.message);
       }
 
       this.setState({
@@ -254,9 +257,8 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
         'Restore Successful',
         'You successfully restored the following purchases: ' + restoredTitles.join(', '),
       );
-    } catch (err) {
-      console.warn(err);
-      Alert.alert(err.message);
+    } catch (e) {
+      Alert.alert(e.message);
     }
   };
 }
