@@ -81,7 +81,6 @@ export class Appear extends React.Component<IProps, IState> {
       case EAppearType.Fade: {
         Animated.timing(this.state.animated, {
           toValue: 0,
-          delay: this.delay,
           duration: 200,
           useNativeDriver: true,
         }).start();
@@ -93,7 +92,6 @@ export class Appear extends React.Component<IProps, IState> {
       default: {
         Animated.spring(this.state.animated, {
           toValue: 0,
-          delay: this.delay,
           tension: 92,
           useNativeDriver: true,
         }).start();
