@@ -7,7 +7,6 @@ import {
   ImageBackground,
   Image,
   Animated,
-  TouchableHighlight,
   ActivityIndicator,
   Alert,
 } from 'react-native';
@@ -23,6 +22,7 @@ import { Appear, EAppearType } from '../common/Appear';
 import { firebaseManager } from '../../managers/FirebaseManager';
 import { CommonService } from '../../services/CommonService';
 import { FormButton, EFormButtonTheme } from '../ui/FormButton';
+import { CustomStatusBar } from '../ui/CustomStatusBar';
 
 enum ESKU {
   Month = 'laakepromonth',
@@ -90,6 +90,7 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
 
     return (
       <ImageBackground source={BGS.DEEP_PURPLE} style={styles.container}>
+        <CustomStatusBar barStyle='light-content' />
         <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
           {loading ? (
             <ActivityIndicator color={COLORS.WHITE.toString()} size='large' />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Dimensions, StatusBar, StyleSheet, View } from 'react-native';
+import { Animated, Dimensions, StyleSheet, View } from 'react-native';
 import { NavigationContainerProps, SafeAreaView, ScrollView } from 'react-navigation';
 import { IPill, PILLS } from '../../common/pills';
 import { VARIABLES } from '../../common/variables';
@@ -18,6 +18,7 @@ import { ModalHeader } from '../blocks/ModalHeader';
 import Permissions from 'react-native-permissions';
 import { PillBrick } from '../ui/PillBrick';
 import ImagePicker, { Image } from 'react-native-image-crop-picker';
+import { CustomStatusBar } from '../ui/CustomStatusBar';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -37,11 +38,7 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
 
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
-        <StatusBar
-          animated={true}
-          backgroundColor={COLORS.WHITE.toString()}
-          barStyle='dark-content'
-        />
+        <CustomStatusBar barStyle='dark-content' />
         <Header title={localeManager.t('COMMON.BACK')} next={null} theme={EHeaderTheme.Dark} />
         <ScrollView
           scrollEventThrottle={1}

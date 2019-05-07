@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { NavigationContainerProps, SafeAreaView } from 'react-navigation';
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
@@ -16,9 +16,9 @@ import { ICONS } from '../../common/icons';
 import { localeManager } from '../../managers/LocaleManager';
 import { CommonService } from '../../services/CommonService';
 import { commonStore } from '../../stores/commonStore';
-import { startOfDay, addDays } from 'date-fns';
-import { createCourseManager } from '../../managers/CreateCourseManager';
+import { startOfDay } from 'date-fns';
 import { courseManager } from '../../managers/CourseManager';
+import { CustomStatusBar } from '../ui/CustomStatusBar';
 
 interface IState {
   period: number;
@@ -37,11 +37,7 @@ export class CourseDurationModal extends React.Component<NavigationContainerProp
 
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
-        <StatusBar
-          animated={true}
-          backgroundColor={COLORS.WHITE.toString()}
-          barStyle='dark-content'
-        />
+        <CustomStatusBar barStyle='dark-content' />
         <Header title={localeManager.t('COMMON.BACK')} next={null} theme={EHeaderTheme.Dark} />
         <View style={GLOBAL_STYLES.MODAL_SCROLL_VIEW}>
           <View style={styles.content}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Image, ImageBackground, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Alert, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainerProps, SafeAreaView } from 'react-navigation';
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
@@ -26,6 +26,7 @@ import { StatisticsInfoBlock } from '../ui/StatisticsInfoBlock';
 import { ICONS } from '../../common/icons';
 import { differenceInDays } from 'date-fns';
 import { ImageWithPreload } from '../ui/ImageWithPreload';
+import { CustomStatusBar } from '../ui/CustomStatusBar';
 
 interface IState {
   loading: boolean;
@@ -87,12 +88,7 @@ export class CourseSummaryModal extends React.Component<
 
     return (
       <View style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
-        <StatusBar
-          animated={true}
-          backgroundColor={COLORS.WHITE.toString()}
-          barStyle='light-content'
-        />
-
+        <CustomStatusBar barStyle='light-content' />
         <SafeAreaView style={styles.top}>
           <ImageBackground source={BGS.BLUE} style={{ width: '100%', height: '100%' }}>
             <Header

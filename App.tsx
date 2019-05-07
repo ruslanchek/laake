@@ -6,7 +6,7 @@ import {
 } from 'react-navigation';
 import { HomeScreen } from './src/components/screens/HomeScreen';
 import { CreateCourseScreen } from './src/components/screens/CreateCourseScreen';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
 import { COLORS } from './src/common/colors';
 import { IconWithBadge as TabBarIcon } from './src/components/ui/IconWithBadge';
 import { ERouteName } from './src/enums/ERouteName';
@@ -19,6 +19,8 @@ import { Notifications } from './src/components/common/Notifications';
 import { FONTS } from './src/common/fonts';
 import { managers } from './src/managers/managers';
 import { PurchaseScreen } from './src/components/screens/PurchaseScreen';
+import { LogScreen } from './src/components/screens/LogScreen';
+import { SummaryScreen } from './src/components/screens/SummaryScreen';
 
 console.disableYellowBox = true;
 
@@ -83,10 +85,10 @@ const TabNavigator = createBottomTabNavigator(
       screen: TodayStack,
     },
     [ERouteName.Summary]: {
-      screen: TodayStack,
+      screen: SummaryScreen,
     },
     [ERouteName.Log]: {
-      screen: TodayStack,
+      screen: LogScreen,
     },
     [ERouteName.Settings]: {
       screen: PurchaseScreen,
@@ -144,6 +146,7 @@ export default class App extends React.Component<{}, IState> {
 
     return (
       <>
+        <StatusBar animated={true} barStyle='light-content' />
         <AppContainer />
         <Notifications />
       </>

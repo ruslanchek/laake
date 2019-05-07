@@ -1,14 +1,6 @@
 import React from 'react';
 import { NavigationContainerProps, SafeAreaView, ScrollView } from 'react-navigation';
-import {
-  StyleSheet,
-  StatusBar,
-  View,
-  TouchableOpacity,
-  Image,
-  Platform,
-  Animated,
-} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
 import { COLORS } from '../../common/colors';
 import { EHeaderTheme, Header } from '../common/Header';
 import { ERouteName } from '../../enums/ERouteName';
@@ -31,6 +23,7 @@ import { ICONS } from '../../common/icons';
 import { ModalHeader } from '../blocks/ModalHeader';
 import { CommonService } from '../../services/CommonService';
 import { ImageWithPreload } from '../ui/ImageWithPreload';
+import { CustomStatusBar } from '../ui/CustomStatusBar';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -53,11 +46,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
 
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
-        <StatusBar
-          animated={true}
-          backgroundColor={COLORS.WHITE.toString()}
-          barStyle='dark-content'
-        />
+        <CustomStatusBar barStyle='dark-content' />
         <Header
           title={localeManager.t('COMMON.BACK')}
           next={{

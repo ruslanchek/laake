@@ -3,10 +3,8 @@ import { NavigationContainerProps, SafeAreaView } from 'react-navigation';
 import {
   ActivityIndicator,
   Animated,
-  Platform,
   SectionList,
   SectionListData,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -31,6 +29,7 @@ import { isAfter, isBefore, isSameDay, isFuture } from 'date-fns';
 import { FONTS } from '../../common/fonts';
 import { Appear, EAppearType } from '../common/Appear';
 import { CommonService } from '../../services/CommonService';
+import { CustomStatusBar } from '../ui/CustomStatusBar';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -70,11 +69,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
 
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
-        <StatusBar
-          animated={true}
-          backgroundColor={COLORS.RED.toString()}
-          barStyle='light-content'
-        />
+        <CustomStatusBar barStyle='light-content' />
         <View style={styles.inner}>
           <CalendarHeader
             todayWords={todayWords}
