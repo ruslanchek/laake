@@ -58,14 +58,12 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
     const todayWords = localeManager.t(daysDifference.word, {
       count: daysDifference.difference,
     });
-    const dateWords = commonStore.state.today.toLocaleDateString(commonStore.state.currentLocale, {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    const dateWords = CommonService.formatDate(
+      commonStore.state.today,
+      commonStore.state.currentLocale,
+    );
     const { scrollTop } = this.state;
-    const sections = this.getSections();
+    const sections = this.sections;
 
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
@@ -114,7 +112,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
                 />
               );
             }}
-            initialNumToRender={100}
+            initialNumToRender={1000}
             keyExtractor={(item, index) => item.course.id + item.take.index}
             sections={sections}
             contentContainerStyle={styles.scrollViewContainer}
@@ -150,7 +148,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
     );
   }
 
-  getSections(): SectionListData<ISectionData>[] {
+  get sections(): SectionListData<ISectionData>[] {
     const sections: SectionListData<ISectionData>[] = [];
     const { today } = commonStore.state;
 

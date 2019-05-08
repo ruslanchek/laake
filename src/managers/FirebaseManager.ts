@@ -20,6 +20,7 @@ export enum ECollectionName {
   Courses = 'courses',
   TakeTimes = 'takeTimes',
   NotificationTokens = 'notificationTokens',
+  Log = 'log',
 }
 
 class FirebaseManager extends Manager {

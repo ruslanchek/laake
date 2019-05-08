@@ -23,6 +23,7 @@ import { ITake, ITakeTime } from '../common/take';
 import { createCourseManager } from './CreateCourseManager';
 import { NotificationsHandler, ENotificationType } from '../components/common/Notifications';
 import { localeManager } from './LocaleManager';
+import { logManager, ELogEvent } from './LogManager';
 
 class CourseManager extends Manager {
   public reset(): void {}
@@ -128,6 +129,8 @@ class CourseManager extends Manager {
 
         this.subscribeToCourses();
 
+        logManager.logEvent(ELogEvent.CourseDeleted, course.title);
+
         NotificationsHandler.alertWithType(
           ENotificationType.Info,
           localeManager.t('NOTIFICATIONS.COURSE_DELETED.TITLE'),
@@ -229,6 +232,8 @@ class CourseManager extends Manager {
           batch.delete(doc.ref);
         });
 
+        logManager.logEvent(ELogEvent.CourseUpdated, title);
+
         await batch.commit();
         await this.recalculateCourseStatistics(currentCourseId);
         await this.subscribeToTakeTimes();
@@ -282,10 +287,11 @@ class CourseManager extends Manager {
       }
     }
 
+    const title = state.title.trim();
     const courseStatistics = await this.getCourseStatistics(null, endDate, startDate, takes);
     const course: Partial<ICourse> = {
       uploadedImage: state.uploadedImage,
-      title: state.title.trim(),
+      title,
       period: state.period,
       periodType: state.periodType,
       pillId: state.currentPill.id,
@@ -302,6 +308,8 @@ class CourseManager extends Manager {
       const creatingResult = await firebaseManager
         .getCollection([ECollectionName.Courses])
         .add(course);
+
+      logManager.logEvent(ELogEvent.CourseCreated, title);
 
       const createdCourseDocument = await creatingResult.get();
       const createdCourse: ICourse = {
@@ -454,6 +462,12 @@ class CourseManager extends Manager {
             isTaken,
             dosage: take.dosage + take.dosagePart,
           });
+
+        if (isTaken) {
+          logManager.logEvent(ELogEvent.MedicationTakeUndo, course.title);
+        } else {
+          logManager.logEvent(ELogEvent.MedicationTake, course.title);
+        }
       } else {
         isTaken = true;
 
@@ -473,6 +487,8 @@ class CourseManager extends Manager {
               isTaken,
               dosage: take.dosage + take.dosagePart,
             });
+
+          logManager.logEvent(ELogEvent.MedicationTake, course.title);
         }
       }
 
@@ -486,7 +502,7 @@ class CourseManager extends Manager {
         }
       }
 
-      await this.recalculateCourseStatistics(course.id);
+      this.recalculateCourseStatistics(course.id);
     } catch (e) {
       firebaseManager.logError(238047, e);
     }

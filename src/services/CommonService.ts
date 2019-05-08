@@ -45,6 +45,23 @@ export class CommonService {
     }
   }
 
+  static formatDate(date: Date, locale: string): string {
+    return date.toLocaleDateString(locale, {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
+
+  static formTime(date: Date, locale: string): string {
+    return date.toLocaleTimeString(locale, {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+  }
+
   static formatDosageTotal(number: number): string {
     const numberParts: string[] = number >= 0 ? number.toString().split('.') : [''];
     const whole: number | null = numberParts[0] ? parseInt(numberParts[0]) : null;
