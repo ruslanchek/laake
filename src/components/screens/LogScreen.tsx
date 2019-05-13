@@ -166,7 +166,7 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
           sections={sections}
           renderSectionHeader={({ section: { title } }) => (
             <View style={styles.sectionTitle}>
-              <Text>{title}</Text>
+              <Text style={styles.sectionTitleText}>{title}</Text>
             </View>
           )}
           renderItem={({ item, index, section }) => {
@@ -235,9 +235,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: VARIABLES.PADDING_BIG,
   },
 
+  sectionTitleText: {
+    fontFamily: FONTS.MEDIUM,
+    fontSize: VARIABLES.FONT_SIZE_TINY,
+    color: COLORS.GRAY.toString(),
+  },
+
   header: {
-    marginTop: VARIABLES.PADDING_BIG,
-    marginBottom: VARIABLES.PADDING_BIG,
+    marginTop: VARIABLES.PADDING_BIG * 1.5,
+    marginBottom: VARIABLES.PADDING_MEDIUM,
     paddingHorizontal: VARIABLES.PADDING_BIG,
     flexShrink: 0,
     height: 40,
@@ -283,9 +289,9 @@ const styles = StyleSheet.create({
 
   time: {
     width: 80,
-    color: COLORS.GRAY.toString(),
     fontFamily: FONTS.MEDIUM,
     fontSize: VARIABLES.FONT_SIZE_TINY,
+    color: COLORS.GRAY.toString(),
   },
 
   line: {
