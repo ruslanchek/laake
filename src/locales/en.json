@@ -1,4 +1,14 @@
 {
+  "LOG_SCREEN": {
+    "TITLE": "Medication log"
+  },
+  "LOG_EVENT": {
+    "MEDICATION_TAKE": "Medication taken",
+    "MEDICATION_TAKE_UNDO": "Medication taken undo",
+    "COURSE_UPDATED": "Course info updated",
+    "COURSE_CREATED": "Course created",
+    "COURSE_DELETED": "Course deleted"
+  },
   "CREATE_COURSE": {
     "LABEL_NAME": "Medication name",
     "LABEL_DESCRIPTION": "Description",

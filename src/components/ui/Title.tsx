@@ -5,15 +5,16 @@ import { FONTS } from '../../common/fonts';
 
 export interface IProps {
   text: string;
+  color: string;
 }
 
 export class Title extends React.PureComponent<IProps> {
   render() {
-    const { text } = this.props;
+    const { text, color } = this.props;
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>{text}</Text>
+        <Text style={[styles.text, { color }]}>{text}</Text>
       </View>
     );
   }

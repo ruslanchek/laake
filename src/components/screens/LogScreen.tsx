@@ -10,7 +10,10 @@ import { logStore } from '../../stores/logStore';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { CommonService } from '../../services/CommonService';
 import { commonStore } from '../../stores/commonStore';
-import { ELogEvent } from '../../managers/LogManager';
+import { ELogEvent, logManager } from '../../managers/LogManager';
+import { localeManager } from '../../managers/LocaleManager';
+import Color from 'color';
+import { FONTS } from '../../common/fonts';
 
 interface IState {}
 
@@ -19,7 +22,10 @@ interface ISectionData {
   time: string;
   id: string;
   event: ELogEvent;
+  courseName: string;
 }
+
+const ICON_SIZE = 24;
 
 @followStore(logStore)
 export class LogScreen extends React.Component<NavigationContainerProps, IState> {
@@ -29,26 +35,83 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
     return event;
   }
 
-  generateEventIcon(event: ELogEvent): React.ReactNode {
+  getEventColor(event: ELogEvent): Color {
     switch (event) {
       case ELogEvent.CourseCreated: {
-        return <Icon name='ios-add' size={25} color={COLORS.BLUE.toString()} />;
+        return COLORS.BLUE;
       }
 
       case ELogEvent.CourseDeleted: {
-        return <Icon name='ios-close' size={25} color={COLORS.RED.toString()} />;
+        return COLORS.RED;
+      }
+
+      case ELogEvent.CourseUpdated: {
+        return COLORS.YELLOW;
       }
 
       case ELogEvent.MedicationTake: {
-        return <Icon name='ios-close' size={25} color={COLORS.RED.toString()} />;
+        return COLORS.GREEN;
       }
 
       case ELogEvent.MedicationTakeUndo: {
-        return <Icon name='ios-checkmark' size={25} color={COLORS.RED.toString()} />;
+        return COLORS.RED;
       }
 
       default: {
-        return <Icon name='ios-checkmark' size={25} color={COLORS.RED.toString()} />;
+        return COLORS.RED;
+      }
+    }
+  }
+
+  generateEventIcon(event: ELogEvent, color: Color): React.ReactNode {
+    switch (event) {
+      case ELogEvent.CourseCreated: {
+        return (
+          <Icon
+            name='ios-add'
+            size={ICON_SIZE}
+            style={{ top: 0.25, left: 0.25 }}
+            color={color.toString()}
+          />
+        );
+      }
+
+      case ELogEvent.CourseDeleted: {
+        return (
+          <Icon
+            name='ios-close'
+            size={ICON_SIZE + 3}
+            style={{ top: -1.5, left: 0.25 }}
+            color={color.toString()}
+          />
+        );
+      }
+
+      case ELogEvent.CourseUpdated: {
+        return (
+          <Icon
+            name='ios-build'
+            size={ICON_SIZE - 8}
+            style={{ top: 0.75, left: 0.25 }}
+            color={color.toString()}
+          />
+        );
+      }
+
+      case ELogEvent.MedicationTakeUndo:
+      case ELogEvent.MedicationTake: {
+        return (
+          <Icon
+            name='ios-medical'
+            size={ICON_SIZE - 8}
+            style={{ top: 0.75, left: 0.25 }}
+            color={color.toString()}
+          />
+        );
+      }
+
+      default: {
+        return <Icon name='ios-checkmark' size={ICON_SIZE} color={color.toString()} />;
       }
     }
   }
@@ -66,6 +129,7 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
         time: CommonService.formTime(eventDate, currentLocale),
         id: event.id,
         event: event.event,
+        courseName: event.courseName,
       };
 
       if (section) {
@@ -81,19 +145,23 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
     return sections;
   }
 
+  handleLoadMore() {
+    logManager.getEvents();
+  }
+
   render() {
     const sections = this.sections;
 
     return (
       <SafeAreaView style={styles.container}>
-        <CustomStatusBar barStyle='dark-content' />
+        <CustomStatusBar barStyle='light-content' />
 
         <View style={styles.header}>
-          <Title text='Log' />
+          <Title text={localeManager.t('LOG_SCREEN.TITLE')} color={COLORS.WHITE.toString()} />
         </View>
 
         <SectionList
-          initialNumToRender={100}
+          initialNumToRender={VARIABLES.LOG_EVENTS_PER_PAGE}
           stickySectionHeadersEnabled={true}
           sections={sections}
           renderSectionHeader={({ section: { title } }) => (
@@ -102,16 +170,42 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
             </View>
           )}
           renderItem={({ item, index, section }) => {
+            const color = this.getEventColor(item.event);
+
             return (
               <View key={item.id} style={styles.item}>
-                {this.generateEventIcon(item.event)}
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.time}>{item.time}</Text>
+                <View style={styles.itemLeft}>
+                  <Text style={styles.time}>{item.time}</Text>
+                  <View style={[styles.eventPin, { backgroundColor: color.alpha(0.2).toString() }]}>
+                    {this.generateEventIcon(item.event, color)}
+                  </View>
+                </View>
+
+                <View style={styles.itemRight}>
+                  <Text style={styles.title}>{item.courseName}</Text>
+                  <Text style={styles.subtitle}>
+                    {localeManager.t(`LOG_EVENT.${String(item.title).toUpperCase()}`)}
+                  </Text>
+                </View>
+
+                <View style={[styles.line, { backgroundColor: color.toString() }]} />
               </View>
             );
           }}
+          keyExtractor={(item, index) => {
+            return index.toString();
+          }}
+          // renderSectionFooter={() => {
+          //   if (logStore.state.loadingEvents) {
+          //     return <ActivityIndicator size='small' color={COLORS.GRAY.toString()} />;
+          //   } else {
+          //     return null;
+          //   }
+          // }}
           style={styles.scroll}
           contentContainerStyle={styles.content}
+          onEndReachedThreshold={0}
+          onEndReached={this.handleLoadMore.bind(this)}
         />
       </SafeAreaView>
     );
@@ -121,38 +215,85 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
+    backgroundColor: COLORS.BLUE.toString(),
     alignItems: 'flex-start',
     justifyContent: 'space-between',
   },
 
-  sectionTitle: {
-    backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
+  eventPin: {
+    width: ICON_SIZE,
+    height: ICON_SIZE,
     justifyContent: 'center',
-    height: 20,
+    alignItems: 'center',
+    borderRadius: VARIABLES.BORDER_RADIUS_BIG,
+  },
+
+  sectionTitle: {
+    backgroundColor: COLORS.GRAY_PALE_LIGHT.toString(),
+    justifyContent: 'center',
+    height: 26,
+    paddingHorizontal: VARIABLES.PADDING_BIG,
   },
 
   header: {
     marginTop: VARIABLES.PADDING_BIG,
+    marginBottom: VARIABLES.PADDING_BIG,
     paddingHorizontal: VARIABLES.PADDING_BIG,
-    flexShrink: 1,
+    flexShrink: 0,
     height: 40,
   },
 
   content: {
-    paddingVertical: VARIABLES.PADDING_BIG,
-    paddingHorizontal: VARIABLES.PADDING_BIG,
+    // paddingVertical: VARIABLES.PADDING_BIG,
   },
 
   scroll: {
+    backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
     width: '100%',
   },
 
-  item: {
-    marginTop: VARIABLES.PADDING_BIG,
+  itemLeft: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
 
-  title: {},
+  itemRight: {
+    marginLeft: VARIABLES.PADDING_MEDIUM,
+    marginTop: 15,
+  },
 
-  time: {},
+  item: {
+    paddingHorizontal: VARIABLES.PADDING_BIG,
+    flexDirection: 'row',
+    paddingBottom: VARIABLES.PADDING_BIG,
+  },
+
+  title: {
+    fontFamily: FONTS.BOLD,
+    marginBottom: 1,
+    fontSize: VARIABLES.FONT_SIZE_SMALL,
+  },
+
+  subtitle: {
+    fontFamily: FONTS.MEDIUM,
+    fontSize: VARIABLES.FONT_SIZE_TINY,
+    color: COLORS.GRAY.toString(),
+  },
+
+  time: {
+    width: 80,
+    color: COLORS.GRAY.toString(),
+    fontFamily: FONTS.MEDIUM,
+    fontSize: VARIABLES.FONT_SIZE_TINY,
+  },
+
+  line: {
+    width: 4,
+    position: 'absolute',
+    top: 36.25,
+    left: 104,
+    bottom: -12.25,
+    opacity: 0.2,
+  },
 });

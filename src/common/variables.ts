@@ -31,4 +31,6 @@ export const VARIABLES = {
   ANIMATED_VALUE_ZERO: new Animated.Value(0),
 
   MAX_TAKES_PER_DAY: 10,
+
+  LOG_EVENTS_PER_PAGE: 20,
 };
