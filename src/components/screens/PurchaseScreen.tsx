@@ -23,6 +23,7 @@ import { firebaseManager } from '../../managers/FirebaseManager';
 import { CommonService } from '../../services/CommonService';
 import { FormButton, EFormButtonTheme } from '../ui/FormButton';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
+import { localeManager } from '../../managers/LocaleManager';
 
 enum ESKU {
   Month = 'laakepromonth',
@@ -95,7 +96,11 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
           {loading ? (
             <ActivityIndicator color={COLORS.WHITE.toString()} size='large' />
           ) : (
-            <ScrollView style={{ width: '100%' }} horizontal={false}>
+            <ScrollView
+              contentContainerStyle={styles.scrollViewContainer}
+              style={styles.scrollView}
+              horizontal={false}
+            >
               <View style={styles.logoHolder}>
                 <Animated.View
                   style={{
@@ -134,10 +139,15 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
                 delay={400}
               >
                 <Text style={styles.title}>Subscribe to get more from Läke Pro</Text>
-                <Text style={styles.textPart}>– Get notified by reminders</Text>
-                <Text style={styles.textPart}>– Mediction avatars by photo them</Text>
-                <Text style={styles.textPart}>– Medication package text</Text>
-                <Text style={styles.textPart}>– Backup your courses in Läke Cloud</Text>
+
+                <View style={styles.textPartsHolder}>
+                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_1')}</Text>
+                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_2')}</Text>
+                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_3')}</Text>
+                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_4')}</Text>
+                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_5')}</Text>
+                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_6')}</Text>
+                </View>
               </Appear>
 
               <Appear
@@ -157,7 +167,9 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
                           isLoading={processingProduct === ESKU.Month}
                           onPress={this.handlePurchase.bind(this, ESKU.Month)}
                         >
-                          <Text style={styles.buttonText}>Monthly</Text>
+                          <Text style={styles.buttonText}>
+                            {localeManager.t('SUBSCRIPTION.MONTHLY')}
+                          </Text>
                           <View style={styles.buttonPrice}>
                             <Text style={styles.buttonPriceText}>{product.localizedPrice}</Text>
                           </View>
@@ -174,7 +186,9 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
                           isLoading={processingProduct === ESKU.Annual}
                           onPress={this.handlePurchase.bind(this, ESKU.Annual)}
                         >
-                          <Text style={styles.buttonText}>Annual</Text>
+                          <Text style={styles.buttonText}>
+                            {localeManager.t('SUBSCRIPTION.ANNUAL')}
+                          </Text>
                           <View style={styles.buttonPrice}>
                             <Text style={styles.buttonPriceText}>{product.localizedPrice}</Text>
                           </View>
@@ -187,7 +201,9 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
 
               <Appear show={animationTrigger} type={EAppearType.Drop} delay={500}>
                 <TouchableOpacity style={styles.restore} onPress={this.handleRestorePurchases}>
-                  <Text style={styles.restoreText}>Restore purchases</Text>
+                  <Text style={styles.restoreText}>
+                    {localeManager.t('SUBSCRIPTION.RESTORE_PURCHASES')}
+                  </Text>
                 </TouchableOpacity>
               </Appear>
             </ScrollView>
@@ -263,40 +279,54 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
   };
 }
 
+const LOGO_HOLDER_SIZE = 320;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
+
+  scrollView: {
+    width: '100%',
+  },
+
+  scrollViewContainer: {
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   waves: {
-    width: 380,
-    height: 380,
+    width: LOGO_HOLDER_SIZE,
+    height: LOGO_HOLDER_SIZE,
   },
 
   logoHolder: {
-    width: 380,
-    height: 380,
+    width: LOGO_HOLDER_SIZE,
+    height: LOGO_HOLDER_SIZE,
     alignItems: 'center',
+    position: 'absolute',
+    top: 0,
   },
 
   bg: { width: '100%', height: '100%' },
 
   logo: {
-    width: 134,
-    height: 193,
+    width: LOGO_HOLDER_SIZE * 0.34,
+    height: LOGO_HOLDER_SIZE * 0.49,
   },
 
   logoContainer: {
     position: 'absolute',
-    width: 134,
-    height: 193,
-    top: 122.75,
+    width: LOGO_HOLDER_SIZE * 0.34,
+    height: LOGO_HOLDER_SIZE * 0.49,
+    top: 104,
   },
 
   texts: {
     paddingHorizontal: VARIABLES.PADDING_BIG,
+    marginTop: LOGO_HOLDER_SIZE,
   },
 
   title: {
@@ -307,9 +337,15 @@ const styles = StyleSheet.create({
     marginBottom: VARIABLES.PADDING_MEDIUM,
   },
 
+  textPartsHolder: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
   textPart: {
     color: COLORS.WHITE.toString(),
     fontFamily: FONTS.MEDIUM,
+    marginBottom: 3,
   },
 
   restore: {

@@ -1,4 +1,16 @@
 {
+  "SUBSCRIPTION": {
+    "TITLE": "Subscribe to get more from Läke Pro",
+    "RESTORE_PURCHASES": "Restore purchases",
+    "MONTHLY": "Monthly",
+    "ANNUAL": "Annual",
+    "FEATURE_1": "Unlimited parallel courses",
+    "FEATURE_2": "Custom medication pictures",
+    "FEATURE_3": "Course summary",
+    "FEATURE_4": "Personal statistics",
+    "FEATURE_5": "Course logs",
+    "FEATURE_6": "And more!"
+  },
   "LOG_SCREEN": {
     "TITLE": "Medication log"
   },
