@@ -23,6 +23,7 @@ interface ISectionData {
   id: string;
   event: ELogEvent;
   courseName: string;
+  isLast: boolean;
 }
 
 const ICON_SIZE = 24;
@@ -119,17 +120,22 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
   get sections(): SectionListData<ISectionData>[] {
     const sections: SectionListData<ISectionData>[] = [];
     const { currentLocale } = commonStore.state;
+    let index = 0;
 
     logStore.state.events.forEach(event => {
       const eventDate = new Date(event.date);
       const sectionTitle = CommonService.formatDate(eventDate, currentLocale);
       const section = sections.find(section => section.title === sectionTitle);
+
+      index++;
+
       const data: ISectionData = {
         title: this.generateEventTitle(event.event),
         time: CommonService.formTime(eventDate, currentLocale),
         id: event.id,
         event: event.event,
         courseName: event.courseName,
+        isLast: index === logStore.state.events.size,
       };
 
       if (section) {
@@ -188,7 +194,9 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
                   </Text>
                 </View>
 
-                <View style={[styles.line, { backgroundColor: color.toString() }]} />
+                {!item.isLast && (
+                  <View style={[styles.line, { backgroundColor: color.toString() }]} />
+                )}
               </View>
             );
           }}
