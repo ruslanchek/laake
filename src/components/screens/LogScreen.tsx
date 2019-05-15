@@ -173,6 +173,9 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
           onWillFocus={() => {
             logManager.reinitEvents();
           }}
+          onDidBlur={() => {
+            logManager.resetEvents();
+          }}
         />
 
         <Title text={localeManager.t('LOG_SCREEN.TITLE')} color={COLORS.WHITE.toString()} />
@@ -323,6 +326,6 @@ const styles = StyleSheet.create({
     top: 36.25,
     left: 104,
     bottom: -12.25,
-    opacity: 0.2,
+    opacity: 0.075,
   },
 });

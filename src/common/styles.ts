@@ -1,7 +1,7 @@
 import { COLORS } from './colors';
 import { StyleSheet, Platform } from 'react-native';
 import { VARIABLES } from './variables';
-import { FONTS } from './fonts'
+import { FONTS } from './fonts';
 
 export const GLOBAL_STYLES = StyleSheet.create({
   SAFE_AREA: {

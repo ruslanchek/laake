@@ -33,10 +33,15 @@ class LogManager extends Manager {
     return eventsArray[eventsArray.length - 1];
   }
 
-  async reinitEvents() {
-    logStore.state.events.clear();
+  resetEvents() {
     logStore.setState({
-      lastLoadedDate: undefined,
+      events: new Map(),
+    });
+  }
+
+  async reinitEvents() {
+    logStore.setState({
+      lastLoadedDate: Infinity,
     });
     await this.getEvents();
   }
