@@ -464,9 +464,9 @@ class CourseManager extends Manager {
           });
 
         if (isTaken) {
-          logManager.logEvent(ELogEvent.MedicationTakeUndo, course.title);
-        } else {
           logManager.logEvent(ELogEvent.MedicationTake, course.title);
+        } else {
+          logManager.logEvent(ELogEvent.MedicationTakeUndo, course.title);
         }
       } else {
         isTaken = true;

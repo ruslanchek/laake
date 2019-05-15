@@ -24,7 +24,6 @@ class LogManager extends Manager {
   public reset(): void {}
 
   public async init(): Promise<any> {
-    this.getEvents();
     return Promise.resolve();
   }
 
@@ -34,14 +33,20 @@ class LogManager extends Manager {
     return eventsArray[eventsArray.length - 1];
   }
 
+  async reinitEvents() {
+    logStore.state.events.clear();
+    logStore.setState({
+      lastLoadedDate: undefined,
+    });
+    await this.getEvents();
+  }
+
   async getEvents() {
     if (logStore.state.loadingEvents) {
       return;
     }
 
     let lastEntry = this.getLastEntry();
-
-    console.log(logStore.state.lastLoadedDate, lastEntry && lastEntry.date);
 
     if (lastEntry && logStore.state.lastLoadedDate === lastEntry.date) {
       return;
@@ -57,25 +62,27 @@ class LogManager extends Manager {
       lastLoadedDate = lastEntry.date;
     }
 
-    const snapshot = await firebaseManager
-      .getCollection([ECollectionName.Log])
-      .orderBy('date', 'desc')
-      .startAt(lastLoadedDate)
-      .limit(VARIABLES.LOG_EVENTS_PER_PAGE)
-      .get();
+    try {
+      const snapshot = await firebaseManager
+        .getCollection([ECollectionName.Log])
+        .orderBy('date', 'desc')
+        .startAt(lastLoadedDate)
+        .limit(VARIABLES.LOG_EVENTS_PER_PAGE)
+        .get();
 
-    snapshot.docs.forEach(doc => {
-      const event: ILogEvent = {
-        id: doc.id,
-        ...doc.data(),
-      } as ILogEvent;
+      snapshot.docs.forEach(doc => {
+        const event: ILogEvent = {
+          id: doc.id,
+          ...doc.data(),
+        } as ILogEvent;
 
-      if (doc.id) {
-        logStore.state.events.set(doc.id, event);
-      }
-    });
-
-    lastEntry = this.getLastEntry();
+        if (doc.id) {
+          logStore.state.events.set(doc.id, event);
+        }
+      });
+    } catch (e) {
+      firebaseManager.logError(231983, e);
+    }
 
     logStore.setState({
       loadingEvents: false,

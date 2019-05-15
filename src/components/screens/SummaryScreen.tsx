@@ -20,9 +20,7 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
             this.forceUpdate();
           }}
         />
-        <View style={styles.content}>
-          <Title text='Summary' />
-        </View>
+        <Title color={COLORS.BLACK.toString()} text='Summary' />
       </SafeAreaView>
     );
   }

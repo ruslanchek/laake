@@ -1,6 +1,13 @@
 import React from 'react';
 import { NavigationContainerProps, NavigationEvents, SectionList } from 'react-navigation';
-import { StyleSheet, SafeAreaView, View, Text, SectionListData } from 'react-native';
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  Text,
+  SectionListData,
+  ActivityIndicator,
+} from 'react-native';
 import { Title } from '../ui/Title';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
@@ -162,59 +169,70 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
       <SafeAreaView style={styles.container}>
         <CustomStatusBar barStyle='light-content' />
 
-        <View style={styles.header}>
-          <Title text={localeManager.t('LOG_SCREEN.TITLE')} color={COLORS.WHITE.toString()} />
-        </View>
-
-        <SectionList
-          initialNumToRender={VARIABLES.LOG_EVENTS_PER_PAGE}
-          stickySectionHeadersEnabled={true}
-          sections={sections}
-          renderSectionHeader={({ section: { title } }) => (
-            <View style={styles.sectionTitle}>
-              <Text style={styles.sectionTitleText}>{title}</Text>
-            </View>
-          )}
-          renderItem={({ item, index, section }) => {
-            const color = this.getEventColor(item.event);
-
-            return (
-              <View key={item.id} style={styles.item}>
-                <View style={styles.itemLeft}>
-                  <Text style={styles.time}>{item.time}</Text>
-                  <View style={[styles.eventPin, { backgroundColor: color.alpha(0.2).toString() }]}>
-                    {this.generateEventIcon(item.event, color)}
-                  </View>
-                </View>
-
-                <View style={styles.itemRight}>
-                  <Text style={styles.title}>{item.courseName}</Text>
-                  <Text style={styles.subtitle}>
-                    {localeManager.t(`LOG_EVENT.${String(item.title).toUpperCase()}`)}
-                  </Text>
-                </View>
-
-                {!item.isLast && (
-                  <View style={[styles.line, { backgroundColor: color.toString() }]} />
-                )}
-              </View>
-            );
+        <NavigationEvents
+          onWillFocus={() => {
+            logManager.reinitEvents();
           }}
-          keyExtractor={(item, index) => {
-            return index.toString();
-          }}
-          // renderSectionFooter={() => {
-          //   if (logStore.state.loadingEvents) {
-          //     return <ActivityIndicator size='small' color={COLORS.GRAY.toString()} />;
-          //   } else {
-          //     return null;
-          //   }
-          // }}
-          style={styles.scroll}
-          contentContainerStyle={styles.content}
-          onEndReachedThreshold={0}
-          onEndReached={this.handleLoadMore.bind(this)}
         />
+
+        <Title text={localeManager.t('LOG_SCREEN.TITLE')} color={COLORS.WHITE.toString()} />
+
+        <View style={styles.content}>
+          {logStore.state.loadingEvents && sections.length === 0 ? (
+            <ActivityIndicator color={COLORS.GRAY.toString()} size='large' />
+          ) : (
+            <SectionList
+              initialNumToRender={VARIABLES.LOG_EVENTS_PER_PAGE}
+              stickySectionHeadersEnabled={true}
+              sections={sections}
+              renderSectionHeader={({ section: { title } }) => (
+                <View style={styles.sectionTitle}>
+                  <Text style={styles.sectionTitleText}>{title}</Text>
+                </View>
+              )}
+              renderItem={({ item, index, section }) => {
+                const color = this.getEventColor(item.event);
+
+                return (
+                  <View key={item.id} style={styles.item}>
+                    <View style={styles.itemLeft}>
+                      <Text style={styles.time}>{item.time}</Text>
+                      <View
+                        style={[styles.eventPin, { backgroundColor: color.alpha(0.2).toString() }]}
+                      >
+                        {this.generateEventIcon(item.event, color)}
+                      </View>
+                    </View>
+
+                    <View style={styles.itemRight}>
+                      <Text style={styles.title}>{item.courseName}</Text>
+                      <Text style={styles.subtitle}>
+                        {localeManager.t(`LOG_EVENT.${String(item.title).toUpperCase()}`)}
+                      </Text>
+                    </View>
+
+                    {!item.isLast && (
+                      <View style={[styles.line, { backgroundColor: color.toString() }]} />
+                    )}
+                  </View>
+                );
+              }}
+              keyExtractor={(item, index) => {
+                return index.toString();
+              }}
+              // renderSectionFooter={() => {
+              //   if (logStore.state.loadingEvents) {
+              //     return <ActivityIndicator size='small' color={COLORS.GRAY.toString()} />;
+              //   } else {
+              //     return null;
+              //   }
+              // }}
+              onEndReachedThreshold={0}
+              onEndReached={this.handleLoadMore.bind(this)}
+              style={styles.scroll}
+            />
+          )}
+        </View>
       </SafeAreaView>
     );
   }
@@ -223,9 +241,23 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexGrow: 1,
     backgroundColor: COLORS.BLUE.toString(),
     alignItems: 'flex-start',
     justifyContent: 'space-between',
+  },
+
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
+  },
+
+  scroll: {
+    width: '100%',
   },
 
   eventPin: {
@@ -247,23 +279,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.MEDIUM,
     fontSize: VARIABLES.FONT_SIZE_TINY,
     color: COLORS.GRAY.toString(),
-  },
-
-  header: {
-    marginTop: VARIABLES.PADDING_BIG * 1.5,
-    marginBottom: VARIABLES.PADDING_MEDIUM,
-    paddingHorizontal: VARIABLES.PADDING_BIG,
-    flexShrink: 0,
-    height: 40,
-  },
-
-  content: {
-    // paddingVertical: VARIABLES.PADDING_BIG,
-  },
-
-  scroll: {
-    backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
-    width: '100%',
   },
 
   itemLeft: {

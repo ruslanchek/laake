@@ -22,8 +22,11 @@ export class Title extends React.PureComponent<IProps> {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 0.5,
-    fontSize: VARIABLES.FONT_SIZE_TINY,
+    marginTop: VARIABLES.PADDING_BIG * 1.5,
+    marginBottom: VARIABLES.PADDING_MEDIUM,
+    paddingHorizontal: VARIABLES.PADDING_BIG,
+    flexShrink: 0,
+    height: 40,
   },
 
   text: {
