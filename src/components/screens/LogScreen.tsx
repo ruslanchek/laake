@@ -54,7 +54,7 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
       }
 
       case ELogEvent.CourseUpdated: {
-        return COLORS.YELLOW;
+        return COLORS.GRAY;
       }
 
       case ELogEvent.MedicationTake: {
