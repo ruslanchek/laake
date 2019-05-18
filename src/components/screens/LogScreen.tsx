@@ -7,6 +7,7 @@ import {
   Text,
   SectionListData,
   ActivityIndicator,
+  Animated,
 } from 'react-native';
 import { Title } from '../ui/Title';
 import { COLORS } from '../../common/colors';
@@ -62,7 +63,7 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
       }
 
       case ELogEvent.MedicationTakeUndo: {
-        return COLORS.RED;
+        return COLORS.GRAY;
       }
 
       default: {
@@ -178,21 +179,30 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
           }}
         />
 
-        <Title text={localeManager.t('LOG_SCREEN.TITLE')} color={COLORS.WHITE.toString()} />
-
         <View style={styles.content}>
+          <Title
+            text={localeManager.t('LOG_SCREEN.TITLE')}
+            backgroundColor={COLORS.BLUE.toString()}
+            color={COLORS.WHITE.toString()}
+          />
+
           {logStore.state.loadingEvents && sections.length === 0 ? (
-            <ActivityIndicator color={COLORS.GRAY.toString()} size='large' />
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator color={COLORS.GRAY.toString()} size='large' />
+            </View>
           ) : (
             <SectionList
               initialNumToRender={VARIABLES.LOG_EVENTS_PER_PAGE}
               stickySectionHeadersEnabled={true}
+              stickyHeaderIndices={[0]}
               sections={sections}
-              renderSectionHeader={({ section: { title } }) => (
-                <View style={styles.sectionTitle}>
-                  <Text style={styles.sectionTitleText}>{title}</Text>
-                </View>
-              )}
+              renderSectionHeader={info => {
+                return (
+                  <View style={styles.sectionTitle}>
+                    <Text style={styles.sectionTitleText}>{info.section.title}</Text>
+                  </View>
+                );
+              }}
               renderItem={({ item, index, section }) => {
                 const color = this.getEventColor(item.event);
 
@@ -245,9 +255,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexGrow: 1,
-    backgroundColor: COLORS.BLUE.toString(),
     alignItems: 'flex-start',
     justifyContent: 'space-between',
+    backgroundColor: COLORS.BLUE.toString(),
+  },
+
+  loadingContainer: {
+    flex: 1,
+    flexShrink: 0,
+    justifyContent: 'center',
+    alignContent: 'center',
   },
 
   content: {
@@ -255,12 +272,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexGrow: 1,
+    flexShrink: 0,
     width: '100%',
     backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
   },
 
   scroll: {
     width: '100%',
+    flex: 1,
+    flexShrink: 0,
   },
 
   eventPin: {

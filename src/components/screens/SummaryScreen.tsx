@@ -1,12 +1,10 @@
 import React from 'react';
 import { NavigationContainerProps, NavigationEvents, ScrollView } from 'react-navigation';
-import { StyleSheet, SafeAreaView, View, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, Animated } from 'react-native';
 import { Title } from '../ui/Title';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
-import { StatisticsInfoBlock } from '../ui/StatisticsInfoBlock';
-import { Progress } from '../ui/Progress';
 import firebase from 'react-native-firebase';
 import { Notification } from 'react-native-firebase/notifications';
 
@@ -32,7 +30,12 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
             });
           }}
         />
-        <Title color={COLORS.BLACK.toString()} text='Summary' />
+
+        <Title
+          color={COLORS.BLACK.toString()}
+          text='Summary'
+          backgroundColor={COLORS.BLUE.toString()}
+        />
 
         <ScrollView>
           {Array.from(this.state.notifications.values()).map(n => {

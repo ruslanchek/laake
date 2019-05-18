@@ -1,32 +1,34 @@
 import React from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View, Animated } from 'react-native';
 import { VARIABLES } from '../../common/variables';
 import { FONTS } from '../../common/fonts';
 
 export interface IProps {
   text: string;
   color: string;
+  backgroundColor: string;
 }
 
 export class Title extends React.PureComponent<IProps> {
   render() {
-    const { text, color } = this.props;
+    const { text, color, backgroundColor } = this.props;
 
     return (
-      <View style={styles.container}>
-        <Text style={[styles.text, { color }]}>{text}</Text>
-      </View>
+      <Animated.View style={[styles.container, { backgroundColor }]}>
+        <Animated.Text style={[styles.text, { color }]}>{text}</Animated.Text>
+      </Animated.View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: VARIABLES.PADDING_BIG * 1.5,
-    marginBottom: VARIABLES.PADDING_MEDIUM,
+    paddingBottom: VARIABLES.PADDING_MEDIUM,
     paddingHorizontal: VARIABLES.PADDING_BIG,
-    flexShrink: 0,
-    height: 40,
+    top: 0,
+    height: 58,
+    justifyContent: 'flex-end',
+    width: '100%',
   },
 
   text: {

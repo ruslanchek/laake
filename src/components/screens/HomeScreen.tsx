@@ -68,6 +68,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
         <CustomStatusBar barStyle='light-content' />
+
         <View style={styles.inner}>
           <CalendarHeader
             todayWords={todayWords}
