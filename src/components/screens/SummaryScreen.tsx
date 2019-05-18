@@ -1,30 +1,49 @@
 import React from 'react';
 import { NavigationContainerProps, NavigationEvents } from 'react-navigation';
-import { StyleSheet, SafeAreaView, View } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text } from 'react-native';
 import { Title } from '../ui/Title';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { StatisticsInfoBlock } from '../ui/StatisticsInfoBlock';
 import { Progress } from '../ui/Progress';
+import firebase from 'react-native-firebase';
+import { Notification } from 'react-native-firebase/notifications';
 
-interface IState {}
+interface IState {
+  notifications: Notification[];
+}
 
 export class SummaryScreen extends React.Component<NavigationContainerProps, IState> {
-  state: IState = {};
+  state: IState = {
+    notifications: [],
+  };
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <CustomStatusBar barStyle='dark-content' />
         <NavigationEvents
-          onDidFocus={() => {
-            this.forceUpdate();
+          onDidFocus={async () => {
+            const notifications = await firebase.notifications().getScheduledNotifications();
+
+            this.setState({
+              notifications,
+            });
           }}
         />
         <Title color={COLORS.BLACK.toString()} text='Summary' />
 
-        <View style={styles.item}>
+        {Array.from(this.state.notifications.values()).map(n => {
+          return (
+            <View style={{ padding: 10 }}>
+              <Text>{n.notificationId}</Text>
+              <Text>{n.body}</Text>
+            </View>
+          );
+        })}
+
+        {/* <View style={styles.item}>
           <Progress
             strokeWidth={6}
             size={80}
@@ -32,7 +51,7 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
             percent={35}
             showPercentage={true}
           />
-        </View>
+        </View> */}
       </SafeAreaView>
     );
   }
