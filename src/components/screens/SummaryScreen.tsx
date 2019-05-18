@@ -7,6 +7,10 @@ import { VARIABLES } from '../../common/variables';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import firebase from 'react-native-firebase';
 import { Notification } from 'react-native-firebase/notifications';
+import { SummaryItem } from '../ui/SummaryItem';
+import { Progress } from '../ui/Progress';
+import { FONTS } from '../../common/fonts';
+import { Label } from '../ui/Label';
 
 interface IState {
   notifications: Notification[];
@@ -31,32 +35,53 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
           }}
         />
 
-        <Title
-          color={COLORS.BLACK.toString()}
-          text='Summary'
-          backgroundColor={COLORS.BLUE.toString()}
-        />
-
-        <ScrollView>
-          {Array.from(this.state.notifications.values()).map(n => {
-            return (
-              <View style={{ padding: 10 }}>
-                <Text>{n.notificationId}</Text>
-                <Text>{n.body}</Text>
-              </View>
-            );
-          })}
-        </ScrollView>
-
-        {/* <View style={styles.item}>
-          <Progress
-            strokeWidth={6}
-            size={80}
-            color={COLORS.RED.toString()}
-            percent={35}
-            showPercentage={true}
+        <ScrollView style={styles.scroll}>
+          <Title
+            color={COLORS.BLACK.toString()}
+            text='Summary'
+            backgroundColor={COLORS.GRAY_ULTRA_LIGHT.toString()}
           />
-        </View> */}
+
+          <View style={styles.content}>
+            <SummaryItem
+              title='Overall progress'
+              subtitle='Through all your courses'
+              right={
+                <Progress
+                  strokeWidth={4}
+                  size={50}
+                  color={COLORS.RED.toString()}
+                  percent={35}
+                  showPercentage={true}
+                />
+              }
+            />
+
+            <SummaryItem title='Medication taken' subtitle='All time' right={<Label>341</Label>} />
+
+            <SummaryItem
+              title='Days'
+              subtitle='Which you take any medications'
+              right={<Label>71</Label>}
+            />
+
+            <SummaryItem title='Skipped' subtitle='Medication takes' right={<Label>3</Label>} />
+
+            <SummaryItem title='Units' subtitle='Taken overall' right={<Label>560</Label>} />
+
+            {/* <SummaryItem
+              title='Days'
+              subtitle='Which you take any medications'
+              right={<Label>71</Label>}
+            />
+
+            <SummaryItem
+              title='Days'
+              subtitle='Which you take any medications'
+              right={<Label>71</Label>}
+            /> */}
+          </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -73,22 +98,10 @@ const styles = StyleSheet.create({
   content: {
     paddingVertical: VARIABLES.PADDING_BIG,
     paddingHorizontal: VARIABLES.PADDING_BIG,
+    flex: 1,
   },
 
-  item: {
-    elevation: 1,
-    shadowColor: COLORS.GRAY_PALE_LIGHT.toString(),
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3,
-    backgroundColor: COLORS.WHITE.toString(),
-    borderRadius: 6,
-    flex: 1,
-    flexGrow: 1,
-    margin: VARIABLES.PADDING_BIG,
-    padding: VARIABLES.PADDING_BIG,
+  scroll: {
+    width: '100%',
   },
 });
