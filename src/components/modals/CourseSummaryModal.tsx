@@ -78,7 +78,9 @@ export class CourseSummaryModal extends React.Component<
       unitsTotal: createCourseStore.state.unitsTotal,
     };
     const pill = PILLS_MAP.get(course.pillId) || PILLS[0];
-    const periodTitle = localeManager.t(periodTypeNames.get(course.periodType) || '');
+    const periodTitle = localeManager.t(periodTypeNames.get(course.periodType) || '', {
+      count: course.period,
+    });
     const timesTitle = `${localeManager.t('TIMES.TIMES', {
       value: course.times.toLocaleString(currentLocale),
       count: course.times,
