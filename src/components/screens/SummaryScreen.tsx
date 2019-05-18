@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainerProps, NavigationEvents } from 'react-navigation';
+import { NavigationContainerProps, NavigationEvents, ScrollView } from 'react-navigation';
 import { StyleSheet, SafeAreaView, View, Text } from 'react-native';
 import { Title } from '../ui/Title';
 import { COLORS } from '../../common/colors';
@@ -34,14 +34,16 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
         />
         <Title color={COLORS.BLACK.toString()} text='Summary' />
 
-        {Array.from(this.state.notifications.values()).map(n => {
-          return (
-            <View style={{ padding: 10 }}>
-              <Text>{n.notificationId}</Text>
-              <Text>{n.body}</Text>
-            </View>
-          );
-        })}
+        <ScrollView>
+          {Array.from(this.state.notifications.values()).map(n => {
+            return (
+              <View style={{ padding: 10 }}>
+                <Text>{n.notificationId}</Text>
+                <Text>{n.body}</Text>
+              </View>
+            );
+          })}
+        </ScrollView>
 
         {/* <View style={styles.item}>
           <Progress

@@ -100,11 +100,16 @@ class FirebaseManager extends Manager {
     return `${USERS_REF}/${this.uid}/`;
   }
 
-  public createNotification(inotification: ILocalNotification) {
+  public createNotification(inotification: ILocalNotification | null) {
+    if (!inotification) {
+      return;
+    }
+
     const notification = new firebase.notifications.Notification()
       .setNotificationId(inotification.id)
       .setTitle(inotification.title)
-      .setBody(inotification.message);
+      .setBody(inotification.message)
+      .setSound('default');
 
     firebase.notifications().scheduleNotification(notification, {
       fireDate: inotification.date.getTime(),
@@ -119,7 +124,15 @@ class FirebaseManager extends Manager {
     firebase.notifications().removeAllDeliveredNotifications();
   }
 
-  private generateNotification(course: ICourse, take: ITake, dayIndex: number): ILocalNotification {
+  private generateNotification(
+    course: ICourse,
+    take: ITake,
+    dayIndex: number,
+  ): ILocalNotification | null {
+    if (!course.id) {
+      return null;
+    }
+
     const id = this.createNotificationId(course.id, dayIndex, take.index);
     const date = addDays(new Date(), dayIndex);
 
@@ -134,8 +147,8 @@ class FirebaseManager extends Manager {
     };
   }
 
-  private generateNotificationsForCourse(course: ICourse): ILocalNotification[] {
-    const notifications: ILocalNotification[] = [];
+  private generateNotificationsForCourse(course: ICourse): Array<ILocalNotification | null> {
+    const notifications: Array<ILocalNotification | null> = [];
     const startDate = new Date(course.startDate);
     const endDate = new Date(course.endDate);
     const days = courseManager.getCourseDaysLength(startDate, endDate);
@@ -144,7 +157,7 @@ class FirebaseManager extends Manager {
     CommonService.times(days, i => {
       const dayIndex = startDayIndex + i;
       course.takes.forEach(take => {
-        notifications.push(this.generateNotification(course, take, i));
+        notifications.push(this.generateNotification(course, take, dayIndex));
       });
     });
 
