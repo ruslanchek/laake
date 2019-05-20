@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     paddingBottom: VARIABLES.PADDING_MEDIUM,
     paddingHorizontal: VARIABLES.PADDING_BIG,
     top: 0,
-    height: 58,
+    height: 65,
     justifyContent: 'flex-end',
     width: '100%',
   },

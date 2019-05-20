@@ -57,6 +57,12 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
               }
             />
 
+            <SummaryItem
+              title='Total courses'
+              subtitle='Compared to each completed'
+              right={<Label>2/3</Label>}
+            />
+
             <SummaryItem title='Medication taken' subtitle='All time' right={<Label>341</Label>} />
 
             <SummaryItem
