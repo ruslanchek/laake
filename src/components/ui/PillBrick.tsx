@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     zIndex: 2,
-    borderColor: COLORS.GRAY_LIGHT.toString(),
+    borderColor: COLORS.BLUE.toString(),
     borderRadius: VARIABLES.BORDER_RADIUS_BIG,
   },
 

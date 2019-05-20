@@ -24,6 +24,7 @@ import { CommonService } from '../../services/CommonService';
 import { FormButton, EFormButtonTheme } from '../ui/FormButton';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { localeManager } from '../../managers/LocaleManager';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 enum ESKU {
   Month = 'laakepromonth',
@@ -45,6 +46,11 @@ interface IState {
 }
 
 export class PurchaseScreen extends React.Component<NavigationContainerProps, IState> {
+  static navigationOptions = {
+    header: null,
+    mode: 'modal',
+  };
+
   state: IState = {
     logoAnimation: new Animated.Value(0),
     wavesAnimation: new Animated.Value(0),
@@ -92,126 +98,145 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
     return (
       <ImageBackground source={BGS.DEEP_PURPLE} style={styles.container}>
         <CustomStatusBar barStyle='light-content' />
+
         <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
-          {loading ? (
-            <ActivityIndicator color={COLORS.WHITE.toString()} size='large' />
-          ) : (
-            <ScrollView
-              contentContainerStyle={styles.scrollViewContainer}
-              style={styles.scrollView}
-              horizontal={false}
-            >
-              <View style={styles.logoHolder}>
-                <Animated.View
-                  style={{
-                    opacity: wavesAnimation.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0, 0.8],
-                    }),
-                  }}
-                >
-                  <Image source={BGS.WAVES} style={styles.waves} />
-                </Animated.View>
-                <Animated.View
-                  style={[
-                    styles.logoContainer,
-                    {
-                      opacity: logoAnimation,
-                      transform: [
-                        {
-                          scale: logoAnimation.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [1.05, 1],
-                          }),
-                        },
-                      ],
-                    },
-                  ]}
-                >
-                  <Image source={BGS.LOGO} style={styles.logo} />
-                </Animated.View>
-              </View>
-
-              <Appear
-                customStyles={styles.texts}
-                show={animationTrigger}
-                type={EAppearType.Drop}
-                delay={400}
-              >
-                <Text style={styles.title}>Subscribe to get more from Läke Pro</Text>
-
-                <View style={styles.textPartsHolder}>
-                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_1')}</Text>
-                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_2')}</Text>
-                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_3')}</Text>
-                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_4')}</Text>
-                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_5')}</Text>
-                  <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_6')}</Text>
+          <View style={styles.content}>
+            <View style={styles.closeContainer}>
+              <TouchableOpacity onPress={this.handleClose}>
+                <View style={styles.close}>
+                  <Icon name='ios-close' size={52} color={COLORS.WHITE.toString()} />
                 </View>
-              </Appear>
+              </TouchableOpacity>
+            </View>
 
-              <Appear
-                show={animationTrigger}
-                type={EAppearType.Drop}
-                delay={450}
-                customStyles={styles.buttons}
+            {loading ? (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator color={COLORS.WHITE.toString()} size='large' />
+              </View>
+            ) : (
+              <ScrollView
+                contentContainerStyle={styles.scrollViewContainer}
+                style={styles.scrollView}
+                horizontal={false}
               >
-                {subscriptions.map(product => {
-                  switch (product.productId) {
-                    case ESKU.Month: {
-                      return (
-                        <FormButton
-                          customStyles={styles.button}
-                          theme={EFormButtonTheme.Blue}
-                          isDisabled={processingProduct === ESKU.Annual}
-                          isLoading={processingProduct === ESKU.Month}
-                          onPress={this.handlePurchase.bind(this, ESKU.Month)}
-                        >
-                          <Text style={styles.buttonText}>
-                            {localeManager.t('SUBSCRIPTION.MONTHLY')}
-                          </Text>
-                          <View style={styles.buttonPrice}>
-                            <Text style={styles.buttonPriceText}>{product.localizedPrice}</Text>
-                          </View>
-                        </FormButton>
-                      );
-                    }
+                <View style={styles.logoHolder}>
+                  <Animated.View
+                    style={{
+                      opacity: wavesAnimation.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 0.8],
+                      }),
+                    }}
+                  >
+                    <Image source={BGS.WAVES} style={styles.waves} />
+                  </Animated.View>
+                  <Animated.View
+                    style={[
+                      styles.logoContainer,
+                      {
+                        opacity: logoAnimation,
+                        transform: [
+                          {
+                            scale: logoAnimation.interpolate({
+                              inputRange: [0, 1],
+                              outputRange: [1.05, 1],
+                            }),
+                          },
+                        ],
+                      },
+                    ]}
+                  >
+                    <Image source={BGS.LOGO} style={styles.logo} />
+                  </Animated.View>
+                </View>
 
-                    case ESKU.Annual: {
-                      return (
-                        <FormButton
-                          customStyles={styles.button}
-                          theme={EFormButtonTheme.Purple}
-                          isDisabled={processingProduct === ESKU.Month}
-                          isLoading={processingProduct === ESKU.Annual}
-                          onPress={this.handlePurchase.bind(this, ESKU.Annual)}
-                        >
-                          <Text style={styles.buttonText}>
-                            {localeManager.t('SUBSCRIPTION.ANNUAL')}
-                          </Text>
-                          <View style={styles.buttonPrice}>
-                            <Text style={styles.buttonPriceText}>{product.localizedPrice}</Text>
-                          </View>
-                        </FormButton>
-                      );
-                    }
-                  }
-                })}
-              </Appear>
+                <Appear
+                  customStyles={styles.texts}
+                  show={animationTrigger}
+                  type={EAppearType.Drop}
+                  delay={400}
+                >
+                  <Text style={styles.title}>Subscribe to get more from Läke Pro</Text>
 
-              <Appear show={animationTrigger} type={EAppearType.Drop} delay={500}>
-                <TouchableOpacity style={styles.restore} onPress={this.handleRestorePurchases}>
-                  <Text style={styles.restoreText}>
-                    {localeManager.t('SUBSCRIPTION.RESTORE_PURCHASES')}
-                  </Text>
-                </TouchableOpacity>
-              </Appear>
-            </ScrollView>
-          )}
+                  <View style={styles.textPartsHolder}>
+                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_1')}</Text>
+                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_2')}</Text>
+                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_3')}</Text>
+                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_4')}</Text>
+                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_5')}</Text>
+                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_6')}</Text>
+                  </View>
+                </Appear>
+
+                <Appear
+                  show={animationTrigger}
+                  type={EAppearType.Drop}
+                  delay={450}
+                  customStyles={styles.buttons}
+                >
+                  {subscriptions.map(product => {
+                    switch (product.productId) {
+                      case ESKU.Month: {
+                        return (
+                          <FormButton
+                            customStyles={styles.button}
+                            theme={EFormButtonTheme.Blue}
+                            isDisabled={processingProduct === ESKU.Annual}
+                            isLoading={processingProduct === ESKU.Month}
+                            onPress={this.handlePurchase.bind(this, ESKU.Month)}
+                          >
+                            <Text style={styles.buttonText}>
+                              {localeManager.t('SUBSCRIPTION.MONTHLY')}
+                            </Text>
+                            <View style={styles.buttonPrice}>
+                              <Text style={styles.buttonPriceText}>{product.localizedPrice}</Text>
+                            </View>
+                          </FormButton>
+                        );
+                      }
+
+                      case ESKU.Annual: {
+                        return (
+                          <FormButton
+                            customStyles={styles.button}
+                            theme={EFormButtonTheme.Purple}
+                            isDisabled={processingProduct === ESKU.Month}
+                            isLoading={processingProduct === ESKU.Annual}
+                            onPress={this.handlePurchase.bind(this, ESKU.Annual)}
+                          >
+                            <Text style={styles.buttonText}>
+                              {localeManager.t('SUBSCRIPTION.ANNUAL')}
+                            </Text>
+                            <View style={styles.buttonPrice}>
+                              <Text style={styles.buttonPriceText}>{product.localizedPrice}</Text>
+                            </View>
+                          </FormButton>
+                        );
+                      }
+                    }
+                  })}
+                </Appear>
+
+                <Appear show={animationTrigger} type={EAppearType.Drop} delay={500}>
+                  <TouchableOpacity style={styles.restore} onPress={this.handleRestorePurchases}>
+                    <Text style={styles.restoreText}>
+                      {localeManager.t('SUBSCRIPTION.RESTORE_PURCHASES')}
+                    </Text>
+                  </TouchableOpacity>
+                </Appear>
+              </ScrollView>
+            )}
+          </View>
         </SafeAreaView>
       </ImageBackground>
     );
   }
+
+  handleClose = () => {
+    if (this.props.navigation) {
+      this.props.navigation.goBack();
+    }
+  };
 
   startAnimations() {
     Animated.timing(this.state.logoAnimation, {
@@ -282,7 +307,40 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
 const LOGO_HOLDER_SIZE = 320;
 
 const styles = StyleSheet.create({
+  closeContainer: {
+    width: 55,
+    height: 55,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 2,
+  },
+
+  close: {
+    width: 52,
+    height: 52,
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 0.75,
+  },
+
+  content: {
+    flex: 1,
+    flexShrink: 0,
+    width: '100%',
+    position: 'relative',
+  },
+
+  loadingContainer: {
+    flex: 1,
+    flexShrink: 0,
+    justifyContent: 'center',
+    alignContent: 'center',
+    width: '100%',
+  },
+
   container: {
+    width: '100%',
     flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',

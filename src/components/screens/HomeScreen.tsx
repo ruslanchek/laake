@@ -25,7 +25,6 @@ import { CourseCard } from '../blocks/CourseCard';
 import { ITake, ITakeTime } from '../../common/take';
 import { ICourse } from '../../common/course';
 import { createCourseManager } from '../../managers/CreateCourseManager';
-import { isAfter, isBefore, isSameDay, isFuture } from 'date-fns';
 import { FONTS } from '../../common/fonts';
 import { Appear, EAppearType } from '../common/Appear';
 import { CommonService } from '../../services/CommonService';

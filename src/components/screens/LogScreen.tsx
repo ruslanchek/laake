@@ -22,6 +22,7 @@ import { ELogEvent, logManager } from '../../managers/LogManager';
 import { localeManager } from '../../managers/LocaleManager';
 import Color from 'color';
 import { FONTS } from '../../common/fonts';
+import { purchaseManager } from '../../managers/PurchaseManager';
 
 interface IState {}
 
@@ -172,7 +173,9 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
 
         <NavigationEvents
           onWillFocus={() => {
-            logManager.reinitEvents();
+            if (purchaseManager.navigatePro(this.props.navigation)) {
+              logManager.reinitEvents();
+            }
           }}
           onDidBlur={() => {
             logManager.resetEvents();

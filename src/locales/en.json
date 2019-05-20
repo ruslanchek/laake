@@ -57,7 +57,8 @@
     "SELECT_PICTURE": "Select picture",
     "TAKE_PICTURE": "Take picture",
     "DESCRIPTION": "Select or upload image for the course",
-    "CUSTOM_IMAGE": "Custom"
+    "CUSTOM_IMAGE": "Custom",
+    "UPLOAD_TITLE": "Uploading image"
   },
   "IMAGE_CROPPING": {
     "SELECT_AREA": "Adjust image area",

@@ -2,7 +2,7 @@ import firebase from 'react-native-firebase';
 import { Manager } from './Manager';
 import { courseStore, createTakeTimeIndex } from '../stores/courseStore';
 import { createCourseStore, ECourseEditMode } from '../stores/createCourseStore';
-import { ICourse, ICourseStatistics } from '../common/course';
+import { ICourse, ICourseStatistics, ICourseImage } from '../common/course';
 import { ECollectionName, firebaseManager } from './FirebaseManager';
 import {
   isToday,
@@ -101,6 +101,24 @@ class CourseManager extends Manager {
       });
 
       this.subscribeToCourses();
+    }
+  }
+
+  public async getCourseImages() {
+    try {
+      const snapshot = await firebaseManager.getCollection([ECollectionName.Images]).get();
+
+      snapshot.docs.forEach(doc => {
+        if (doc.id) {
+          const event: ICourseImage = {
+            id: doc.id,
+            ...doc.data(),
+          } as ICourseImage;
+          courseStore.state.courseImages.set(doc.id, event);
+        }
+      });
+    } catch (e) {
+      firebaseManager.logError(432901, e);
     }
   }
 

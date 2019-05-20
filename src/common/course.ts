@@ -26,3 +26,8 @@ export interface ICourse extends ICourseStatistics {
   endDate: number;
   notificationsEnabled: boolean;
 }
+
+export interface ICourseImage {
+  downloadURL: string;
+  date: number;
+}

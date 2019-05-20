@@ -71,10 +71,12 @@ const TodayStack = createStackNavigator(
     [ERouteName.TodayEditCourseScreen]: {
       screen: CourseSummaryModal,
     },
+    [ERouteName.PurchaseScreen]: {
+      screen: PurchaseScreen,
+    },
   },
   {
     initialRouteName: ERouteName.Today,
-    mode: 'card',
     headerMode: 'none',
   },
 );
@@ -91,7 +93,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: LogScreen,
     },
     [ERouteName.Settings]: {
-      screen: PurchaseScreen,
+      screen: LogScreen,
     },
   },
   {

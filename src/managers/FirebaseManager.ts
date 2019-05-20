@@ -9,6 +9,11 @@ import { ITake } from '../common/take';
 
 const USERS_REF = 'users';
 
+interface IUploadResult {
+  error: string | null;
+  uri: string | null;
+}
+
 interface ILocalNotification {
   id: string;
   date: Date;
@@ -21,6 +26,7 @@ export enum ECollectionName {
   TakeTimes = 'takeTimes',
   NotificationTokens = 'notificationTokens',
   Log = 'log',
+  Images = 'images',
 }
 
 class FirebaseManager extends Manager {
@@ -56,23 +62,62 @@ class FirebaseManager extends Manager {
     return firebase.firestore().collection(ref);
   }
 
-  public async uploadFile(filename: string, file: string) {
-    const storageRef = firebase.storage().ref();
-    const uploadTask = await storageRef.child(`${this.userRef}pills/${filename}`).putFile(file, {
-      contentType: 'image/jpeg',
-    });
+  public async uploadFile(
+    filename: string,
+    file: string,
+    onProgress: (progress: number) => void,
+    getCancelHandler: (cancelHandler: () => void) => void,
+  ): Promise<IUploadResult> {
+    return new Promise<IUploadResult>((resolve, reject) => {
+      const storageRef = firebase.storage().ref();
+      const uploadTask = storageRef.child(`${this.userRef}pills/${filename}`).putFile(file, {
+        contentType: 'image/jpeg',
+      });
 
-    if (uploadTask.state === 'success') {
-      return {
-        error: null,
-        uri: uploadTask.downloadURL,
-      };
-    } else {
-      return {
-        error: null,
-        uri: '',
-      };
-    }
+      getCancelHandler(() => {
+        uploadTask.cancel();
+      });
+
+      uploadTask.on(
+        'state_changed' as any,
+        snapshot => {
+          let progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+
+          if (progress > 100) {
+            progress = 100;
+          }
+
+          onProgress(progress);
+        },
+        error => {
+          resolve({
+            error: error.message,
+            uri: null,
+          });
+        },
+        snapshot => {
+          snapshot.ref
+            .getDownloadURL()
+            .then(async downloadURL => {
+              await this.getCollection([ECollectionName.Images]).add({
+                downloadURL,
+                date: Date.now(),
+              });
+
+              resolve({
+                error: null,
+                uri: downloadURL,
+              });
+            })
+            .catch(error => {
+              resolve({
+                error: error.message,
+                uri: null,
+              });
+            });
+        },
+      );
+    });
   }
 
   private async updateFCMToken() {

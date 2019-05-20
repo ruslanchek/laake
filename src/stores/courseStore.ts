@@ -1,10 +1,11 @@
 import { Store } from 'react-stores';
-import { ICourse } from '../common/course';
+import { ICourse, ICourseImage } from '../common/course';
 import { ITakeTime } from '../common/take';
 
 interface CourseStoreState {
   courses: Map<string, ICourse>;
   takeTimes: Map<string, ITakeTime>;
+  courseImages: Map<string, ICourseImage>;
   loadingCourses: boolean;
   loadingTakeTimes: boolean;
   takeTimesUpdateTime: number;
@@ -22,6 +23,7 @@ export function createTakeTimeIndex(
 const initialState: CourseStoreState = {
   courses: new Map<string, ICourse>(),
   takeTimes: new Map<string, ITakeTime>(),
+  courseImages: new Map<string, ICourseImage>(),
   loadingCourses: false,
   loadingTakeTimes: false,
   takeTimesUpdateTime: 0,
