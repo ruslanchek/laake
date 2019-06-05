@@ -21,6 +21,7 @@ import { managers } from './src/managers/managers';
 import { PurchaseScreen } from './src/components/screens/PurchaseScreen';
 import { LogScreen } from './src/components/screens/LogScreen';
 import { SummaryScreen } from './src/components/screens/SummaryScreen';
+import { SettingsScreen } from './src/components/screens/SettingsScreen';
 
 console.disableYellowBox = true;
 
@@ -93,7 +94,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: LogScreen,
     },
     [ERouteName.Settings]: {
-      screen: LogScreen,
+      screen: SettingsScreen,
     },
   },
   {
