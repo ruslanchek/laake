@@ -322,13 +322,13 @@ class CourseManager extends Manager {
       ...courseStatistics,
     };
 
-    if (course.notificationsEnabled) {
-      const creatingResult = await firebaseManager
-        .getCollection([ECollectionName.Courses])
-        .add(course);
+    const creatingResult = await firebaseManager
+      .getCollection([ECollectionName.Courses])
+      .add(course);
 
-      logManager.logEvent(ELogEvent.CourseCreated, title);
+    logManager.logEvent(ELogEvent.CourseCreated, title);
 
+    if (course.notificationsEnabled && creatingResult) {
       const createdCourseDocument = await creatingResult.get();
       const createdCourse: ICourse = {
         id: createdCourseDocument.id,
