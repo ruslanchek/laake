@@ -1,20 +1,18 @@
 import React from 'react';
 import { NavigationContainerProps, NavigationEvents, ScrollView } from 'react-navigation';
-import { StyleSheet, SafeAreaView, View, Text, Animated } from 'react-native';
+import { StyleSheet, SafeAreaView, View } from 'react-native';
 import { Title } from '../ui/Title';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
-import firebase from 'react-native-firebase';
-import { Notification } from 'react-native-firebase/notifications';
 import { SummaryItem } from '../ui/SummaryItem';
 import { Progress } from '../ui/Progress';
-import { FONTS } from '../../common/fonts';
 import { Label } from '../ui/Label';
 import { followStore } from 'react-stores';
 import { courseStore } from '../../stores/courseStore';
 import { ICourse } from '../../common/course';
 import { isBefore, isAfter, isSameDay } from 'date-fns';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface IState {
   overallProgress: number;
@@ -119,6 +117,14 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
 
           <View style={styles.content}>
             <SummaryItem
+              icon={
+                <Icon
+                  style={{ top: 0.5 }}
+                  name={'ios-ribbon'}
+                  size={24}
+                  color={COLORS.RED.toString()}
+                />
+              }
               title='Overall progress'
               subtitle='Through all your courses'
               right={
@@ -133,27 +139,40 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
             />
 
             <SummaryItem
-              title='Courses'
-              subtitle='Total'
+              icon={
+                <Icon style={{}} name={'ios-podium'} size={23} color={COLORS.GREEN.toString()} />
+              }
+              title='Total courses'
+              subtitle='Courses'
               right={<Label>{courseStore.state.courses.size}</Label>}
             />
 
             <SummaryItem
-              title='Courses'
-              subtitle='Completed'
+              icon={
+                <Icon
+                  style={{ top: -4 }}
+                  name={'ios-done-all'}
+                  size={32}
+                  color={COLORS.GREEN.toString()}
+                />
+              }
+              title='Completed courses'
+              subtitle='Courses'
               right={<Label>{completedCourses.length}</Label>}
             />
 
             <SummaryItem
-              title='Medication taken'
-              subtitle='All time'
+              icon={
+                <Icon
+                  style={{ top: -1 }}
+                  name={'ios-medical'}
+                  size={24}
+                  color={COLORS.GREEN.toString()}
+                />
+              }
+              title='Take times'
+              subtitle='All courses'
               right={<Label>{medicationTakenOverall}</Label>}
-            />
-
-            <SummaryItem
-              title='Skipped'
-              subtitle='Medication takes'
-              right={<Label>{medicationTakesOverall}</Label>}
             />
           </View>
         </ScrollView>

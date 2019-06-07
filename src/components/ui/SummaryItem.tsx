@@ -8,16 +8,20 @@ interface IProps {
   title: string;
   subtitle: string;
   right: React.ReactNode;
+  icon: React.ReactNode;
 }
 
 export class SummaryItem extends React.PureComponent<IProps> {
   render() {
-    const { title, subtitle, right } = this.props;
+    const { title, subtitle, right, icon } = this.props;
 
     return (
       <View style={styles.container}>
         <View style={styles.left}>
-          <Text style={styles.title}>{title}</Text>
+          <View style={styles.titleBlock}>
+            <View style={styles.icon}>{icon}</View>
+            <Text style={styles.title}>{title}</Text>
+          </View>
           <Text style={styles.subtitle}>{subtitle}</Text>
         </View>
         <View style={styles.right}>{right}</View>
@@ -51,6 +55,14 @@ const styles = StyleSheet.create({
   left: {},
 
   right: {},
+
+  titleBlock: {
+    flexDirection: 'row',
+  },
+
+  icon: {
+    width: 26,
+  },
 
   title: {
     fontSize: VARIABLES.FONT_SIZE_REGULAR,

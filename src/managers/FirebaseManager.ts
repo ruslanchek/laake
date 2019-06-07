@@ -187,7 +187,7 @@ class FirebaseManager extends Manager {
     return {
       id,
       date,
-      title: `It's take time`,
+      title: `It's take time ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`,
       message: `Don't forget to have your ${course.title}`,
     };
   }

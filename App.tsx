@@ -22,6 +22,7 @@ import { PurchaseScreen } from './src/components/screens/PurchaseScreen';
 import { LogScreen } from './src/components/screens/LogScreen';
 import { SummaryScreen } from './src/components/screens/SummaryScreen';
 import { SettingsScreen } from './src/components/screens/SettingsScreen';
+import { SettingsNotificationsModal } from './src/components/modals/SettingsNotificationsModal';
 
 console.disableYellowBox = true;
 
@@ -82,6 +83,21 @@ const TodayStack = createStackNavigator(
   },
 );
 
+const SettingsStack = createStackNavigator(
+  {
+    [ERouteName.Settings]: {
+      screen: SettingsScreen,
+    },
+    [ERouteName.SettingsNotificationModal]: {
+      screen: SettingsNotificationsModal,
+    },
+  },
+  {
+    initialRouteName: ERouteName.Settings,
+    headerMode: 'none',
+  },
+);
+
 const TabNavigator = createBottomTabNavigator(
   {
     [ERouteName.Today]: {
@@ -94,7 +110,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: LogScreen,
     },
     [ERouteName.Settings]: {
-      screen: SettingsScreen,
+      screen: SettingsStack,
     },
   },
   {

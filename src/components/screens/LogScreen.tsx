@@ -169,13 +169,11 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
 
     return (
       <SafeAreaView style={styles.container}>
-        <CustomStatusBar barStyle='light-content' />
+        <CustomStatusBar barStyle='dark-content' />
 
         <NavigationEvents
           onWillFocus={() => {
-            if (purchaseManager.navigatePro(this.props.navigation)) {
-              logManager.reinitEvents();
-            }
+            logManager.reinitEvents();
           }}
           onDidBlur={() => {
             logManager.resetEvents();
@@ -185,8 +183,8 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
         <View style={styles.content}>
           <Title
             text={localeManager.t('LOG_SCREEN.TITLE')}
-            backgroundColor={COLORS.BLUE.toString()}
-            color={COLORS.WHITE.toString()}
+            backgroundColor={COLORS.GRAY_ULTRA_LIGHT.toString()}
+            color={COLORS.BLACK.toString()}
           />
 
           {logStore.state.loadingEvents && sections.length === 0 ? (
@@ -260,7 +258,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    backgroundColor: COLORS.BLUE.toString(),
+    backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
   },
 
   loadingContainer: {

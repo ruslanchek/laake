@@ -6,6 +6,7 @@ export enum ERouteName {
   Summary = 'Summary',
   Log = 'Log',
   Settings = 'Settings',
+  SettingsNotificationModal = 'SettingsNotificationModal',
   CourseTypeModal = 'CourseTypeModal',
   CourseDurationModal = 'CourseDurationModal',
   CourseOftennessModal = 'CourseOftennessModal',

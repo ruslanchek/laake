@@ -19,7 +19,6 @@ import Permissions from 'react-native-permissions';
 import { PillBrick } from '../ui/PillBrick';
 import ImagePicker, { Image } from 'react-native-image-crop-picker';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Progress } from '../ui/Progress';
 import { FONTS } from '../../common/fonts';
 import { Appear, EAppearType } from '../common/Appear';
