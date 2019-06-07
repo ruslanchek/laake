@@ -110,10 +110,10 @@ class CourseManager extends Manager {
 
       snapshot.docs.forEach(doc => {
         if (doc.id) {
-          const event: ICourseImage = {
+          const event: ICourseImage = ({
             id: doc.id,
             ...doc.data(),
-          } as ICourseImage;
+          } as unknown) as ICourseImage;
           courseStore.state.courseImages.set(doc.id, event);
         }
       });
