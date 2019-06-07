@@ -309,6 +309,8 @@ export class CourseSummaryModal extends React.Component<
   };
 
   handleNotifications = () => {
+    CommonService.haptic();
+
     this.setState(
       {
         notificationsLoading: true,
