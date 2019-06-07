@@ -173,13 +173,14 @@ class FirebaseManager extends Manager {
     course: ICourse,
     take: ITake,
     dayIndex: number,
+    index: number,
   ): ILocalNotification | null {
     if (!course.id) {
       return null;
     }
 
     const id = this.createNotificationId(course.id, dayIndex, take.index);
-    const date = addDays(new Date(), dayIndex);
+    const date = addDays(new Date(), index);
 
     date.setHours(take.hours);
     date.setMinutes(take.minutes);
@@ -204,7 +205,7 @@ class FirebaseManager extends Manager {
     CommonService.times(days, i => {
       const dayIndex = startDayIndex + i;
       course.takes.forEach(take => {
-        notifications.push(this.generateNotification(course, take, dayIndex));
+        notifications.push(this.generateNotification(course, take, dayIndex, i));
       });
     });
 
