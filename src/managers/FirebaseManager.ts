@@ -190,7 +190,7 @@ class FirebaseManager extends Manager {
       title: `It's take time`,
       message: `Don't forget to have your ${
         course.title
-      } ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`,
+      } date: ${date} new Date: ${new Date()} dayIndex: ${dayIndex}`,
     };
   }
 
