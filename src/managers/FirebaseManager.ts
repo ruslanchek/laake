@@ -240,8 +240,8 @@ class FirebaseManager extends Manager {
       .cancelNotification(this.createNotificationId(courseId, dayIndex, takeIndex));
   }
 
-  public createNotificationByTake(course: ICourse, take: ITake, dayIndex: number) {
-    const notification = this.generateNotification(course, take, dayIndex);
+  public createNotificationByTake(course: ICourse, take: ITake, dayIndex: number, index: number) {
+    const notification = this.generateNotification(course, take, dayIndex, index);
 
     this.createNotification(notification);
   }

@@ -516,7 +516,7 @@ class CourseManager extends Manager {
         if (isTaken) {
           firebaseManager.cancelNotificationByTake(course.id, take.index, notificationDayIndex);
         } else {
-          firebaseManager.createNotificationByTake(course, take, notificationDayIndex);
+          firebaseManager.createNotificationByTake(course, take, notificationDayIndex, take.index);
         }
       }
 
