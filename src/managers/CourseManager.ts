@@ -256,8 +256,11 @@ class CourseManager extends Manager {
         await this.recalculateCourseStatistics(currentCourseId);
         await this.subscribeToTakeTimes();
 
-        firebaseManager.cancelNotificationsForCourse(course);
-        firebaseManager.createNotificationsForCourse(course);
+        firebaseManager.cancelNotificationsForCourse({ ...course, ...{ id: currentCourseId } });
+
+        if (course.notificationsEnabled) {
+          firebaseManager.createNotificationsForCourse({ ...course, ...{ id: currentCourseId } });
+        }
       }
     }
   }
@@ -512,11 +515,17 @@ class CourseManager extends Manager {
 
       if (course.notificationsEnabled && isTaken !== null) {
         const notificationDayIndex = differenceInDays(commonStore.state.today, new Date(0));
+        const notificationIndex = differenceInDays(commonStore.state.today, course.startDate);
 
         if (isTaken) {
           firebaseManager.cancelNotificationByTake(course.id, take.index, notificationDayIndex);
         } else {
-          firebaseManager.createNotificationByTake(course, take, notificationDayIndex, take.index);
+          firebaseManager.createNotificationByTake(
+            course,
+            take,
+            notificationDayIndex,
+            notificationIndex,
+          );
         }
       }
 

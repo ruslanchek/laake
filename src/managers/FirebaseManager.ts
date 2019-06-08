@@ -180,21 +180,18 @@ class FirebaseManager extends Manager {
     }
 
     const id = this.createNotificationId(course.id, dayIndex, take.index);
-
-    console.log(id);
-
     const date = addDays(new Date(), index);
 
     date.setHours(take.hours);
     date.setMinutes(take.minutes);
 
+    console.log('id', id, 'date', date);
+
     return {
       id,
       date,
       title: `It's take time`,
-      message: `Don't forget to have your ${
-        course.title
-      } date: ${date} new Date: ${new Date()} dayIndex: ${dayIndex}`,
+      message: `Don't forget to have your ${course.title} date: ${date} dayIndex: ${dayIndex}`,
     };
   }
 
@@ -204,6 +201,8 @@ class FirebaseManager extends Manager {
     const endDate = new Date(course.endDate);
     const days = courseManager.getCourseDaysLength(startDate, endDate);
     const startDayIndex = courseManager.getDayIndex(startDate);
+
+    console.log('startDate', startDate, 'endDate', endDate, 'days', days);
 
     CommonService.times(days, i => {
       const dayIndex = startDayIndex + i;
