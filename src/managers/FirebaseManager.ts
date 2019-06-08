@@ -180,6 +180,9 @@ class FirebaseManager extends Manager {
     }
 
     const id = this.createNotificationId(course.id, dayIndex, take.index);
+
+    console.log(id);
+
     const date = addDays(new Date(), index);
 
     date.setHours(take.hours);
@@ -200,7 +203,7 @@ class FirebaseManager extends Manager {
     const startDate = new Date(course.startDate);
     const endDate = new Date(course.endDate);
     const days = courseManager.getCourseDaysLength(startDate, endDate);
-    const startDayIndex = courseManager.getDayIndex(startDate) + 1;
+    const startDayIndex = courseManager.getDayIndex(startDate);
 
     CommonService.times(days, i => {
       const dayIndex = startDayIndex + i;
@@ -224,7 +227,7 @@ class FirebaseManager extends Manager {
     const startDate = new Date(course.startDate);
     const endDate = new Date(course.endDate);
     const days = courseManager.getCourseDaysLength(startDate, endDate);
-    const startDayIndex = courseManager.getDayIndex(startDate) + 1;
+    const startDayIndex = courseManager.getDayIndex(startDate);
 
     CommonService.times(days, i => {
       const dayIndex = startDayIndex + i;
@@ -235,12 +238,16 @@ class FirebaseManager extends Manager {
   }
 
   public cancelNotificationByTake(courseId: string, takeIndex: number, dayIndex: number) {
+    console.log(this.createNotificationId(courseId, dayIndex, takeIndex));
+
     firebase
       .notifications()
       .cancelNotification(this.createNotificationId(courseId, dayIndex, takeIndex));
   }
 
   public createNotificationByTake(course: ICourse, take: ITake, dayIndex: number, index: number) {
+    console.log(index);
+
     const notification = this.generateNotification(course, take, dayIndex, index);
 
     this.createNotification(notification);

@@ -511,7 +511,7 @@ class CourseManager extends Manager {
       }
 
       if (course.notificationsEnabled && isTaken !== null) {
-        const notificationDayIndex = differenceInDays(commonStore.state.today, new Date());
+        const notificationDayIndex = differenceInDays(commonStore.state.today, new Date(0));
 
         if (isTaken) {
           firebaseManager.cancelNotificationByTake(course.id, take.index, notificationDayIndex);

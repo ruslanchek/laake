@@ -30,7 +30,16 @@ export class SettingsNotificationsModal extends React.Component<NavigationContai
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
         <View style={styles.contentContainer}>
-          <Header title={localeManager.t('COMMON.BACK')} next={null} theme={EHeaderTheme.Dark} />
+          <Header
+            title={localeManager.t('COMMON.BACK')}
+            next={{
+              title: 'Clear',
+              action: () => {
+                firebase.notifications().removeAllDeliveredNotifications();
+              },
+            }}
+            theme={EHeaderTheme.Dark}
+          />
 
           <ScrollView>
             <View style={styles.content}>
