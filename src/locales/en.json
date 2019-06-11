@@ -96,6 +96,10 @@
     "CANCEL": "Cancel"
   },
   "NOTIFICATIONS": {
+    "TAKE_TIME": {
+      "TITLE": "It's {{time}} now",
+      "MESSAGE": "Time to take your {{courseName}}"
+    },
     "NAME_EMPTY": {
       "TITLE": "Form error",
       "MESSAGE": "Medication name cannot be empty"

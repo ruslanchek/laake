@@ -100,7 +100,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
                       });
                     }}
                     error={this.state.error}
-                    placeholder='Aspirin'
+                    placeholder='e.g. Aspirin'
                     suffix={null}
                     prefix={
                       <TouchableOpacity style={styles.pill} onPress={this.handleEditType}>

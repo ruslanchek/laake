@@ -6,6 +6,8 @@ import { courseManager } from './CourseManager';
 import { CommonService } from '../services/CommonService';
 import { addDays, differenceInDays } from 'date-fns';
 import { ITake } from '../common/take';
+import { localeManager } from './LocaleManager';
+import { commonStore } from '../stores/commonStore';
 
 const USERS_REF = 'users';
 
@@ -190,8 +192,12 @@ class FirebaseManager extends Manager {
     return {
       id,
       date,
-      title: `It's take time`,
-      message: `Don't forget to have your ${course.title} date: ${date} dayIndex: ${dayIndex}`,
+      title: localeManager.t('NOTIFICATIONS.TAKE_TIME.TITLE', {
+        time: date.toLocaleTimeString(commonStore.state.currentLocale),
+      }),
+      message: localeManager.t('NOTIFICATIONS.TAKE_TIME.MESSAGE', {
+        courseName: course.title,
+      }),
     };
   }
 

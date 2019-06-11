@@ -109,6 +109,9 @@ const TabNavigator = createBottomTabNavigator(
     [ERouteName.Log]: {
       screen: LogScreen,
     },
+    // [ERouteName.Settings]: {
+    //   screen: SettingsStack,
+    // },
   },
   {
     lazy: true,
