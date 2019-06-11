@@ -4,6 +4,7 @@ import { VARIABLES } from '../../common/variables';
 import { Svg, Circle } from 'react-native-svg';
 import { COLORS } from '../../common/colors';
 import { FONTS } from '../../common/fonts';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export interface IProps {
   percent: number;
@@ -16,6 +17,15 @@ export interface IProps {
 export class Progress extends React.PureComponent<IProps> {
   render() {
     const { percent, size, color, strokeWidth, showPercentage } = this.props;
+
+    if (percent >= 100) {
+      return (
+        <View style={[styles.completed, { width: size, height: size }]}>
+          <Icon name={'ios-checkmark'} size={size} color={COLORS.WHITE.toString()} />
+        </View>
+      );
+    }
+
     const diameter = size;
     const radius = diameter / 2;
     const radiusWithoutStroke = radius - strokeWidth / 2;
@@ -69,6 +79,14 @@ const styles = StyleSheet.create({
     fontSize: VARIABLES.FONT_SIZE_TINY,
   },
 
+  completed: {
+    backgroundColor: COLORS.GREEN.toString(),
+    borderRadius: 50,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   graphics: {},
 
   textContainer: {
@@ -83,7 +101,8 @@ const styles = StyleSheet.create({
 
   text: {
     fontFamily: FONTS.BOLD,
-    fontSize: VARIABLES.FONT_SIZE_SMALL,
+    fontSize: VARIABLES.FONT_SIZE_TINY,
     textAlign: 'center',
+    color: COLORS.GRAY_DARK.toString(),
   },
 });

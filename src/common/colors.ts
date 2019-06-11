@@ -11,6 +11,7 @@ export const COLORS = {
   PURPLE: Color('#740085'),
 
   GRAY: Color('#7a8c9c'),
+  GRAY_DARK: Color('#7a8c9c').darken(0.1),
   GRAY_LIGHT: Color('#a7b4bf'),
   GRAY_PALE_LIGHT: Color('#ebf0f6'),
   GRAY_ULTRA_LIGHT: Color('#f6fafd'),

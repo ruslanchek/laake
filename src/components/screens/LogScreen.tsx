@@ -51,6 +51,10 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
         return COLORS.BLUE;
       }
 
+      case ELogEvent.CourseFinished: {
+        return COLORS.WHITE;
+      }
+
       case ELogEvent.CourseDeleted: {
         return COLORS.RED;
       }
@@ -73,6 +77,70 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
     }
   }
 
+  getEventBgColor(event: ELogEvent): Color {
+    switch (event) {
+      case ELogEvent.CourseCreated: {
+        return COLORS.BLUE.alpha(0.2);
+      }
+
+      case ELogEvent.CourseFinished: {
+        return COLORS.GREEN.alpha(0.75);
+      }
+
+      case ELogEvent.CourseDeleted: {
+        return COLORS.RED.alpha(0.2);
+      }
+
+      case ELogEvent.CourseUpdated: {
+        return COLORS.GRAY.alpha(0.2);
+      }
+
+      case ELogEvent.MedicationTake: {
+        return COLORS.GREEN.alpha(0.2);
+      }
+
+      case ELogEvent.MedicationTakeUndo: {
+        return COLORS.GRAY.alpha(0.2);
+      }
+
+      default: {
+        return COLORS.RED.alpha(0.2);
+      }
+    }
+  }
+
+  getEventLineBgColor(event: ELogEvent): Color {
+    switch (event) {
+      case ELogEvent.CourseCreated: {
+        return COLORS.BLUE.alpha(0.2);
+      }
+
+      case ELogEvent.CourseFinished: {
+        return COLORS.GREEN.alpha(0.5);
+      }
+
+      case ELogEvent.CourseDeleted: {
+        return COLORS.RED.alpha(0.2);
+      }
+
+      case ELogEvent.CourseUpdated: {
+        return COLORS.GRAY.alpha(0.2);
+      }
+
+      case ELogEvent.MedicationTake: {
+        return COLORS.GREEN.alpha(0.2);
+      }
+
+      case ELogEvent.MedicationTakeUndo: {
+        return COLORS.GRAY.alpha(0.2);
+      }
+
+      default: {
+        return COLORS.RED.alpha(0.2);
+      }
+    }
+  }
+
   generateEventIcon(event: ELogEvent, color: Color): React.ReactNode {
     switch (event) {
       case ELogEvent.CourseCreated: {
@@ -81,6 +149,17 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
             name='ios-add'
             size={ICON_SIZE}
             style={{ top: 0.25, left: 0.25 }}
+            color={color.toString()}
+          />
+        );
+      }
+
+      case ELogEvent.CourseFinished: {
+        return (
+          <Icon
+            name='ios-checkmark'
+            size={ICON_SIZE + 4}
+            style={{ top: -1.75, left: 0.25 }}
             color={color.toString()}
           />
         );
@@ -206,14 +285,14 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
               }}
               renderItem={({ item, index, section }) => {
                 const color = this.getEventColor(item.event);
+                const colorBg = this.getEventBgColor(item.event);
+                const lineBg = this.getEventLineBgColor(item.event);
 
                 return (
                   <View key={item.id} style={styles.item}>
                     <View style={styles.itemLeft}>
                       <Text style={styles.time}>{item.time}</Text>
-                      <View
-                        style={[styles.eventPin, { backgroundColor: color.alpha(0.2).toString() }]}
-                      >
+                      <View style={[styles.eventPin, { backgroundColor: colorBg.toString() }]}>
                         {this.generateEventIcon(item.event, color)}
                       </View>
                     </View>
@@ -226,7 +305,7 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
                     </View>
 
                     {!item.isLast && (
-                      <View style={[styles.line, { backgroundColor: color.toString() }]} />
+                      <View style={[styles.line, { backgroundColor: lineBg.toString() }]} />
                     )}
                   </View>
                 );
@@ -347,6 +426,6 @@ const styles = StyleSheet.create({
     top: 36.25,
     left: 104,
     bottom: -12.25,
-    opacity: 0.075,
+    opacity: 0.75,
   },
 });

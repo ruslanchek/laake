@@ -39,7 +39,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 1,
     shadowRadius: 3,
-    padding: VARIABLES.PADDING_BIG,
+    paddingVertical: VARIABLES.PADDING_SMALL,
+    paddingLeft: VARIABLES.PADDING_MEDIUM,
+    paddingRight: VARIABLES.PADDING_SMALL,
     backgroundColor: COLORS.WHITE.toString(),
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
     width: '100%',
@@ -62,16 +64,16 @@ const styles = StyleSheet.create({
 
   icon: {
     width: 26,
+    height: 26,
   },
 
   title: {
     fontSize: VARIABLES.FONT_SIZE_REGULAR,
     fontFamily: FONTS.BOLD,
-    marginBottom: 4,
   },
 
   subtitle: {
-    fontSize: VARIABLES.FONT_SIZE_SMALL,
+    fontSize: VARIABLES.FONT_SIZE_TINY,
     fontFamily: FONTS.MEDIUM,
     color: COLORS.GRAY.toString(),
   },

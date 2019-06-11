@@ -181,6 +181,10 @@ class CourseManager extends Manager {
           .update({
             ...courseStatistics,
           });
+
+        if (courseStatistics.takenPercent >= 100) {
+          logManager.logEvent(ELogEvent.CourseFinished, course.title);
+        }
       }
     } else {
       const courseStatistics = await this.getCourseStatistics(

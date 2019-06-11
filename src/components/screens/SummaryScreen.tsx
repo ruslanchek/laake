@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainerProps, NavigationEvents, ScrollView } from 'react-navigation';
-import { StyleSheet, SafeAreaView, View } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text } from 'react-native';
 import { Title } from '../ui/Title';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
@@ -13,6 +13,9 @@ import { courseStore } from '../../stores/courseStore';
 import { ICourse } from '../../common/course';
 import { isBefore, isAfter, isSameDay } from 'date-fns';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SummaryItemCourse } from '../ui/SummaryItemCourse';
+import { localeManager } from '../../managers/LocaleManager';
+import { FONTS } from '../../common/fonts';
 
 interface IState {
   overallProgress: number;
@@ -75,7 +78,15 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
       medicationTakesOverall += course.timesTotal;
     });
 
-    const overallProgress = Math.round((overallPercentCompleted / overallPercents) * 100);
+    let overallProgress = Math.round((overallPercentCompleted / overallPercents) * 100);
+
+    if (overallProgress > 100) {
+      overallProgress = 100;
+    }
+
+    if (isNaN(overallProgress)) {
+      overallProgress = 0;
+    }
 
     this.setState({
       overallProgress,
@@ -84,8 +95,6 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
       completedCourses,
       medicationTakenOverall,
     });
-
-    console.log(overallPercentCompleted);
   }
 
   render() {
@@ -97,6 +106,12 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
       medicationTakenOverall,
       medicationTakesOverall,
     } = this.state;
+
+    const courses = Array.from(courseStore.state.courses.values());
+
+    courses.sort((a, b) => {
+      return b.startDate - a.startDate;
+    });
 
     return (
       <SafeAreaView style={styles.container}>
@@ -111,11 +126,13 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
         <ScrollView style={styles.scroll}>
           <Title
             color={COLORS.BLACK.toString()}
-            text='Summary'
+            text={localeManager.t('SUMMARY.TITLE')}
             backgroundColor={COLORS.GRAY_ULTRA_LIGHT.toString()}
           />
 
           <View style={styles.content}>
+            <Text style={styles.groupTitle}>{localeManager.t('SUMMARY.GROUP_TITLE_STATS')}</Text>
+
             <SummaryItem
               icon={
                 <Icon
@@ -125,28 +142,28 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
                   color={COLORS.RED.toString()}
                 />
               }
-              title='Overall progress'
-              subtitle='Through all your courses'
+              title={localeManager.t('SUMMARY_FEATURES.FEATURE_1.TITLE')}
+              subtitle={localeManager.t('SUMMARY_FEATURES.FEATURE_1.SUBTITLE')}
               right={
-                <Progress
-                  strokeWidth={4}
-                  size={50}
-                  color={COLORS.RED.toString()}
-                  percent={overallProgress}
-                  showPercentage={true}
-                />
+                <View style={styles.rightContainer}>
+                  <Progress
+                    strokeWidth={3}
+                    size={38}
+                    color={COLORS.RED.toString()}
+                    percent={overallProgress}
+                    showPercentage={true}
+                  />
+                </View>
               }
             />
-
             <SummaryItem
               icon={
                 <Icon style={{}} name={'ios-podium'} size={23} color={COLORS.GREEN.toString()} />
               }
-              title='Total courses'
-              subtitle='Courses'
+              title={localeManager.t('SUMMARY_FEATURES.FEATURE_2.TITLE')}
+              subtitle={localeManager.t('SUMMARY_FEATURES.FEATURE_2.SUBTITLE')}
               right={<Label>{courseStore.state.courses.size}</Label>}
             />
-
             <SummaryItem
               icon={
                 <Icon
@@ -156,11 +173,10 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
                   color={COLORS.GREEN.toString()}
                 />
               }
-              title='Completed courses'
-              subtitle='Courses'
+              title={localeManager.t('SUMMARY_FEATURES.FEATURE_3.TITLE')}
+              subtitle={localeManager.t('SUMMARY_FEATURES.FEATURE_3.SUBTITLE')}
               right={<Label>{completedCourses.length}</Label>}
             />
-
             <SummaryItem
               icon={
                 <Icon
@@ -170,10 +186,20 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
                   color={COLORS.GREEN.toString()}
                 />
               }
-              title='Take times'
-              subtitle='All courses'
+              title={localeManager.t('SUMMARY_FEATURES.FEATURE_4.TITLE')}
+              subtitle={localeManager.t('SUMMARY_FEATURES.FEATURE_4.SUBTITLE')}
               right={<Label>{medicationTakenOverall}</Label>}
             />
+
+            <View style={styles.dots}>
+              <Icon name={'ios-more'} size={32} color={COLORS.GRAY.toString()} />
+            </View>
+
+            <Text style={styles.groupTitle}>{localeManager.t('SUMMARY.GROUP_TITLE_COURSES')}</Text>
+
+            {courses.map((course, i) => {
+              return <SummaryItemCourse course={course} key={i} />;
+            })}
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -182,6 +208,12 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
 }
 
 const styles = StyleSheet.create({
+  rightContainer: {
+    height: 38,
+    width: 38,
+    margin: 6,
+  },
+
   container: {
     flex: 1,
     backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
@@ -190,12 +222,23 @@ const styles = StyleSheet.create({
   },
 
   content: {
-    paddingVertical: VARIABLES.PADDING_BIG,
     paddingHorizontal: VARIABLES.PADDING_BIG,
     flex: 1,
   },
 
   scroll: {
     width: '100%',
+  },
+
+  dots: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 22,
+  },
+
+  groupTitle: {
+    marginBottom: 5,
+    color: COLORS.GRAY.toString(),
+    fontFamily: FONTS.MEDIUM,
   },
 });

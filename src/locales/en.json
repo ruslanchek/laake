@@ -11,15 +11,44 @@
     "FEATURE_5": "Course logs",
     "FEATURE_6": "And more!"
   },
+  "SUMMARY": {
+    "TITLE": "Summary",
+    "GROUP_TITLE_STATS": "Statistics",
+    "GROUP_TITLE_COURSES": "Courses"
+  },
+  "SUMMARY_FEATURES": {
+    "FEATURE_1": {
+      "TITLE": "Overall progress",
+      "SUBTITLE": "Through all your courses"
+    },
+    "FEATURE_2": {
+      "TITLE": "Total courses",
+      "SUBTITLE": "For all time"
+    },
+    "FEATURE_3": {
+      "TITLE": "Completed courses",
+      "SUBTITLE": "Fully passed"
+    },
+    "FEATURE_4": {
+      "TITLE": "Take times",
+      "SUBTITLE": "For all courses"
+    }
+  },
+  "COURSE_STATUS": {
+    "IN_PROGRESS": "In progress",
+    "ARCHIVE": "Archived",
+    "FINISHED": "Finished"
+  },
   "LOG_SCREEN": {
-    "TITLE": "Medication log"
+    "TITLE": "Activity log"
   },
   "LOG_EVENT": {
     "MEDICATION_TAKE": "Medication taken",
     "MEDICATION_TAKE_UNDO": "Medication taken undo",
     "COURSE_UPDATED": "Course info updated",
     "COURSE_CREATED": "Course created",
-    "COURSE_DELETED": "Course deleted"
+    "COURSE_DELETED": "Course deleted",
+    "COURSE_FINISHED": "Course finished"
   },
   "CREATE_COURSE": {
     "LABEL_NAME": "Medication name",

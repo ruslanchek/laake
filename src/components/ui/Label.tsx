@@ -20,15 +20,18 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 0.5,
     fontSize: VARIABLES.FONT_SIZE_TINY,
-    backgroundColor: COLORS.GRAY.alpha(0.2).toString(),
+    backgroundColor: COLORS.GRAY_PALE_LIGHT.toString(),
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: VARIABLES.PADDING_BIG,
-    borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
+    borderRadius: 20,
+    height: 38,
+    minWidth: 38,
+    margin: 6,
   },
 
   content: {
-    color: COLORS.BLACK.toString(),
+    color: COLORS.GRAY_DARK.toString(),
     fontFamily: FONTS.BOLD,
     fontSize: VARIABLES.FONT_SIZE_REGULAR,
   },
