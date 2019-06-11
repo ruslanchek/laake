@@ -19,8 +19,6 @@ class ResourcesManager extends Manager {
       require('../assets/pills/3.png'),
       require('../assets/pills/4.png'),
       require('../assets/pills/5.png'),
-      require('../assets/pills/6.png'),
-      require('../assets/pills/7.png'),
 
       require('../assets/bg/blue.png'),
       require('../assets/bg/deep-purple.png'),

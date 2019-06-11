@@ -62,6 +62,12 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
     const sizeThird = Dimensions.get('window').width / 3 - VARIABLES.PADDING_BIG * 1.33;
     const { scrollTop, customImageSource } = this.state;
     const customImages = Array.from(courseStore.state.courseImages.values());
+    const totalCount = PILLS.length + customImages.length;
+    let needEqualifierCell = false;
+
+    if (totalCount % 3 !== 0) {
+      needEqualifierCell = true;
+    }
 
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
@@ -121,8 +127,9 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
               />
             </View>
             <View style={styles.content}>
-              {customImages.map(image => (
+              {customImages.map((image, i) => (
                 <PillBrick
+                  key={i}
                   title={localeManager.t('COURSE_TYPE_MODAL.CUSTOM_IMAGE')}
                   selected={customImageSource === image.downloadURL}
                   size={sizeThird}
@@ -147,6 +154,10 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
                   />
                 );
               })}
+
+              {needEqualifierCell && (
+                <View style={[styles.dummyCell, { width: sizeThird, height: sizeThird }]} />
+              )}
             </View>
           </ScrollView>
         </View>
@@ -401,4 +412,6 @@ const styles = StyleSheet.create({
   addIcon: {
     top: 2,
   },
+
+  dummyCell: {},
 });

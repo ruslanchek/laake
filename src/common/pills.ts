@@ -52,18 +52,6 @@ export const PILLS: IPill[] = [
     title: 'PILL_NAMES.ROUNDED_TABLET',
     type: EPillType.Pill,
   },
-  {
-    id: 6,
-    image: require(`../assets/pills/6.png`),
-    title: 'PILL_NAMES.COLOUR_PILL',
-    type: EPillType.Pill,
-  },
-  {
-    id: 7,
-    image: require(`../assets/pills/7.png`),
-    title: 'PILL_NAMES.ROUND_TABLET',
-    type: EPillType.Tablet,
-  },
 ];
 
 export const PILLS_MAP = new Map<number, IPill>();
