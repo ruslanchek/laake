@@ -191,15 +191,21 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
               right={<Label>{medicationTakenOverall}</Label>}
             />
 
-            <View style={styles.dots}>
-              <Icon name={'ios-more'} size={32} color={COLORS.GRAY.toString()} />
-            </View>
+            {courses.length > 0 && (
+              <React.Fragment>
+                <View style={styles.dots}>
+                  <Icon name={'ios-more'} size={32} color={COLORS.GRAY.toString()} />
+                </View>
 
-            <Text style={styles.groupTitle}>{localeManager.t('SUMMARY.GROUP_TITLE_COURSES')}</Text>
+                <Text style={styles.groupTitle}>
+                  {localeManager.t('SUMMARY.GROUP_TITLE_COURSES')}
+                </Text>
 
-            {courses.map((course, i) => {
-              return <SummaryItemCourse course={course} key={i} />;
-            })}
+                {courses.map((course, i) => {
+                  return <SummaryItemCourse course={course} key={i} />;
+                })}
+              </React.Fragment>
+            )}
           </View>
         </ScrollView>
       </SafeAreaView>
