@@ -23,6 +23,7 @@ import { LogScreen } from './src/components/screens/LogScreen';
 import { SummaryScreen } from './src/components/screens/SummaryScreen';
 import { SettingsScreen } from './src/components/screens/SettingsScreen';
 import { SettingsNotificationsModal } from './src/components/modals/SettingsNotificationsModal';
+import { localeManager } from './src/managers/LocaleManager';
 
 console.disableYellowBox = true;
 
@@ -73,9 +74,6 @@ const TodayStack = createStackNavigator(
     [ERouteName.TodayEditCourseScreen]: {
       screen: CourseSummaryModal,
     },
-    [ERouteName.PurchaseScreen]: {
-      screen: PurchaseScreen,
-    },
   },
   {
     initialRouteName: ERouteName.Today,
@@ -109,6 +107,9 @@ const TabNavigator = createBottomTabNavigator(
     [ERouteName.Log]: {
       screen: LogScreen,
     },
+    [ERouteName.PurchaseScreen]: {
+      screen: PurchaseScreen,
+    },
   },
   {
     lazy: true,
@@ -123,6 +124,7 @@ const TabNavigator = createBottomTabNavigator(
     },
     animationEnabled: true,
     defaultNavigationOptions: ({ navigation }) => ({
+      tabBarLabel: getRouteLabel(navigation.state.routeName),
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         return (
           <TabBarIcon
@@ -135,6 +137,10 @@ const TabNavigator = createBottomTabNavigator(
     }),
   },
 );
+
+function getRouteLabel(routeName: string): string {
+  return localeManager.t(`ROUTE_NAMES.${routeName}`);
+}
 
 const AppContainer = createAppContainer(TabNavigator);
 

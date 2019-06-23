@@ -9,10 +9,10 @@ import {
   Animated,
   ActivityIndicator,
   Alert,
+  TouchableOpacity,
 } from 'react-native';
 import { Platform } from 'react-native';
 import * as RNIap from 'react-native-iap';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GLOBAL_STYLES } from '../../common/styles';
 import { COLORS } from '../../common/colors';
 import { BGS } from '../../common/bgs';
@@ -24,7 +24,6 @@ import { CommonService } from '../../services/CommonService';
 import { FormButton, EFormButtonTheme } from '../ui/FormButton';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { localeManager } from '../../managers/LocaleManager';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 enum ESKU {
   Month = 'laakepromonth',
@@ -46,10 +45,7 @@ interface IState {
 }
 
 export class PurchaseScreen extends React.Component<NavigationContainerProps, IState> {
-  static navigationOptions = {
-    header: null,
-    mode: 'modal',
-  };
+  static navigationOptions = {};
 
   state: IState = {
     logoAnimation: new Animated.Value(0),
@@ -91,24 +87,15 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
       wavesAnimation,
       animationTrigger,
       loading,
-      subscriptions,
       processingProduct,
     } = this.state;
 
     return (
-      <ImageBackground source={BGS.DEEP_PURPLE} style={styles.container}>
+      <ImageBackground source={BGS.DEEP_RED} style={styles.container}>
         <CustomStatusBar barStyle='light-content' />
 
         <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
           <View style={styles.content}>
-            <View style={styles.closeContainer}>
-              <TouchableOpacity onPress={this.handleClose}>
-                <View style={styles.close}>
-                  <Icon name='ios-close' size={52} color={COLORS.WHITE.toString()} />
-                </View>
-              </TouchableOpacity>
-            </View>
-
             {loading ? (
               <View style={styles.loadingContainer}>
                 <ActivityIndicator color={COLORS.WHITE.toString()} size='large' />
@@ -174,50 +161,19 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
                   delay={450}
                   customStyles={styles.buttons}
                 >
-                  {subscriptions.map(product => {
-                    switch (product.productId) {
-                      case ESKU.Month: {
-                        return (
-                          <FormButton
-                            customStyles={styles.button}
-                            theme={EFormButtonTheme.Blue}
-                            isDisabled={processingProduct === ESKU.Annual}
-                            isLoading={processingProduct === ESKU.Month}
-                            onPress={this.handlePurchase.bind(this, ESKU.Month)}
-                          >
-                            <Text style={styles.buttonText}>
-                              {localeManager.t('SUBSCRIPTION.MONTHLY')}
-                            </Text>
-                            <View style={styles.buttonPrice}>
-                              <Text style={styles.buttonPriceText}>{product.localizedPrice}</Text>
-                            </View>
-                          </FormButton>
-                        );
-                      }
+                  <FormButton
+                    customStyles={styles.button}
+                    theme={EFormButtonTheme.Red}
+                    isDisabled={processingProduct === ESKU.Annual}
+                    isLoading={processingProduct === ESKU.Month}
+                    onPress={this.handlePurchase.bind(this, ESKU.Month)}
+                  >
+                    <Text style={styles.buttonText}>{localeManager.t('SUBSCRIPTION.MONTHLY')}</Text>
+                    <View style={styles.buttonPrice}>
+                      <Text style={styles.buttonPriceText}>$100</Text>
+                    </View>
+                  </FormButton>
 
-                      case ESKU.Annual: {
-                        return (
-                          <FormButton
-                            customStyles={styles.button}
-                            theme={EFormButtonTheme.Purple}
-                            isDisabled={processingProduct === ESKU.Month}
-                            isLoading={processingProduct === ESKU.Annual}
-                            onPress={this.handlePurchase.bind(this, ESKU.Annual)}
-                          >
-                            <Text style={styles.buttonText}>
-                              {localeManager.t('SUBSCRIPTION.ANNUAL')}
-                            </Text>
-                            <View style={styles.buttonPrice}>
-                              <Text style={styles.buttonPriceText}>{product.localizedPrice}</Text>
-                            </View>
-                          </FormButton>
-                        );
-                      }
-                    }
-                  })}
-                </Appear>
-
-                <Appear show={animationTrigger} type={EAppearType.Drop} delay={500}>
                   <TouchableOpacity style={styles.restore} onPress={this.handleRestorePurchases}>
                     <Text style={styles.restoreText}>
                       {localeManager.t('SUBSCRIPTION.RESTORE_PURCHASES')}
@@ -231,12 +187,6 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
       </ImageBackground>
     );
   }
-
-  handleClose = () => {
-    if (this.props.navigation) {
-      this.props.navigation.goBack();
-    }
-  };
 
   startAnimations() {
     Animated.timing(this.state.logoAnimation, {
@@ -307,23 +257,6 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
 const LOGO_HOLDER_SIZE = 320;
 
 const styles = StyleSheet.create({
-  closeContainer: {
-    width: 55,
-    height: 55,
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    zIndex: 2,
-  },
-
-  close: {
-    width: 52,
-    height: 52,
-    justifyContent: 'center',
-    alignItems: 'center',
-    opacity: 0.75,
-  },
-
   content: {
     flex: 1,
     flexShrink: 0,
@@ -419,7 +352,7 @@ const styles = StyleSheet.create({
 
   buttons: {
     marginTop: VARIABLES.PADDING_BIG * 2,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },

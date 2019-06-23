@@ -11,6 +11,12 @@
     "FEATURE_5": "Course logs",
     "FEATURE_6": "And more!"
   },
+  "ROUTE_NAMES": {
+    "Today": "Today",
+    "Summary": "Summary",
+    "Log": "Log",
+    "PurchaseScreen": "Pro"
+  },
   "SUMMARY": {
     "TITLE": "Summary",
     "GROUP_TITLE_STATS": "Statistics",

@@ -17,13 +17,37 @@ export class IconWithBadge extends React.PureComponent<IProps> {
     return (
       <View style={styles.container}>
         <Icon
-          style={styles.icon}
+          style={[styles.icon, { left: this.offsetLeft }]}
           name={this.iconName}
           size={28}
           color={color || COLORS.RED.toString()}
         />
       </View>
     );
+  }
+
+  get offsetLeft() {
+    switch (this.props.routeName) {
+      case ERouteName.Today: {
+        return 2;
+      }
+
+      case ERouteName.Summary: {
+        return 2;
+      }
+
+      case ERouteName.Log: {
+        return 2;
+      }
+
+      case ERouteName.PurchaseScreen: {
+        return 0;
+      }
+
+      default: {
+        return 0;
+      }
+    }
   }
 
   get iconName() {
@@ -40,12 +64,12 @@ export class IconWithBadge extends React.PureComponent<IProps> {
         return 'ios-list';
       }
 
-      case ERouteName.Settings: {
-        return 'ios-settings';
+      case ERouteName.PurchaseScreen: {
+        return 'ios-star-outline';
       }
 
       default: {
-        return 'ios-settings';
+        return 'ios-star-outline';
       }
     }
   }
@@ -54,7 +78,8 @@ export class IconWithBadge extends React.PureComponent<IProps> {
 const styles = StyleSheet.create({
   container: {
     width: 24,
-    height: 24,
+    height: 25,
+    justifyContent: 'center',
   },
   icon: {
     top: 1,
