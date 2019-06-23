@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainerProps, SafeAreaView } from 'react-navigation';
+import { NavigationContainerProps, SafeAreaView, NavigationEvents } from 'react-navigation';
 import {
   ActivityIndicator,
   Animated,
@@ -29,6 +29,7 @@ import { FONTS } from '../../common/fonts';
 import { Appear, EAppearType } from '../common/Appear';
 import { CommonService } from '../../services/CommonService';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
+import { firebaseManager } from '../../managers/FirebaseManager';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -67,6 +68,12 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
         <CustomStatusBar barStyle='light-content' />
+
+        <NavigationEvents
+          onDidFocus={() => {
+            firebaseManager.loadAds();
+          }}
+        />
 
         <View style={styles.inner}>
           <CalendarHeader

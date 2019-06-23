@@ -9,6 +9,7 @@ export const COLORS = {
   BLUE: Color('#2F6FE4'),
   YELLOW: Color('#ffc211'),
   PURPLE: Color('#740085'),
+  CYAN: Color('#19efba'),
 
   GRAY: Color('#7a8c9c'),
   GRAY_DARK: Color('#7a8c9c').darken(0.1),

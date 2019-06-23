@@ -4,6 +4,7 @@ import {
   createBottomTabNavigator,
   createAppContainer,
 } from 'react-navigation';
+import { Text } from 'react-native';
 import { HomeScreen } from './src/components/screens/HomeScreen';
 import { CreateCourseScreen } from './src/components/screens/CreateCourseScreen';
 import { StyleSheet, StatusBar } from 'react-native';
@@ -24,6 +25,7 @@ import { SummaryScreen } from './src/components/screens/SummaryScreen';
 import { SettingsScreen } from './src/components/screens/SettingsScreen';
 import { SettingsNotificationsModal } from './src/components/modals/SettingsNotificationsModal';
 import { localeManager } from './src/managers/LocaleManager';
+import { VARIABLES } from './src/common/variables';
 
 console.disableYellowBox = true;
 
@@ -40,6 +42,16 @@ const styles = StyleSheet.create({
     padding: 0,
     margin: 0,
     fontFamily: FONTS.MEDIUM,
+    fontSize: VARIABLES.FONT_SIZE_TINY,
+    color: COLORS.GRAY.toString(),
+  },
+
+  labelStyleFocused: {
+    color: COLORS.RED.toString(),
+  },
+
+  labelStyleFocusedPro: {
+    color: COLORS.CYAN.darken(0.12).toString(),
   },
 
   iconStyle: {
@@ -116,7 +128,6 @@ const TabNavigator = createBottomTabNavigator(
     initialRouteName: ERouteName.Today,
     tabBarOptions: {
       tabStyle: styles.tabStyle,
-      labelStyle: styles.labelStyle,
       iconStyle: styles.iconStyle,
       style: styles.tabBar,
       activeTintColor: COLORS.RED.toString(),
@@ -124,7 +135,9 @@ const TabNavigator = createBottomTabNavigator(
     },
     animationEnabled: true,
     defaultNavigationOptions: ({ navigation }) => ({
-      tabBarLabel: getRouteLabel(navigation.state.routeName),
+      tabBarLabel: ({ focused, tintColor }) => {
+        return getRouteLabel(focused, navigation.state.routeName);
+      },
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         return (
           <TabBarIcon
@@ -138,8 +151,21 @@ const TabNavigator = createBottomTabNavigator(
   },
 );
 
-function getRouteLabel(routeName: string): string {
-  return localeManager.t(`ROUTE_NAMES.${routeName}`);
+function getRouteLabel(focused: boolean, routeName: string) {
+  return (
+    <Text
+      style={[
+        styles.labelStyle,
+        focused
+          ? routeName === ERouteName.PurchaseScreen
+            ? styles.labelStyleFocusedPro
+            : styles.labelStyleFocused
+          : null,
+      ]}
+    >
+      {localeManager.t(`ROUTE_NAMES.${routeName}`)}
+    </Text>
+  );
 }
 
 const AppContainer = createAppContainer(TabNavigator);

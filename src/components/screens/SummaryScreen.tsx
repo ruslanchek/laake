@@ -16,6 +16,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { SummaryItemCourse } from '../ui/SummaryItemCourse';
 import { localeManager } from '../../managers/LocaleManager';
 import { FONTS } from '../../common/fonts';
+import { firebaseManager } from '../../managers/FirebaseManager';
 
 interface IState {
   overallProgress: number;
@@ -119,7 +120,7 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
 
         <NavigationEvents
           onDidFocus={() => {
-            this.countStats();
+            firebaseManager.loadAds();
           }}
         />
 

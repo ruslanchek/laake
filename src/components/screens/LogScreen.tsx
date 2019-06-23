@@ -23,6 +23,7 @@ import { localeManager } from '../../managers/LocaleManager';
 import Color from 'color';
 import { FONTS } from '../../common/fonts';
 import { purchaseManager } from '../../managers/PurchaseManager';
+import { firebaseManager } from '../../managers/FirebaseManager';
 
 interface IState {}
 
@@ -256,6 +257,9 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
           }}
           onDidBlur={() => {
             logManager.resetEvents();
+          }}
+          onDidFocus={() => {
+            firebaseManager.loadAds();
           }}
         />
 

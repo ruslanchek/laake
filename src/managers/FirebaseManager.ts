@@ -4,7 +4,7 @@ import { CollectionReference } from 'react-native-firebase/firestore';
 import { ICourse } from '../common/course';
 import { courseManager } from './CourseManager';
 import { CommonService } from '../services/CommonService';
-import { addDays, differenceInDays } from 'date-fns';
+import { addDays } from 'date-fns';
 import { ITake } from '../common/take';
 import { localeManager } from './LocaleManager';
 import { commonStore } from '../stores/commonStore';
@@ -14,6 +14,11 @@ const USERS_REF = 'users';
 interface IUploadResult {
   error: string | null;
   uri: string | null;
+}
+
+interface ISettings<T> {
+  name: string;
+  value: T;
 }
 
 interface ILocalNotification {
@@ -29,6 +34,7 @@ export enum ECollectionName {
   NotificationTokens = 'notificationTokens',
   Log = 'log',
   Images = 'images',
+  Settings = 'settings',
 }
 
 class FirebaseManager extends Manager {
@@ -38,6 +44,7 @@ class FirebaseManager extends Manager {
 
   public async init(): Promise<any> {
     await this.initAuth();
+    await this.checkPro();
     this.removeAllDeliveredNotifications();
     this.setBadgeNumber(0);
   }
@@ -260,6 +267,66 @@ class FirebaseManager extends Manager {
 
   public logError(code: number, error: any) {
     console.log(code, error);
+  }
+
+  private async checkPro() {
+    const result = await this.getCollection([ECollectionName.Settings])
+      .where('name', '==', 'isPro')
+      .limit(1)
+      .get();
+
+    let isPro = false;
+
+    if (!result.docs || result.docs.length === 0) {
+      isPro = false;
+      await this.setPro(false);
+    } else {
+      if (result.docs[0].data) {
+        const settingsParam: ISettings<boolean> = result.docs[0].data() as any;
+
+        if (settingsParam.name && settingsParam.value) {
+          isPro = true;
+        } else {
+          isPro = false;
+        }
+      } else {
+        isPro = false;
+      }
+    }
+
+    commonStore.setState({
+      isPro,
+    });
+
+    console.log(commonStore.state.isPro);
+  }
+
+  private async setPro(isPro: boolean) {
+    await this.getCollection([ECollectionName.Settings])
+      .doc()
+      .set({
+        name: 'isPro',
+        value: isPro,
+      });
+  }
+
+  public loadAds() {
+    console.log(11111, commonStore.state.isPro);
+
+    if (commonStore.state.isPro === true) {
+      return;
+    }
+
+    const advert = (firebase as any).admob().interstitial('ca-app-pub-3940256099942544/1033173712');
+    const AdRequest = (firebase as any).admob.AdRequest;
+    const request = new AdRequest();
+    advert.loadAd(request.build());
+
+    advert.on('onAdLoaded', () => {
+      if (advert.isLoaded()) {
+        advert.show();
+      }
+    });
   }
 }
 
