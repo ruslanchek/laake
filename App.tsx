@@ -135,10 +135,10 @@ const TabNavigator = createBottomTabNavigator(
     },
     animationEnabled: true,
     defaultNavigationOptions: ({ navigation }) => ({
-      tabBarLabel: ({ focused, tintColor }) => {
+      tabBarLabel: ({ focused }) => {
         return getRouteLabel(focused, navigation.state.routeName);
       },
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      tabBarIcon: ({ focused, tintColor }) => {
         return (
           <TabBarIcon
             focused={focused}
