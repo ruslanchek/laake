@@ -1,15 +1,21 @@
 {
   "SUBSCRIPTION": {
-    "TITLE": "Subscribe to get more from Läke Pro",
+    "TITLE": "Get Läke Pro to remove Ads",
     "RESTORE_PURCHASES": "Restore purchases",
-    "MONTHLY": "Monthly",
-    "ANNUAL": "Annual",
-    "FEATURE_1": "Unlimited parallel courses",
-    "FEATURE_2": "Custom medication pictures",
-    "FEATURE_3": "Course summary",
-    "FEATURE_4": "Personal statistics",
-    "FEATURE_5": "Course logs",
-    "FEATURE_6": "And more!"
+    "PRO": "Get Pro",
+    "FEATURE_1": "Disable Ads forever",
+    "RESTORE": {
+      "TITLE": "Restore Successful",
+      "DESCRIPTION": "You successfully restored the following purchases: {{titles}}"
+    },
+    "RESTORE_FAILED": {
+      "TITLE": "Can not restore",
+      "DESCRIPTION": "You have no products to restore"
+    }
+  },
+  "PRO": {
+    "TITLE": "You've got a Pro",
+    "FEATURE_1": "Thank you for purchasing Läke Pro!"
   },
   "ROUTE_NAMES": {
     "Today": "Today",

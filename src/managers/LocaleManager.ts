@@ -41,9 +41,16 @@ class LocaleManager extends Manager {
   public reset(): void {}
 
   public async init(): Promise<any> {
+    const locale = this.getSystemLocale();
+    const localeFiltered = this.filterLocale(locale);
+
+    commonStore.setState({
+      currentLocale: localeFiltered,
+    });
+
     this.translator = await i18n.use(initReactI18next).init({
       resources: LOCALES,
-      lng: commonStore.state.currentLocale,
+      lng: localeFiltered,
       fallbackLng: DEFAULT_LOCALE,
       keySeparator: '.',
       interpolation: {

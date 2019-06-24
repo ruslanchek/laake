@@ -297,27 +297,27 @@ class FirebaseManager extends Manager {
     commonStore.setState({
       isPro,
     });
-
-    console.log(commonStore.state.isPro);
   }
 
-  private async setPro(isPro: boolean) {
+  public async setPro(isPro: boolean) {
     await this.getCollection([ECollectionName.Settings])
-      .doc()
+      .doc('isPro')
       .set({
         name: 'isPro',
         value: isPro,
       });
+
+    commonStore.setState({
+      isPro,
+    });
   }
 
   public loadAds() {
-    console.log(11111, commonStore.state.isPro);
-
     if (commonStore.state.isPro === true) {
       return;
     }
 
-    const advert = (firebase as any).admob().interstitial('ca-app-pub-3940256099942544/1033173712');
+    const advert = (firebase as any).admob().interstitial('ca-app-pub-7561063360856843/6686338527');
     const AdRequest = (firebase as any).admob.AdRequest;
     const request = new AdRequest();
     advert.loadAd(request.build());

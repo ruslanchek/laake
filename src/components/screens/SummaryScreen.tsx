@@ -120,7 +120,7 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
 
         <NavigationEvents
           onDidFocus={() => {
-            firebaseManager.loadAds();
+            // firebaseManager.loadAds();
           }}
         />
 

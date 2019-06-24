@@ -11,7 +11,6 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
-import { Platform } from 'react-native';
 import * as RNIap from 'react-native-iap';
 import { GLOBAL_STYLES } from '../../common/styles';
 import { COLORS } from '../../common/colors';
@@ -24,26 +23,22 @@ import { CommonService } from '../../services/CommonService';
 import { FormButton, EFormButtonTheme } from '../ui/FormButton';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { localeManager } from '../../managers/LocaleManager';
+import { commonStore } from '../../stores/commonStore';
+import { followStore } from 'react-stores';
 
-enum ESKU {
-  Month = 'laakepromonth',
-  Annual = 'laakeproannual',
-}
-
-const items = Platform.select({
-  ios: [ESKU.Month, ESKU.Annual],
-  android: [ESKU.Month, ESKU.Annual],
-});
+const SKU = 'laakepronoads';
 
 interface IState {
   logoAnimation: Animated.Value;
   wavesAnimation: Animated.Value;
   animationTrigger: boolean;
-  subscriptions: RNIap.Subscription<any>[];
+  products: RNIap.Product<any>[];
+  purchases: RNIap.ProductPurchase[];
   loading: boolean;
-  processingProduct: ESKU | null;
+  processingProduct: string | null;
 }
 
+@followStore(commonStore)
 export class PurchaseScreen extends React.Component<NavigationContainerProps, IState> {
   static navigationOptions = {};
 
@@ -51,7 +46,8 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
     logoAnimation: new Animated.Value(0),
     wavesAnimation: new Animated.Value(0),
     animationTrigger: false,
-    subscriptions: [],
+    products: [],
+    purchases: [],
     loading: true,
     processingProduct: null,
   };
@@ -60,15 +56,11 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
     RNIap.initConnection();
 
     try {
-      const subscriptions = await RNIap.getSubscriptions(items);
-
-      subscriptions.sort((a, b) => {
-        return parseFloat(a.price) - parseFloat(b.price);
-      });
+      const products = await RNIap.getProducts([SKU]);
 
       this.setState({
-        subscriptions,
         loading: false,
+        products,
       });
 
       this.startAnimations();
@@ -88,6 +80,7 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
       animationTrigger,
       loading,
       processingProduct,
+      products,
     } = this.state;
 
     return (
@@ -126,14 +119,14 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
                           {
                             scale: logoAnimation.interpolate({
                               inputRange: [0, 1],
-                              outputRange: [1.05, 1],
+                              outputRange: [1.1, 1.0],
                             }),
                           },
                         ],
                       },
                     ]}
                   >
-                    <Image source={BGS.LOGO} style={styles.logo} />
+                    <Image source={BGS.LOGO} resizeMode='contain' style={styles.logo} />
                   </Animated.View>
                 </View>
 
@@ -143,43 +136,51 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
                   type={EAppearType.Drop}
                   delay={400}
                 >
-                  <Text style={styles.title}>Subscribe to get more from Läke Pro</Text>
+                  <Text style={styles.title}>
+                    {localeManager.t(commonStore.state.isPro ? 'PRO.TITLE' : 'SUBSCRIPTION.TITLE')}
+                  </Text>
 
                   <View style={styles.textPartsHolder}>
-                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_1')}</Text>
-                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_2')}</Text>
+                    <Text style={styles.textPart}>
+                      {localeManager.t(
+                        commonStore.state.isPro ? 'PRO.FEATURE_1' : 'SUBSCRIPTION.FEATURE_1',
+                      )}
+                    </Text>
+                    {/* <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_2')}</Text>
                     <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_3')}</Text>
                     <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_4')}</Text>
                     <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_5')}</Text>
-                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_6')}</Text>
+                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_6')}</Text> */}
                   </View>
                 </Appear>
 
-                <Appear
-                  show={animationTrigger}
-                  type={EAppearType.Drop}
-                  delay={450}
-                  customStyles={styles.buttons}
-                >
-                  <FormButton
-                    customStyles={styles.button}
-                    theme={EFormButtonTheme.Red}
-                    isDisabled={processingProduct === ESKU.Annual}
-                    isLoading={processingProduct === ESKU.Month}
-                    onPress={this.handlePurchase.bind(this, ESKU.Month)}
+                {!commonStore.state.isPro && (
+                  <Appear
+                    show={animationTrigger}
+                    type={EAppearType.Drop}
+                    delay={450}
+                    customStyles={styles.buttons}
                   >
-                    <Text style={styles.buttonText}>{localeManager.t('SUBSCRIPTION.MONTHLY')}</Text>
-                    <View style={styles.buttonPrice}>
-                      <Text style={styles.buttonPriceText}>$100</Text>
-                    </View>
-                  </FormButton>
+                    <FormButton
+                      customStyles={styles.button}
+                      theme={EFormButtonTheme.Red}
+                      isDisabled={processingProduct === SKU}
+                      isLoading={processingProduct === SKU}
+                      onPress={this.handlePurchase.bind(this, SKU)}
+                    >
+                      <Text style={styles.buttonText}>{localeManager.t('SUBSCRIPTION.PRO')}</Text>
+                      <View style={styles.buttonPrice}>
+                        <Text style={styles.buttonPriceText}>{products[0].localizedPrice}</Text>
+                      </View>
+                    </FormButton>
 
-                  <TouchableOpacity style={styles.restore} onPress={this.handleRestorePurchases}>
-                    <Text style={styles.restoreText}>
-                      {localeManager.t('SUBSCRIPTION.RESTORE_PURCHASES')}
-                    </Text>
-                  </TouchableOpacity>
-                </Appear>
+                    <TouchableOpacity style={styles.restore} onPress={this.handleRestorePurchases}>
+                      <Text style={styles.restoreText}>
+                        {localeManager.t('SUBSCRIPTION.RESTORE_PURCHASES')}
+                      </Text>
+                    </TouchableOpacity>
+                  </Appear>
+                )}
               </ScrollView>
             )}
           </View>
@@ -191,7 +192,7 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
   startAnimations() {
     Animated.timing(this.state.logoAnimation, {
       toValue: 1,
-      duration: 1000,
+      duration: 1100,
       useNativeDriver: true,
     }).start();
 
@@ -206,7 +207,7 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
     });
   }
 
-  async handlePurchase(sku: ESKU) {
+  async handlePurchase(sku: string) {
     if (!this.state.processingProduct) {
       CommonService.haptic();
 
@@ -217,7 +218,11 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
       try {
         const result = await RNIap.buySubscription(sku);
 
-        Alert.alert(JSON.stringify(result));
+        if (result.productId === SKU) {
+          firebaseManager.setPro(true);
+        }
+
+        console.log(result);
       } catch (e) {
         firebaseManager.logError(421335, e);
         Alert.alert(e.message);
@@ -235,19 +240,33 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
     try {
       const purchases = await RNIap.getAvailablePurchases();
       const restoredTitles: string[] = [];
+      let isPro = false;
 
-      purchases.forEach(purchase => {
-        if (purchase.productId === ESKU.Annual) {
-          restoredTitles.push('Annual');
-        } else if (purchase.productId === ESKU.Month) {
-          restoredTitles.push('Month');
-        }
-      });
+      if (purchases.length > 0) {
+        purchases.forEach(purchase => {
+          restoredTitles.push(purchase.productId);
 
-      Alert.alert(
-        'Restore Successful',
-        'You successfully restored the following purchases: ' + restoredTitles.join(', '),
-      );
+          if (purchase.productId === SKU) {
+            isPro = true;
+          }
+        });
+
+        Alert.alert(
+          localeManager.t('SUBSCRIPTION.RESTORE.TITLE'),
+          localeManager.t('SUBSCRIPTION.RESTORE.DESCRIPTION', {
+            titles: restoredTitles.join(', '),
+          }),
+        );
+
+        firebaseManager.setPro(isPro);
+      } else {
+        Alert.alert(
+          localeManager.t('SUBSCRIPTION.RESTORE_FAILED.TITLE'),
+          localeManager.t('SUBSCRIPTION.RESTORE_FAILED.DESCRIPTION', {
+            titles: restoredTitles.join(', '),
+          }),
+        );
+      }
     } catch (e) {
       Alert.alert(e.message);
     }
@@ -261,31 +280,33 @@ const styles = StyleSheet.create({
     flex: 1,
     flexShrink: 0,
     width: '100%',
-    position: 'relative',
   },
 
   loadingContainer: {
-    flex: 1,
-    flexShrink: 0,
-    justifyContent: 'center',
-    alignContent: 'center',
-    width: '100%',
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: [{ translateX: -15 }, { translateY: -15 }],
   },
 
   container: {
     width: '100%',
     flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   scrollView: {
     width: '100%',
+    height: '100%',
+    flex: 1,
   },
 
   scrollViewContainer: {
-    alignItems: 'center',
+    flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
 
   waves: {
@@ -294,30 +315,33 @@ const styles = StyleSheet.create({
   },
 
   logoHolder: {
-    width: LOGO_HOLDER_SIZE,
     height: LOGO_HOLDER_SIZE,
     alignItems: 'center',
-    position: 'absolute',
-    top: 0,
+    justifyContent: 'center',
+    position: 'relative',
+    flexGrow: 0,
   },
 
-  bg: { width: '100%', height: '100%' },
+  bg: {
+    width: '100%',
+    height: '100%',
+  },
 
   logo: {
-    width: LOGO_HOLDER_SIZE * 0.34,
-    height: LOGO_HOLDER_SIZE * 0.49,
+    width: 148,
+    height: 164,
   },
 
   logoContainer: {
+    width: 148,
+    height: 164,
     position: 'absolute',
-    width: LOGO_HOLDER_SIZE * 0.34,
-    height: LOGO_HOLDER_SIZE * 0.49,
-    top: 104,
+    top: 103,
   },
 
   texts: {
     paddingHorizontal: VARIABLES.PADDING_BIG,
-    marginTop: LOGO_HOLDER_SIZE,
+    textAlign: 'center',
   },
 
   title: {
