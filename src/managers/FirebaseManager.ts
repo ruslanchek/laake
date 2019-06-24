@@ -47,6 +47,8 @@ class FirebaseManager extends Manager {
     await this.checkPro();
     this.removeAllDeliveredNotifications();
     this.setBadgeNumber(0);
+
+    this.logError(123213, {});
   }
 
   public async initMessaging(): Promise<boolean> {
@@ -194,8 +196,6 @@ class FirebaseManager extends Manager {
     date.setHours(take.hours);
     date.setMinutes(take.minutes);
 
-    console.log('id', id, 'date', date);
-
     return {
       id,
       date,
@@ -214,8 +214,6 @@ class FirebaseManager extends Manager {
     const endDate = new Date(course.endDate);
     const days = courseManager.getCourseDaysLength(startDate, endDate);
     const startDayIndex = courseManager.getDayIndex(startDate);
-
-    console.log('startDate', startDate, 'endDate', endDate, 'days', days);
 
     CommonService.times(days, i => {
       const dayIndex = startDayIndex + i;
@@ -250,23 +248,20 @@ class FirebaseManager extends Manager {
   }
 
   public cancelNotificationByTake(courseId: string, takeIndex: number, dayIndex: number) {
-    console.log(this.createNotificationId(courseId, dayIndex, takeIndex));
-
     firebase
       .notifications()
       .cancelNotification(this.createNotificationId(courseId, dayIndex, takeIndex));
   }
 
   public createNotificationByTake(course: ICourse, take: ITake, dayIndex: number, index: number) {
-    console.log(index);
-
     const notification = this.generateNotification(course, take, dayIndex, index);
 
     this.createNotification(notification);
   }
 
   public logError(code: number, error: any) {
-    console.log(code, error);
+    firebase.crashlytics().log('Test Message!');
+    firebase.crashlytics().recordError(37, 'Test Error');
   }
 
   private async checkPro() {
