@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "640411576151",
+    "firebase_url": "https://laake-cab74.firebaseio.com",
+    "project_id": "laake-cab74",
+    "storage_bucket": "laake-cab74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640411576151:android:e99d09f4fd2b67ee",
+        "android_client_info": {
+          "package_name": "com.fyramedia.laake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640411576151-9kc5i8rhes3o1ii64pu28if18apcnk6c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP5p9A1AJpMuUZDO1pkTVHGuyB19sFV-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640411576151-9kc5i8rhes3o1ii64pu28if18apcnk6c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "640411576151-q8bav2h5sh2f2em52su4r2degg8lusot.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fyramedia.laake",
+                "app_store_id": "1458632978"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
