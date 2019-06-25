@@ -18,13 +18,14 @@ import { BGS } from '../../common/bgs';
 import { VARIABLES } from '../../common/variables';
 import { FONTS } from '../../common/fonts';
 import { Appear, EAppearType } from '../common/Appear';
-import { firebaseManager } from '../../managers/FirebaseManager';
+import { firebaseManager, ECollectionName } from '../../managers/FirebaseManager';
 import { CommonService } from '../../services/CommonService';
 import { FormButton, EFormButtonTheme } from '../ui/FormButton';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { localeManager } from '../../managers/LocaleManager';
 import { commonStore } from '../../stores/commonStore';
 import { followStore } from 'react-stores';
+import firebase from 'react-native-firebase';
 
 const SKU = 'laakepronoads';
 
@@ -53,9 +54,9 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
   };
 
   async componentDidMount() {
-    RNIap.initConnection();
-
     try {
+      RNIap.initConnection();
+
       const products = await RNIap.getProducts([SKU]);
 
       this.setState({
@@ -66,6 +67,14 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
       this.startAnimations();
     } catch (e) {
       firebaseManager.logError(293837, e);
+
+      firebaseManager
+        .getCollection([ECollectionName.Debug])
+        .doc()
+        .set({
+          name: 293837,
+          value: JSON.stringify(e),
+        });
     }
   }
 
@@ -83,110 +92,125 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
       products,
     } = this.state;
 
-    return (
-      <ImageBackground source={BGS.DEEP_RED} style={styles.container}>
-        <CustomStatusBar barStyle='light-content' />
+    try {
+      return (
+        <ImageBackground source={BGS.DEEP_RED} style={styles.container}>
+          <CustomStatusBar barStyle='light-content' />
 
-        <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
-          <View style={styles.content}>
-            {loading ? (
-              <View style={styles.loadingContainer}>
-                <ActivityIndicator color={COLORS.WHITE.toString()} size='large' />
-              </View>
-            ) : (
-              <ScrollView
-                contentContainerStyle={styles.scrollViewContainer}
-                style={styles.scrollView}
-                horizontal={false}
-              >
-                <View style={styles.logoHolder}>
-                  <Animated.View
-                    style={{
-                      opacity: wavesAnimation.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, 0.8],
-                      }),
-                    }}
-                  >
-                    <Image source={BGS.WAVES} style={styles.waves} />
-                  </Animated.View>
-                  <Animated.View
-                    style={[
-                      styles.logoContainer,
-                      {
-                        opacity: logoAnimation,
-                        transform: [
-                          {
-                            scale: logoAnimation.interpolate({
-                              inputRange: [0, 1],
-                              outputRange: [1.1, 1.0],
-                            }),
-                          },
-                        ],
-                      },
-                    ]}
-                  >
-                    <Image source={BGS.LOGO} resizeMode='contain' style={styles.logo} />
-                  </Animated.View>
+          <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
+            <View style={styles.content}>
+              {loading ? (
+                <View style={styles.loadingContainer}>
+                  <ActivityIndicator color={COLORS.WHITE.toString()} size='large' />
                 </View>
-
-                <Appear
-                  customStyles={styles.texts}
-                  show={animationTrigger}
-                  type={EAppearType.Drop}
-                  delay={400}
+              ) : (
+                <ScrollView
+                  contentContainerStyle={styles.scrollViewContainer}
+                  style={styles.scrollView}
+                  horizontal={false}
                 >
-                  <Text style={styles.title}>
-                    {localeManager.t(commonStore.state.isPro ? 'PRO.TITLE' : 'SUBSCRIPTION.TITLE')}
-                  </Text>
+                  <View style={styles.logoHolder}>
+                    <Animated.View
+                      style={{
+                        opacity: wavesAnimation.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [0, 0.8],
+                        }),
+                      }}
+                    >
+                      <Image source={BGS.WAVES} style={styles.waves} />
+                    </Animated.View>
+                    <Animated.View
+                      style={[
+                        styles.logoContainer,
+                        {
+                          opacity: logoAnimation,
+                          transform: [
+                            {
+                              scale: logoAnimation.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: [1.1, 1.0],
+                              }),
+                            },
+                          ],
+                        },
+                      ]}
+                    >
+                      <Image source={BGS.LOGO} resizeMode='contain' style={styles.logo} />
+                    </Animated.View>
+                  </View>
 
-                  <View style={styles.textPartsHolder}>
-                    <Text style={styles.textPart}>
+                  <Appear
+                    customStyles={styles.texts}
+                    show={animationTrigger}
+                    type={EAppearType.Drop}
+                    delay={400}
+                  >
+                    <Text style={styles.title}>
                       {localeManager.t(
-                        commonStore.state.isPro ? 'PRO.FEATURE_1' : 'SUBSCRIPTION.FEATURE_1',
+                        commonStore.state.isPro ? 'PRO.TITLE' : 'SUBSCRIPTION.TITLE',
                       )}
                     </Text>
-                    {/* <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_2')}</Text>
+
+                    <View style={styles.textPartsHolder}>
+                      <Text style={styles.textPart}>
+                        {localeManager.t(
+                          commonStore.state.isPro ? 'PRO.FEATURE_1' : 'SUBSCRIPTION.FEATURE_1',
+                        )}
+                      </Text>
+                      {/* <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_2')}</Text>
                     <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_3')}</Text>
                     <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_4')}</Text>
                     <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_5')}</Text>
                     <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_6')}</Text> */}
-                  </View>
-                </Appear>
-
-                {!commonStore.state.isPro && (
-                  <Appear
-                    show={animationTrigger}
-                    type={EAppearType.Drop}
-                    delay={450}
-                    customStyles={styles.buttons}
-                  >
-                    <FormButton
-                      customStyles={styles.button}
-                      theme={EFormButtonTheme.Red}
-                      isDisabled={processingProduct === SKU}
-                      isLoading={processingProduct === SKU}
-                      onPress={this.handlePurchase.bind(this, SKU)}
-                    >
-                      <Text style={styles.buttonText}>{localeManager.t('SUBSCRIPTION.PRO')}</Text>
-                      <View style={styles.buttonPrice}>
-                        <Text style={styles.buttonPriceText}>{products[0].localizedPrice}</Text>
-                      </View>
-                    </FormButton>
-
-                    <TouchableOpacity style={styles.restore} onPress={this.handleRestorePurchases}>
-                      <Text style={styles.restoreText}>
-                        {localeManager.t('SUBSCRIPTION.RESTORE_PURCHASES')}
-                      </Text>
-                    </TouchableOpacity>
+                    </View>
                   </Appear>
-                )}
-              </ScrollView>
-            )}
-          </View>
-        </SafeAreaView>
-      </ImageBackground>
-    );
+
+                  {!commonStore.state.isPro && (
+                    <Appear
+                      show={animationTrigger}
+                      type={EAppearType.Drop}
+                      delay={450}
+                      customStyles={styles.buttons}
+                    >
+                      <FormButton
+                        customStyles={styles.button}
+                        theme={EFormButtonTheme.Red}
+                        isDisabled={processingProduct === SKU}
+                        isLoading={processingProduct === SKU}
+                        onPress={this.handlePurchase.bind(this, SKU)}
+                      >
+                        <Text style={styles.buttonText}>{localeManager.t('SUBSCRIPTION.PRO')}</Text>
+                        <View style={styles.buttonPrice}>
+                          <Text style={styles.buttonPriceText}>{products[0].localizedPrice}</Text>
+                        </View>
+                      </FormButton>
+
+                      <TouchableOpacity
+                        style={styles.restore}
+                        onPress={this.handleRestorePurchases}
+                      >
+                        <Text style={styles.restoreText}>
+                          {localeManager.t('SUBSCRIPTION.RESTORE_PURCHASES')}
+                        </Text>
+                      </TouchableOpacity>
+                    </Appear>
+                  )}
+                </ScrollView>
+              )}
+            </View>
+          </SafeAreaView>
+        </ImageBackground>
+      );
+    } catch (e) {
+      firebaseManager
+        .getCollection([ECollectionName.Debug])
+        .doc()
+        .set({
+          name: 324562,
+          value: JSON.stringify(e),
+        });
+    }
   }
 
   startAnimations() {

@@ -35,6 +35,7 @@ export enum ECollectionName {
   Log = 'log',
   Images = 'images',
   Settings = 'settings',
+  Debug = 'debug',
 }
 
 class FirebaseManager extends Manager {
@@ -47,8 +48,6 @@ class FirebaseManager extends Manager {
     await this.checkPro();
     this.removeAllDeliveredNotifications();
     this.setBadgeNumber(0);
-
-    this.logError(123213, {});
   }
 
   public async initMessaging(): Promise<boolean> {
@@ -260,8 +259,10 @@ class FirebaseManager extends Manager {
   }
 
   public logError(code: number, error: any) {
-    firebase.crashlytics().log('Test Message!');
-    firebase.crashlytics().recordError(37, 'Test Error');
+    // firebase.crashlytics().log('Test Message!');
+    // firebase.crashlytics().recordError(37, 'Test Error');
+
+    console.log(code, error);
   }
 
   private async checkPro() {
