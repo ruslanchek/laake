@@ -102,6 +102,7 @@ android {
     }
 
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.fyramedia.laake"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -138,6 +139,7 @@ android {
 }
 
 dependencies {
+    // implementation 'com.android.support:multidex:1.0.0'
     implementation project(':react-native-image-picker')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-svg')
@@ -152,6 +154,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-base:16.1.0"
     implementation "com.google.firebase:firebase-core:16.0.9"
     implementation "com.google.firebase:firebase-ads:17.2.1"
+    implementation "com.google.firebase:firebase-firestore:19.0.0"
 }
 
 // Run this once to be able to run the application with BUCK
