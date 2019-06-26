@@ -16,6 +16,10 @@ import com.facebook.soloader.SoLoader;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.admob.RNFirebaseAdMobPackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.storage.RNFirebaseStoragePackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+import io.invertase.firebase.perf.RNFirebasePerformancePackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +36,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(), new ImagePickerPackage(), new VectorIconsPackage(),
           new SvgPackage(), new RNReactNativeHapticFeedbackPackage(), new RNGestureHandlerPackage(),
-          new RNFirebasePackage(), new RNFirebaseAdMobPackage(), new RNFirebaseFirestorePackage());
+          new RNFirebasePackage(), new RNFirebaseAdMobPackage(), new RNFirebaseFirestorePackage(),
+          new RNFirebaseMessagingPackage(), new RNFirebaseStoragePackage(), new RNFirebaseAuthPackage(),
+          new RNFirebasePerformancePackage());
     }
 
     @Override

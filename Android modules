@@ -1,6 +1,0 @@
-
-  pod "Firebase/Firestore", "~> 5.20.1"
-  pod "Firebase/Messaging", "~> 5.20.1"
-  pod "Firebase/Storage", "~> 5.20.1"
-  pod "Firebase/Auth", "~> 5.20.1"
-  pod "Firebase/Performance", "~> 5.20.1"
