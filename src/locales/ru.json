@@ -1,0 +1,258 @@
+{
+  "SUBSCRIPTION": {
+    "TITLE": "Läke Pro – без рекламы",
+    "RESTORE_PURCHASES": "Восстановить покупки",
+    "PRO": "Получить Pro",
+    "FEATURE_1": "Отключите рекламу навсегда и получайте новые функции раньше других!",
+    "RESTORE": {
+      "TITLE": "Восстановление успешно",
+      "DESCRIPTION": "Вы успешно восстановили следующие покупки: {{titles}}"
+    },
+    "RESTORE_FAILED": {
+      "TITLE": "Не удается восстановить",
+      "DESCRIPTION": "У вас нет товаров для восстановления"
+    }
+  },
+  "PRO": {
+    "TITLE": "У вас есть Pro",
+    "FEATURE_1": "Спасибо за покупку Läke Pro!"
+  },
+  "ROUTE_NAMES": {
+    "Today": "Сегодня",
+    "Summary": "Сводка",
+    "Log": "Журнал",
+    "PurchaseScreen": "Pro"
+  },
+  "SUMMARY": {
+    "TITLE": "Сводка",
+    "GROUP_TITLE_STATS": "Статистика",
+    "GROUP_TITLE_COURSES": "Курсы"
+  },
+  "SUMMARY_FEATURES": {
+    "FEATURE_1": {
+      "TITLE": "Общий прогресс",
+      "SUBTITLE": "По всем курсам"
+    },
+    "FEATURE_2": {
+      "TITLE": "Всего курсов",
+      "SUBTITLE": "За все время"
+    },
+    "FEATURE_3": {
+      "TITLE": "Завершенные курсы",
+      "SUBTITLE": "Полностью пройден"
+    },
+    "FEATURE_4": {
+      "TITLE": "Количество приемов",
+      "SUBTITLE": "По всем курсам"
+    }
+  },
+  "COURSE_STATUS": {
+    "IN_PROGRESS": "В процессе",
+    "ARCHIVE": "Архивный",
+    "FINISHED": "Закончен"
+  },
+  "LOG_SCREEN": {
+    "TITLE": "Журнал"
+  },
+  "LOG_EVENT": {
+    "MEDICATION_TAKE": "Лекарств принято",
+    "MEDICATION_TAKE_UNDO": "Принятые лекарства отменены",
+    "COURSE_UPDATED": "Информация о курсе обновлена",
+    "COURSE_CREATED": "Курс создан",
+    "COURSE_DELETED": "Курс удален",
+    "COURSE_FINISHED": "Курс закончен"
+  },
+  "CREATE_COURSE": {
+    "LABEL_NAME": "Название лекарства",
+    "LABEL_DESCRIPTION": "Описание",
+    "LABEL_DURATION": "Продолжительность",
+    "LABEL_OFTENNESS": "Частота приема",
+    "LABEL_TAKES": "Приемы",
+    "TITLE": "Новый курс",
+    "DESCRIPTION": "Введите информацию о новом курсе"
+  },
+  "EDIT_COURSE": {
+    "TITLE": "Редактировать курс",
+    "DESCRIPTION": "Вы можете изменить любую информацию о курсе"
+  },
+  "COURSE_DURATION_MODAL": {
+    "HEADER": "Длительность курса",
+    "DESCRIPTION": "Как долго будет продолжаться курс?"
+  },
+  "COURSE_OFTENNESS_MODAL": {
+    "HEADER": "",
+    "DESCRIPTION": "Как часто вы должны принимать лекарства во время курса"
+  },
+  "COURSE_SUMMARY_MODAL": {
+    "HEADER": "Подробности",
+    "DISCLAIMER": "Пожалуйста, проверьте свои настройки перед созданием курса",
+    "RECEIVE_REMINDERS": "Получать напоминания",
+    "DESCRIPTION": "Статистика и информация о курсе",
+    "COMPLETION": "Завершенность",
+    "TAKES": "Приемы",
+    "UNITS_TAKEN": "Лекарств принято",
+    "DAYS_PAST": "Прошло дней"
+  },
+  "COURSE_TYPE_MODAL": {
+    "HEADER": "Тип лекарства",
+    "SELECT_PICTURE": "Выбрать фотографию",
+    "TAKE_PICTURE": "Сделать фотографию",
+    "DESCRIPTION": "Выберите или загрузите изображение для курса",
+    "CUSTOM_IMAGE": "Загружено",
+    "UPLOAD_TITLE": "Загрузка изображения"
+  },
+  "IMAGE_CROPPING": {
+    "SELECT_AREA": "Настройка области изображения",
+    "PROCESSING": "Обработка...",
+    "CHOOSE": "Выбрать",
+    "CANCEL": "Отменить"
+  },
+  "NOTIFICATIONS": {
+    "TAKE_TIME": {
+      "TITLE": "Сейчас {{time}}",
+      "MESSAGE": "Время принять {{courseName}}"
+    },
+    "NAME_EMPTY": {
+      "TITLE": "Ошибка формы",
+      "MESSAGE": "Название лекарства не может быть пустым"
+    },
+    "COURSE_ALREADY_EXISTS": {
+      "TITLE": "Ошибка формы",
+      "MESSAGE": "Курс с таким названием уже существует"
+    },
+    "UPLOAD_ERROR": {
+      "TITLE": "Ошибка загрузки изображения",
+      "MESSAGE": "Не удалось загрузить изображение, пожалуйста, попробуйте еще раз"
+    },
+    "COURSE_DELETED": {
+      "TITLE": "Курс удален",
+      "MESSAGE": "Курс удален"
+    },
+    "NOTIFICATIONS_ENABLED": {
+      "TITLE": "Напоминания",
+      "MESSAGE": "Напоминания для курса включены"
+    }
+  },
+  "PERIODS": {
+    "DAYS_0": "день",
+    "DAYS_1": "дня",
+    "DAYS_2": "дней",
+    "DAYS_3": "дней",
+    "WEEKS_0": "неделя",
+    "WEEKS_1": "недели",
+    "WEEKS_2": "недель",
+    "WEEKS_3": "недель",
+    "MONTHS_0": "месяц",
+    "MONTHS_1": "месяца",
+    "MONTHS_2": "месяцев",
+    "MONTHS_3": "месяцев"
+  },
+  "TIMES": {
+    "TIMES_0": "один раз",
+    "TIMES_1": "{{value}} раза",
+    "TIMES_2": "{{value}} раз",
+    "TIMES_3": "{{value}} раз"
+  },
+  "TIMES_PER": {
+    "DAY": "в день",
+    "WEEK": "в неделю"
+  },
+  "PILL_NAMES": {
+    "VITAMIN": "Витамин",
+    "COLOUR_PILL": "Цветная таблетка",
+    "ELLIPSE_PILL": "Овальная таблетка",
+    "ROUND_TABLET": "Круглая таблетка",
+    "ROUNDED_TABLET": "Округлая таблетка"
+  },
+  "PILL_TYPES": {
+    "COMMON": "Универсальная",
+    "CAPSULE": "Капсула",
+    "PILL": "Пилюля",
+    "TABLET": "Таблетка"
+  },
+  "DATE_DISTANCE": {
+    "TODAY": "Сегодня",
+    "TOMORROW": "Завтра",
+    "YESTERDAY": "Вчера",
+    "DAYS_POST_0": "Через день",
+    "DAYS_POST_1": "Через {{count}} дня",
+    "DAYS_POST_2": "Через {{count}} дней",
+    "DAYS_POST_3": "Через {{count}} дней",
+    "DAYS_PAST_0": "День назад",
+    "DAYS_PAST_1": "{{count}} дня назад",
+    "DAYS_PAST_2": "{{count}} дней назад",
+    "DAYS_PAST_3": "{{count}} дней назад"
+  },
+  "COMMON": {
+    "BACK_TO_TODAY": "Сегодня",
+    "CONFIRM": "Подтвердить",
+    "CREATE": "Создать",
+    "SAVE": "Сохранить",
+    "BACK": "Назад",
+    "EDIT": "Редактировать",
+    "OK": "ОК",
+    "CANCEL": "Отменить",
+    "CREATE_COURSE": "Создать курс",
+    "SAVE_COURSE": "Сохранить курс",
+    "EDIT_COURSE": "Редактировать курс",
+    "DELETE_COURSE": "Удалить курс",
+    "DELETE_CONFIRM": "Вы уверены, что хотите удалить курс?",
+    "NO_COURSES": "У вас нет активных курсов в этот день, создайте новый курс"
+  },
+  "TAKE": {
+    "HEADER": "Прием",
+    "DESCRIPTION": "Выберите количество и время приема лекарства",
+    "LABEL": "Приемы",
+    "TIME": "Время",
+    "AMOUNT": "Количество",
+    "PLACEHOLDER": "",
+    "DOSAGE_UNITS": {
+      "PILLS_0": "пиллюля",
+      "PILLS_1": "пиллюли",
+      "PILLS_2": "пиллюль",
+      "PILLS_3": "пиллюль",
+      "TABLETS_0": "таблетка",
+      "TABLETS_1": "таблетки",
+      "TABLETS_2": "таблеток",
+      "TABLETS_3": "таблеток",
+      "MILLI_GRAMS_0": "мг",
+      "MILLI_GRAMS_1": "мг",
+      "MILLI_GRAMS_2": "мг",
+      "MILLI_GRAMS_3": "мг",
+      "GRAMS_0": "г",
+      "GRAMS_1": "г",
+      "GRAMS_2": "г",
+      "GRAMS_3": "г",
+      "MILLI_LITERS_0": "мл",
+      "MILLI_LITERS_1": "мл",
+      "MILLI_LITERS_2": "мл",
+      "MILLI_LITERS_3": "мл",
+      "OUNCES_0": "унция",
+      "OUNCES_1": "унции",
+      "OUNCES_2": "унций",
+      "OUNCES_3": "унций",
+      "PIECES_0": "штука",
+      "PIECES_1": "штуки",
+      "PIECES_2": "штук",
+      "PIECES_3": "штук"
+    },
+    "TERM": {
+      "BEFORE_MEAL": "перед едой",
+      "AFTER_MEAL": "после еды",
+      "AFTER_BED": "после сна",
+      "BEFORE_BED": "перед сном"
+    },
+    "NUMBERS": {
+      "FIRST": "Первый прием",
+      "SECOND": "Второй прием",
+      "THIRD": "Третий прием",
+      "FOURTH": "Четвертый прием",
+      "FIFTH": "Пятый прием",
+      "SIXTH": "Шестой прием",
+      "SEVENTH": "Седьмой прием",
+      "EIGHTH": "Восьмой прием",
+      "NINETH": "Девятый прием",
+      "TENTH": "Десятый прием"
+    }
+  }
+}

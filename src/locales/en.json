@@ -1,15 +1,15 @@
 {
   "SUBSCRIPTION": {
-    "TITLE": "Get Läke Pro to remove Ads",
+    "TITLE": "Get Läke Pro to remove the ads",
     "RESTORE_PURCHASES": "Restore purchases",
     "PRO": "Get Pro",
-    "FEATURE_1": "Disable Ads forever",
+    "FEATURE_1": "Disable Ads forever and get new features first",
     "RESTORE": {
       "TITLE": "Restore Successful",
       "DESCRIPTION": "You successfully restored the following purchases: {{titles}}"
     },
     "RESTORE_FAILED": {
-      "TITLE": "Can not restore",
+      "TITLE": "Cannot restore",
       "DESCRIPTION": "You have no products to restore"
     }
   },
@@ -69,7 +69,7 @@
     "LABEL_OFTENNESS": "Oftenness",
     "LABEL_TAKES": "Takes",
     "TITLE": "New course",
-    "DESCRIPTION": "State info about the new course"
+    "DESCRIPTION": "Enter new course information"
   },
   "EDIT_COURSE": {
     "TITLE": "Edit course",
@@ -77,7 +77,7 @@
   },
   "COURSE_DURATION_MODAL": {
     "HEADER": "Course duration",
-    "DESCRIPTION": "How long is the course"
+    "DESCRIPTION": "How long will the course be?"
   },
   "COURSE_OFTENNESS_MODAL": {
     "HEADER": "Course oftenness",
@@ -87,10 +87,10 @@
     "HEADER": "Summary",
     "DISCLAIMER": "Please check your preferences before creating the course",
     "RECEIVE_REMINDERS": "Receive reminders",
-    "DESCRIPTION": "Information about the course",
-    "COMPLETION": "Completion",
+    "DESCRIPTION": "Course statistics & Information",
+    "COMPLETION": "Completeness",
     "TAKES": "Takes",
-    "UNITS_TAKEN": "Units taken",
+    "UNITS_TAKEN": "Medication taken",
     "DAYS_PAST": "Days past"
   },
   "COURSE_TYPE_MODAL": {
@@ -98,7 +98,7 @@
     "SELECT_PICTURE": "Select picture",
     "TAKE_PICTURE": "Take picture",
     "DESCRIPTION": "Select or upload image for the course",
-    "CUSTOM_IMAGE": "Custom",
+    "CUSTOM_IMAGE": "Uploaded",
     "UPLOAD_TITLE": "Uploading image"
   },
   "IMAGE_CROPPING": {
@@ -130,7 +130,7 @@
     },
     "NOTIFICATIONS_ENABLED": {
       "TITLE": "Reminders",
-      "MESSAGE": "Remind notifications is enabled for the course"
+      "MESSAGE": "Reminders for the course are enabled"
     }
   },
   "PERIODS": {
@@ -142,7 +142,7 @@
     "MONTHS_plural": "months"
   },
   "TIMES": {
-    "TIMES": "{{value}} time",
+    "TIMES": "one time",
     "TIMES_plural": "{{value}} times"
   },
   "TIMES_PER": {
@@ -151,13 +151,13 @@
   },
   "PILL_NAMES": {
     "VITAMIN": "Vitamin",
-    "COLOUR_PILL": "Colour pill",
+    "COLOUR_PILL": "Colored pill",
     "ELLIPSE_PILL": "Ellipse pill",
     "ROUND_TABLET": "Round tablet",
     "ROUNDED_TABLET": "Rounded tablet"
   },
   "PILL_TYPES": {
-    "COMMON": "Common",
+    "COMMON": "Generic",
     "CAPSULE": "Capsule",
     "PILL": "Pill",
     "TABLET": "Tablet"
@@ -184,13 +184,13 @@
     "SAVE_COURSE": "Save course",
     "EDIT_COURSE": "Edit course",
     "DELETE_COURSE": "Delete course",
-    "DELETE_CONFIRM": "Are ou sure you want to delete the course?",
-    "NO_COURSES": "You have no active courses on this day, go to create one"
+    "DELETE_CONFIRM": "Are you sure you want to delete the course?",
+    "NO_COURSES": "You have no active courses on this day, create a new one"
   },
   "TAKE": {
-    "HEADER": "Take",
-    "DESCRIPTION": "Select take time and amount of the medication",
-    "LABEL": "Take list",
+    "HEADER": "Medication",
+    "DESCRIPTION": "Select the amount and time of taking the medicine",
+    "LABEL": "Medications",
     "TIME": "Time",
     "AMOUNT": "Amount",
     "PLACEHOLDER": "Select take",
@@ -200,9 +200,13 @@
       "TABLETS": "tablet",
       "TABLETS_plural": "tablets",
       "MILLI_GRAMS": "mg",
+      "MILLI_GRAMS_plural": "mg",
       "GRAMS": "g",
-      "MILLI_LITERS": "mL",
+      "GRAMS_plural": "g",
+      "MILLI_LITERS": "ml",
+      "MILLI_LITERS_plural": "ml",
       "OUNCES": "oz",
+      "OUNCES_plural": "oz",
       "PIECES": "piece",
       "PIECES_plural": "pieces"
     },
@@ -221,7 +225,7 @@
       "SIXTH": "Sixth take",
       "SEVENTH": "Seventh take",
       "EIGHTH": "Eighth take",
-      "NINETH": "Nineth take",
+      "NINETH": "Ninth take",
       "TENTH": "Tenth take"
     }
   }
