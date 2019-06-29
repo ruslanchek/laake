@@ -1,0 +1,232 @@
+{
+  "SUBSCRIPTION": {
+    "TITLE": "Få Läke Pro til å fjerne annonsene",
+    "RESTORE_PURCHASES": "Gjenopprette kjøp",
+    "PRO": "Bli proff",
+    "FEATURE_1": "Deaktiver annonser for alltid og få nye funksjoner først",
+    "RESTORE": {
+      "TITLE": "Gjenopprett vellykket",
+      "DESCRIPTION": "Du har tilbakestilt følgende kjøp: {{titles}}"
+    },
+    "RESTORE_FAILED": {
+      "TITLE": "Kan ikke gjenopprette",
+      "DESCRIPTION": "Du har ingen produkter å gjenopprette"
+    }
+  },
+  "PRO": {
+    "TITLE": "Du har en Pro",
+    "FEATURE_1": "Takk for at du kjøpte Läke Pro!"
+  },
+  "ROUTE_NAMES": {
+    "Today": "I dag",
+    "Summary": "Sammendrag",
+    "Log": "Logg",
+    "PurchaseScreen": "Pro"
+  },
+  "SUMMARY": {
+    "TITLE": "Sammendrag",
+    "GROUP_TITLE_STATS": "Statistikk",
+    "GROUP_TITLE_COURSES": "kurs"
+  },
+  "SUMMARY_FEATURES": {
+    "FEATURE_1": {
+      "TITLE": "Samlet fremdrift",
+      "SUBTITLE": "Gjennom alle kursene dine"
+    },
+    "FEATURE_2": {
+      "TITLE": "Totalt kurs",
+      "SUBTITLE": "For alltid"
+    },
+    "FEATURE_3": {
+      "TITLE": "Fullførte kurs",
+      "SUBTITLE": "Fullt passert"
+    },
+    "FEATURE_4": {
+      "TITLE": "Ta tider",
+      "SUBTITLE": "For alle kurs"
+    }
+  },
+  "COURSE_STATUS": {
+    "IN_PROGRESS": "I prosess",
+    "ARCHIVE": "arkivert",
+    "FINISHED": "ferdig"
+  },
+  "LOG_SCREEN": {
+    "TITLE": "Aktivitetsloggen"
+  },
+  "LOG_EVENT": {
+    "MEDICATION_TAKE": "Medisinering tatt",
+    "MEDICATION_TAKE_UNDO": "Medisinering tatt angre",
+    "COURSE_UPDATED": "Kursinformasjon oppdatert",
+    "COURSE_CREATED": "Kursopprettet",
+    "COURSE_DELETED": "Kurs slettet",
+    "COURSE_FINISHED": "Kurset er ferdig"
+  },
+  "CREATE_COURSE": {
+    "LABEL_NAME": "Medisinnavn",
+    "LABEL_DESCRIPTION": "Beskrivelse",
+    "LABEL_DURATION": "Varighet",
+    "LABEL_OFTENNESS": "oftenness",
+    "LABEL_TAKES": "tar",
+    "TITLE": "Nytt kurs",
+    "DESCRIPTION": "Skriv inn ny kursinformasjon"
+  },
+  "EDIT_COURSE": {
+    "TITLE": "Rediger kurs",
+    "DESCRIPTION": "Du kan endre all informasjon om kurset"
+  },
+  "COURSE_DURATION_MODAL": {
+    "HEADER": "Kursets varighet",
+    "DESCRIPTION": "Hvor lenge skal kurset være?"
+  },
+  "COURSE_OFTENNESS_MODAL": {
+    "HEADER": "Kursets hyppighet",
+    "DESCRIPTION": "Hvor ofte må du ta medisinen i løpet av kurset"
+  },
+  "COURSE_SUMMARY_MODAL": {
+    "HEADER": "Sammendrag",
+    "DISCLAIMER": "Vennligst sjekk dine preferanser før du oppretter kurset",
+    "RECEIVE_REMINDERS": "Motta påminnelser",
+    "DESCRIPTION": "Kursstatistikk og informasjon",
+    "COMPLETION": "fullstendighet",
+    "TAKES": "tar",
+    "UNITS_TAKEN": "Medisinering tatt",
+    "DAYS_PAST": "Dager forbi"
+  },
+  "COURSE_TYPE_MODAL": {
+    "HEADER": "Medisineringstype",
+    "SELECT_PICTURE": "Velg bilde",
+    "TAKE_PICTURE": "Ta bilde",
+    "DESCRIPTION": "Velg eller last opp bilde for kurset",
+    "CUSTOM_IMAGE": "lastet opp",
+    "UPLOAD_TITLE": "Laster opp bilde"
+  },
+  "IMAGE_CROPPING": {
+    "SELECT_AREA": "Juster bildeområdet",
+    "PROCESSING": "Behandling...",
+    "CHOOSE": "Velge",
+    "CANCEL": "Avbryt"
+  },
+  "NOTIFICATIONS": {
+    "TAKE_TIME": {
+      "TITLE": "Det er {{time}} nå",
+      "MESSAGE": "Tid til å ta ditt {{courseName}}"
+    },
+    "NAME_EMPTY": {
+      "TITLE": "Formfeil",
+      "MESSAGE": "Medisinnavnet kan ikke være tomt"
+    },
+    "COURSE_ALREADY_EXISTS": {
+      "TITLE": "Formfeil",
+      "MESSAGE": "Kurs med det navnet eksisterer allerede"
+    },
+    "UPLOAD_ERROR": {
+      "TITLE": "Bildeopplastingsfeil",
+      "MESSAGE": "Kunne ikke laste opp bilde, prøv igjen"
+    },
+    "COURSE_DELETED": {
+      "TITLE": "Kurs slettet",
+      "MESSAGE": "Kurset ble slettet"
+    },
+    "NOTIFICATIONS_ENABLED": {
+      "TITLE": "påminnelser",
+      "MESSAGE": "Påminnelser for kurset er aktivert"
+    }
+  },
+  "PERIODS": {
+    "DAYS": "dag",
+    "DAYS_plural": "dager",
+    "WEEKS": "uke",
+    "WEEKS_plural": "uker",
+    "MONTHS": "måned",
+    "MONTHS_plural": "måneder"
+  },
+  "TIMES": {
+    "TIMES": "en gang",
+    "TIMES_plural": "{{value}} ganger"
+  },
+  "TIMES_PER": {
+    "DAY": "per dag",
+    "WEEK": "per uke"
+  },
+  "PILL_NAMES": {
+    "VITAMIN": "Vitamin",
+    "COLOUR_PILL": "Farget pille",
+    "ELLIPSE_PILL": "Ellipse pille",
+    "ROUND_TABLET": "Round tablet",
+    "ROUNDED_TABLET": "Avrundet tavle"
+  },
+  "PILL_TYPES": {
+    "COMMON": "Generisk",
+    "CAPSULE": "kapsel",
+    "PILL": "Pille",
+    "TABLET": "Tablett"
+  },
+  "DATE_DISTANCE": {
+    "TODAY": "I dag",
+    "TOMORROW": "I morgen",
+    "YESTERDAY": "I går",
+    "DAYS_POST": "Etter en dag",
+    "DAYS_POST_plural": "Etter {{count}} dager",
+    "DAYS_PAST": "En dag siden",
+    "DAYS_PAST_plural": "{{count}} dager siden"
+  },
+  "COMMON": {
+    "BACK_TO_TODAY": "I dag",
+    "CONFIRM": "Bekrefte",
+    "CREATE": "Skape",
+    "SAVE": "Lagre",
+    "BACK": "Tilbake",
+    "EDIT": "Redigere",
+    "OK": "OK",
+    "CANCEL": "Avbryt",
+    "CREATE_COURSE": "Lag kurs",
+    "SAVE_COURSE": "Lagre kurs",
+    "EDIT_COURSE": "Rediger kurs",
+    "DELETE_COURSE": "Slett kurs",
+    "DELETE_CONFIRM": "Er du sikker på at du vil slette kurset?",
+    "NO_COURSES": "Du har ingen aktive kurs på denne dagen, opprett en ny"
+  },
+  "TAKE": {
+    "HEADER": "medisinering",
+    "DESCRIPTION": "Velg mengden og tidspunktet for medisinen",
+    "LABEL": "medisiner",
+    "TIME": "Tid",
+    "AMOUNT": "Beløp",
+    "PLACEHOLDER": "Velg ta",
+    "DOSAGE_UNITS": {
+      "PILLS": "pille",
+      "PILLS_plural": "piller",
+      "TABLETS": "tablett",
+      "TABLETS_plural": "tabletter",
+      "MILLI_GRAMS": "mg",
+      "MILLI_GRAMS_plural": "mg",
+      "GRAMS": "g",
+      "GRAMS_plural": "g",
+      "MILLI_LITERS": "ml",
+      "MILLI_LITERS_plural": "ml",
+      "OUNCES": "oz",
+      "OUNCES_plural": "oz",
+      "PIECES": "stykke",
+      "PIECES_plural": "brikker"
+    },
+    "TERM": {
+      "BEFORE_MEAL": "før måltidet",
+      "AFTER_MEAL": "etter måltid",
+      "AFTER_BED": "etter sengen",
+      "BEFORE_BED": "før sengetid"
+    },
+    "NUMBERS": {
+      "FIRST": "Først ta",
+      "SECOND": "Andre ta",
+      "THIRD": "Tredje ta",
+      "FOURTH": "Fjerde ta",
+      "FIFTH": "Femte ta",
+      "SIXTH": "Sjette ta",
+      "SEVENTH": "Syvende ta",
+      "EIGHTH": "Åttende ta",
+      "NINETH": "Niende ta",
+      "TENTH": "Tiende ta"
+    }
+  }
+}

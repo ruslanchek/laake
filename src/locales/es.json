@@ -1,0 +1,232 @@
+{
+  "SUBSCRIPTION": {
+    "TITLE": "Consigue Läke Pro para eliminar los anuncios",
+    "RESTORE_PURCHASES": "Restaurar las compras",
+    "PRO": "Obtener pro",
+    "FEATURE_1": "Deshabilita los anuncios para siempre y obtén nuevas características primero.",
+    "RESTORE": {
+      "TITLE": "Restauración exitosa",
+      "DESCRIPTION": "Has restaurado con éxito las siguientes compras: {{titles}}"
+    },
+    "RESTORE_FAILED": {
+      "TITLE": "No se puede restaurar",
+      "DESCRIPTION": "No tienes productos para restaurar."
+    }
+  },
+  "PRO": {
+    "TITLE": "Tienes un pro",
+    "FEATURE_1": "¡Gracias por comprar Läke Pro!"
+  },
+  "ROUTE_NAMES": {
+    "Today": "Hoy",
+    "Summary": "Resumen",
+    "Log": "Iniciar sesión",
+    "PurchaseScreen": "Pro"
+  },
+  "SUMMARY": {
+    "TITLE": "Resumen",
+    "GROUP_TITLE_STATS": "Estadística",
+    "GROUP_TITLE_COURSES": "Los cursos"
+  },
+  "SUMMARY_FEATURES": {
+    "FEATURE_1": {
+      "TITLE": "Progreso general",
+      "SUBTITLE": "A través de todos tus cursos."
+    },
+    "FEATURE_2": {
+      "TITLE": "Cursos totales",
+      "SUBTITLE": "Para todo el tiempo"
+    },
+    "FEATURE_3": {
+      "TITLE": "Cursos completados",
+      "SUBTITLE": "Completamente aprobado"
+    },
+    "FEATURE_4": {
+      "TITLE": "Tomar tiempos",
+      "SUBTITLE": "Para todos los cursos"
+    }
+  },
+  "COURSE_STATUS": {
+    "IN_PROGRESS": "En progreso",
+    "ARCHIVE": "Archivado",
+    "FINISHED": "Terminado"
+  },
+  "LOG_SCREEN": {
+    "TITLE": "Registro de actividades"
+  },
+  "LOG_EVENT": {
+    "MEDICATION_TAKE": "Medicación tomada",
+    "MEDICATION_TAKE_UNDO": "Medicación tomada deshacer",
+    "COURSE_UPDATED": "Información del curso actualizada",
+    "COURSE_CREATED": "Curso creado",
+    "COURSE_DELETED": "Curso eliminado",
+    "COURSE_FINISHED": "Curso terminado"
+  },
+  "CREATE_COURSE": {
+    "LABEL_NAME": "Nombre del medicamento",
+    "LABEL_DESCRIPTION": "Descripción",
+    "LABEL_DURATION": "Duración",
+    "LABEL_OFTENNESS": "Frecuencia",
+    "LABEL_TAKES": "Toma",
+    "TITLE": "Nuevo curso",
+    "DESCRIPTION": "Ingrese nueva información del curso"
+  },
+  "EDIT_COURSE": {
+    "TITLE": "Editar curso",
+    "DESCRIPTION": "Puedes cambiar cualquier información del curso."
+  },
+  "COURSE_DURATION_MODAL": {
+    "HEADER": "Duración del curso",
+    "DESCRIPTION": "¿Cuánto durará el curso?"
+  },
+  "COURSE_OFTENNESS_MODAL": {
+    "HEADER": "Frecuencia del curso",
+    "DESCRIPTION": "¿Con qué frecuencia tiene que tomar el medicamento durante el curso?"
+  },
+  "COURSE_SUMMARY_MODAL": {
+    "HEADER": "Resumen",
+    "DISCLAIMER": "Por favor revise sus preferencias antes de crear el curso.",
+    "RECEIVE_REMINDERS": "Recibir recordatorios",
+    "DESCRIPTION": "Estadísticas del curso e información",
+    "COMPLETION": "Lo completo",
+    "TAKES": "Toma",
+    "UNITS_TAKEN": "Medicación tomada",
+    "DAYS_PAST": "Días pasados"
+  },
+  "COURSE_TYPE_MODAL": {
+    "HEADER": "Tipo de medicación",
+    "SELECT_PICTURE": "Seleccionar imagen",
+    "TAKE_PICTURE": "Tomar la foto",
+    "DESCRIPTION": "Selecciona o sube la imagen para el curso.",
+    "CUSTOM_IMAGE": "Subido",
+    "UPLOAD_TITLE": "Cargando imagen"
+  },
+  "IMAGE_CROPPING": {
+    "SELECT_AREA": "Ajustar el área de la imagen",
+    "PROCESSING": "Tratamiento...",
+    "CHOOSE": "Escoger",
+    "CANCEL": "Cancelar"
+  },
+  "NOTIFICATIONS": {
+    "TAKE_TIME": {
+      "TITLE": "Es {{time}} ahora",
+      "MESSAGE": "Hora de tomar su {{courseName}}"
+    },
+    "NAME_EMPTY": {
+      "TITLE": "Error de formulario",
+      "MESSAGE": "El nombre del medicamento no puede estar vacío"
+    },
+    "COURSE_ALREADY_EXISTS": {
+      "TITLE": "Error de formulario",
+      "MESSAGE": "Curso con ese nombre ya existe."
+    },
+    "UPLOAD_ERROR": {
+      "TITLE": "Error de carga de la imagen",
+      "MESSAGE": "No se pudo subir la imagen, por favor intente de nuevo"
+    },
+    "COURSE_DELETED": {
+      "TITLE": "Curso eliminado",
+      "MESSAGE": "El curso fue eliminado"
+    },
+    "NOTIFICATIONS_ENABLED": {
+      "TITLE": "Recordatorios",
+      "MESSAGE": "Los recordatorios para el curso están habilitados."
+    }
+  },
+  "PERIODS": {
+    "DAYS": "día",
+    "DAYS_plural": "dias",
+    "WEEKS": "semana",
+    "WEEKS_plural": "semanas",
+    "MONTHS": "mes",
+    "MONTHS_plural": "meses"
+  },
+  "TIMES": {
+    "TIMES": "una vez",
+    "TIMES_plural": "{{value}} veces"
+  },
+  "TIMES_PER": {
+    "DAY": "por día",
+    "WEEK": "por semana"
+  },
+  "PILL_NAMES": {
+    "VITAMIN": "Vitamina",
+    "COLOUR_PILL": "Pastilla de color",
+    "ELLIPSE_PILL": "Pastilla elipse",
+    "ROUND_TABLET": "Tableta redonda",
+    "ROUNDED_TABLET": "Tableta redondeada"
+  },
+  "PILL_TYPES": {
+    "COMMON": "Genérico",
+    "CAPSULE": "Cápsula",
+    "PILL": "Píldora",
+    "TABLET": "Tableta"
+  },
+  "DATE_DISTANCE": {
+    "TODAY": "Hoy",
+    "TOMORROW": "mañana",
+    "YESTERDAY": "Ayer",
+    "DAYS_POST": "Después de un día",
+    "DAYS_POST_plural": "Después de {{count}} días",
+    "DAYS_PAST": "Hace un dia",
+    "DAYS_PAST_plural": "Hace {{count}} días"
+  },
+  "COMMON": {
+    "BACK_TO_TODAY": "Hoy",
+    "CONFIRM": "Confirmar",
+    "CREATE": "Crear",
+    "SAVE": "Salvar",
+    "BACK": "Espalda",
+    "EDIT": "Editar",
+    "OK": "DE ACUERDO",
+    "CANCEL": "Cancelar",
+    "CREATE_COURSE": "Crear curso",
+    "SAVE_COURSE": "Guardar curso",
+    "EDIT_COURSE": "Editar curso",
+    "DELETE_COURSE": "Borrar curso",
+    "DELETE_CONFIRM": "¿Seguro que quieres borrar el curso?",
+    "NO_COURSES": "No tienes cursos activos en este día, crea uno nuevo."
+  },
+  "TAKE": {
+    "HEADER": "Medicación",
+    "DESCRIPTION": "Seleccione la cantidad y el tiempo de tomar el medicamento.",
+    "LABEL": "Medicamentos",
+    "TIME": "Hora",
+    "AMOUNT": "Cantidad",
+    "PLACEHOLDER": "Seleccione tomar",
+    "DOSAGE_UNITS": {
+      "PILLS": "píldora",
+      "PILLS_plural": "pastillas",
+      "TABLETS": "tableta",
+      "TABLETS_plural": "tabletas",
+      "MILLI_GRAMS": "mg",
+      "MILLI_GRAMS_plural": "mg",
+      "GRAMS": "sol",
+      "GRAMS_plural": "sol",
+      "MILLI_LITERS": "ml",
+      "MILLI_LITERS_plural": "ml",
+      "OUNCES": "onz",
+      "OUNCES_plural": "onz",
+      "PIECES": "trozo",
+      "PIECES_plural": "piezas"
+    },
+    "TERM": {
+      "BEFORE_MEAL": "Antes de la comida",
+      "AFTER_MEAL": "después de comer",
+      "AFTER_BED": "después de la cama",
+      "BEFORE_BED": "Antes de ir a la cama"
+    },
+    "NUMBERS": {
+      "FIRST": "Primer toma",
+      "SECOND": "Segunda toma",
+      "THIRD": "Tercera toma",
+      "FOURTH": "Cuarta toma",
+      "FIFTH": "Quinta toma",
+      "SIXTH": "Sexta toma",
+      "SEVENTH": "Séptima toma",
+      "EIGHTH": "Octava toma",
+      "NINETH": "Novena toma",
+      "TENTH": "Décima toma"
+    }
+  }
+}

@@ -385,6 +385,7 @@ const styles = StyleSheet.create({
     color: COLORS.WHITE.toString(),
     fontFamily: FONTS.MEDIUM,
     marginBottom: 3,
+    textAlign: 'center',
   },
 
   restore: {

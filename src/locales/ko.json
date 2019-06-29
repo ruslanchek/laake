@@ -1,0 +1,219 @@
+{
+  "SUBSCRIPTION": {
+    "TITLE": "Laket Pro에서 광고를 삭제하십시오.",
+    "RESTORE_PURCHASES": "구매를 복원",
+    "PRO": "프로 얻기",
+    "FEATURE_1": "광고를 영구히 비활성화하고 새로운 기능을 먼저 얻으십시오.",
+    "RESTORE": {
+      "TITLE": "성공적으로 복원",
+      "DESCRIPTION": "다음 구매 항목을 성공적으로 복원했습니다 : {{titles}}"
+    },
+    "RESTORE_FAILED": {
+      "TITLE": "복원 할 수 없음",
+      "DESCRIPTION": "복원 할 제품이 없습니다."
+    }
+  },
+  "PRO": {
+    "TITLE": "프로가 있어요.",
+    "FEATURE_1": "Läke Pro를 구입해 주셔서 감사합니다!"
+  },
+  "ROUTE_NAMES": {
+    "Today": "오늘",
+    "Summary": "개요",
+    "Log": "로그",
+    "PurchaseScreen": "찬성"
+  },
+  "SUMMARY": {
+    "TITLE": "개요",
+    "GROUP_TITLE_STATS": "통계",
+    "GROUP_TITLE_COURSES": "행동"
+  },
+  "SUMMARY_FEATURES": {
+    "FEATURE_1": {
+      "TITLE": "전반적인 진행 상황",
+      "SUBTITLE": "모든 과정을 통해"
+    },
+    "FEATURE_2": {
+      "TITLE": "총 과정 수",
+      "SUBTITLE": "모든 시간 동안"
+    },
+    "FEATURE_3": {
+      "TITLE": "완료 과정",
+      "SUBTITLE": "완전 통과 함"
+    },
+    "FEATURE_4": {
+      "TITLE": "시간 걸린다.",
+      "SUBTITLE": "모든 코스"
+    }
+  },
+  "COURSE_STATUS": {
+    "IN_PROGRESS": "진행 중",
+    "ARCHIVE": "보관 됨",
+    "FINISHED": "끝마친"
+  },
+  "LOG_SCREEN": {
+    "TITLE": "활동 로그"
+  },
+  "LOG_EVENT": {
+    "MEDICATION_TAKE": "투약",
+    "MEDICATION_TAKE_UNDO": "실행 취소 된 약물",
+    "COURSE_UPDATED": "코스 정보가 업데이트되었습니다.",
+    "COURSE_CREATED": "코스가 생성되었습니다.",
+    "COURSE_DELETED": "강의 삭제됨",
+    "COURSE_FINISHED": "코스가 끝났습니다."
+  },
+  "CREATE_COURSE": {
+    "LABEL_NAME": "약물 치료 명",
+    "LABEL_DESCRIPTION": "기술",
+    "LABEL_DURATION": "지속",
+    "LABEL_OFTENNESS": "자주",
+    "LABEL_TAKES": "가져 가라.",
+    "TITLE": "새로운 코스",
+    "DESCRIPTION": "새로운 코스 정보 입력"
+  },
+  "EDIT_COURSE": {
+    "TITLE": "코스 편집",
+    "DESCRIPTION": "코스 정보를 변경할 수 있습니다."
+  },
+  "COURSE_DURATION_MODAL": {
+    "HEADER": "코스 기간",
+    "DESCRIPTION": "과정은 얼마나 오래 걸릴까요?"
+  },
+  "COURSE_OFTENNESS_MODAL": {
+    "HEADER": "코스 자주",
+    "DESCRIPTION": "얼마나 자주 코스를 마쳐야하나요?"
+  },
+  "COURSE_SUMMARY_MODAL": {
+    "HEADER": "개요",
+    "DISCLAIMER": "코스를 만들기 전에 환경 설정을 확인하십시오.",
+    "RECEIVE_REMINDERS": "알림 수신",
+    "DESCRIPTION": "코스 통계 및 정보",
+    "COMPLETION": "완전성",
+    "TAKES": "가져 가라.",
+    "UNITS_TAKEN": "투약",
+    "DAYS_PAST": "과거 일"
+  },
+  "COURSE_TYPE_MODAL": {
+    "HEADER": "약물 치료 유형",
+    "SELECT_PICTURE": "사진 선택",
+    "TAKE_PICTURE": "사진을 촬영",
+    "DESCRIPTION": "코스 이미지 선택 또는 업로드",
+    "CUSTOM_IMAGE": "업로드 됨",
+    "UPLOAD_TITLE": "이미지 업로드 중"
+  },
+  "IMAGE_CROPPING": {
+    "SELECT_AREA": "이미지 영역 조정",
+    "PROCESSING": "처리 중 ...",
+    "CHOOSE": "고르다",
+    "CANCEL": "취소"
+  },
+  "NOTIFICATIONS": {
+    "TAKE_TIME": {
+      "TITLE": "이제 {{time}}",
+      "MESSAGE": "귀하의 {{courseName}}"
+    },
+    "NAME_EMPTY": {
+      "TITLE": "양식 오류",
+      "MESSAGE": "약물 치료 이름은 비워 둘 수 없습니다."
+    },
+    "COURSE_ALREADY_EXISTS": {
+      "TITLE": "양식 오류",
+      "MESSAGE": "해당 이름의 코스가 이미 있습니다."
+    },
+    "UPLOAD_ERROR": {
+      "TITLE": "이미지 업로드 오류",
+      "MESSAGE": "이미지를 업로드 할 수 없습니다. 다시 시도하십시오."
+    },
+    "COURSE_DELETED": {
+      "TITLE": "강의 삭제됨",
+      "MESSAGE": "코스가 삭제되었습니다."
+    },
+    "NOTIFICATIONS_ENABLED": {
+      "TITLE": "알리미",
+      "MESSAGE": "코스에 대한 알림이 사용 설정되었습니다."
+    }
+  },
+  "PERIODS": {
+    "DAYS_0": "일",
+    "WEEKS_0": "주",
+    "MONTHS_0": "개월"
+  },
+  "TIMES": {
+    "TIMES_0": "{{value}} 회"
+  },
+  "TIMES_PER": {
+    "DAY": "하루에",
+    "WEEK": "한 주에"
+  },
+  "PILL_NAMES": {
+    "VITAMIN": "비타민",
+    "COLOUR_PILL": "컬러 피임약",
+    "ELLIPSE_PILL": "타원 약",
+    "ROUND_TABLET": "둥근 태블릿",
+    "ROUNDED_TABLET": "둥근 태블릿"
+  },
+  "PILL_TYPES": {
+    "COMMON": "일반적인",
+    "CAPSULE": "캡슐",
+    "PILL": "알약",
+    "TABLET": "태블릿"
+  },
+  "DATE_DISTANCE": {
+    "TODAY": "오늘",
+    "TOMORROW": "내일",
+    "YESTERDAY": "어제",
+    "DAYS_POST_0": "{{count}} 일 후에",
+    "DAYS_PAST_0": "{{count}} 일 전"
+  },
+  "COMMON": {
+    "BACK_TO_TODAY": "오늘",
+    "CONFIRM": "확인",
+    "CREATE": "몹시 떠들어 대다",
+    "SAVE": "구하다",
+    "BACK": "뒤로",
+    "EDIT": "편집하다",
+    "OK": "승인",
+    "CANCEL": "취소",
+    "CREATE_COURSE": "코스 만들기",
+    "SAVE_COURSE": "코스 저장",
+    "EDIT_COURSE": "코스 편집",
+    "DELETE_COURSE": "코스 삭제",
+    "DELETE_CONFIRM": "코스를 삭제 하시겠습니까?",
+    "NO_COURSES": "이 날에는 현재 진행중인 코스가 없습니다. 새 코스를 만드십시오."
+  },
+  "TAKE": {
+    "HEADER": "약물 치료",
+    "DESCRIPTION": "약을 복용하는 양과 시간을 선택하십시오.",
+    "LABEL": "의약품",
+    "TIME": "시각",
+    "AMOUNT": "양",
+    "PLACEHOLDER": "테이크를 선택하십시오.",
+    "DOSAGE_UNITS": {
+      "PILLS_0": "의사",
+      "TABLETS_0": "정제",
+      "MILLI_GRAMS_0": "mg",
+      "GRAMS_0": "지",
+      "MILLI_LITERS_0": "ml",
+      "OUNCES_0": "온스",
+      "PIECES_0": "조각들"
+    },
+    "TERM": {
+      "BEFORE_MEAL": "식사 전",
+      "AFTER_MEAL": "식사 후",
+      "AFTER_BED": "침대 다음에",
+      "BEFORE_BED": "자기 전"
+    },
+    "NUMBERS": {
+      "FIRST": "첫 번째 테이크 아웃",
+      "SECOND": "두 번째 테이크",
+      "THIRD": "3 번째 테이크",
+      "FOURTH": "넷째 테이크",
+      "FIFTH": "다섯 번째 테이크",
+      "SIXTH": "여섯 번째 테이크",
+      "SEVENTH": "일곱 번째 테이크",
+      "EIGHTH": "여덟 번째",
+      "NINETH": "아홉 번째",
+      "TENTH": "10 번째 테이크"
+    }
+  }
+}

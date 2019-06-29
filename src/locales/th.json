@@ -1,0 +1,219 @@
+{
+  "SUBSCRIPTION": {
+    "TITLE": "รับLäke Pro เพื่อลบโฆษณา",
+    "RESTORE_PURCHASES": "เรียกคืนการซื้อสินค้า",
+    "PRO": "รับโปร",
+    "FEATURE_1": "ปิดการใช้งานโฆษณาตลอดไปและรับคุณสมบัติใหม่ก่อน",
+    "RESTORE": {
+      "TITLE": "คืนความสำเร็จ",
+      "DESCRIPTION": "คุณกู้คืนการซื้อต่อไปนี้ได้สำเร็จ: {{titles}}"
+    },
+    "RESTORE_FAILED": {
+      "TITLE": "ไม่สามารถกู้คืนได้",
+      "DESCRIPTION": "คุณไม่มีผลิตภัณฑ์ที่จะกู้คืน"
+    }
+  },
+  "PRO": {
+    "TITLE": "คุณมีมืออาชีพ",
+    "FEATURE_1": "ขอบคุณที่ซื้อLäke Pro!"
+  },
+  "ROUTE_NAMES": {
+    "Today": "ในวันนี้",
+    "Summary": "สรุป",
+    "Log": "เข้าสู่ระบบ",
+    "PurchaseScreen": "มือโปร"
+  },
+  "SUMMARY": {
+    "TITLE": "สรุป",
+    "GROUP_TITLE_STATS": "สถิติ",
+    "GROUP_TITLE_COURSES": "หลักสูตร"
+  },
+  "SUMMARY_FEATURES": {
+    "FEATURE_1": {
+      "TITLE": "ความคืบหน้าโดยรวม",
+      "SUBTITLE": "ผ่านหลักสูตรทั้งหมดของคุณ"
+    },
+    "FEATURE_2": {
+      "TITLE": "รวมหลักสูตร",
+      "SUBTITLE": "ตลอดเวลา"
+    },
+    "FEATURE_3": {
+      "TITLE": "หลักสูตรที่สำเร็จ",
+      "SUBTITLE": "ผ่านอย่างเต็มที่"
+    },
+    "FEATURE_4": {
+      "TITLE": "ใช้เวลา",
+      "SUBTITLE": "สำหรับทุกหลักสูตร"
+    }
+  },
+  "COURSE_STATUS": {
+    "IN_PROGRESS": "กำลังดำเนินการ",
+    "ARCHIVE": "เก็บถาวร",
+    "FINISHED": "เสร็จ"
+  },
+  "LOG_SCREEN": {
+    "TITLE": "บันทึกกิจกรรม"
+  },
+  "LOG_EVENT": {
+    "MEDICATION_TAKE": "ใช้ยา",
+    "MEDICATION_TAKE_UNDO": "ใช้ยาเลิกทำ",
+    "COURSE_UPDATED": "อัปเดตข้อมูลหลักสูตรแล้ว",
+    "COURSE_CREATED": "สร้างหลักสูตรแล้ว",
+    "COURSE_DELETED": "ลบหลักสูตรแล้ว",
+    "COURSE_FINISHED": "จบหลักสูตรแล้ว"
+  },
+  "CREATE_COURSE": {
+    "LABEL_NAME": "ชื่อยา",
+    "LABEL_DESCRIPTION": "ลักษณะ",
+    "LABEL_DURATION": "ระยะเวลา",
+    "LABEL_OFTENNESS": "Oftenness",
+    "LABEL_TAKES": "ใช้เวลา",
+    "TITLE": "หลักสูตรใหม่",
+    "DESCRIPTION": "ป้อนข้อมูลหลักสูตรใหม่"
+  },
+  "EDIT_COURSE": {
+    "TITLE": "แก้ไขหลักสูตร",
+    "DESCRIPTION": "คุณสามารถเปลี่ยนข้อมูลของหลักสูตรได้"
+  },
+  "COURSE_DURATION_MODAL": {
+    "HEADER": "ระยะเวลาของหลักสูตร",
+    "DESCRIPTION": "หลักสูตรจะใช้เวลานานเท่าใด"
+  },
+  "COURSE_OFTENNESS_MODAL": {
+    "HEADER": "หลักสูตรบ่อยครั้ง",
+    "DESCRIPTION": "บ่อยแค่ไหนที่คุณต้องใช้ยาในระหว่างการเรียนการสอน"
+  },
+  "COURSE_SUMMARY_MODAL": {
+    "HEADER": "สรุป",
+    "DISCLAIMER": "โปรดตรวจสอบค่ากำหนดของคุณก่อนสร้างหลักสูตร",
+    "RECEIVE_REMINDERS": "รับการแจ้งเตือน",
+    "DESCRIPTION": "สถิติ & ข้อมูลหลักสูตร",
+    "COMPLETION": "ความสมบูรณ์",
+    "TAKES": "ใช้เวลา",
+    "UNITS_TAKEN": "ใช้ยา",
+    "DAYS_PAST": "วันที่ผ่านมา"
+  },
+  "COURSE_TYPE_MODAL": {
+    "HEADER": "ประเภทยา",
+    "SELECT_PICTURE": "เลือกรูปภาพ",
+    "TAKE_PICTURE": "ถ่ายภาพ",
+    "DESCRIPTION": "เลือกหรืออัพโหลดภาพสำหรับหลักสูตร",
+    "CUSTOM_IMAGE": "อัปโหลด",
+    "UPLOAD_TITLE": "กำลังอัพโหลดภาพ"
+  },
+  "IMAGE_CROPPING": {
+    "SELECT_AREA": "ปรับพื้นที่ภาพ",
+    "PROCESSING": "กำลังประมวลผล ...",
+    "CHOOSE": "เลือก",
+    "CANCEL": "ยกเลิก"
+  },
+  "NOTIFICATIONS": {
+    "TAKE_TIME": {
+      "TITLE": "เป็น {{time}} ตอนนี้",
+      "MESSAGE": "เวลาใช้ {{courseName}}"
+    },
+    "NAME_EMPTY": {
+      "TITLE": "ข้อผิดพลาดของแบบฟอร์ม",
+      "MESSAGE": "ชื่อยาต้องไม่ว่างเปล่า"
+    },
+    "COURSE_ALREADY_EXISTS": {
+      "TITLE": "ข้อผิดพลาดของแบบฟอร์ม",
+      "MESSAGE": "มีหลักสูตรที่ใช้ชื่อนั้นแล้ว"
+    },
+    "UPLOAD_ERROR": {
+      "TITLE": "ข้อผิดพลาดในการอัพโหลดภาพ",
+      "MESSAGE": "ไม่สามารถอัปโหลดภาพได้โปรดลองอีกครั้ง"
+    },
+    "COURSE_DELETED": {
+      "TITLE": "ลบหลักสูตรแล้ว",
+      "MESSAGE": "ลบหลักสูตรแล้ว"
+    },
+    "NOTIFICATIONS_ENABLED": {
+      "TITLE": "การแจ้งเตือน",
+      "MESSAGE": "เปิดใช้งานการเตือนสำหรับหลักสูตร"
+    }
+  },
+  "PERIODS": {
+    "DAYS_0": "วัน",
+    "WEEKS_0": "สัปดาห์ที่ผ่านมา",
+    "MONTHS_0": "เดือน"
+  },
+  "TIMES": {
+    "TIMES_0": "{{value}} ครั้ง"
+  },
+  "TIMES_PER": {
+    "DAY": "ต่อวัน",
+    "WEEK": "ต่อสัปดาห์"
+  },
+  "PILL_NAMES": {
+    "VITAMIN": "วิตามิน",
+    "COLOUR_PILL": "ยาเม็ดสี",
+    "ELLIPSE_PILL": "เม็ดยา",
+    "ROUND_TABLET": "เม็ดกลม",
+    "ROUNDED_TABLET": "แท็บเล็ตโค้งมน"
+  },
+  "PILL_TYPES": {
+    "COMMON": "ทั่วไป",
+    "CAPSULE": "แคปซูล",
+    "PILL": "ยา",
+    "TABLET": "แท็บเล็ต"
+  },
+  "DATE_DISTANCE": {
+    "TODAY": "ในวันนี้",
+    "TOMORROW": "วันพรุ่งนี้",
+    "YESTERDAY": "เมื่อวาน",
+    "DAYS_POST_0": "หลังจาก {{count}} วัน",
+    "DAYS_PAST_0": "{{count}} วันที่ผ่านมา"
+  },
+  "COMMON": {
+    "BACK_TO_TODAY": "ในวันนี้",
+    "CONFIRM": "ยืนยัน",
+    "CREATE": "สร้าง",
+    "SAVE": "บันทึก",
+    "BACK": "กลับ",
+    "EDIT": "แก้ไข",
+    "OK": "ตกลง",
+    "CANCEL": "ยกเลิก",
+    "CREATE_COURSE": "สร้างหลักสูตร",
+    "SAVE_COURSE": "บันทึกหลักสูตร",
+    "EDIT_COURSE": "แก้ไขหลักสูตร",
+    "DELETE_COURSE": "ลบหลักสูตร",
+    "DELETE_CONFIRM": "คุณแน่ใจหรือว่าต้องการลบหลักสูตร",
+    "NO_COURSES": "คุณไม่มีหลักสูตรที่ใช้งานในวันนี้สร้างหลักสูตรใหม่"
+  },
+  "TAKE": {
+    "HEADER": "ยา",
+    "DESCRIPTION": "เลือกจำนวนและเวลาในการทานยา",
+    "LABEL": "ยา",
+    "TIME": "เวลา",
+    "AMOUNT": "จำนวน",
+    "PLACEHOLDER": "เลือกใช้",
+    "DOSAGE_UNITS": {
+      "PILLS_0": "ยา",
+      "TABLETS_0": "แท็บเล็ต",
+      "MILLI_GRAMS_0": "มก.",
+      "GRAMS_0": "ก.",
+      "MILLI_LITERS_0": "มล.",
+      "OUNCES_0": "ออนซ์",
+      "PIECES_0": "ชิ้น"
+    },
+    "TERM": {
+      "BEFORE_MEAL": "ก่อนมื้ออาหาร",
+      "AFTER_MEAL": "หลังอาหาร",
+      "AFTER_BED": "หลังเตียง",
+      "BEFORE_BED": "ก่อนนอน"
+    },
+    "NUMBERS": {
+      "FIRST": "ก่อนอื่น",
+      "SECOND": "ใช้เวลาสอง",
+      "THIRD": "ประการที่สาม",
+      "FOURTH": "ประการที่สี่",
+      "FIFTH": "ประการที่ห้าใช้",
+      "SIXTH": "หกใช้เวลา",
+      "SEVENTH": "เจ็ดใช้",
+      "EIGHTH": "แปดใช้",
+      "NINETH": "เก้าใช้",
+      "TENTH": "สิบใช้"
+    }
+  }
+}

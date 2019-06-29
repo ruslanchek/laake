@@ -1,0 +1,232 @@
+{
+  "SUBSCRIPTION": {
+    "TITLE": "विज्ञापनों को हटाने के लिए Läke Pro प्राप्त करें",
+    "RESTORE_PURCHASES": "खरीदारी वापस लौटाएं",
+    "PRO": "समर्थक बनो",
+    "FEATURE_1": "विज्ञापनों को हमेशा के लिए अक्षम करें और पहले नई सुविधाएँ प्राप्त करें",
+    "RESTORE": {
+      "TITLE": "सफल को पुनर्स्थापित करें",
+      "DESCRIPTION": "आपने निम्न खरीद को सफलतापूर्वक बहाल किया: {{titles}}"
+    },
+    "RESTORE_FAILED": {
+      "TITLE": "पुनर्स्थापित नहीं कर सकता",
+      "DESCRIPTION": "आपके पास पुनर्स्थापित करने के लिए कोई उत्पाद नहीं है"
+    }
+  },
+  "PRO": {
+    "TITLE": "आपने प्रो",
+    "FEATURE_1": "Läke Pro खरीदने के लिए धन्यवाद!"
+  },
+  "ROUTE_NAMES": {
+    "Today": "आज",
+    "Summary": "सारांश",
+    "Log": "लॉग",
+    "PurchaseScreen": "समर्थक"
+  },
+  "SUMMARY": {
+    "TITLE": "सारांश",
+    "GROUP_TITLE_STATS": "आंकड़े",
+    "GROUP_TITLE_COURSES": "पाठ्यक्रम"
+  },
+  "SUMMARY_FEATURES": {
+    "FEATURE_1": {
+      "TITLE": "समग्र प्रगति",
+      "SUBTITLE": "अपने सभी पाठ्यक्रमों के माध्यम से"
+    },
+    "FEATURE_2": {
+      "TITLE": "कुल पाठ्यक्रम",
+      "SUBTITLE": "हमेशा के लिए"
+    },
+    "FEATURE_3": {
+      "TITLE": "पाठ्यक्रम पूरा किया",
+      "SUBTITLE": "पूरी तरह से पारित कर दिया"
+    },
+    "FEATURE_4": {
+      "TITLE": "समय लें",
+      "SUBTITLE": "सभी पाठ्यक्रमों के लिए"
+    }
+  },
+  "COURSE_STATUS": {
+    "IN_PROGRESS": "चालू",
+    "ARCHIVE": "संग्रहीत",
+    "FINISHED": "ख़त्म होना"
+  },
+  "LOG_SCREEN": {
+    "TITLE": "गतिविधि लॉग"
+  },
+  "LOG_EVENT": {
+    "MEDICATION_TAKE": "दवा ले ली",
+    "MEDICATION_TAKE_UNDO": "दवा पूर्ववत ली गई",
+    "COURSE_UPDATED": "कोर्स की जानकारी अपडेट की गई",
+    "COURSE_CREATED": "कोर्स बनाया",
+    "COURSE_DELETED": "कोर्स हटा दिया गया",
+    "COURSE_FINISHED": "कोर्स समाप्त हुआ"
+  },
+  "CREATE_COURSE": {
+    "LABEL_NAME": "दवा का नाम",
+    "LABEL_DESCRIPTION": "विवरण",
+    "LABEL_DURATION": "अवधि",
+    "LABEL_OFTENNESS": "oftenness",
+    "LABEL_TAKES": "लेता है",
+    "TITLE": "नया कोर्स",
+    "DESCRIPTION": "नई पाठ्यक्रम जानकारी दर्ज करें"
+  },
+  "EDIT_COURSE": {
+    "TITLE": "पाठ्यक्रम संपादित करें",
+    "DESCRIPTION": "आप पाठ्यक्रम की किसी भी जानकारी को बदल सकते हैं"
+  },
+  "COURSE_DURATION_MODAL": {
+    "HEADER": "कोर्स की अवधि",
+    "DESCRIPTION": "कोर्स कब तक होगा?"
+  },
+  "COURSE_OFTENNESS_MODAL": {
+    "HEADER": "पाठ्यक्रम अक्सर",
+    "DESCRIPTION": "कोर्स के दौरान आपको कितनी बार दवा लेनी है"
+  },
+  "COURSE_SUMMARY_MODAL": {
+    "HEADER": "सारांश",
+    "DISCLAIMER": "कोर्स बनाने से पहले कृपया अपनी प्राथमिकताएं जांच लें",
+    "RECEIVE_REMINDERS": "अनुस्मारक प्राप्त करें",
+    "DESCRIPTION": "पाठ्यक्रम के आँकड़े और सूचना",
+    "COMPLETION": "संपूर्णता",
+    "TAKES": "लेता है",
+    "UNITS_TAKEN": "दवा ले ली",
+    "DAYS_PAST": "बीते हुए दिन"
+  },
+  "COURSE_TYPE_MODAL": {
+    "HEADER": "दवा प्रकार",
+    "SELECT_PICTURE": "चित्र का चयन करें",
+    "TAKE_PICTURE": "तस्वीर ले लो",
+    "DESCRIPTION": "पाठ्यक्रम के लिए छवि का चयन करें या अपलोड करें",
+    "CUSTOM_IMAGE": "अपलोड की गई",
+    "UPLOAD_TITLE": "छवि अपलोड करना"
+  },
+  "IMAGE_CROPPING": {
+    "SELECT_AREA": "छवि क्षेत्र समायोजित करें",
+    "PROCESSING": "प्रसंस्करण ...",
+    "CHOOSE": "चुनें",
+    "CANCEL": "रद्द करना"
+  },
+  "NOTIFICATIONS": {
+    "TAKE_TIME": {
+      "TITLE": "अब यह {{time}} है",
+      "MESSAGE": "आपके {{courseName}} लेने का समय"
+    },
+    "NAME_EMPTY": {
+      "TITLE": "प्रपत्र त्रुटि",
+      "MESSAGE": "दवा का नाम खाली नहीं हो सकता"
+    },
+    "COURSE_ALREADY_EXISTS": {
+      "TITLE": "प्रपत्र त्रुटि",
+      "MESSAGE": "उस नाम वाला पाठ्यक्रम पहले से मौजूद है"
+    },
+    "UPLOAD_ERROR": {
+      "TITLE": "छवि अपलोड की गई त्रुटि",
+      "MESSAGE": "चित्र अपलोड नहीं किया जा सका, कृपया पुनः प्रयास करें"
+    },
+    "COURSE_DELETED": {
+      "TITLE": "कोर्स हटा दिया गया",
+      "MESSAGE": "पाठ्यक्रम को हटा दिया गया था"
+    },
+    "NOTIFICATIONS_ENABLED": {
+      "TITLE": "अनुस्मारक",
+      "MESSAGE": "पाठ्यक्रम के लिए अनुस्मारक सक्षम हैं"
+    }
+  },
+  "PERIODS": {
+    "DAYS": "दिन",
+    "DAYS_plural": "दिन",
+    "WEEKS": "सप्ताह",
+    "WEEKS_plural": "सप्ताह",
+    "MONTHS": "महीना",
+    "MONTHS_plural": "महीने"
+  },
+  "TIMES": {
+    "TIMES": "एक बार",
+    "TIMES_plural": "{{value}} बार"
+  },
+  "TIMES_PER": {
+    "DAY": "हर दिन",
+    "WEEK": "प्रति सप्ताह"
+  },
+  "PILL_NAMES": {
+    "VITAMIN": "विटामिन",
+    "COLOUR_PILL": "रंगीन गोली",
+    "ELLIPSE_PILL": "दीर्घवृत्त की गोली",
+    "ROUND_TABLET": "गोल गोली",
+    "ROUNDED_TABLET": "गोल गोल"
+  },
+  "PILL_TYPES": {
+    "COMMON": "सामान्य",
+    "CAPSULE": "कैप्सूल",
+    "PILL": "गोली",
+    "TABLET": "गोली"
+  },
+  "DATE_DISTANCE": {
+    "TODAY": "आज",
+    "TOMORROW": "आने वाला कल",
+    "YESTERDAY": "बिता कल",
+    "DAYS_POST": "एक दिन बाद",
+    "DAYS_POST_plural": "{{count}} दिनों के बाद",
+    "DAYS_PAST": "एक दिन पहले",
+    "DAYS_PAST_plural": "{{count}} दिन पहले"
+  },
+  "COMMON": {
+    "BACK_TO_TODAY": "आज",
+    "CONFIRM": "की पुष्टि करें",
+    "CREATE": "सर्जन करना",
+    "SAVE": "बचाना",
+    "BACK": "वापस",
+    "EDIT": "संपादित करें",
+    "OK": "ठीक",
+    "CANCEL": "रद्द करना",
+    "CREATE_COURSE": "पाठ्यक्रम बनाएं",
+    "SAVE_COURSE": "बचाओ कोर्स",
+    "EDIT_COURSE": "पाठ्यक्रम संपादित करें",
+    "DELETE_COURSE": "पाठ्यक्रम को हटा दें",
+    "DELETE_CONFIRM": "क्या आप वाकई पाठ्यक्रम को हटाना चाहते हैं?",
+    "NO_COURSES": "आपके पास इस दिन कोई सक्रिय पाठ्यक्रम नहीं है, एक नया बनाएं"
+  },
+  "TAKE": {
+    "HEADER": "इलाज",
+    "DESCRIPTION": "दवा लेने की मात्रा और समय का चयन करें",
+    "LABEL": "दवाएं",
+    "TIME": "पहर",
+    "AMOUNT": "रकम",
+    "PLACEHOLDER": "का चयन करें",
+    "DOSAGE_UNITS": {
+      "PILLS": "गोली",
+      "PILLS_plural": "गोलियाँ",
+      "TABLETS": "गोली",
+      "TABLETS_plural": "गोलियाँ",
+      "MILLI_GRAMS": "मिलीग्राम",
+      "MILLI_GRAMS_plural": "मिलीग्राम",
+      "GRAMS": "जी",
+      "GRAMS_plural": "जी",
+      "MILLI_LITERS": "मिलीलीटर",
+      "MILLI_LITERS_plural": "मिलीलीटर",
+      "OUNCES": "आउंस",
+      "OUNCES_plural": "आउंस",
+      "PIECES": "टुकड़ा",
+      "PIECES_plural": "टुकड़े"
+    },
+    "TERM": {
+      "BEFORE_MEAL": "भोजन से पहले",
+      "AFTER_MEAL": "भोजन के बाद",
+      "AFTER_BED": "बिस्तर के बाद",
+      "BEFORE_BED": "सोने से पहले"
+    },
+    "NUMBERS": {
+      "FIRST": "पहले लो",
+      "SECOND": "दूसरा लेते हैं",
+      "THIRD": "तीसरा लेते हैं",
+      "FOURTH": "चौथा लेना",
+      "FIFTH": "पांचवा लेते हैं",
+      "SIXTH": "छठा लेते हैं",
+      "SEVENTH": "सातवें ले",
+      "EIGHTH": "आठवां लेते हैं",
+      "NINETH": "नौवीं ले",
+      "TENTH": "दसवीं लेते हैं"
+    }
+  }
+}

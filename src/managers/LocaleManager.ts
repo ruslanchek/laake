@@ -4,10 +4,18 @@ import { initReactI18next } from 'react-i18next';
 import { commonStore } from '../stores/commonStore';
 import { NativeModules, Platform } from 'react-native';
 
-const DEFAULT_LOCALE = 'en';
+const DEFAULT_LOCALE = 'ja';
 const LOCALES = {
   en: {
     translation: require('../locales/en.json'),
+  },
+
+  ru: {
+    translation: require('../locales/ru.json'),
+  },
+
+  ja: {
+    translation: require('../locales/ja.json'),
   },
 };
 

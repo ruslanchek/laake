@@ -1,0 +1,219 @@
+{
+  "SUBSCRIPTION": {
+    "TITLE": "LäkeProを入手して広告を削除する",
+    "RESTORE_PURCHASES": "購入を復元",
+    "PRO": "Proを入手",
+    "FEATURE_1": "永久に広告を無効にして最初に新機能を入手する",
+    "RESTORE": {
+      "TITLE": "復元成功",
+      "DESCRIPTION": "次の購入品を復元しました： {{titles}}"
+    },
+    "RESTORE_FAILED": {
+      "TITLE": "復元できません",
+      "DESCRIPTION": "復元する商品がありません"
+    }
+  },
+  "PRO": {
+    "TITLE": "あなたはプロを持っています",
+    "FEATURE_1": "LäkeProをご購入いただきありがとうございます。"
+  },
+  "ROUTE_NAMES": {
+    "Today": "今日",
+    "Summary": "概要",
+    "Log": "ログ",
+    "PurchaseScreen": "プロ"
+  },
+  "SUMMARY": {
+    "TITLE": "概要",
+    "GROUP_TITLE_STATS": "統計",
+    "GROUP_TITLE_COURSES": "コース"
+  },
+  "SUMMARY_FEATURES": {
+    "FEATURE_1": {
+      "TITLE": "全体的な進捗状況",
+      "SUBTITLE": "すべてのコースを通して"
+    },
+    "FEATURE_2": {
+      "TITLE": "総コース",
+      "SUBTITLE": "永遠に"
+    },
+    "FEATURE_3": {
+      "TITLE": "修了コース",
+      "SUBTITLE": "完全に合格"
+    },
+    "FEATURE_4": {
+      "TITLE": "時間をかけて",
+      "SUBTITLE": "全コース"
+    }
+  },
+  "COURSE_STATUS": {
+    "IN_PROGRESS": "進行中",
+    "ARCHIVE": "アーカイブ済み",
+    "FINISHED": "終了しました"
+  },
+  "LOG_SCREEN": {
+    "TITLE": "活動記録"
+  },
+  "LOG_EVENT": {
+    "MEDICATION_TAKE": "服用した薬",
+    "MEDICATION_TAKE_UNDO": "元に戻した薬",
+    "COURSE_UPDATED": "コース情報を更新しました",
+    "COURSE_CREATED": "コース作成",
+    "COURSE_DELETED": "コースを削除しました",
+    "COURSE_FINISHED": "コース終了"
+  },
+  "CREATE_COURSE": {
+    "LABEL_NAME": "薬の名前",
+    "LABEL_DESCRIPTION": "説明",
+    "LABEL_DURATION": "期間",
+    "LABEL_OFTENNESS": "しばしば",
+    "LABEL_TAKES": "とります",
+    "TITLE": "新コース",
+    "DESCRIPTION": "新しいコース情報を入力してください"
+  },
+  "EDIT_COURSE": {
+    "TITLE": "コースを編集",
+    "DESCRIPTION": "あなたはコースの情報を変更することができます"
+  },
+  "COURSE_DURATION_MODAL": {
+    "HEADER": "コース期間",
+    "DESCRIPTION": "コースはどのくらいの期間ですか？"
+  },
+  "COURSE_OFTENNESS_MODAL": {
+    "HEADER": "コース頻度",
+    "DESCRIPTION": "コース中に薬を服用しなければならない頻度"
+  },
+  "COURSE_SUMMARY_MODAL": {
+    "HEADER": "概要",
+    "DISCLAIMER": "コースを作成する前に設定を確認してください",
+    "RECEIVE_REMINDERS": "通知を受け取る",
+    "DESCRIPTION": "コースの統計と情報",
+    "COMPLETION": "完全",
+    "TAKES": "とります",
+    "UNITS_TAKEN": "服用した薬",
+    "DAYS_PAST": "過去の日数"
+  },
+  "COURSE_TYPE_MODAL": {
+    "HEADER": "薬の種類",
+    "SELECT_PICTURE": "写真を選択",
+    "TAKE_PICTURE": "写真を撮る",
+    "DESCRIPTION": "コースの画像を選択またはアップロードする",
+    "CUSTOM_IMAGE": "アップロード済み",
+    "UPLOAD_TITLE": "画像をアップロードしています"
+  },
+  "IMAGE_CROPPING": {
+    "SELECT_AREA": "画像領域を調整する",
+    "PROCESSING": "処理...",
+    "CHOOSE": "選ぶ",
+    "CANCEL": "キャンセル"
+  },
+  "NOTIFICATIONS": {
+    "TAKE_TIME": {
+      "TITLE": "それは今{{time}}",
+      "MESSAGE": "{{courseName}}"
+    },
+    "NAME_EMPTY": {
+      "TITLE": "フォームエラー",
+      "MESSAGE": "薬の名前は空にできません"
+    },
+    "COURSE_ALREADY_EXISTS": {
+      "TITLE": "フォームエラー",
+      "MESSAGE": "その名前のコースは既に存在します"
+    },
+    "UPLOAD_ERROR": {
+      "TITLE": "画像アップロードエラー",
+      "MESSAGE": "画像をアップロードできませんでした。もう一度お試しください"
+    },
+    "COURSE_DELETED": {
+      "TITLE": "コースを削除しました",
+      "MESSAGE": "コースは削除されました"
+    },
+    "NOTIFICATIONS_ENABLED": {
+      "TITLE": "リマインダー",
+      "MESSAGE": "コースのリマインダーが有効になっています"
+    }
+  },
+  "PERIODS": {
+    "DAYS_0": "日々",
+    "WEEKS_0": "週",
+    "MONTHS_0": "月"
+  },
+  "TIMES": {
+    "TIMES_0": "{{value}}回"
+  },
+  "TIMES_PER": {
+    "DAY": "1日あたり",
+    "WEEK": "週あたり"
+  },
+  "PILL_NAMES": {
+    "VITAMIN": "ビタミン",
+    "COLOUR_PILL": "着色ピル",
+    "ELLIPSE_PILL": "楕円ピル",
+    "ROUND_TABLET": "丸型タブレット",
+    "ROUNDED_TABLET": "丸みを帯びたタブレット"
+  },
+  "PILL_TYPES": {
+    "COMMON": "一般的な",
+    "CAPSULE": "カプセル",
+    "PILL": "ピル",
+    "TABLET": "タブレット"
+  },
+  "DATE_DISTANCE": {
+    "TODAY": "今日",
+    "TOMORROW": "明日",
+    "YESTERDAY": "昨日",
+    "DAYS_POST_0": "{{count}}日後",
+    "DAYS_PAST_0": "{{count}}日前"
+  },
+  "COMMON": {
+    "BACK_TO_TODAY": "今日",
+    "CONFIRM": "確認する",
+    "CREATE": "作成する",
+    "SAVE": "保存する",
+    "BACK": "バック",
+    "EDIT": "編集する",
+    "OK": "OK",
+    "CANCEL": "キャンセル",
+    "CREATE_COURSE": "コースを作成",
+    "SAVE_COURSE": "コースを保存",
+    "EDIT_COURSE": "コースを編集",
+    "DELETE_COURSE": "コースを削除",
+    "DELETE_CONFIRM": "コースを削除してよろしいですか？",
+    "NO_COURSES": "この日はアクティブなコースがありません。新しいコースを作成してください"
+  },
+  "TAKE": {
+    "HEADER": "薬",
+    "DESCRIPTION": "薬の服用量と服用時間を選択してください",
+    "LABEL": "薬",
+    "TIME": "時間",
+    "AMOUNT": "量",
+    "PLACEHOLDER": "テイクを選択",
+    "DOSAGE_UNITS": {
+      "PILLS_0": "丸薬",
+      "TABLETS_0": "タブレット",
+      "MILLI_GRAMS_0": "mg",
+      "GRAMS_0": "g",
+      "MILLI_LITERS_0": "ml",
+      "OUNCES_0": "オンス",
+      "PIECES_0": "駒"
+    },
+    "TERM": {
+      "BEFORE_MEAL": "食事の前に",
+      "AFTER_MEAL": "食事の後",
+      "AFTER_BED": "就寝後",
+      "BEFORE_BED": "就寝前"
+    },
+    "NUMBERS": {
+      "FIRST": "初撮り",
+      "SECOND": "セカンドテイク",
+      "THIRD": "サードテイク",
+      "FOURTH": "4回目",
+      "FIFTH": "フィフステイク",
+      "SIXTH": "シックステイク",
+      "SEVENTH": "セブンステイク",
+      "EIGHTH": "8番",
+      "NINETH": "ナインテイク",
+      "TENTH": "第十テイク"
+    }
+  }
+}

@@ -36,7 +36,9 @@ const styles = StyleSheet.create({
     borderTopColor: COLORS.GRAY_LIGHT.alpha(0.4).toString(),
   },
 
-  tabStyle: {},
+  tabStyle: {
+    top: -1,
+  },
 
   labelStyle: {
     padding: 0,
