@@ -102,12 +102,13 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.laake"
+        applicationId "com.fyramedia.laake"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {
@@ -151,6 +152,8 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "com.google.android.gms:play-services-base:16.1.0"
+
+    implementation project(':react-native-iap')
 
     implementation "com.google.firebase:firebase-core:16.0.9"
     implementation "com.google.firebase:firebase-ads:17.2.1"

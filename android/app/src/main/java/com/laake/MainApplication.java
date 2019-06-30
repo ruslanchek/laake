@@ -1,4 +1,4 @@
-package com.laake;
+package com.fyramedia.laake;
 
 import android.app.Application;
 

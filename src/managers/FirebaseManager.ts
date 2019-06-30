@@ -8,10 +8,12 @@ import { addDays } from 'date-fns';
 import { ITake } from '../common/take';
 import { localeManager } from './LocaleManager';
 import { commonStore } from '../stores/commonStore';
+import { Platform, NativeModules } from 'react-native';
 
 const USERS_REF = 'users';
 const ADS_THRESHOLD_TIMEOUT = 30000;
-const INTERSTITIAL_ID = 'ca-app-pub-7561063360856843/6686338527';
+const INTERSTITIAL_ID_IOS = 'ca-app-pub-7561063360856843/6686338527';
+const INTERSTITIAL_ID_ANDROID = 'ca-app-pub-7561063360856843/6728185648';
 
 interface IUploadResult {
   error: string | null;
@@ -51,7 +53,7 @@ class FirebaseManager extends Manager {
     await this.initAuth();
     await this.checkPro();
     this.removeAllDeliveredNotifications();
-    this.setBadgeNumber(0);
+    // this.setBadgeNumber(0);
   }
 
   public async initMessaging(): Promise<boolean> {
@@ -313,7 +315,7 @@ class FirebaseManager extends Manager {
   }
 
   public loadAds() {
-    if (commonStore.state.isPro === true) {
+    if (commonStore.state.isPro || this.adsThreshold) {
       return;
     }
 
@@ -327,7 +329,15 @@ class FirebaseManager extends Manager {
       this.adsThreshold = false;
     }, ADS_THRESHOLD_TIMEOUT);
 
-    const advert = (firebase as any).admob().interstitial(INTERSTITIAL_ID);
+    let interstitialId;
+
+    if (Platform.OS === 'ios') {
+      interstitialId = INTERSTITIAL_ID_IOS;
+    } else {
+      interstitialId = INTERSTITIAL_ID_ANDROID;
+    }
+
+    const advert = (firebase as any).admob().interstitial(interstitialId);
     const AdRequest = (firebase as any).admob.AdRequest;
     const request = new AdRequest();
 
