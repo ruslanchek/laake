@@ -1,24 +1,40 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.fyramedia.laake">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.laake">
 
   <uses-permission android:name="android.permission.INTERNET" />
 
-  <meta-data android:name="com.google.android.gms.ads.laake-cab74" android:value="ca-app-pub-7561063360856843~4116015503"/>
-
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="false" android:theme="@style/AppTheme">
-    <activity android:name=".MainActivity" android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:windowSoftInputMode="adjustResize">
+    <activity android:launchMode="singleTop" android:name=".MainActivity" android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:windowSoftInputMode="adjustResize">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-    <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
+
+    <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-7561063360856843~4116015503"/>
+    <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
     <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
       <intent-filter>
         <action android:name="com.google.firebase.MESSAGING_EVENT" />
       </intent-filter>
     </service>
+
+    <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
+
+    <receiver android:name="io.invertase.firebase.notifications.RNFirebaseNotificationReceiver"/>
+    <receiver android:enabled="true" android:exported="true" android:name="io.invertase.firebase.notifications.RNFirebaseNotificationsRebootReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+        <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </receiver>
   </application>
 
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <uses-permission android:name="android.permission.VIBRATE" />
 </manifest>
-

@@ -1,25 +1,29 @@
-package com.fyramedia.laake;
+package com.laake;
 
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import com.dooboolab.RNIap.RNIapPackage;
 import com.mkuczera.RNReactNativeHapticFeedbackPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.admob.RNFirebaseAdMobPackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
+import io.invertase.firebase.storage.RNFirebaseStoragePackage;
+import io.invertase.firebase.perf.RNFirebasePerformancePackage;
+
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
-import io.invertase.firebase.RNFirebasePackage;
-import io.invertase.firebase.admob.RNFirebaseAdMobPackage;
-import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
-import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
-import io.invertase.firebase.storage.RNFirebaseStoragePackage;
-import io.invertase.firebase.auth.RNFirebaseAuthPackage;
-import io.invertase.firebase.perf.RNFirebasePerformancePackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,11 +38,24 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(), new ImagePickerPackage(), new VectorIconsPackage(),
-          new SvgPackage(), new RNReactNativeHapticFeedbackPackage(), new RNGestureHandlerPackage(),
-          new RNFirebasePackage(), new RNFirebaseAdMobPackage(), new RNFirebaseFirestorePackage(),
-          new RNFirebaseMessagingPackage(), new RNFirebaseStoragePackage(), new RNFirebaseAuthPackage(),
-          new RNFirebasePerformancePackage());
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+            new VectorIconsPackage(),
+            new SvgPackage(),
+            new ImagePickerPackage(),
+            new PickerPackage(),
+            new RNIapPackage(),
+            new RNReactNativeHapticFeedbackPackage(),
+            new RNGestureHandlerPackage(),
+            new RNFirebasePackage(),
+            new RNFirebaseAdMobPackage(),
+            new RNFirebaseAuthPackage(),
+            new RNFirebaseFirestorePackage(),
+            new RNFirebaseMessagingPackage(),
+            new RNFirebaseNotificationsPackage(),
+            new RNFirebaseStoragePackage(),
+            new RNFirebasePerformancePackage()
+      );
     }
 
     @Override
