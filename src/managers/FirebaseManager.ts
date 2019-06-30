@@ -313,7 +313,7 @@ class FirebaseManager extends Manager {
   }
 
   public loadAds() {
-    if (commonStore.state.isPro === true || this.adsThreshold === true) {
+    if (commonStore.state.isPro === true) {
       return;
     }
 
@@ -331,13 +331,14 @@ class FirebaseManager extends Manager {
     const AdRequest = (firebase as any).admob.AdRequest;
     const request = new AdRequest();
 
+    // request.addTestDevice('b87df65e35e51250e04288aed511b8f8');
+
+    advert.loadAd(request.build());
     advert.on('onAdLoaded', () => {
       if (advert.isLoaded()) {
         advert.show();
       }
     });
-
-    advert.loadAd(request.build());
   }
 }
 
