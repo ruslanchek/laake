@@ -10,6 +10,8 @@ import { localeManager } from './LocaleManager';
 import { commonStore } from '../stores/commonStore';
 
 const USERS_REF = 'users';
+const ADS_THRESHOLD_TIMEOUT = 30000;
+const INTERSTITIAL_ID = 'ca-app-pub-7561063360856843/6686338527';
 
 interface IUploadResult {
   error: string | null;
@@ -40,6 +42,8 @@ export enum ECollectionName {
 
 class FirebaseManager extends Manager {
   private uid: string = '';
+  private adsThreshold = false;
+  private adsThresholdTimeout: null | number = null;
 
   public reset(): void {}
 
@@ -309,20 +313,31 @@ class FirebaseManager extends Manager {
   }
 
   public loadAds() {
-    if (commonStore.state.isPro === true) {
+    if (commonStore.state.isPro === true || this.adsThreshold === true) {
       return;
     }
 
-    const advert = (firebase as any).admob().interstitial('ca-app-pub-7561063360856843/6686338527');
+    if (this.adsThresholdTimeout) {
+      clearTimeout(this.adsThresholdTimeout);
+    }
+
+    this.adsThreshold = true;
+
+    this.adsThresholdTimeout = setTimeout(() => {
+      this.adsThreshold = false;
+    }, ADS_THRESHOLD_TIMEOUT);
+
+    const advert = (firebase as any).admob().interstitial(INTERSTITIAL_ID);
     const AdRequest = (firebase as any).admob.AdRequest;
     const request = new AdRequest();
-    advert.loadAd(request.build());
 
     advert.on('onAdLoaded', () => {
       if (advert.isLoaded()) {
         advert.show();
       }
     });
+
+    advert.loadAd(request.build());
   }
 }
 

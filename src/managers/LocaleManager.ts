@@ -4,18 +4,59 @@ import { initReactI18next } from 'react-i18next';
 import { commonStore } from '../stores/commonStore';
 import { NativeModules, Platform } from 'react-native';
 
-const DEFAULT_LOCALE = 'ja';
+const DEFAULT_LOCALE = 'en';
+
 const LOCALES = {
+  de: {
+    translation: require('../locales/de.json'),
+  },
+
   en: {
     translation: require('../locales/en.json'),
+  },
+
+  es: {
+    translation: require('../locales/es.json'),
+  },
+
+  fr: {
+    translation: require('../locales/fr.json'),
+  },
+
+  hi: {
+    translation: require('../locales/hi.json'),
+  },
+
+  it: {
+    translation: require('../locales/it.json'),
+  },
+
+  ja: {
+    translation: require('../locales/ja.json'),
+  },
+
+  ko: {
+    translation: require('../locales/ko.json'),
+  },
+
+  nb: {
+    translation: require('../locales/nb.json'),
+  },
+
+  pt: {
+    translation: require('../locales/pt.json'),
   },
 
   ru: {
     translation: require('../locales/ru.json'),
   },
 
-  ja: {
-    translation: require('../locales/ja.json'),
+  th: {
+    translation: require('../locales/th.json'),
+  },
+
+  uk: {
+    translation: require('../locales/uk.json'),
   },
 };
 
@@ -31,6 +72,8 @@ class LocaleManager extends Manager {
   }
 
   public filterLocale(locale: string): string {
+    locale = locale.substring(0, 2);
+
     if ((LOCALES as any)[locale]) {
       return locale;
     } else {
@@ -50,6 +93,8 @@ class LocaleManager extends Manager {
 
   public async init(): Promise<any> {
     const locale = this.getSystemLocale();
+    console.log(locale);
+
     const localeFiltered = this.filterLocale(locale);
 
     commonStore.setState({

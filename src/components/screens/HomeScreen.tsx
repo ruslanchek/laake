@@ -96,7 +96,9 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
                 <View style={styles.header}>
                   <View style={styles.titles}>
                     <Text style={styles.title}>{todayWords}</Text>
-                    <Text style={styles.subtitle}>{dateWords}</Text>
+                    <Text style={styles.subtitle}>
+                      {CommonService.capitalizeFirstWord(dateWords)}
+                    </Text>
                   </View>
 
                   {sections.length > 0 && (

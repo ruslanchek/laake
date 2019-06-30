@@ -19,12 +19,12 @@
   },
   "ROUTE_NAMES": {
     "Today": "Heute",
-    "Summary": "Zusammenfassung",
+    "Summary": "Übersicht",
     "Log": "Log",
     "PurchaseScreen": "Profi"
   },
   "SUMMARY": {
-    "TITLE": "Zusammenfassung",
+    "TITLE": "Übersicht",
     "GROUP_TITLE_STATS": "Statistiken",
     "GROUP_TITLE_COURSES": "Kurse"
   },

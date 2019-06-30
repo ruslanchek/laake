@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CalendarStrip from 'react-native-calendar-strip';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { VARIABLES } from '../../common/variables';
@@ -21,6 +21,29 @@ interface IProps {
 
 @followStore(commonStore)
 export class CalendarHeader extends React.Component<IProps> {
+  monthNamesCacahe: string[] = [];
+
+  get monthNames(): string[] {
+    if (this.monthNamesCacahe.length === 0) {
+      this.monthNamesCacahe = [];
+
+      const date = new Date();
+
+      for (let i = 0; i < 12; i++) {
+        date.setDate(1);
+        date.setMonth(i);
+
+        this.monthNamesCacahe.push(
+          date.toLocaleString(commonStore.state.currentLocale, {
+            month: 'long',
+          }),
+        );
+      }
+    }
+
+    return this.monthNamesCacahe;
+  }
+
   render() {
     const { scrollTop, dateWords } = this.props;
 
@@ -107,6 +130,12 @@ export class CalendarHeader extends React.Component<IProps> {
         >
           <CalendarStrip
             style={styles.calendar}
+            locale={{
+              name: commonStore.state.currentLocale,
+              config: {
+                months: this.monthNames,
+              },
+            }}
             selectedDate={commonStore.state.today}
             calendarHeaderPosition={'below'}
             calendarHeaderStyle={styles.header}

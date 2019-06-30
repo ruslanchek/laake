@@ -54,6 +54,10 @@ export class CommonService {
     });
   }
 
+  static capitalizeFirstWord(value: string): string {
+    return `${value.substring(0, 1).toLocaleUpperCase()}${value.substring(1, value.length)}`;
+  }
+
   static formTime(date: Date, locale: string): string {
     return date.toLocaleTimeString(locale, {
       hour: '2-digit',
