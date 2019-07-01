@@ -9,11 +9,10 @@ import { ITake } from '../common/take';
 import { localeManager } from './LocaleManager';
 import { commonStore } from '../stores/commonStore';
 import { Platform } from 'react-native';
+import { VARIABLES } from '../common/variables';
 
 const USERS_REF = 'users';
 const ADS_THRESHOLD_MAX_NUMBER = 10;
-const INTERSTITIAL_ID_IOS = 'ca-app-pub-7561063360856843/6686338527';
-const INTERSTITIAL_ID_ANDROID = 'ca-app-pub-7561063360856843/6728185648';
 
 interface IUploadResult {
   error: string | null;
@@ -315,9 +314,9 @@ class FirebaseManager extends Manager {
 
   get interstitialId() {
     if (Platform.OS === 'ios') {
-      return INTERSTITIAL_ID_IOS;
+      return VARIABLES.INTERSTITIAL_ID_IOS;
     } else {
-      return INTERSTITIAL_ID_ANDROID;
+      return VARIABLES.INTERSTITIAL_ID_ANDROID;
     }
   }
 
@@ -334,7 +333,7 @@ class FirebaseManager extends Manager {
         const AdRequest = (firebase as any).admob.AdRequest;
         const request = new AdRequest();
 
-        // request.addTestDevice('b87df65e35e51250e04288aed511b8f8');
+        request.addTestDevice('b87df65e35e51250e04288aed511b8f8');
 
         advert.loadAd(request.build());
 

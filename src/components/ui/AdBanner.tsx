@@ -4,11 +4,9 @@ import { followStore } from 'react-stores';
 import { commonStore } from '../../stores/commonStore';
 import { Platform, View, StyleSheet } from 'react-native';
 import { COLORS } from '../../common/colors';
+import { VARIABLES } from '../../common/variables';
 
 const { AdRequest, Banner } = (firebase as any).admob;
-
-const BANNER_ID_IOS = 'ca-app-pub-7561063360856843/4274015331';
-const BANNER_ID_ANDROID = 'ca-app-pub-7561063360856843/7248088061';
 
 interface IProps {}
 
@@ -19,7 +17,7 @@ interface IState {
 @followStore(commonStore)
 export class AdBanner extends React.PureComponent<IProps, IState> {
   state = {
-    request: new AdRequest(),
+    request: new AdRequest().addTestDevice('b87df65e35e51250e04288aed511b8f8'),
   };
 
   render() {
@@ -46,9 +44,9 @@ export class AdBanner extends React.PureComponent<IProps, IState> {
 
   get bannerId() {
     if (Platform.OS === 'ios') {
-      return BANNER_ID_IOS;
+      return VARIABLES.BANNER_ID_IOS;
     } else {
-      return BANNER_ID_ANDROID;
+      return VARIABLES.BANNER_ID_ANDROID;
     }
   }
 }
