@@ -203,6 +203,7 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
         </ImageBackground>
       );
     } catch (e) {
+      return <Text>{e.message}</Text>;
       firebaseManager
         .getCollection([ECollectionName.Debug])
         .doc()

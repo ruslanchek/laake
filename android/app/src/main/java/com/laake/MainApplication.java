@@ -20,6 +20,8 @@ import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import io.invertase.firebase.perf.RNFirebasePerformancePackage;
 
+import com.dooboolab.RNIap.RNIapPackage;
+
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -54,7 +56,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFirebaseMessagingPackage(),
             new RNFirebaseNotificationsPackage(),
             new RNFirebaseStoragePackage(),
-            new RNFirebasePerformancePackage()
+            new RNFirebasePerformancePackage(),
+            new RNIapPackage()
       );
     }
 
