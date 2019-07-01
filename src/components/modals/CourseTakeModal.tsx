@@ -27,6 +27,7 @@ import { localeManager } from '../../managers/LocaleManager';
 import { courseManager } from '../../managers/CourseManager';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { firebaseManager } from '../../managers/FirebaseManager';
+import { AdBanner } from '../ui/AdBanner';
 
 interface IState {
   take: ITake | null;
@@ -129,6 +130,7 @@ export class CourseTakeModal extends React.Component<
             </FormRow>
           </View>
         </View>
+        <AdBanner />
       </SafeAreaView>
     );
   }

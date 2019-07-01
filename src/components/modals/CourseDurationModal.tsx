@@ -20,6 +20,7 @@ import { startOfDay } from 'date-fns';
 import { courseManager } from '../../managers/CourseManager';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { firebaseManager } from '../../managers/FirebaseManager';
+import { AdBanner } from '../ui/AdBanner';
 
 interface IState {
   period: number;
@@ -76,6 +77,7 @@ export class CourseDurationModal extends React.Component<NavigationContainerProp
             </FormRow>
           </View>
         </View>
+        <AdBanner />
       </SafeAreaView>
     );
   }

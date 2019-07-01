@@ -6,7 +6,6 @@ import { FONTS } from './fonts';
 export const GLOBAL_STYLES = StyleSheet.create({
   SAFE_AREA: {
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? 25 : 0,
   },
 
   MODAL_BUTTON_HOLDER: {

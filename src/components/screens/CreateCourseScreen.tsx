@@ -25,6 +25,7 @@ import { CommonService } from '../../services/CommonService';
 import { ImageWithPreload } from '../ui/ImageWithPreload';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { firebaseManager } from '../../managers/FirebaseManager';
+import { AdBanner } from '../ui/AdBanner';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -187,6 +188,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
             </View>
           </View>
         </ScrollView>
+        <AdBanner />
       </SafeAreaView>
     );
   }

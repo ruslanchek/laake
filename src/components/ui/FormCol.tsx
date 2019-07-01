@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
 interface IProps {
   width: string | number;
@@ -12,7 +12,6 @@ export class FormCol extends React.PureComponent<IProps> {
     return (
       <View
         style={[
-          styles.container,
           {
             width,
           },
@@ -23,7 +22,3 @@ export class FormCol extends React.PureComponent<IProps> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});

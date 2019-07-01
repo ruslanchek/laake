@@ -24,6 +24,7 @@ import Color from 'color';
 import { FONTS } from '../../common/fonts';
 import { purchaseManager } from '../../managers/PurchaseManager';
 import { firebaseManager } from '../../managers/FirebaseManager';
+import { AdBanner } from '../ui/AdBanner';
 
 interface IState {}
 
@@ -330,6 +331,7 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
             />
           )}
         </View>
+        <AdBanner />
       </SafeAreaView>
     );
   }

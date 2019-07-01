@@ -19,6 +19,7 @@ import { CommonService } from '../../services/CommonService';
 import { commonStore } from '../../stores/commonStore';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { firebaseManager } from '../../managers/FirebaseManager';
+import { AdBanner } from '../ui/AdBanner';
 
 interface IState {
   times: number;
@@ -75,6 +76,7 @@ export class CourseOftennessModal extends React.Component<
             </FormRow>
           </View>
         </View>
+        <AdBanner />
       </SafeAreaView>
     );
   }

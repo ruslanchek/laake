@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  NavigationContainerProps,
-  SafeAreaView,
-  NavigationEvents,
-  FlatList,
-} from 'react-navigation';
+import { NavigationContainerProps, SafeAreaView, NavigationEvents } from 'react-navigation';
 import {
   ActivityIndicator,
   Animated,
@@ -35,6 +30,7 @@ import { Appear, EAppearType } from '../common/Appear';
 import { CommonService } from '../../services/CommonService';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { firebaseManager } from '../../managers/FirebaseManager';
+import { AdBanner } from '../ui/AdBanner';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -157,6 +153,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
               </>
             }
           />
+          <AdBanner />
         </View>
       </SafeAreaView>
     );

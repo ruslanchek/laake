@@ -28,6 +28,7 @@ import { differenceInDays } from 'date-fns';
 import { ImageWithPreload } from '../ui/ImageWithPreload';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { firebaseManager } from '../../managers/FirebaseManager';
+import { AdBanner } from '../ui/AdBanner';
 
 interface IState {
   loading: boolean;
@@ -263,6 +264,7 @@ export class CourseSummaryModal extends React.Component<
             )}
           </View>
         </View>
+        <AdBanner />
       </View>
     );
   }

@@ -17,6 +17,7 @@ import { SummaryItemCourse } from '../ui/SummaryItemCourse';
 import { localeManager } from '../../managers/LocaleManager';
 import { FONTS } from '../../common/fonts';
 import { firebaseManager } from '../../managers/FirebaseManager';
+import { AdBanner } from '../ui/AdBanner';
 
 interface IState {
   overallProgress: number;
@@ -209,6 +210,7 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
             )}
           </View>
         </ScrollView>
+        <AdBanner />
       </SafeAreaView>
     );
   }

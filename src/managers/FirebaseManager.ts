@@ -11,7 +11,7 @@ import { commonStore } from '../stores/commonStore';
 import { Platform } from 'react-native';
 
 const USERS_REF = 'users';
-const ADS_THRESHOLD_MAX_NUMBER = 4;
+const ADS_THRESHOLD_MAX_NUMBER = 10;
 const INTERSTITIAL_ID_IOS = 'ca-app-pub-7561063360856843/6686338527';
 const INTERSTITIAL_ID_ANDROID = 'ca-app-pub-7561063360856843/6728185648';
 
@@ -322,12 +322,6 @@ class FirebaseManager extends Manager {
   }
 
   public loadAds() {
-    console.log(
-      this.adsThresholdNumber,
-      ADS_THRESHOLD_MAX_NUMBER,
-      this.adsThresholdNumber < ADS_THRESHOLD_MAX_NUMBER,
-    );
-
     if (commonStore.state.isPro) {
       return;
     }
@@ -335,18 +329,23 @@ class FirebaseManager extends Manager {
     this.adsThresholdNumber++;
 
     if (this.adsThresholdNumber === ADS_THRESHOLD_MAX_NUMBER) {
-      const advert = (firebase as any).admob().interstitial(this.interstitialId);
-      const AdRequest = (firebase as any).admob.AdRequest;
-      const request = new AdRequest();
+      try {
+        const advert = (firebase as any).admob().interstitial(this.interstitialId);
+        const AdRequest = (firebase as any).admob.AdRequest;
+        const request = new AdRequest();
 
-      // request.addTestDevice('b87df65e35e51250e04288aed511b8f8');
+        // request.addTestDevice('b87df65e35e51250e04288aed511b8f8');
 
-      advert.loadAd(request.build());
-      advert.on('onAdLoaded', () => {
-        if (advert.isLoaded()) {
-          advert.show();
-        }
-      });
+        advert.loadAd(request.build());
+
+        advert.on('onAdLoaded', () => {
+          if (advert.isLoaded()) {
+            advert.show();
+          }
+        });
+      } catch (e) {
+        this.logError(393202, e);
+      }
 
       this.adsThresholdNumber = 0;
     }

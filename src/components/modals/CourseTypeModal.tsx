@@ -29,6 +29,7 @@ import { FONTS } from '../../common/fonts';
 import { Appear, EAppearType } from '../common/Appear';
 import { courseManager } from '../../managers/CourseManager';
 import { courseStore } from '../../stores/courseStore';
+import { AdBanner } from '../ui/AdBanner';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -171,6 +172,7 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
             </View>
           </ScrollView>
         </View>
+        <AdBanner />
       </SafeAreaView>
     );
   }
