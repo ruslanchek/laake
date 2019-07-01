@@ -8,10 +8,10 @@ import { addDays } from 'date-fns';
 import { ITake } from '../common/take';
 import { localeManager } from './LocaleManager';
 import { commonStore } from '../stores/commonStore';
-import { Platform, NativeModules } from 'react-native';
+import { Platform } from 'react-native';
 
 const USERS_REF = 'users';
-const ADS_THRESHOLD_TIMEOUT = 30000;
+const ADS_THRESHOLD_MAX_NUMBER = 4;
 const INTERSTITIAL_ID_IOS = 'ca-app-pub-7561063360856843/6686338527';
 const INTERSTITIAL_ID_ANDROID = 'ca-app-pub-7561063360856843/6728185648';
 
@@ -44,8 +44,7 @@ export enum ECollectionName {
 
 class FirebaseManager extends Manager {
   private uid: string = '';
-  private adsThreshold = false;
-  private adsThresholdTimeout: null | number = null;
+  private adsThresholdNumber: number = 0;
 
   public reset(): void {}
 
@@ -314,41 +313,43 @@ class FirebaseManager extends Manager {
     });
   }
 
+  get interstitialId() {
+    if (Platform.OS === 'ios') {
+      return INTERSTITIAL_ID_IOS;
+    } else {
+      return INTERSTITIAL_ID_ANDROID;
+    }
+  }
+
   public loadAds() {
-    if (commonStore.state.isPro || this.adsThreshold) {
+    console.log(
+      this.adsThresholdNumber,
+      ADS_THRESHOLD_MAX_NUMBER,
+      this.adsThresholdNumber < ADS_THRESHOLD_MAX_NUMBER,
+    );
+
+    if (commonStore.state.isPro) {
       return;
     }
 
-    if (this.adsThresholdTimeout) {
-      clearTimeout(this.adsThresholdTimeout);
+    this.adsThresholdNumber++;
+
+    if (this.adsThresholdNumber === ADS_THRESHOLD_MAX_NUMBER) {
+      const advert = (firebase as any).admob().interstitial(this.interstitialId);
+      const AdRequest = (firebase as any).admob.AdRequest;
+      const request = new AdRequest();
+
+      // request.addTestDevice('b87df65e35e51250e04288aed511b8f8');
+
+      advert.loadAd(request.build());
+      advert.on('onAdLoaded', () => {
+        if (advert.isLoaded()) {
+          advert.show();
+        }
+      });
+
+      this.adsThresholdNumber = 0;
     }
-
-    this.adsThreshold = true;
-
-    this.adsThresholdTimeout = setTimeout(() => {
-      this.adsThreshold = false;
-    }, ADS_THRESHOLD_TIMEOUT);
-
-    let interstitialId;
-
-    if (Platform.OS === 'ios') {
-      interstitialId = INTERSTITIAL_ID_IOS;
-    } else {
-      interstitialId = INTERSTITIAL_ID_ANDROID;
-    }
-
-    const advert = (firebase as any).admob().interstitial(interstitialId);
-    const AdRequest = (firebase as any).admob.AdRequest;
-    const request = new AdRequest();
-
-    // request.addTestDevice('b87df65e35e51250e04288aed511b8f8');
-
-    advert.loadAd(request.build());
-    advert.on('onAdLoaded', () => {
-      if (advert.isLoaded()) {
-        advert.show();
-      }
-    });
   }
 }
 

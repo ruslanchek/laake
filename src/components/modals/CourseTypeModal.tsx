@@ -1,6 +1,11 @@
 import React from 'react';
 import { Animated, Dimensions, StyleSheet, View, Text } from 'react-native';
-import { NavigationContainerProps, SafeAreaView, ScrollView } from 'react-navigation';
+import {
+  NavigationContainerProps,
+  SafeAreaView,
+  ScrollView,
+  NavigationEvents,
+} from 'react-navigation';
 import { IPill, PILLS } from '../../common/pills';
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
@@ -71,6 +76,11 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
 
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
+        <NavigationEvents
+          onDidFocus={() => {
+            firebaseManager.loadAds();
+          }}
+        />
         <View style={styles.contentContainer}>
           <CustomStatusBar barStyle='dark-content' />
           <Header title={localeManager.t('COMMON.BACK')} next={null} theme={EHeaderTheme.Dark} />

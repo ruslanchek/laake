@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
-import { NavigationContainerProps, SafeAreaView } from 'react-navigation';
+import { NavigationContainerProps, SafeAreaView, NavigationEvents } from 'react-navigation';
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { EHeaderTheme, Header } from '../common/Header';
@@ -27,6 +27,7 @@ import { ICONS } from '../../common/icons';
 import { differenceInDays } from 'date-fns';
 import { ImageWithPreload } from '../ui/ImageWithPreload';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
+import { firebaseManager } from '../../managers/FirebaseManager';
 
 interface IState {
   loading: boolean;
@@ -91,6 +92,11 @@ export class CourseSummaryModal extends React.Component<
     return (
       <View style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
         <CustomStatusBar barStyle='light-content' />
+        <NavigationEvents
+          onDidFocus={() => {
+            firebaseManager.loadAds();
+          }}
+        />
         <SafeAreaView style={styles.top}>
           <ImageBackground source={BGS.BLUE} style={{ width: '100%', height: '100%' }}>
             <Header

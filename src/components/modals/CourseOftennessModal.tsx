@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { NavigationContainerProps, SafeAreaView } from 'react-navigation';
+import { NavigationContainerProps, SafeAreaView, NavigationEvents } from 'react-navigation';
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { EHeaderTheme, Header } from '../common/Header';
@@ -18,6 +18,7 @@ import { createCourseManager } from '../../managers/CreateCourseManager';
 import { CommonService } from '../../services/CommonService';
 import { commonStore } from '../../stores/commonStore';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
+import { firebaseManager } from '../../managers/FirebaseManager';
 
 interface IState {
   times: number;
@@ -39,6 +40,11 @@ export class CourseOftennessModal extends React.Component<
 
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
+        <NavigationEvents
+          onDidFocus={() => {
+            firebaseManager.loadAds();
+          }}
+        />
         <CustomStatusBar barStyle='dark-content' />
         <Header title={localeManager.t('COMMON.BACK')} next={null} theme={EHeaderTheme.Dark} />
         <View style={GLOBAL_STYLES.MODAL_SCROLL_VIEW}>

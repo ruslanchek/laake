@@ -259,7 +259,7 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
             logManager.resetEvents();
           }}
           onDidFocus={() => {
-            // firebaseManager.loadAds();
+            firebaseManager.loadAds();
           }}
         />
 

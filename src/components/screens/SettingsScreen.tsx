@@ -11,6 +11,7 @@ import { FormCol } from '../ui/FormCol';
 import { FormEntitiesInput } from '../ui/FormEntitiesInput';
 import { FormBooleanInput } from '../ui/FormBooleanInput';
 import { ERouteName } from '../../enums/ERouteName';
+import { firebaseManager } from '../../managers/FirebaseManager';
 
 interface IState {
   enabled: boolean;
@@ -25,7 +26,11 @@ export class SettingsScreen extends React.Component<NavigationContainerProps, IS
     return (
       <SafeAreaView style={styles.container}>
         <CustomStatusBar barStyle='dark-content' />
-        <NavigationEvents onDidFocus={async () => {}} />
+        <NavigationEvents
+          onDidFocus={async () => {
+            firebaseManager.loadAds();
+          }}
+        />
 
         <ScrollView style={styles.scroll}>
           <Title

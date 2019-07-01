@@ -24,6 +24,7 @@ import { ModalHeader } from '../blocks/ModalHeader';
 import { CommonService } from '../../services/CommonService';
 import { ImageWithPreload } from '../ui/ImageWithPreload';
 import { CustomStatusBar } from '../ui/CustomStatusBar';
+import { firebaseManager } from '../../managers/FirebaseManager';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -98,6 +99,8 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
                       this.setState({
                         error: false,
                       });
+
+                      firebaseManager.loadAds();
                     }}
                     error={this.state.error}
                     placeholder='e.g. Aspirin'
