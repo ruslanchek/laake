@@ -5,11 +5,11 @@ export const COLORS = {
   BLACK: Color('#000000'),
 
   RED: Color('#ff2c52'),
-  GREEN: Color('#03be7f'),
+  GREEN: Color('#19efba').darken(0.1),
   BLUE: Color('#2F6FE4'),
   YELLOW: Color('#ffc211'),
   PURPLE: Color('#740085'),
-  CYAN: Color('#19efba'),
+  CYAN: Color('#19efba').darken(0.1),
 
   GRAY: Color('#7a8c9c'),
   GRAY_DARK: Color('#7a8c9c').darken(0.1),

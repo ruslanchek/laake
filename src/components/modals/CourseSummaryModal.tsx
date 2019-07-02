@@ -475,7 +475,6 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: VARIABLES.FONT_SIZE_BIG,
-    fontWeight: '600',
     marginBottom: 3,
     textAlign: 'center',
     fontFamily: FONTS.BOLD,

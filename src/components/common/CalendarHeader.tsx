@@ -324,7 +324,6 @@ const styles = StyleSheet.create({
   weekday: {
     fontSize: VARIABLES.FONT_SIZE_NANO,
     marginBottom: 7,
-    fontWeight: '600',
     fontFamily: FONTS.BOLD,
     color: COLORS.WHITE.alpha(0.6).toString(),
   },
@@ -346,7 +345,6 @@ const styles = StyleSheet.create({
 
   numberSelected: {
     color: COLORS.WHITE.toString(),
-    fontWeight: '600',
     fontFamily: FONTS.BOLD,
   },
 

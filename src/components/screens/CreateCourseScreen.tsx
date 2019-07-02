@@ -277,7 +277,6 @@ const styles = StyleSheet.create({
   text: {
     color: COLORS.WHITE.toString(),
     fontSize: VARIABLES.FONT_SIZE_GIANT,
-    fontWeight: '600',
   },
 
   content: {

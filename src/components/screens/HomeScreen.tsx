@@ -270,7 +270,6 @@ const styles = StyleSheet.create({
 
   title: {
     color: COLORS.BLACK.toString(),
-    fontWeight: '800',
     fontSize: VARIABLES.FONT_SIZE_GIANT,
     fontFamily: FONTS.BOLD,
   },

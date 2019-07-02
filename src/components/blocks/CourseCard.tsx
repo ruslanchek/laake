@@ -232,7 +232,6 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: VARIABLES.FONT_SIZE_REGULAR,
-    fontWeight: '600',
     flex: 1,
     fontFamily: FONTS.BOLD,
     color: COLORS.BLACK.toString(),
