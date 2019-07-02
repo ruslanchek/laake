@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
+    marginTop: Platform.OS === 'ios' ? 0 : 25,
     paddingHorizontal: VARIABLES.PADDING_BIG,
     paddingVertical: VARIABLES.PADDING_MEDIUM,
     flexDirection: 'row',

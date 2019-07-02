@@ -92,7 +92,7 @@ export class CourseSummaryModal extends React.Component<
 
     return (
       <View style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
-        <CustomStatusBar barStyle='light-content' />
+        <CustomStatusBar barStyle='light-content' color={COLORS.BLUE.toString()} translucent />
         <NavigationEvents
           onDidFocus={() => {
             firebaseManager.loadAds();

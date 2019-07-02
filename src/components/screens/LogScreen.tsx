@@ -214,14 +214,14 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
 
     logStore.state.events.forEach(event => {
       const eventDate = new Date(event.date);
-      const sectionTitle = CommonService.formatDate(eventDate, currentLocale);
+      const sectionTitle = localeManager.formatDate(commonStore.state.today, 'dddd, Do MMMM YYYY');
       const section = sections.find(section => section.title === sectionTitle);
 
       index++;
 
       const data: ISectionData = {
         title: this.generateEventTitle(event.event),
-        time: CommonService.formTime(eventDate, currentLocale),
+        time: localeManager.formatDate(eventDate, 'HH:mm:ss'),
         id: event.id,
         event: event.event,
         courseName: event.courseName,
@@ -250,7 +250,11 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
 
     return (
       <SafeAreaView style={styles.container}>
-        <CustomStatusBar barStyle='dark-content' />
+        <CustomStatusBar
+          barStyle='dark-content'
+          color={COLORS.GRAY_ULTRA_LIGHT.toString()}
+          translucent
+        />
 
         <NavigationEvents
           onWillFocus={() => {
@@ -411,6 +415,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.BOLD,
     marginBottom: 1,
     fontSize: VARIABLES.FONT_SIZE_SMALL,
+    color: COLORS.BLACK.toString(),
   },
 
   subtitle: {

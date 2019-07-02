@@ -37,6 +37,7 @@ export const GLOBAL_STYLES = StyleSheet.create({
   INPUT_TEXT: {
     fontSize: VARIABLES.FONT_SIZE_REGULAR,
     fontFamily: FONTS.MEDIUM,
+    color: COLORS.BLACK.toString(),
   },
 
   INPUT_CONTAINER: {
@@ -88,6 +89,7 @@ export const GLOBAL_STYLES = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     fontFamily: FONTS.MEDIUM,
+    color: COLORS.BLACK.toString(),
   },
 
   INPUT_LABEL: {

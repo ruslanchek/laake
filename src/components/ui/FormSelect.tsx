@@ -1,7 +1,8 @@
 import React from 'react';
 import { Picker, StyleSheet } from 'react-native';
 import { VARIABLES } from '../../common/variables';
-import { FONTS } from '../../common/fonts'
+import { FONTS } from '../../common/fonts';
+import { COLORS } from '../../common/colors';
 
 interface IProps<TValue> {
   items: IFormSelectItem<TValue>[];
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
 
   item: {
     fontFamily: FONTS.MEDIUM,
+    color: COLORS.BLACK.toString(),
     height: 160,
     fontSize: VARIABLES.FONT_SIZE_REGULAR,
     borderTopWidth: 1,

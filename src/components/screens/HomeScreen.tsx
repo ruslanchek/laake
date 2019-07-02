@@ -59,16 +59,14 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
     const todayWords = localeManager.t(daysDifference.word, {
       count: daysDifference.difference,
     });
-    const dateWords = CommonService.formatDate(
-      commonStore.state.today,
-      commonStore.state.currentLocale,
-    );
+
+    const dateWords = localeManager.formatDate(commonStore.state.today, 'dddd, Do MMMM YYYY');
     const { scrollTop } = this.state;
     const sections = this.sections;
 
     return (
       <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
-        <CustomStatusBar barStyle='light-content' />
+        <CustomStatusBar barStyle='light-content' color={COLORS.RED.toString()} />
 
         <NavigationEvents
           onDidFocus={() => {

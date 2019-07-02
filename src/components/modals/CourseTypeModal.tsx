@@ -83,7 +83,11 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
           }}
         />
         <View style={styles.contentContainer}>
-          <CustomStatusBar barStyle='dark-content' />
+          <CustomStatusBar
+            barStyle='dark-content'
+            color={COLORS.GRAY_ULTRA_LIGHT.toString()}
+            translucent
+          />
           <Header title={localeManager.t('COMMON.BACK')} next={null} theme={EHeaderTheme.Dark} />
 
           {this.state.uploading && (

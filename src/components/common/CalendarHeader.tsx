@@ -6,7 +6,7 @@ import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { commonStore } from '../../stores/commonStore';
 import { followStore } from 'react-stores';
-import { isToday, isSameWeek, startOfWeek } from 'date-fns';
+import { isToday, isSameWeek, format } from 'date-fns';
 import { localeManager } from '../../managers/LocaleManager';
 import { courseManager } from '../../managers/CourseManager';
 import { FONTS } from '../../common/fonts';
@@ -33,11 +33,7 @@ export class CalendarHeader extends React.Component<IProps> {
         date.setDate(1);
         date.setMonth(i);
 
-        this.monthNamesCacahe.push(
-          date.toLocaleString(commonStore.state.currentLocale, {
-            month: 'long',
-          }),
-        );
+        this.monthNamesCacahe.push(localeManager.formatDate(date, 'MMMM'));
       }
     }
 
@@ -149,15 +145,11 @@ export class CalendarHeader extends React.Component<IProps> {
               return (
                 <TouchableOpacity style={styles.day} onPress={props.onDateSelected}>
                   <Text style={[styles.weekday, isToday ? styles.weekdayToday : null]}>
-                    {date.toLocaleDateString(commonStore.state.currentLocale, {
-                      weekday: 'narrow',
-                    })}
+                    {localeManager.formatDate(date, 'dd')}
                   </Text>
                   <View style={this.getNumberContainerStyles(isToday, props.selected)}>
                     <Text style={this.getNumberStyles(isToday, props.selected)}>
-                      {date.toLocaleDateString(commonStore.state.currentLocale, {
-                        day: 'numeric',
-                      })}
+                      {localeManager.formatDate(date, 'D')}
                     </Text>
                   </View>
                 </TouchableOpacity>

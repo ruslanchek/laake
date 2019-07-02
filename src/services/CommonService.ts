@@ -45,25 +45,8 @@ export class CommonService {
     }
   }
 
-  static formatDate(date: Date, locale: string): string {
-    return date.toLocaleDateString(locale, {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  }
-
   static capitalizeFirstWord(value: string): string {
     return `${value.substring(0, 1).toLocaleUpperCase()}${value.substring(1, value.length)}`;
-  }
-
-  static formTime(date: Date, locale: string): string {
-    return date.toLocaleTimeString(locale, {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    });
   }
 
   static formatDosageTotal(number: number): string {

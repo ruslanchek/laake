@@ -148,12 +148,7 @@ class CreateCourseManager extends Manager {
     time.setHours(take.hours);
     time.setMinutes(take.minutes);
 
-    takeItems.push(
-      time.toLocaleTimeString(locale, {
-        hour: '2-digit',
-        minute: '2-digit',
-      }),
-    );
+    takeItems.push(localeManager.formatDate(time, 'HH:mm'));
 
     takeItems.push(
       `${CommonService.formatDosageParts(take.dosage, take.dosagePart, locale)} ${localeManager.t(

@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
   itemLabel: {
     marginRight: VARIABLES.PADDING_SMALL,
     flexShrink: 1,
+    color: COLORS.BLACK.toString(),
   },
 
   placeholder: {

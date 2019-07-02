@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.MEDIUM,
     fontSize: VARIABLES.FONT_SIZE_TINY,
     color: COLORS.GRAY.toString(),
+    textAlign: 'center',
   },
 
   labelStyleFocused: {

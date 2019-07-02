@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 1,
     shadowRadius: 3,
+    elevation: 1,
     padding: VARIABLES.PADDING_SMALL,
     backgroundColor: COLORS.WHITE.toString(),
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     fontSize: VARIABLES.FONT_SIZE_REGULAR,
     fontFamily: FONTS.BOLD,
     marginBottom: 4,
+    color: COLORS.BLACK.toString(),
   },
 
   subtitle: {

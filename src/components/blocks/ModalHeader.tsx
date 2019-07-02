@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 5,
     fontFamily: FONTS.BOLD,
+    color: COLORS.BLACK.toString(),
   },
 
   text: {

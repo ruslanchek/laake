@@ -154,10 +154,12 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexShrink: 0,
     flexGrow: 1,
+    flexDirection: 'column',
   },
 
   input: {
     paddingBottom: VARIABLES.PADDING_MEDIUM,
+    color: COLORS.BLACK.toString(),
   },
 
   inputLabelError: {

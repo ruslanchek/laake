@@ -25,7 +25,11 @@ export class SettingsScreen extends React.Component<NavigationContainerProps, IS
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <CustomStatusBar barStyle='dark-content' />
+        <CustomStatusBar
+          barStyle='dark-content'
+          color={COLORS.GRAY_ULTRA_LIGHT.toString()}
+          translucent
+        />
         <NavigationEvents
           onDidFocus={async () => {
             firebaseManager.loadAds();

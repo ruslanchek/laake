@@ -44,7 +44,11 @@ export class CourseDurationModal extends React.Component<NavigationContainerProp
             firebaseManager.loadAds();
           }}
         />
-        <CustomStatusBar barStyle='dark-content' />
+        <CustomStatusBar
+          barStyle='dark-content'
+          color={COLORS.GRAY_ULTRA_LIGHT.toString()}
+          translucent
+        />
         <Header title={localeManager.t('COMMON.BACK')} next={null} theme={EHeaderTheme.Dark} />
         <View style={GLOBAL_STYLES.MODAL_SCROLL_VIEW}>
           <View style={styles.content}>

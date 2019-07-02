@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, View, Animated } from 'react-native';
+import { Text, StyleSheet, View, Platform } from 'react-native';
 import { VARIABLES } from '../../common/variables';
 import { FONTS } from '../../common/fonts';
 
@@ -14,15 +14,16 @@ export class Title extends React.PureComponent<IProps> {
     const { text, color, backgroundColor } = this.props;
 
     return (
-      <Animated.View style={[styles.container, { backgroundColor }]}>
-        <Animated.Text style={[styles.text, { color }]}>{text}</Animated.Text>
-      </Animated.View>
+      <View style={[styles.container, { backgroundColor }]}>
+        <Text style={[styles.text, { color }]}>{text}</Text>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: Platform.OS === 'ios' ? 0 : 20,
     paddingBottom: VARIABLES.PADDING_MEDIUM,
     paddingHorizontal: VARIABLES.PADDING_BIG,
     top: 0,

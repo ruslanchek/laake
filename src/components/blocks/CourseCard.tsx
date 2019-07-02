@@ -23,6 +23,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { FONTS } from '../../common/fonts';
 import { CommonService } from '../../services/CommonService';
 import { ImageWithPreload } from '../ui/ImageWithPreload';
+import { localeManager } from '../../managers/LocaleManager';
 
 interface IProps extends NavigationInjectedProps {
   take: ITake;
@@ -82,10 +83,7 @@ class CourseCardClass extends React.Component<IProps, IState> {
           <View style={styles.subtitles}>
             <View style={styles.label}>
               <Text numberOfLines={1} style={styles.labelText}>
-                {new Date(time).toLocaleTimeString(commonStore.state.currentLocale, {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
+                {localeManager.formatDate(new Date(time), 'HH:mm')}
               </Text>
             </View>
             <Text style={styles.subtitle}>
@@ -165,8 +163,7 @@ const styles = StyleSheet.create({
     marginBottom: VARIABLES.PADDING_MEDIUM,
     borderRadius: VARIABLES.BORDER_RADIUS_BIG,
     backgroundColor: COLORS.WHITE.toString(),
-    // paddingVertical: VARIABLES.PADDING_SMALL,
-    // paddingLeft: VARIABLES.PADDING_SMALL,
+    elevation: 1,
     shadowColor: COLORS.GRAY_PALE_LIGHT.toString(),
     shadowOffset: {
       width: 0,
@@ -198,6 +195,7 @@ const styles = StyleSheet.create({
   labelText: {
     fontSize: VARIABLES.FONT_SIZE_TINY,
     fontFamily: FONTS.MEDIUM,
+    color: COLORS.BLACK.toString(),
   },
 
   text: {
@@ -237,6 +235,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     flex: 1,
     fontFamily: FONTS.BOLD,
+    color: COLORS.BLACK.toString(),
   },
 
   titleBlock: {

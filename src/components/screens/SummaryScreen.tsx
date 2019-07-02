@@ -117,7 +117,11 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
 
     return (
       <SafeAreaView style={styles.container}>
-        <CustomStatusBar barStyle='dark-content' />
+        <CustomStatusBar
+          barStyle='dark-content'
+          color={COLORS.GRAY_ULTRA_LIGHT.toString()}
+          translucent
+        />
 
         <NavigationEvents
           onDidFocus={() => {

@@ -95,7 +95,7 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
     try {
       return (
         <ImageBackground source={BGS.DEEP_RED} style={styles.container}>
-          <CustomStatusBar barStyle='light-content' />
+          <CustomStatusBar barStyle='light-content' color={COLORS.RED.toString()} translucent />
 
           <SafeAreaView style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
             <View style={styles.content}>

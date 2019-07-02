@@ -205,7 +205,7 @@ class FirebaseManager extends Manager {
       id,
       date,
       title: localeManager.t('NOTIFICATIONS.TAKE_TIME.TITLE', {
-        time: date.toLocaleTimeString(commonStore.state.currentLocale),
+        time: localeManager.formatDate(date, 'HH:mm'),
       }),
       message: localeManager.t('NOTIFICATIONS.TAKE_TIME.MESSAGE', {
         courseName: course.title,
