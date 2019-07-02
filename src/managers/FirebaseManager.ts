@@ -52,6 +52,8 @@ class FirebaseManager extends Manager {
     await this.checkPro();
     this.removeAllDeliveredNotifications();
     // this.setBadgeNumber(0);
+    // firebase.crashlytics().log('Test Message!');
+    // firebase.crashlytics().recordError(37, 'Test Error');
   }
 
   public async initMessaging(): Promise<boolean> {
@@ -263,9 +265,6 @@ class FirebaseManager extends Manager {
   }
 
   public logError(code: number, error: any) {
-    // firebase.crashlytics().log('Test Message!');
-    // firebase.crashlytics().recordError(37, 'Test Error');
-
     console.log(code, error);
   }
 

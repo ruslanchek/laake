@@ -45,8 +45,8 @@ target "laake" do
   pod "Firebase/AdMob", "~> 5.20.1"
   pod "RNFirebase", :path => "../node_modules/react-native-firebase/ios"
 
-  pod "Fabric", "~> 1.7.13"
-  pod "Crashlytics", "~> 3.10.7"
+  pod "Fabric", "~> 1.10.2"
+  pod "Crashlytics", "~> 3.13.2"
 
   pod "RNImageCropPicker", :path => "../node_modules/react-native-image-crop-picker"
 

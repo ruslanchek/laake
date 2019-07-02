@@ -40,25 +40,12 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new VectorIconsPackage(),
-            new SvgPackage(),
-            new ImagePickerPackage(),
-            new PickerPackage(),
-            new RNIapPackage(),
-            new RNReactNativeHapticFeedbackPackage(),
-            new RNGestureHandlerPackage(),
-            new RNFirebasePackage(),
-            new RNFirebaseAdMobPackage(),
-            new RNFirebaseAuthPackage(),
-            new RNFirebaseFirestorePackage(),
-            new RNFirebaseMessagingPackage(),
-            new RNFirebaseNotificationsPackage(),
-            new RNFirebaseStoragePackage(),
-            new RNFirebasePerformancePackage(),
-            new RNIapPackage()
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new VectorIconsPackage(), new SvgPackage(),
+          new ImagePickerPackage(), new PickerPackage(), new RNReactNativeHapticFeedbackPackage(),
+          new RNGestureHandlerPackage(), new RNFirebasePackage(), new RNFirebaseAdMobPackage(),
+          new RNFirebaseAuthPackage(), new RNFirebaseFirestorePackage(), new RNFirebaseMessagingPackage(),
+          new RNFirebaseNotificationsPackage(), new RNFirebaseStoragePackage(), new RNFirebasePerformancePackage(),
+          new RNIapPackage());
     }
 
     @Override
