@@ -50,8 +50,6 @@ class HeaderClass extends React.PureComponent<IProps> {
   }
 
   handleBack = () => {
-    CommonService.haptic();
-
     if (this.props.onBack) {
       this.props.onBack();
     }
@@ -60,8 +58,6 @@ class HeaderClass extends React.PureComponent<IProps> {
   };
 
   handleNext = () => {
-    CommonService.haptic();
-
     if (this.props.next) {
       this.props.next.action();
     }

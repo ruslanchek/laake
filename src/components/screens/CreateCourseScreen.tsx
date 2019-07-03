@@ -214,8 +214,6 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
     if (this.props.navigation) {
       this.props.navigation.navigate(ERouteName.CourseTypeModal);
     }
-
-    CommonService.haptic();
   };
 
   handleEditDuration = () => {

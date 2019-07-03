@@ -6,7 +6,7 @@ import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { commonStore } from '../../stores/commonStore';
 import { followStore } from 'react-stores';
-import { isToday, isSameWeek, format } from 'date-fns';
+import { isToday, isSameWeek } from 'date-fns';
 import { localeManager } from '../../managers/LocaleManager';
 import { courseManager } from '../../managers/CourseManager';
 import { FONTS } from '../../common/fonts';
@@ -97,8 +97,8 @@ export class CalendarHeader extends React.Component<IProps> {
           <TouchableOpacity style={styles.todayButtonTouchable} onPress={this.handlePressToday}>
             <Icon
               style={styles.todayButtonIcon}
-              name='ios-calendar'
-              size={16}
+              name='ios-backspace'
+              size={14}
               color={COLORS.WHITE.toString()}
             />
             <Animated.Text
@@ -142,15 +142,15 @@ export class CalendarHeader extends React.Component<IProps> {
             onWeekChanged={this.handleWeekChange}
             dayComponent={props => {
               const date = new Date(props.date.toISOString());
-              const isToday = this.isSameDay(new Date(), date);
+              const today = isToday(date);
 
               return (
                 <TouchableOpacity style={styles.day} onPress={props.onDateSelected}>
-                  <Text style={[styles.weekday, isToday ? styles.weekdayToday : null]}>
+                  <Text style={[styles.weekday, today ? styles.weekdayToday : null]}>
                     {localeManager.formatDate(date, 'dd').toLocaleUpperCase()}
                   </Text>
-                  <View style={this.getNumberContainerStyles(isToday, props.selected)}>
-                    <Text style={this.getNumberStyles(isToday, props.selected)}>
+                  <View style={this.getNumberContainerStyles(today, props.selected)}>
+                    <Text style={this.getNumberStyles(today, props.selected)}>
                       {localeManager.formatDate(date, 'D')}
                     </Text>
                   </View>
@@ -207,22 +207,12 @@ export class CalendarHeader extends React.Component<IProps> {
     }
   }
 
-  isSameDay(d1: Date, d2: Date): boolean {
-    return (
-      d1.getFullYear() === d2.getFullYear() &&
-      d1.getMonth() === d2.getMonth() &&
-      d1.getDate() === d2.getDate()
-    );
-  }
-
   handlePressToday = () => {
     courseManager.setToday(new Date());
-    CommonService.haptic();
   };
 
   handleSelectDate = (date: Date) => {
     courseManager.setToday(new Date(date));
-    CommonService.haptic();
   };
 
   handleWeekChange = (e: any) => {
@@ -235,8 +225,6 @@ export class CalendarHeader extends React.Component<IProps> {
         courseManager.setToday(weekStartDate);
       }
     }
-
-    CommonService.haptic();
   };
 }
 
@@ -252,7 +240,7 @@ const styles = StyleSheet.create({
   },
 
   todayButtonIcon: {
-    top: 0.25,
+    top: 0.7,
     marginRight: 5,
   },
 

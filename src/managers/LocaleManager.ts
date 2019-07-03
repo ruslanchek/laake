@@ -5,6 +5,8 @@ import { commonStore } from '../stores/commonStore';
 import { NativeModules, Platform } from 'react-native';
 import dayjs from 'dayjs';
 
+import 'moment/min/locales';
+
 import 'dayjs/locale/de';
 import 'dayjs/locale/en';
 import 'dayjs/locale/es';

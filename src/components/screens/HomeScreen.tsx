@@ -200,7 +200,6 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
 
   handleNewCourse = () => {
     createCourseManager.setDefaults();
-    CommonService.haptic();
 
     if (this.props.navigation) {
       this.props.navigation.navigate(ERouteName.TodayCreateCourseScreen);

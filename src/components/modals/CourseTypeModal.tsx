@@ -288,18 +288,22 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
 
   handleSelect(currentPill: IPill) {
     CommonService.haptic();
+
     createCourseStore.setState({
       currentPill,
       uploadedImage: null,
     });
+
     CommonService.goBackAfterSelect(this.props.navigation);
   }
 
   handleSelectCustom(url: string) {
     CommonService.haptic();
+
     createCourseStore.setState({
       uploadedImage: url,
     });
+
     CommonService.goBackAfterSelect(this.props.navigation);
   }
 }

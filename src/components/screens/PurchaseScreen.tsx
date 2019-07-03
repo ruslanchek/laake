@@ -234,8 +234,6 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
 
   async handlePurchase(sku: string) {
     if (!this.state.processingProduct) {
-      CommonService.haptic();
-
       this.setState({
         processingProduct: sku,
       });

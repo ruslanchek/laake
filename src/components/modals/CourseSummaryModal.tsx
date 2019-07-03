@@ -270,8 +270,6 @@ export class CourseSummaryModal extends React.Component<
   }
 
   handleEdit = () => {
-    CommonService.haptic();
-
     if (this.props.navigation) {
       this.props.navigation.navigate(ERouteName.TodayCreateCourseScreen);
 
@@ -284,8 +282,6 @@ export class CourseSummaryModal extends React.Component<
   };
 
   handleDelete = () => {
-    CommonService.haptic();
-
     Alert.alert(
       localeManager.t('COMMON.DELETE_COURSE'),
       localeManager.t('COMMON.DELETE_CONFIRM'),
@@ -334,8 +330,6 @@ export class CourseSummaryModal extends React.Component<
   };
 
   handleSave = () => {
-    CommonService.haptic();
-
     this.setState(
       {
         loading: true,

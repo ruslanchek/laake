@@ -123,8 +123,6 @@ class CourseCardClass extends React.Component<IProps, IState> {
   }
 
   handleEdit = () => {
-    CommonService.haptic();
-
     if (this.props.navigation) {
       createCourseManager.setEditingCourseData(this.props.course.id, ECourseEditMode.View);
       this.props.navigation.navigate(ERouteName.TodayEditCourseScreen);
