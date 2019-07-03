@@ -33,7 +33,9 @@ export class CalendarHeader extends React.Component<IProps> {
         date.setDate(1);
         date.setMonth(i);
 
-        this.monthNamesCacahe.push(localeManager.formatDate(date, 'MMMM'));
+        this.monthNamesCacahe.push(
+          CommonService.capitalizeFirstWord(localeManager.formatDate(date, 'MMMM')),
+        );
       }
     }
 
@@ -145,7 +147,7 @@ export class CalendarHeader extends React.Component<IProps> {
               return (
                 <TouchableOpacity style={styles.day} onPress={props.onDateSelected}>
                   <Text style={[styles.weekday, isToday ? styles.weekdayToday : null]}>
-                    {localeManager.formatDate(date, 'dd')}
+                    {localeManager.formatDate(date, 'dd').toLocaleUpperCase()}
                   </Text>
                   <View style={this.getNumberContainerStyles(isToday, props.selected)}>
                     <Text style={this.getNumberStyles(isToday, props.selected)}>

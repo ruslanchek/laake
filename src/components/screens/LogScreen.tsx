@@ -214,7 +214,7 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
 
     logStore.state.events.forEach(event => {
       const eventDate = new Date(event.date);
-      const sectionTitle = localeManager.formatDate(commonStore.state.today, 'dddd, Do MMMM YYYY');
+      const sectionTitle = localeManager.formatDate(commonStore.state.today, 'dddd, D MMMM YYYY');
       const section = sections.find(section => section.title === sectionTitle);
 
       index++;

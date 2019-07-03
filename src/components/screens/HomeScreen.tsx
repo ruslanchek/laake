@@ -60,7 +60,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
       count: daysDifference.difference,
     });
 
-    const dateWords = localeManager.formatDate(commonStore.state.today, 'dddd, Do MMMM YYYY');
+    const dateWords = localeManager.formatDate(commonStore.state.today, 'dddd, D MMMM YYYY');
     const { scrollTop } = this.state;
     const sections = this.sections;
 
