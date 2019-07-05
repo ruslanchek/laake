@@ -81,7 +81,7 @@ export class CourseDurationModal extends React.Component<NavigationContainerProp
             </FormRow>
           </View>
         </View>
-        <AdBanner />
+        <AdBanner isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }

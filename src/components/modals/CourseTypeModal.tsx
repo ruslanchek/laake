@@ -30,6 +30,7 @@ import { Appear, EAppearType } from '../common/Appear';
 import { courseManager } from '../../managers/CourseManager';
 import { courseStore } from '../../stores/courseStore';
 import { AdBanner } from '../ui/AdBanner';
+import { commonStore } from '../../stores/commonStore';
 
 interface IState {
   scrollTop: Animated.Value;
@@ -176,7 +177,7 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
             </View>
           </ScrollView>
         </View>
-        <AdBanner />
+        <AdBanner isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }

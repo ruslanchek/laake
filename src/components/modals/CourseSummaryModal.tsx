@@ -264,7 +264,7 @@ export class CourseSummaryModal extends React.Component<
             )}
           </View>
         </View>
-        <AdBanner />
+        <AdBanner isPro={commonStore.state.isPro} />
       </View>
     );
   }

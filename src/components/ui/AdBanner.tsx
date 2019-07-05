@@ -8,24 +8,22 @@ import { VARIABLES } from '../../common/variables';
 
 const { AdRequest, Banner } = (firebase as any).admob;
 
-interface IProps {}
+interface IProps {
+  isPro: boolean;
+}
 
 interface IState {
   request: typeof AdRequest;
 }
 
-@followStore(commonStore)
 export class AdBanner extends React.PureComponent<IProps, IState> {
   state = {
     request: new AdRequest().addTestDevice('b87df65e35e51250e04288aed511b8f8'),
   };
 
   render() {
-    if (!commonStore.state.isPro) {
+    if (!this.props.isPro) {
       const { request } = this.state;
-
-      // @ts-ignore
-      console.log('request', request);
 
       // @ts-ignore
       if (request) {

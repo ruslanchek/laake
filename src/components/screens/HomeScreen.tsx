@@ -9,6 +9,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import { ERouteName } from '../../enums/ERouteName';
 import { COLORS } from '../../common/colors';
@@ -71,6 +72,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
         <NavigationEvents
           onDidFocus={() => {
             firebaseManager.loadAds();
+            this.forceUpdate();
           }}
         />
 
@@ -151,7 +153,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
               </>
             }
           />
-          <AdBanner />
+          <AdBanner isPro={commonStore.state.isPro} />
         </View>
       </SafeAreaView>
     );

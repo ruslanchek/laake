@@ -80,7 +80,7 @@ export class CourseOftennessModal extends React.Component<
             </FormRow>
           </View>
         </View>
-        <AdBanner />
+        <AdBanner isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }

@@ -265,6 +265,7 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
           }}
           onDidFocus={() => {
             firebaseManager.loadAds();
+            this.forceUpdate();
           }}
         />
 
@@ -335,7 +336,7 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
             />
           )}
         </View>
-        <AdBanner />
+        <AdBanner isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }

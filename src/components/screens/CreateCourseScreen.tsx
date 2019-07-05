@@ -192,7 +192,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
             </View>
           </View>
         </ScrollView>
-        <AdBanner />
+        <AdBanner isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }

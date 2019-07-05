@@ -18,6 +18,7 @@ import { localeManager } from '../../managers/LocaleManager';
 import { FONTS } from '../../common/fonts';
 import { firebaseManager } from '../../managers/FirebaseManager';
 import { AdBanner } from '../ui/AdBanner';
+import { commonStore } from '../../stores/commonStore';
 
 interface IState {
   overallProgress: number;
@@ -126,6 +127,7 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
         <NavigationEvents
           onDidFocus={() => {
             firebaseManager.loadAds();
+            this.forceUpdate();
           }}
         />
 
@@ -214,7 +216,7 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
             )}
           </View>
         </ScrollView>
-        <AdBanner />
+        <AdBanner isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }

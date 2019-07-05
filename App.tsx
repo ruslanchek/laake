@@ -26,6 +26,8 @@ import { SettingsScreen } from './src/components/screens/SettingsScreen';
 import { SettingsNotificationsModal } from './src/components/modals/SettingsNotificationsModal';
 import { localeManager } from './src/managers/LocaleManager';
 import { VARIABLES } from './src/common/variables';
+import { followStore } from 'react-stores';
+import { commonStore } from './src/stores/commonStore';
 
 console.disableYellowBox = true;
 

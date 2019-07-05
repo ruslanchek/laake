@@ -25,7 +25,6 @@ import { CustomStatusBar } from '../ui/CustomStatusBar';
 import { localeManager } from '../../managers/LocaleManager';
 import { commonStore } from '../../stores/commonStore';
 import { followStore } from 'react-stores';
-import firebase from 'react-native-firebase';
 
 const SKU = 'laakepronoads';
 
@@ -158,13 +157,21 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
                           commonStore.state.isPro ? 'PRO.FEATURE_1' : 'SUBSCRIPTION.FEATURE_1',
                         )}
                       </Text>
-                      {/* <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_2')}</Text>
-                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_3')}</Text>
-                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_4')}</Text>
-                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_5')}</Text>
-                    <Text style={styles.textPart}>{localeManager.t('SUBSCRIPTION.FEATURE_6')}</Text> */}
                     </View>
                   </Appear>
+
+                  {/* <TouchableOpacity
+                    style={styles.restore}
+                    onPress={() => {
+                      commonStore.setState({
+                        isPro: !commonStore.state.isPro,
+                      });
+                    }}
+                  >
+                    <Text style={styles.restoreText}>
+                      isPro: {commonStore.state.isPro.toString()}
+                    </Text>
+                  </TouchableOpacity> */}
 
                   {!commonStore.state.isPro && (
                     <Appear
@@ -204,13 +211,6 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
       );
     } catch (e) {
       return <Text>{e.message}</Text>;
-      firebaseManager
-        .getCollection([ECollectionName.Debug])
-        .doc()
-        .set({
-          name: 324562,
-          value: JSON.stringify(e),
-        });
     }
   }
 
@@ -241,9 +241,7 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
       try {
         const result = await RNIap.buySubscription(sku);
 
-        if (result.productId === SKU) {
-          firebaseManager.setPro(true);
-        }
+        firebaseManager.setPro(true);
 
         console.log(result);
       } catch (e) {
