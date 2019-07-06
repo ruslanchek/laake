@@ -23,7 +23,7 @@ export class Title extends React.PureComponent<IProps> {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Platform.OS === 'ios' ? 0 : 20,
+    marginTop: Platform.OS === 'ios' ? 0 : 32,
     paddingBottom: VARIABLES.PADDING_MEDIUM,
     paddingHorizontal: VARIABLES.PADDING_BIG,
     top: 0,

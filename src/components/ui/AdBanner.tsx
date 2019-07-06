@@ -18,7 +18,7 @@ interface IState {
 
 export class AdBanner extends React.PureComponent<IProps, IState> {
   state = {
-    request: new AdRequest().addTestDevice('b87df65e35e51250e04288aed511b8f8'),
+    request: new AdRequest().addTestDevice('B573ED30AB3AFFAAF169CA4790DC4C0C'),
   };
 
   render() {
