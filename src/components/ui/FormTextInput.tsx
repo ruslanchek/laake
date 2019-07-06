@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, Animated, StyleSheet, TextInput, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  Animated,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+  Platform,
+} from 'react-native';
 import { COLORS } from '../../common/colors';
 import { GLOBAL_STYLES } from '../../common/styles';
 import { VARIABLES } from '../../common/variables';
@@ -168,9 +175,17 @@ const styles: { [key: string]: any } = StyleSheet.create({
 
   inputLabel: {
     left: VARIABLES.PADDING_MEDIUM,
-    top: VARIABLES.PADDING_MEDIUM - 3,
+    top: VARIABLES.PADDING_MEDIUM - 5,
     position: 'absolute',
     marginBottom: 0,
+    ...Platform.select({
+      ios: {
+        top: VARIABLES.PADDING_MEDIUM - 2.5,
+      },
+      android: {
+        top: VARIABLES.PADDING_MEDIUM - 6,
+      },
+    }),
   },
 
   suffix: {
