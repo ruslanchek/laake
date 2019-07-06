@@ -13,7 +13,7 @@ import { COLORS } from '../../common/colors';
 
 interface IProps {
   source: ImageURISource;
-  style: ViewStyle;
+  style: ViewStyle | ViewStyle[];
   width: number;
   height: number;
 }
@@ -31,7 +31,7 @@ export class ImageWithPreload extends React.PureComponent<IProps, IState> {
 
   render() {
     const { source, style, width, height } = this.props;
-    const { loading, animated } = this.state;
+    const { animated } = this.state;
 
     return (
       <View style={[styles.container, style]}>

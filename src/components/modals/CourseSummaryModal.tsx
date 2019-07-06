@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Alert, Image, ImageBackground, StyleSheet, Text, View, Dimensions } from 'react-native';
 import { NavigationContainerProps, SafeAreaView, NavigationEvents } from 'react-navigation';
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
@@ -36,7 +36,8 @@ interface IState {
   notificationsLoading: boolean;
 }
 
-const IMAGE_HEIGHT = 75;
+const IMAGE_BORDER_RADIUS = VARIABLES.BORDER_RADIUS_BIG * 1.5;
+const { height } = Dimensions.get('window');
 
 @followStore(commonStore)
 @followStore(createCourseStore)
@@ -90,6 +91,21 @@ export class CourseSummaryModal extends React.Component<
     const unitsTotal = CommonService.formatDosageTotal(course.unitsTotal);
     const unitsTaken = CommonService.formatDosageTotal(course.unitsTaken);
 
+    let imageSize = 75;
+    let topHeight = 260;
+    let titleSize = VARIABLES.FONT_SIZE_BIG;
+
+    if (height < 700) {
+      imageSize = 42;
+      topHeight = 210;
+      titleSize = VARIABLES.FONT_SIZE_REGULAR;
+    }
+
+    let imageBorderRadius = imageSize * 0.3;
+    let imagePadding = imageSize * 0.1;
+
+    const pillBorderRadius = imageBorderRadius * 0.68;
+
     return (
       <View style={[styles.container, GLOBAL_STYLES.SAFE_AREA]}>
         <CustomStatusBar barStyle='light-content' color={COLORS.BLUE.toString()} translucent />
@@ -98,7 +114,14 @@ export class CourseSummaryModal extends React.Component<
             firebaseManager.loadAds();
           }}
         />
-        <SafeAreaView style={styles.top}>
+        <SafeAreaView
+          style={[
+            styles.top,
+            {
+              height: topHeight,
+            },
+          ]}
+        >
           <ImageBackground source={BGS.BLUE} style={{ width: '100%', height: '100%' }}>
             <Header
               title={localeManager.t(
@@ -114,20 +137,33 @@ export class CourseSummaryModal extends React.Component<
                   show={true}
                   delay={200}
                   type={EAppearType.Spring}
-                  customStyles={styles.pillContainer}
+                  customStyles={[
+                    styles.pillContainer,
+                    {
+                      borderRadius: imageBorderRadius,
+                      padding: imagePadding,
+                    },
+                  ]}
                 >
                   <ImageWithPreload
                     source={course.uploadedImage ? { uri: course.uploadedImage } : pill.image}
-                    style={styles.pill}
-                    width={IMAGE_HEIGHT}
-                    height={IMAGE_HEIGHT}
+                    style={[
+                      styles.pill,
+                      {
+                        borderRadius: pillBorderRadius,
+                        width: imageSize,
+                        height: imageSize,
+                      },
+                    ]}
+                    width={imageSize}
+                    height={imageSize}
                   />
                 </Appear>
 
                 <View style={styles.titleContainer}>
                   <View>
                     <Appear show={true} delay={250} type={EAppearType.Spring}>
-                      <Text style={styles.title}>{course.title}</Text>
+                      <Text style={[styles.title, { fontSize: titleSize }]}>{course.title}</Text>
                     </Appear>
                     <Appear show={true} delay={300} type={EAppearType.Spring}>
                       <Text style={styles.subtitle}>
@@ -363,12 +399,11 @@ const styles = StyleSheet.create({
   top: {
     backgroundColor: COLORS.BLUE.toString(),
     justifyContent: 'center',
-    flex: 0.45,
   },
 
   bottom: {
     justifyContent: 'center',
-    flex: 0.55,
+    flex: 1,
   },
 
   container: {
@@ -468,7 +503,6 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: VARIABLES.FONT_SIZE_BIG,
     marginBottom: 3,
     textAlign: 'center',
     fontFamily: FONTS.BOLD,
@@ -483,15 +517,10 @@ const styles = StyleSheet.create({
   },
 
   pill: {
-    width: IMAGE_HEIGHT,
-    height: IMAGE_HEIGHT,
-    borderRadius: VARIABLES.BORDER_RADIUS_SMALL * 1.65,
     overflow: 'hidden',
   },
 
   pillContainer: {
-    padding: VARIABLES.PADDING_SMALL,
-    borderRadius: VARIABLES.BORDER_RADIUS_BIG * 1.5,
     overflow: 'hidden',
     backgroundColor: COLORS.WHITE.alpha(0.33).toString(),
     marginBottom: 10,
