@@ -57,7 +57,7 @@ export class AdBanner extends React.PureComponent<IProps, IState> {
 
 const styles: { [key: string]: any } = StyleSheet.create({
   root: {
-    backgroundColor: COLORS.WHITE.toString(),
+    backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
     alignItems: 'center',
   },
 });
