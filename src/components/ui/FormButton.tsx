@@ -139,7 +139,7 @@ export class FormButton extends React.PureComponent<IProps> {
   };
 }
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   isSmall: {
     fontSize: VARIABLES.FONT_SIZE_SMALL,
   },
@@ -169,5 +169,6 @@ const styles = StyleSheet.create({
   buttonText: {
     textTransform: 'uppercase',
     fontFamily: FONTS.BOLD,
+    textAlign: 'center',
   },
 });

@@ -12,7 +12,7 @@ export class FormRow extends React.PureComponent<IProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   container: {
     marginBottom: VARIABLES.PADDING_BIG,
     flexDirection: 'row',

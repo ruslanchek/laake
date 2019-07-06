@@ -71,7 +71,7 @@ const ICON_THEME_COLORS = {
 
 export const Header = withNavigation(HeaderClass);
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   next: {
     fontSize: VARIABLES.FONT_SIZE_SMALL,
     textTransform: 'uppercase',
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const titleTheme = StyleSheet.create({
+const titleTheme : {[key: string]: any} = StyleSheet.create({
   [EHeaderTheme.Dark]: {
     color: COLORS.GRAY.toString(),
   },
@@ -114,7 +114,7 @@ const titleTheme = StyleSheet.create({
   },
 });
 
-const nextTheme = StyleSheet.create({
+const nextTheme : {[key: string]: any} = StyleSheet.create({
   [EHeaderTheme.Dark]: {
     color: COLORS.RED.toString(),
   },

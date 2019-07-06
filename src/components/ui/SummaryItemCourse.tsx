@@ -9,6 +9,7 @@ import { PILLS_MAP, PILLS } from '../../common/pills';
 import { Progress } from './Progress';
 import { localeManager } from '../../managers/LocaleManager';
 import { isAfter, isToday, isBefore } from 'date-fns';
+import { mergeWithShadow } from '../../common/styles';
 
 interface IProps {
   course: ICourse;
@@ -70,16 +71,8 @@ export class SummaryItemCourse extends React.PureComponent<IProps> {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    shadowColor: COLORS.GRAY_PALE_LIGHT.toString(),
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3,
-    elevation: 1,
+const styles: { [key: string]: any } = StyleSheet.create({
+  container: mergeWithShadow({
     padding: VARIABLES.PADDING_SMALL,
     backgroundColor: COLORS.WHITE.toString(),
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
@@ -91,7 +84,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: VARIABLES.PADDING_BIG,
-  },
+  }),
 
   left: {
     width: HEIGHT,

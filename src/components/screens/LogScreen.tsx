@@ -336,13 +336,13 @@ export class LogScreen extends React.Component<NavigationContainerProps, IState>
             />
           )}
         </View>
-        <AdBanner isPro={commonStore.state.isPro} />
+        <AdBanner height={150} isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   container: {
     flex: 1,
     flexGrow: 1,

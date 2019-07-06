@@ -30,7 +30,7 @@ export class StatisticsInfoBlock extends React.PureComponent<IProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -228,7 +228,7 @@ export class CalendarHeader extends React.Component<IProps> {
   };
 }
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   calendarHeader: {
     backgroundColor: COLORS.RED.toString(),
     position: 'absolute',

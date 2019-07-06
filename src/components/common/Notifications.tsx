@@ -82,7 +82,7 @@ export class NotificationsHandler {
   }
 }
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   iconView: {
     justifyContent: 'center',
     alignItems: 'center',

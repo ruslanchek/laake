@@ -13,7 +13,7 @@ import { EHeaderTheme, Header } from '../common/Header';
 import { followStore } from 'react-stores';
 import { createCourseStore } from '../../stores/createCourseStore';
 import { CommonService } from '../../services/CommonService';
-import { GLOBAL_STYLES } from '../../common/styles';
+import { GLOBAL_STYLES, mergeWithShadow } from '../../common/styles';
 import { localeManager } from '../../managers/LocaleManager';
 import { firebaseManager } from '../../managers/FirebaseManager';
 import { ENotificationType, NotificationsHandler } from '../common/Notifications';
@@ -177,7 +177,7 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
             </View>
           </ScrollView>
         </View>
-        <AdBanner isPro={commonStore.state.isPro} />
+        <AdBanner height={80} isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }
@@ -309,7 +309,7 @@ export class CourseTypeModal extends React.Component<NavigationContainerProps, I
   }
 }
 
-const styles = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
@@ -349,22 +349,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 
-  upload: {
+  upload: mergeWithShadow({
     borderRadius: VARIABLES.BORDER_RADIUS_BIG,
     width: 175,
     height: 175,
     backgroundColor: COLORS.WHITE.toString(),
-    elevation: 1,
-    shadowColor: COLORS.GRAY_PALE_LIGHT.toString(),
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3,
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  }),
 
   uploadCancel: {
     position: 'absolute',

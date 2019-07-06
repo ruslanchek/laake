@@ -78,7 +78,6 @@ export class FormTextInput extends React.Component<IProps, IState> {
 
   render() {
     const { placeholder, label, prefix, suffix, onChange, onFocus, value, error } = this.props;
-    const { isFocused } = this.state;
 
     return (
       <View style={GLOBAL_STYLES.INPUT_CONTAINER}>
@@ -148,7 +147,7 @@ export class FormTextInput extends React.Component<IProps, IState> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   containerFocus: {},
 
   inputContainer: {
@@ -158,7 +157,8 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    paddingBottom: VARIABLES.PADDING_MEDIUM,
+    paddingTop: 30,
+    paddingBottom: VARIABLES.PADDING_MEDIUM - 4,
     color: COLORS.BLACK.toString(),
   },
 
@@ -167,8 +167,10 @@ const styles = StyleSheet.create({
   },
 
   inputLabel: {
-    paddingLeft: VARIABLES.PADDING_MEDIUM,
-    paddingTop: VARIABLES.PADDING_MEDIUM,
+    left: VARIABLES.PADDING_MEDIUM,
+    top: VARIABLES.PADDING_MEDIUM - 3,
+    position: 'absolute',
+    marginBottom: 0,
   },
 
   suffix: {

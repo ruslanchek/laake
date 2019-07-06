@@ -134,7 +134,7 @@ export class CourseTakeModal extends React.Component<
             </FormRow>
           </View>
         </View>
-        <AdBanner isPro={commonStore.state.isPro} />
+        <AdBanner height={80} isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }
@@ -285,7 +285,7 @@ export class CourseTakeModal extends React.Component<
   }
 }
 
-const styles = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
 import { FONTS } from '../../common/fonts';
+import { mergeWithShadow } from '../../common/styles';
 
 interface IProps {
   title: string;
@@ -30,20 +31,12 @@ export class SummaryItem extends React.PureComponent<IProps> {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    shadowColor: COLORS.GRAY_PALE_LIGHT.toString(),
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3,
+const styles: { [key: string]: any } = StyleSheet.create({
+  container: mergeWithShadow({
     paddingVertical: VARIABLES.PADDING_SMALL,
     paddingLeft: VARIABLES.PADDING_MEDIUM,
     paddingRight: VARIABLES.PADDING_SMALL,
     backgroundColor: COLORS.WHITE.toString(),
-    elevation: 1,
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
     width: '100%',
     flex: 1,
@@ -53,7 +46,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: VARIABLES.PADDING_BIG,
-  },
+  }),
 
   left: {},
 

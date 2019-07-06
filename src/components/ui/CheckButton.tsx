@@ -100,7 +100,7 @@ export class CheckButton extends React.PureComponent<IProps, IState> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   button: {
     backgroundColor: COLORS.WHITE.alpha(0.125).toString(),
     paddingLeft: VARIABLES.PADDING_MEDIUM,

@@ -73,7 +73,7 @@ export class Progress extends React.PureComponent<IProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   container: {
     flexGrow: 0.5,
     fontSize: VARIABLES.FONT_SIZE_TINY,

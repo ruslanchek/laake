@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainerProps, SafeAreaView, ScrollView } from 'react-navigation';
-import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Animated, Platform } from 'react-native';
 import { COLORS } from '../../common/colors';
 import { EHeaderTheme, Header } from '../common/Header';
 import { ERouteName } from '../../enums/ERouteName';
@@ -192,7 +192,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
             </View>
           </View>
         </ScrollView>
-        <AdBanner isPro={commonStore.state.isPro} />
+        <AdBanner height={120} isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }
@@ -259,7 +259,7 @@ export class CreateCourseScreen extends React.Component<NavigationContainerProps
   };
 }
 
-const styles = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),
@@ -287,10 +287,17 @@ const styles = StyleSheet.create({
     borderTopStartRadius: VARIABLES.BORDER_RADIUS_SMALL,
     overflow: 'hidden',
     width: VARIABLES.INPUT_HEIGHT,
-    height: VARIABLES.INPUT_HEIGHT,
     justifyContent: 'center',
     alignItems: 'center',
     flexShrink: 0,
+    ...Platform.select({
+      ios: {
+        height: VARIABLES.INPUT_HEIGHT,
+      },
+      android: {
+        height: VARIABLES.INPUT_HEIGHT - 1.5,
+      },
+    }),
   },
 
   pillImage: {

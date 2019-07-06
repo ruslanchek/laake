@@ -153,7 +153,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
               </>
             }
           />
-          <AdBanner isPro={commonStore.state.isPro} />
+          <AdBanner height={150} isPro={commonStore.state.isPro} />
         </View>
       </SafeAreaView>
     );
@@ -209,7 +209,7 @@ export class HomeScreen extends React.Component<NavigationContainerProps, IState
   };
 }
 
-const styles = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.RED.toString(),

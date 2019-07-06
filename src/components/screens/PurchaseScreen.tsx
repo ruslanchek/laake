@@ -296,7 +296,7 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
 
 const LOGO_HOLDER_SIZE = 320;
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   content: {
     flex: 1,
     flexShrink: 0,

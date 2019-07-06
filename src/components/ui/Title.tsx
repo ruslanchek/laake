@@ -21,7 +21,7 @@ export class Title extends React.PureComponent<IProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   container: {
     marginTop: Platform.OS === 'ios' ? 0 : 32,
     paddingBottom: VARIABLES.PADDING_MEDIUM,

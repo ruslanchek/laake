@@ -135,6 +135,6 @@ export class Appear extends React.Component<IProps, IState> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   container: {},
 });

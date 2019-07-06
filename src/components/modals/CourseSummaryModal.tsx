@@ -1,12 +1,21 @@
 import React from 'react';
-import { Alert, Image, ImageBackground, StyleSheet, Text, View, Dimensions } from 'react-native';
+import {
+  Alert,
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import { NavigationContainerProps, SafeAreaView, NavigationEvents } from 'react-navigation';
 import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { EHeaderTheme, Header } from '../common/Header';
 import { followStore } from 'react-stores';
 import { createCourseStore, ECourseEditMode } from '../../stores/createCourseStore';
-import { GLOBAL_STYLES } from '../../common/styles';
+import { GLOBAL_STYLES, mergeWithShadow } from '../../common/styles';
 import { EFormButtonTheme, FormButton } from '../ui/FormButton';
 import { localeManager } from '../../managers/LocaleManager';
 import { ICourse } from '../../common/course';
@@ -36,7 +45,6 @@ interface IState {
   notificationsLoading: boolean;
 }
 
-const IMAGE_BORDER_RADIUS = VARIABLES.BORDER_RADIUS_BIG * 1.5;
 const { height } = Dimensions.get('window');
 
 @followStore(commonStore)
@@ -92,8 +100,16 @@ export class CourseSummaryModal extends React.Component<
     const unitsTaken = CommonService.formatDosageTotal(course.unitsTaken);
 
     let imageSize = 75;
-    let topHeight = 260;
+    let topHeight = 280;
     let titleSize = VARIABLES.FONT_SIZE_BIG;
+
+    if (height < 800) {
+      topHeight = 260;
+    }
+
+    if (Platform.OS === 'android') {
+      topHeight += 55;
+    }
 
     if (height < 700) {
       imageSize = 42;
@@ -300,7 +316,7 @@ export class CourseSummaryModal extends React.Component<
             )}
           </View>
         </View>
-        <AdBanner isPro={commonStore.state.isPro} />
+        <AdBanner height={50} isPro={commonStore.state.isPro} />
       </View>
     );
   }
@@ -385,7 +401,7 @@ export class CourseSummaryModal extends React.Component<
   };
 }
 
-const styles = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   infoBlockRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -399,6 +415,7 @@ const styles = StyleSheet.create({
   top: {
     backgroundColor: COLORS.BLUE.toString(),
     justifyContent: 'center',
+    flexShrink: 0,
   },
 
   bottom: {
@@ -440,21 +457,13 @@ const styles = StyleSheet.create({
     minHeight: VARIABLES.INPUT_HEIGHT,
   },
 
-  infoBlock: {
-    elevation: 1,
+  infoBlock: mergeWithShadow({
     backgroundColor: COLORS.WHITE.toString(),
-    shadowColor: COLORS.GRAY_PALE_LIGHT.toString(),
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3,
     marginTop: VARIABLES.PADDING_SMALL,
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
     flexDirection: 'row',
     flexWrap: 'wrap',
-  },
+  }),
 
   labels: {
     flexDirection: 'row',
@@ -523,6 +532,6 @@ const styles = StyleSheet.create({
   pillContainer: {
     overflow: 'hidden',
     backgroundColor: COLORS.WHITE.alpha(0.33).toString(),
-    marginBottom: 10,
+    marginBottom: Platform.OS === 'ios' ? 10 : 5,
   },
 });

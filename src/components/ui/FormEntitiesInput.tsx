@@ -92,7 +92,7 @@ export class FormEntitiesInput extends React.PureComponent<IProps> {
   };
 }
 
-const styles = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   itemLabel: {
     marginRight: VARIABLES.PADDING_SMALL,
     flexShrink: 1,

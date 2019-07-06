@@ -1,15 +1,15 @@
 import React from 'react';
 import firebase from 'react-native-firebase';
-import { followStore } from 'react-stores';
-import { commonStore } from '../../stores/commonStore';
-import { Platform, View, StyleSheet } from 'react-native';
+import { Platform, View, StyleSheet, Dimensions, Alert } from 'react-native';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
 
 const { AdRequest, Banner } = (firebase as any).admob;
+const { width } = Dimensions.get('window');
 
 interface IProps {
   isPro: boolean;
+  height: number;
 }
 
 interface IState {
@@ -22,14 +22,20 @@ export class AdBanner extends React.PureComponent<IProps, IState> {
   };
 
   render() {
-    if (!this.props.isPro) {
+    const { isPro, height } = this.props;
+
+    if (!isPro) {
       const { request } = this.state;
 
       // @ts-ignore
       if (request) {
         return (
           <View style={styles.root}>
-            <Banner unitId={this.bannerId} request={request.build()} size={'SMART_BANNER'} />
+            <Banner
+              unitId={this.bannerId}
+              request={request.build()}
+              size={`${Math.round(width)}x${height}`}
+            />
           </View>
         );
       } else {
@@ -49,7 +55,7 @@ export class AdBanner extends React.PureComponent<IProps, IState> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   root: {
     backgroundColor: COLORS.WHITE.toString(),
     alignItems: 'center',

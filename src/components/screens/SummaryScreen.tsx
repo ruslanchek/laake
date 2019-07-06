@@ -216,13 +216,13 @@ export class SummaryScreen extends React.Component<NavigationContainerProps, ISt
             )}
           </View>
         </ScrollView>
-        <AdBanner isPro={commonStore.state.isPro} />
+        <AdBanner height={150} isPro={commonStore.state.isPro} />
       </SafeAreaView>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   rightContainer: {
     height: 38,
     width: 38,

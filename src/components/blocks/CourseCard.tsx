@@ -24,6 +24,7 @@ import { FONTS } from '../../common/fonts';
 import { CommonService } from '../../services/CommonService';
 import { ImageWithPreload } from '../ui/ImageWithPreload';
 import { localeManager } from '../../managers/LocaleManager';
+import { mergeWithShadow } from '../../common/styles';
 
 interface IProps extends NavigationInjectedProps {
   take: ITake;
@@ -151,8 +152,8 @@ class CourseCardClass extends React.Component<IProps, IState> {
 
 export const CourseCard = withNavigation(CourseCardClass);
 
-const styles = StyleSheet.create({
-  container: {
+const styles: { [key: string]: any } = StyleSheet.create({
+  container: mergeWithShadow({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -161,15 +162,7 @@ const styles = StyleSheet.create({
     marginBottom: VARIABLES.PADDING_MEDIUM,
     borderRadius: VARIABLES.BORDER_RADIUS_BIG,
     backgroundColor: COLORS.WHITE.toString(),
-    elevation: 1,
-    shadowColor: COLORS.GRAY_PALE_LIGHT.toString(),
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3,
-  },
+  }),
 
   containerTaken: {},
 

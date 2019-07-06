@@ -4,6 +4,7 @@ import { VARIABLES } from '../../common/variables';
 import { COLORS } from '../../common/colors';
 import { FONTS } from '../../common/fonts';
 import { ImageWithPreload } from './ImageWithPreload';
+import { mergeWithShadow } from '../../common/styles';
 
 interface IProps {
   title: string;
@@ -40,22 +41,14 @@ export class PillBrick extends React.PureComponent<IProps> {
   }
 }
 
-const styles = StyleSheet.create({
-  pillInner: {
+const styles: { [key: string]: any } = StyleSheet.create({
+  pillInner: mergeWithShadow({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: VARIABLES.BORDER_RADIUS_BIG,
     marginBottom: VARIABLES.PADDING_MEDIUM,
     backgroundColor: COLORS.WHITE.toString(),
-    elevation: 1,
-    shadowColor: COLORS.GRAY_PALE_LIGHT.toString(),
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3,
-  },
+  }),
 
   checkMarkIcon: {
     top: -2,

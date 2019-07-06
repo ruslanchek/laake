@@ -50,7 +50,7 @@ export class FormSelect<TValue> extends React.PureComponent<IProps<TValue>> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles : {[key: string]: any} = StyleSheet.create({
   container: {},
 
   item: {
