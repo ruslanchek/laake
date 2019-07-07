@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Dimensions,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
@@ -217,9 +218,14 @@ const styles: { [key: string]: any } = StyleSheet.create({
     backgroundColor: 'transparent',
   },
 
-  addIcon: {
-    top: 2,
-  },
+  addIcon: Platform.select({
+    ios: {
+      top: 2,
+    },
+    android: {
+      top: 0,
+    },
+  }),
 
   title: {
     fontSize: VARIABLES.FONT_SIZE_REGULAR,

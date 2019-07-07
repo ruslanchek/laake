@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
   Alert,
+  Platform,
 } from 'react-native';
 import { ERouteName } from '../../enums/ERouteName';
 import { COLORS } from '../../common/colors';
