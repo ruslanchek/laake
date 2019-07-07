@@ -7,6 +7,7 @@ import {
   View,
   TouchableHighlight,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
@@ -117,6 +118,12 @@ const styles: { [key: string]: any } = StyleSheet.create({
     color: COLORS.WHITE.toString(),
     fontFamily: FONTS.MEDIUM,
     fontSize: VARIABLES.FONT_SIZE_SMALL,
+    ...Platform.select({
+      android: {
+        paddingBottom: 3,
+      },
+      ios: {},
+    }),
   },
 
   icon: {},

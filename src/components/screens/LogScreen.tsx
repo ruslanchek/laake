@@ -8,6 +8,7 @@ import {
   SectionListData,
   ActivityIndicator,
   Animated,
+  Platform,
 } from 'react-native';
 import { Title } from '../ui/Title';
 import { COLORS } from '../../common/colors';
@@ -435,9 +436,17 @@ const styles: { [key: string]: any } = StyleSheet.create({
   line: {
     width: 4,
     position: 'absolute',
-    top: 36.25,
     left: 104,
-    bottom: -12.25,
     opacity: 0.75,
+    ...Platform.select({
+      ios: {
+        top: 36.25,
+        bottom: -12.25,
+      },
+      android: {
+        top: 37.5,
+        bottom: -14.5,
+      },
+    }),
   },
 });
