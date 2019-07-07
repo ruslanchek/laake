@@ -23,7 +23,7 @@ import { ELogEvent, logManager } from '../../managers/LogManager';
 import { localeManager } from '../../managers/LocaleManager';
 import Color from 'color';
 import { FONTS } from '../../common/fonts';
-import { purchaseManager } from '../../managers/PurchaseManager';
+import * as RNIap from 'react-native-iap';
 import { firebaseManager } from '../../managers/FirebaseManager';
 import { AdBanner } from '../ui/AdBanner';
 

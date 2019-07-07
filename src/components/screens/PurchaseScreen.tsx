@@ -58,6 +58,8 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
 
       const products = await RNIap.getProducts([SKU]);
 
+      console.log('laakedebug:', products);
+
       this.setState({
         loading: false,
         products,
@@ -66,14 +68,6 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
       this.startAnimations();
     } catch (e) {
       firebaseManager.logError(293837, e);
-
-      firebaseManager
-        .getCollection([ECollectionName.Debug])
-        .doc()
-        .set({
-          name: 293837,
-          value: JSON.stringify(e),
-        });
     }
   }
 
@@ -296,7 +290,7 @@ export class PurchaseScreen extends React.Component<NavigationContainerProps, IS
 
 const LOGO_HOLDER_SIZE = 320;
 
-const styles : {[key: string]: any} = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   content: {
     flex: 1,
     flexShrink: 0,
