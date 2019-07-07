@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Platform } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Platform, StatusBar } from 'react-native';
 import { COLORS } from '../../common/colors';
 import { VARIABLES } from '../../common/variables';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -71,7 +71,7 @@ const ICON_THEME_COLORS = {
 
 export const Header = withNavigation(HeaderClass);
 
-const styles : {[key: string]: any} = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   next: {
     fontSize: VARIABLES.FONT_SIZE_SMALL,
     textTransform: 'uppercase',
@@ -79,12 +79,12 @@ const styles : {[key: string]: any} = StyleSheet.create({
   },
 
   container: {
-    marginTop: Platform.OS === 'ios' ? 0 : 36,
     paddingHorizontal: VARIABLES.PADDING_BIG,
     paddingVertical: VARIABLES.PADDING_MEDIUM,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
 
   back: {
@@ -104,7 +104,7 @@ const styles : {[key: string]: any} = StyleSheet.create({
   },
 });
 
-const titleTheme : {[key: string]: any} = StyleSheet.create({
+const titleTheme: { [key: string]: any } = StyleSheet.create({
   [EHeaderTheme.Dark]: {
     color: COLORS.GRAY.toString(),
   },
@@ -114,7 +114,7 @@ const titleTheme : {[key: string]: any} = StyleSheet.create({
   },
 });
 
-const nextTheme : {[key: string]: any} = StyleSheet.create({
+const nextTheme: { [key: string]: any } = StyleSheet.create({
   [EHeaderTheme.Dark]: {
     color: COLORS.RED.toString(),
   },

@@ -1,5 +1,5 @@
 import { COLORS } from './colors';
-import { StyleSheet, ViewStyle, Platform } from 'react-native';
+import { StyleSheet, ViewStyle, Platform, StatusBar } from 'react-native';
 import { VARIABLES } from './variables';
 import { FONTS } from './fonts';
 

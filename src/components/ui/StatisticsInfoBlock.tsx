@@ -30,12 +30,12 @@ export class StatisticsInfoBlock extends React.PureComponent<IProps> {
   }
 }
 
-const styles : {[key: string]: any} = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     width: '50%',
-    paddingVertical: VARIABLES.PADDING_BIG * 1.5,
+    paddingTop: VARIABLES.PADDING_BIG * 1.5,
     paddingHorizontal: VARIABLES.PADDING_BIG * 1.5,
   },
 

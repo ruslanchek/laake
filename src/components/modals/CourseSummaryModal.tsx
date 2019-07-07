@@ -8,6 +8,7 @@ import {
   View,
   Dimensions,
   Platform,
+  StatusBar,
 } from 'react-native';
 import { NavigationContainerProps, SafeAreaView, NavigationEvents } from 'react-navigation';
 import { VARIABLES } from '../../common/variables';
@@ -107,14 +108,14 @@ export class CourseSummaryModal extends React.Component<
       topHeight = 260;
     }
 
-    if (Platform.OS === 'android') {
-      topHeight += 55;
-    }
-
     if (height < 700) {
       imageSize = 42;
       topHeight = 210;
       titleSize = VARIABLES.FONT_SIZE_REGULAR;
+    }
+
+    if (Platform.OS === 'android') {
+      topHeight += StatusBar.currentHeight || 0;
     }
 
     let imageBorderRadius = imageSize * 0.3;
@@ -463,6 +464,7 @@ const styles: { [key: string]: any } = StyleSheet.create({
     borderRadius: VARIABLES.BORDER_RADIUS_SMALL,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    paddingBottom: VARIABLES.PADDING_BIG * 1.5,
   }),
 
   labels: {
