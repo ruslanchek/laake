@@ -291,6 +291,7 @@ const styles: { [key: string]: any } = StyleSheet.create({
     top: 100,
     bottom: 0,
     flex: 1,
+    minHeight: 150,
   },
 
   groupTitle: {
