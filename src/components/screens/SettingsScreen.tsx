@@ -99,7 +99,7 @@ export class SettingsScreen extends React.Component<NavigationContainerProps, IS
   }
 }
 
-const styles : {[key: string]: any} = StyleSheet.create({
+const styles: { [key: string]: any } = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.GRAY_ULTRA_LIGHT.toString(),

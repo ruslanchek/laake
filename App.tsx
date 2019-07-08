@@ -125,7 +125,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: LogScreen,
     },
     [ERouteName.PurchaseScreen]: {
-      screen: PurchaseScreen,
+      screen: SettingsStack,
     },
   },
   {

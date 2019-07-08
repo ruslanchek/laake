@@ -41,6 +41,16 @@ export enum ECollectionName {
   Debug = 'debug',
 }
 
+export let channel: any | null = null;
+
+if (Platform.OS === 'android') {
+  channel = new firebase.notifications.Android.Channel(
+    'courses',
+    'Courses',
+    firebase.notifications.Android.Importance.Max,
+  );
+}
+
 class FirebaseManager extends Manager {
   private uid: string = '';
   private adsThresholdNumber: number = 0;
@@ -64,6 +74,10 @@ class FirebaseManager extends Manager {
     } else {
       await firebase.messaging().requestPermission();
       enabled = await firebase.messaging().hasPermission();
+    }
+
+    if (enabled && Platform.OS === 'android') {
+      await firebase.notifications().android.createChannel(channel);
     }
 
     return enabled;
