@@ -101,11 +101,11 @@ export class CourseSummaryModal extends React.Component<
     const unitsTaken = CommonService.formatDosageTotal(course.unitsTaken);
 
     let imageSize = 75;
-    let topHeight = 280;
+    let topHeight = 300;
     let titleSize = VARIABLES.FONT_SIZE_BIG;
 
     if (height < 800) {
-      topHeight = 260;
+      topHeight = 280;
     }
 
     if (height < 700) {
