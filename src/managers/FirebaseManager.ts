@@ -10,6 +10,7 @@ import { localeManager } from './LocaleManager';
 import { commonStore } from '../stores/commonStore';
 import { Platform } from 'react-native';
 import { VARIABLES } from '../common/variables';
+import { Notification } from 'react-native-firebase/notifications';
 
 const USERS_REF = 'users';
 const ADS_THRESHOLD_MAX_NUMBER = 10;
@@ -61,9 +62,23 @@ class FirebaseManager extends Manager {
     await this.initAuth();
     await this.checkPro();
     this.removeAllDeliveredNotifications();
+    this.initNotifications();
     // this.setBadgeNumber(0);
     // firebase.crashlytics().log('Test Message!');
     // firebase.crashlytics().recordError(37, 'Test Error');
+  }
+
+  private async initNotifications() {
+    if (Platform.OS === 'android' && channel) {
+      await firebase.notifications().android.createChannel(channel);
+
+      firebase.notifications().onNotification(notification => {
+        notification.android
+          .setChannelId(channel.channelId)
+          .android.setSmallIcon('ic_notification');
+        firebase.notifications().displayNotification(notification);
+      });
+    }
   }
 
   public async initMessaging(): Promise<boolean> {
@@ -74,10 +89,6 @@ class FirebaseManager extends Manager {
     } else {
       await firebase.messaging().requestPermission();
       enabled = await firebase.messaging().hasPermission();
-    }
-
-    if (enabled && Platform.OS === 'android') {
-      await firebase.notifications().android.createChannel(channel);
     }
 
     return enabled;

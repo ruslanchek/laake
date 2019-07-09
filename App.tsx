@@ -19,15 +19,13 @@ import { CourseSummaryModal } from './src/components/modals/CourseSummaryModal';
 import { Notifications } from './src/components/common/Notifications';
 import { FONTS } from './src/common/fonts';
 import { managers } from './src/managers/managers';
-import { PurchaseScreen } from './src/components/screens/PurchaseScreen';
 import { LogScreen } from './src/components/screens/LogScreen';
 import { SummaryScreen } from './src/components/screens/SummaryScreen';
 import { SettingsScreen } from './src/components/screens/SettingsScreen';
 import { SettingsNotificationsModal } from './src/components/modals/SettingsNotificationsModal';
 import { localeManager } from './src/managers/LocaleManager';
 import { VARIABLES } from './src/common/variables';
-import { followStore } from 'react-stores';
-import { commonStore } from './src/stores/commonStore';
+import { PurchaseScreen } from './src/components/screens/PurchaseScreen';
 
 console.disableYellowBox = true;
 
@@ -125,7 +123,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: LogScreen,
     },
     [ERouteName.PurchaseScreen]: {
-      screen: SettingsStack,
+      screen: PurchaseScreen,
     },
   },
   {
