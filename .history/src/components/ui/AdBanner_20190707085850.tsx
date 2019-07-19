@@ -30,14 +30,7 @@ export class AdBanner extends React.PureComponent<IProps, IState> {
       // @ts-ignore
       if (request) {
         return (
-          <View
-            style={[
-              styles.root,
-              {
-                height,
-              },
-            ]}
-          >
+          <View style={styles.root}>
             <Banner
               unitId={this.bannerId}
               request={request.build()}
