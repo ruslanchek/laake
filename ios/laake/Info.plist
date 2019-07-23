@@ -1,109 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Läke</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.15</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Fabric</key>
 	<dict>
-		<key>CFBundleDevelopmentRegion</key>
-		<string>en</string>
-		<key>CFBundleDisplayName</key>
-		<string>Läke</string>
-		<key>CFBundleExecutable</key>
-		<string>$(EXECUTABLE_NAME)</string>
-		<key>CFBundleIdentifier</key>
-		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-		<key>CFBundleInfoDictionaryVersion</key>
-		<string>6.0</string>
-		<key>CFBundleName</key>
-		<string>$(PRODUCT_NAME)</string>
-		<key>CFBundlePackageType</key>
-		<string>APPL</string>
-		<key>CFBundleShortVersionString</key>
-		<string>1.14</string>
-		<key>CFBundleSignature</key>
-		<string>????</string>
-		<key>CFBundleVersion</key>
-		<string>2</string>
-		<key>Fabric</key>
-		<dict>
-			<key>APIKey</key>
-			<string>9ac7faa573d6a1ead2f21a6d4610eab0fc21eb02</string>
-			<key>Kits</key>
-			<array>
-				<dict>
-					<key>KitInfo</key>
-					<dict/>
-					<key>KitName</key>
-					<string>Crashlytics</string>
-				</dict>
-			</array>
-		</dict>
-		<key>GADApplicationIdentifier</key>
-		<string>ca-app-pub-5233313224793945~5475308565</string>
-		<key>LSRequiresIPhoneOS</key>
-		<true/>
-		<key>NSAppTransportSecurity</key>
-		<dict>
-			<key>NSAllowsArbitraryLoads</key>
-			<true/>
-			<key>NSExceptionDomains</key>
-			<true/>
-		</dict>
-		<key>NSAppleMusicUsageDescription</key>
-		<string>Some ad content may access Apple Music Usage</string>
-		<key>NSBluetoothPeripheralUsageDescription</key>
-		<string>Some ad content may access Bluetooth Peripheral</string>
-		<key>NSCalendarsUsageDescription</key>
-		<string>Some ad content may access calendar</string>
-		<key>NSCameraUsageDescription</key>
-		<string>$(PRODUCT_NAME) users can shot and upload their custom images to use as a medication course icon</string>
-		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-		<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
-		<key>NSLocationAlwaysUsageDescription</key>
-		<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
-		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
-		<key>NSMotionUsageDescription</key>
-		<string>Some ad content may access MotionUsage</string>
-		<key>NSPhotoLibraryUsageDescription</key>
-		<string>$(PRODUCT_NAME) users can select and upload their custom images to use as a medication course icon</string>
-		<key>NSSpeechRecognitionUsageDescription</key>
-		<string>Some ad content may access Speech Recognition</string>
-		<key>UIAppFonts</key>
+		<key>APIKey</key>
+		<string>9ac7faa573d6a1ead2f21a6d4610eab0fc21eb02</string>
+		<key>Kits</key>
 		<array>
-			<string>Ionicons.ttf</string>
-			<string>Quicksand-Bold.ttf</string>
-			<string>Quicksand-Light.ttf</string>
-			<string>Quicksand-Medium.ttf</string>
-			<string>Quicksand-Regular.ttf</string>
-			<string>AntDesign.ttf</string>
-			<string>Entypo.ttf</string>
-			<string>EvilIcons.ttf</string>
-			<string>Feather.ttf</string>
-			<string>FontAwesome.ttf</string>
-			<string>FontAwesome5_Brands.ttf</string>
-			<string>FontAwesome5_Regular.ttf</string>
-			<string>FontAwesome5_Solid.ttf</string>
-			<string>Foundation.ttf</string>
-			<string>MaterialCommunityIcons.ttf</string>
-			<string>MaterialIcons.ttf</string>
-			<string>Octicons.ttf</string>
-			<string>SimpleLineIcons.ttf</string>
-			<string>Zocial.ttf</string>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
 		</array>
-		<key>UIBackgroundModes</key>
-		<array>
-			<string>remote-notification</string>
-		</array>
-		<key>UILaunchStoryboardName</key>
-		<string>LaunchScreen</string>
-		<key>UIRequiredDeviceCapabilities</key>
-		<array>
-			<string>armv7</string>
-		</array>
-		<key>UISupportedInterfaceOrientations</key>
-		<array>
-			<string>UIInterfaceOrientationPortrait</string>
-		</array>
-		<key>UIViewControllerBasedStatusBarAppearance</key>
-		<false/>
 	</dict>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-5233313224793945~5475308565</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<true/>
+	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Some ad content may access Apple Music Usage</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Some ad content may access Bluetooth Peripheral</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Some ad content may access calendar</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) users can shot and upload their custom images to use as a medication course icon</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs Location access for recognize local medication names and improve AI-powered search and image recognition scanner</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Some ad content may access MotionUsage</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) users can select and upload their custom images to use as a medication course icon</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Some ad content may access Speech Recognition</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Ionicons.ttf</string>
+		<string>Quicksand-Bold.ttf</string>
+		<string>Quicksand-Light.ttf</string>
+		<string>Quicksand-Medium.ttf</string>
+		<string>Quicksand-Regular.ttf</string>
+		<string>AntDesign.ttf</string>
+		<string>Entypo.ttf</string>
+		<string>EvilIcons.ttf</string>
+		<string>Feather.ttf</string>
+		<string>FontAwesome.ttf</string>
+		<string>FontAwesome5_Brands.ttf</string>
+		<string>FontAwesome5_Regular.ttf</string>
+		<string>FontAwesome5_Solid.ttf</string>
+		<string>Foundation.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+		<string>MaterialIcons.ttf</string>
+		<string>Octicons.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+		<string>Zocial.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+</dict>
 </plist>
